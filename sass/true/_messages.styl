@@ -1,0 +1,29 @@
+// Messages
+// ========
+
+
+
+
+// True Message
+// ------------
+/// Output a message to CSS comments,
+/// or command line terminal (via debug/warn)
+/// @access private
+/// @group private-message
+/// @param {String} $message -
+///   Message to output
+/// @param {String} $output [comments] -
+///   Type of output, either `comments`, `terminal`, `debug` or `warn`
+_true-message($message, $output = "comments", $comment-padding = 0)
+  $pad = ""
+  if $comment-padding > 0
+    for $i in (0)..(($comment-padding) - 1)
+      $pad = $pad + " "
+  for $line in $message
+    if index($output, "comments")
+      $tmp = $pad + $line
+      /*! $tmp */
+    if index($output, "debug") or index($output, "terminal")
+      p($line)
+    if index($output, "warn")
+      warn($line)

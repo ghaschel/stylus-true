@@ -1,0 +1,131 @@
+use('lib/dynamic-hash.js')
+use('lib/map-keys.js')
+// Utilities
+// =========
+
+
+
+
+// True Error Output Override
+// --------------------------
+/// Override error-output for the purpose of testing failure-cases
+/// @access private
+/// @group private-utils
+/// @type bool
+$_true-error-output-override = {
+  value: false
+}
+
+
+
+
+// True Error [function]
+// ---------------------
+/// Optionally override error-output for testing failure-cases
+/// @access private
+/// @group private-utils
+/// @param {string} $message -
+///   The error to report
+/// @param {string} $source -
+///   The source of the error
+/// @param {bool} $override [$_true-error-output-override] -
+///   Optionally override error-output for testing failure-cases
+/// @return {string}
+///   A message detailing the source and error,
+///   when the `$override` is `true`
+/// @throw
+///   A message detailing the source and error,
+///   when the `$override` is `false`
+_true-error($message, $source, $override = $_true-error-output-override.value)
+  $error = "ERROR [%s] %s" % $source $message
+
+  if $override
+    return $error
+
+  error($error)
+
+
+
+
+// True Error [mixin]
+// ---------------------
+/// Optionally override error-output for testing failure-cases
+/// @access private
+/// @group private-utils
+/// @param {string} $message -
+///   The error to report
+/// @param {string} $source -
+///   The source of the error
+/// @param {bool} $override [$_true-error-output-override] -
+///   Optionally override error-output for testing failure-cases
+/// @output
+///   A message detailing the source and error,
+///   when the `$override` is `true`
+/// @throw
+///   A message detailing the source and error,
+///   when the `$override` is `false`
+_true-error-mixin($message, $source, $override = $_true-error-output-override.value)
+  $error = "ERROR [%s] %s" % $source $message
+
+  if $override
+    _true-message($error, "comments")
+  else
+    error($error)
+
+
+
+
+// Map Increment
+// -------------
+/// Add map values together
+/// @access private
+/// @group private-utils
+/// @param {map} $base -
+///   Initial map to add values to
+/// @param {map} $add -
+///   Map of values to be added
+/// @return {map}
+_true-map-increment($base, $add)
+  for $key in map-keys($add)
+    $value = $add[$key]
+
+    if $value
+      $base-value = $base[$key]
+      $new-value = $base-value ? $base-value + $value : $value
+
+      $tmp = dynamic-hash({}, $key, $new-value)
+      $base = merge($base, $tmp)
+  return $base
+
+
+
+
+// Join Multiple
+// -------------
+/// Extends the Sass `join()` function
+/// to accept and combine any number of lists
+/// @access private
+/// @group private-utils
+/// @param {list | 'space' | 'comma'} $lists... -
+///   Any number of lists to be joined,
+///   with an optional final argument describing
+///   the desired list-separator ('space' or 'comma')
+/// @return {list} Joined items in a single list
+_true-join-multiple($lists...)
+  $return = $lists[0]
+  $type = list-separator($return)
+  $last = $lists[-1]
+  $length = length($lists)
+
+  if $last == "space" or $last == "comma"
+    $length = $length - 1
+    $type = $last
+
+  if $length < 2
+    $error = "Must provide at least 2 lists"
+    return _true-error($error, "_true-join-multiple")
+
+  for $i in (2)..($length)
+    $return = join($return, $lists[$i], $type)
+
+  return $return

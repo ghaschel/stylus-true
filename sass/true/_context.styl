@@ -1,0 +1,175 @@
+use('lib/dynamic-hash.js')
+// Context Management
+// ==================
+
+
+
+
+// Context [variable]
+// ------------------
+/// Stores the current module/test/assertion context stack
+/// @access private
+
+/// @group private-context
+/// @type list
+$_true-context = {
+  value: ()
+}
+
+
+
+
+// Context [mixin]
+// ---------------
+/// Update the current context for a given scope
+/// @access private
+/// @group private-context
+/// @param {string} $scope -
+///   Either `module`, `test` or `assert`
+/// @param {string} $name -
+///   Name or description of the current scope
+_true-context-mixin($scope, $name)
+  unshift($_true-context.value, $scope)
+  unshift($_true-context.value, $name)
+
+
+
+
+// Context Pop [mixin]
+// -------------------
+/// Remove the deepest context layer from `$_true-context`
+/// @access private
+/// @group private-context
+_true-context-pop()
+  $new = ()
+
+  for $i in (0)..(length($_true-context.value) - 1)
+    unshift($new, $_true-context.value[$i])
+
+  $_true-context.value = $new
+
+
+
+
+// Output-context [variable]
+// -------------------------
+/// Make sure every output test
+/// includes an `assert`, `output`, and `expect`/`contains`
+/// @access private
+/// @group private-context
+/// @type list
+$_true-output-context = {
+  value: ()
+}
+
+
+
+
+
+// Output-context [mixin]
+// ----------------------
+/// Add `assert`, `output`, `expect`, or `contains` context to an output test,
+/// or check to make sure they all exist before resetting the context.
+/// @access private
+/// @group private-context
+/// @param {'assert' | 'output' | 'expect' | 'contains' | null} $new -
+///   Add a new `assert`, `output`, `expect`, or `contains` layer
+///   to the context of an output-test,
+///   or use `null` to check that all context is properly formed
+///   and then reset it at the end of a test
+/// @param {list} $context [$_true-output-context] -
+///   The current output context
+_true-output-context($new, $context = $_true-output-context.value)
+  $valid = "assert" "expect" "output" "contains"
+  $_true-output-context.value = _true-validate-output-context($new, $context)
+
+
+
+
+// Validate Output-context [function]
+// ----------------------------------
+/// Validate the new context, and return an updated context value
+/// @access private
+/// @group private-context
+/// @param {'assert' | 'output' | 'expect' | 'contains' | null} $new -
+///   Add a new `assert`, `output`, `expect`, or `contains` layer
+///   to the context of an output-test,
+///   or use `null` to check that all context is properly formed
+///   and then reset it at the end of a test
+/// @param {list} $context [$_true-output-context] -
+///   The current output context
+/// @return {list} Updated output context
+/// @throw When adding unknown context
+/// @throw When trying to add context that already exists
+/// @throw When `assert()` is missing before `expect`, `output`, or `contains`
+/// @throw When context is missing before a reset
+_true-validate-output-context($new, $context = $_true-output-context.value)
+  $valid = "assert" "expect" "output" "contains"
+
+  if $new and not index($valid, $new)
+    $error = "%s is not a valid context for output tests: %s" % $new $valid
+    return _true-error($error, "output-context")
+  else if index($context, $new)
+    if $new == "assert"
+      $error = "The `assert()` mixin can not contain another `assert()`"
+      return _true-error($error, "output-context")
+
+    $error = "The `%()` mixin must only be used once per `assert()`" % $new
+    return _true-error($error, "output-context")
+  else if $new
+    $is-sub = index("expect" "output" "contains", $new)
+    if $is-sub and not index($context, "assert")
+      $error = "The `assert()` wrapper is required"
+      return _true-error($error, "output-context")
+
+    return push($context, $new)
+
+  $length = length($context)
+  $has-expect = index($context, "expect") or index($context, "contains")
+  $has-both = index($context, "output") and $has-expect
+
+  if $length != 3 or not $has-both
+    $required = "one `output()`, and one `expect()` or `contains()`"
+    $error = "Each `assert()` must contain #{$required}"
+    return _true-error($error, "output-context")
+
+  return ()
+
+
+
+
+// Context [function]
+// ------------------
+/// Get information on current context for a given scope
+/// @access private
+/// @group private-context
+/// @param {string} $scope
+/// @return {string}
+_true-context($scope)
+  $value = null
+
+  for $entry-scope, $entry-value in $_true-context.value
+   if $entry-scope == $scope
+     $value = $entry-value
+
+  return $value
+
+
+
+
+// Context All [function]
+// ----------------------
+/// Get list of context names for a given scope
+/// @access private
+/// @group private-context
+/// @param {string} $scope
+/// @return {list}
+_true-context-all($scope)
+  $list = ()
+  p($scope)
+  p($_true-context.value)
+  for $entry-scope, $entry-value in $_true-context.value
+    if $entry-scope == $scope
+      push($list, $entry-value)
+
+  return $list

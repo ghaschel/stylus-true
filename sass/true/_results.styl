@@ -1,0 +1,118 @@
+use('lib/dynamic-hash.js')
+// Result Tracking
+// ===============
+
+
+
+
+// Get Result
+// ----------
+/// Compare two values, and return a `pass` or `fail` result.
+/// @access private
+/// @group private-context
+/// @param {*} $assert - Value to consider
+/// @param {*} $expected - Expected match
+/// @param {bool} $unequal [false] -
+///   Set to `true` if the comparison is expected to fail
+/// @return {'pass' | 'fail'}
+_true-get-result($assert, $expected, $unequal = false)
+  $equal = $assert == $expected
+  $pass = $unequal ? not $equal : $equal
+
+  return $pass ? "pass" : "fail"
+
+
+
+// Results
+// -------
+/// Global test-results map
+/// @access private
+/// @group private-context
+/// @type Map
+$_true-results = {
+  value: {
+    "run": 0,
+    "pass": 0,
+    "fail": 0,
+    "output-to-css": 0
+  }
+}
+
+
+
+
+// Update
+// ------
+/// Update global results data
+/// @access private
+/// @group private-context
+/// @param {'pass' | 'fail' | 'output-to-css'} $result -
+_true-update($result)
+  $update = dynamic-hash({run: 1}, $result, 1)
+  $_true-results.value = _true-map-increment($_true-results.value, $update)
+  $_true-test-result.value = null
+
+
+
+
+// Test Results
+// ------------
+// Local flags for tracking assertion results in a test
+/// @access private
+/// @group private-context
+/// @type String
+$_true-test-result = {
+  value: null
+}
+
+
+
+
+// Update Test
+// -----------
+/// Update test result flag with new data
+/// @access private
+/// @group private-context
+/// @param {'pass' | 'fail' | 'output-to-css'} $result -
+_true-update-test($result)
+  if $result == "fail" or $_true-test-result.value == "fail"
+    $_true-test-result.value = "fail"
+  else if $_true-test-result.value != "output-to-css"
+    $_true-test-result.value = $result
+
+
+
+
+// Results Message
+// ---------------
+/// Report message
+/// @access private
+/// @group private-message
+/// @param {Bool} $linebreak [false] -
+///   Return message either as a single line or in multiple lines
+/// @param {Map} $results [$_true-results] -
+///   A map of run, pass, fail, and output-to-css results
+/// @return {String} -
+///   Single or multi-line message for reporting
+_true-results-message($linebreak = false, $results = $_true-results.value)
+  $run = $results.run
+  $pass = $results.pass
+  $fail = $results.fail
+  $output-to-css = $results.output-to-css
+
+  $items = $run == 1 ? "Test" : "Tests"
+  $items = "%s %s" % $run $items
+  $passed = "%s Passed" % $pass
+  $failed = "%s Failed" % $fail
+  $compiled = $output-to-css > 0 ? "%s Output to CSS" % $output-to-css : null
+
+  // Linebreaks
+  if $linebreak
+    $message = "%s:" % $items, "- %s" % $passed, "- %s" % $failed
+    $message = $compiled ? push($message, "- %s" % $compiled) : $message
+    return $message
+
+  // No Linebreaks
+  $message = "%s, %s, %s" % $items $passed $failed
+  $message = $compiled ? "%s, %s" % $message $compiled : $message
+  return $message

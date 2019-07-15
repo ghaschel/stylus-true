@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": ["es2016"],
+    "module": "commonjs",
+    "outDir": "out",
+    "importHelpers": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+
+    "allowJs": false,
+    "alwaysStrict": true,
+    "checkJs": false,
+    "declaration": false,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "rootDir": "./src",
+    "suppressExcessPropertyErrors": false,
+    "suppressImplicitAnyIndexErrors": false
+  },
+  "include": ["src/main.ts"]
+}

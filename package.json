@@ -1,0 +1,80 @@
+{
+  "name": "stylus-unit",
+  "version": "0.1.0",
+  "description": "Testing your stylus source code.",
+  "author": {
+    "name": "Daniel Bannert",
+    "email": "d.bannert@anolilab.de"
+  },
+  "homepage": "http://anolilab.de",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anolilab/stylus-unit.git"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npm run test:mocha; npm run test:jest",
+    "test:mocha": "nyc --reporter=html --reporter=text mocha",
+    "test:jest": "jest --testRegex test_sass",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "debug": "mocha debug",
+    "sassdoc": "sassdoc sass/",
+    "compile": "node-sass test/scss/test.scss test/css/test.css --include-path ./sass/",
+    "commit": "npm run test; npm run compile; gulp sasslint; npm run sassdoc"
+  },
+  "bugs": {
+    "url": "https://github.com/anolilab/stylus-unit/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "glob": "^7.1.4",
+    "stylus": "^0.54.5",
+    "chalk": "^2.4.2",
+    "css": "^2.2.1",
+    "lodash.find": "^4.6.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.last": "^3.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
+    "husky": "^3.0.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "standard-version": "^6.0.1",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  },
+  "keywords": [
+    "grunt",
+    "development",
+    "dev",
+    "tool",
+    "unit",
+    "stylus",
+    "stylus-unit",
+    "anolilab",
+    "mocha",
+    "chai"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
