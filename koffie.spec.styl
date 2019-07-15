@@ -1,5 +1,17 @@
 @import 'sass/_true.styl'
 
 +describe('Koffie')
-  +it('should')
+  +it('should equal')
     assert-equal('10px', '10px')
+  +it('should2 unequal')
+    assert-unequal('20px', '20px')
+  +it('should3 true')
+    assert-true('20px', '20px')
+
++describe('Koffie2')
+  +it('2 should equal')
+    assert-equal('10px', '10px')
+  +it('2 should2 unequal')
+    assert-unequal('20px', '20px')
+  +it('2 should3 true')
+    assert-true('20px', '20px')

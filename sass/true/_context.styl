@@ -1,4 +1,6 @@
 use('lib/dynamic-hash.js')
+use('lib/unwrap.js')
+use('lib/unwrap-list.js')
 // Context Management
 // ==================
 
@@ -29,8 +31,10 @@ $_true-context = {
 /// @param {string} $name -
 ///   Name or description of the current scope
 _true-context-mixin($scope, $name)
-  unshift($_true-context.value, $scope)
-  unshift($_true-context.value, $name)
+  unshift($_true-context.value, "%s, %s" % (unquote($scope) unquote($name)))
+  $_true-context.value = unwrap-list($_true-context.value)
+  p($_true-context.value)
+
 
 
 
@@ -166,8 +170,6 @@ _true-context($scope)
 /// @return {list}
 _true-context-all($scope)
   $list = ()
-  p($scope)
-  p($_true-context.value)
   for $entry-scope, $entry-value in $_true-context.value
     if $entry-scope == $scope
       push($list, $entry-value)

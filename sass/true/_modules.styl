@@ -1,4 +1,3 @@
-@require '_context'
 use('lib/str-length.js')
 // Test Module
 // ===========
@@ -34,6 +33,8 @@ use('lib/str-length.js')
 // /     }
 // /   }
 test-module($name)
+  $_true-context.value = null
+  
   _true-module-start($name)
   {block}
   _true-module-stop()
@@ -72,7 +73,6 @@ describe($name)
 
 
 
-
 // Module Start
 // ------------
 /// Module start helper
@@ -81,7 +81,7 @@ describe($name)
 /// @param {string} $name - module name
 _true-module-start($name)
   _true-context-mixin(module, $name)
-
+  // p($_true-context.value)
   $module-list = _true-context-all("module")
 
   $modules = $module-list[0]
