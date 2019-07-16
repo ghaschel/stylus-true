@@ -16,7 +16,6 @@ use('lib/unwrap-list.js')
 /// @type list
 $_true-context = {
   buffer: ()
-  currentModule: null
 }
 
 
@@ -32,7 +31,7 @@ $_true-context = {
 /// @param {string} $name -
 ///   Name or description of the current scope
 _true-context-mixin($scope, $name)
-  push($_true-context.buffer, "%s, %s" % (unquote($scope) unquote($name)))
+  push($_true-context.buffer, "%s|%s" % (unquote($scope) unquote($name)))
   $_true-context.buffer = unwrap-list($_true-context.buffer)
 
 
@@ -151,8 +150,12 @@ _true-validate-output-context($new, $context = $_true-output-context.value)
 /// @return {string}
 _true-context($scope)
   $value = null
+  for $entry in $_true-context.buffer
+    $entries = split('|', $entry);
 
-  for $entry-scope, $entry-value in $_true-context.buffer
+    $entry-scope = $entries[0]
+    $entry-value = $entries[1]
+
    if $entry-scope == $scope
      $value = $entry-value
 
@@ -170,7 +173,12 @@ _true-context($scope)
 /// @return {list}
 _true-context-all($scope)
   $list = ()
-  for $entry-scope, $entry-value in $_true-context.buffer
+  for $entry, $entry-value in $_true-context.buffer
+    $entries = split('|', $entry);
+
+    $entry-scope = $entries[0]
+    $entry-value = $entries[1]
+
     if $entry-scope == $scope
       push($list, $entry-value)
 

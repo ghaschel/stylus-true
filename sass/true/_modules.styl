@@ -1,4 +1,6 @@
 use('lib/str-length.js')
+use('lib/arrange-test-list.js')
+use('lib/unwrap-list.js')
 // Test Module
 // ===========
 
@@ -34,7 +36,6 @@ use('lib/str-length.js')
 // /   }
 test-module($name)
   // /$_true-context.value = null
-  
   _true-module-start($name)
   {block}
   _true-module-stop()
@@ -82,6 +83,8 @@ describe($name)
 _true-module-start($name)
   _true-context-mixin(module, $name)
   // p($_true-context.value)
+  $_true-context.buffer = arrange-test-list(unwrap-list($_true-context.buffer))
+  p($_true-context.buffer)
   $module-list = _true-context-all("module")
 
   $modules = $module-list[0]

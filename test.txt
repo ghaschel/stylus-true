@@ -1,29 +1,6 @@
-/*! # Module:  */
+/*! # Module: 'is-px()' */
 /*! "----------"-- */
-/*! Test: 'should not return true for a px value' */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✖ FAILED:  */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*! null */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
-/*!  */
-/*! Test: 'should return true for a px value' */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
-{"buffer":"(('assert, [assert-true] ' ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should not return true for a px value') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('assert, [assert-true] ') ('test, should return true for a px value') ('module, is-px()')))","currentModule":"(null)"}
-/*!   ✔  */
+/*! Test: 'first it' */
+/*!   ✔ '[assert-true] ' */
 /*!  */
 /*!  */

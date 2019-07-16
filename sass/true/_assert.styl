@@ -1,4 +1,3 @@
-use('lib/fix-order.js')
 use('lib/unwrap-list.js')
 // Assert
 // ======
@@ -30,7 +29,6 @@ assert-true($assert, $description = null)
   $truthy = _true-is-truthy($assert)
   $tmp = $description or $default
   _true-context-mixin("assert", "[assert-true] %s" % $tmp)
-  fix-array-order($_true-context)
   _true-assert-results($truthy, true)
 
 
