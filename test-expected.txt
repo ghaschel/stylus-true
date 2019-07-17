@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/* # Module: strip-unit() */
+/* ---------------------- */
+/* Test: should strip the unit from a px value */
+/*   ✔ [assert-true] should strip the unit from a px value */
+/*  */
+/* Test: should strip the unit from a pt value */
+/*   ✔ [assert-true] should strip the unit from a pt value */
+/*  */
+/* Test: should strip the unit from a rem value */
+/*   ✔ [assert-true] should strip the unit from a rem value */
+/*  */
+/* Test: should strip the unit from a em value */
+/*   ✔ [assert-true] should strip the unit from a em value */
+/*  */
+/* Test: should strip the unit from a pc value */
+/*   ✔ [assert-true] should strip the unit from a pc value */
+/*  */
+/* Test: should strip the unit from a % value */
+/*   ✔ [assert-true] should strip the unit from a % value */
+/*  */
+/*  */

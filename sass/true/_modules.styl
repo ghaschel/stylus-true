@@ -82,22 +82,23 @@ describe($name)
 /// @param {string} $name - module name
 _true-module-start($name)
   _true-context-mixin(module, $name)
-  // p($_true-context.value)
   $_true-context.buffer = arrange-test-list(unwrap-list($_true-context.buffer))
-  p($_true-context.buffer)
   $module-list = _true-context-all("module")
 
+  p($module-list)
   $modules = $module-list[0]
   $length = length($module-list)
 
+  p($length)
   if $length > 1
     for $i in (2)..($length)
       $modules = $modules + " :: " + $module-list[$i]
-  _true-message("# Module: %s" % $modules, "comments")
+
+  _true-message("# Module: %s" % unquote($modules), "comments")
   $underline = "----------"
 
-  for $i in (1)..(str-length(inspect($modules)))
-    $underline = "%s-" % $underline
+  for $i in (0)..(str-length(unquote($modules)) - 1)
+    $underline = "%s-" % unquote($underline)
 
   _true-message($underline, "comments")
 

@@ -13,7 +13,7 @@
 ///   a passing-test comment with the name of the passing assertion
 _true-pass-details()
   $assertion = _true-context("assert")
-  $message = "✔ %s" % $assertion
+  $message = "✔ %s" % unquote($assertion)
   _true-message($message, "comments", 2)
 
 
