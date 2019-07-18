@@ -82,14 +82,12 @@ describe($name)
 /// @param {string} $name - module name
 _true-module-start($name)
   _true-context-mixin(module, $name)
-  $_true-context.buffer = arrange-test-list(unwrap-list($_true-context.buffer))
+  $_true-context.buffer = arrange-test-list($_true-context.buffer)
   $module-list = _true-context-all("module")
 
-  p($module-list)
   $modules = $module-list[0]
   $length = length($module-list)
 
-  p($length)
   if $length > 1
     for $i in (2)..($length)
       $modules = $modules + " :: " + $module-list[$i]
@@ -113,5 +111,5 @@ _true-module-start($name)
 /// @group private-test
 _true-module-stop()
   _true-update-stats-count("modules")
-  _true-context-pop()
+  _true-context-pop('modules')
   _true-message("", "comments")

@@ -1,4 +1,3 @@
-use('lib/dynamic-hash.js')
 // Result Tracking
 // ===============
 
@@ -18,7 +17,6 @@ use('lib/dynamic-hash.js')
 _true-get-result($assert, $expected, $unequal = false)
   $equal = $assert == $expected
   $pass = $unequal ? not $equal : $equal
-
   return $pass ? "pass" : "fail"
 
 
@@ -48,10 +46,11 @@ $_true-results = {
 /// @group private-context
 /// @param {'pass' | 'fail' | 'output-to-css'} $result -
 _true-update($result)
-  $update = dynamic-hash({run: 1}, $result, 1)
+  $update = {
+    run: 1
+  }
+  $update[$result] = 1
   $_true-results.value = _true-map-increment($_true-results.value, $update)
-  $_true-test-result.value = null
-
 
 
 
@@ -94,7 +93,7 @@ _true-update-test($result)
 ///   A map of run, pass, fail, and output-to-css results
 /// @return {String} -
 ///   Single or multi-line message for reporting
-_true-results-message($linebreak = false, $results = $_true-results.value)
+_true-results-message($linebreak = true, $results = $_true-results.value)
   $run = $results.run
   $pass = $results.pass
   $fail = $results.fail
@@ -106,10 +105,16 @@ _true-results-message($linebreak = false, $results = $_true-results.value)
   $failed = "%s Failed" % $fail
   $compiled = $output-to-css > 0 ? "%s Output to CSS" % $output-to-css : null
 
+  // p($failed)
+  // p($items)
+  // p($passed)
+  // p($compiled)
+
   // Linebreaks
   if $linebreak
     $message = "%s:" % $items, "- %s" % $passed, "- %s" % $failed
     $message = $compiled ? push($message, "- %s" % $compiled) : $message
+    p($message)
     return $message
 
   // No Linebreaks

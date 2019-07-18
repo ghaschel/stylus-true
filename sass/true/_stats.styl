@@ -1,5 +1,3 @@
-use('lib/dynamic-hash.js')
-
 // Stats Tracking & Reporting
 // ==========================
 
@@ -21,12 +19,14 @@ $_true-stats = {
 
 // Update stats count
 // ------------------
+
 /// Add to a stats count type count by 1
 /// @param {String} $type - The stats type to add to
 /// @access private
 /// @group private-context
 _true-update-stats-count($type)
-  $update = dynamic-hash({}, $type, 1)
+  $update = {}
+  $update[$type] = 1
   $_true-stats.value = _true-map-increment($_true-stats.value, $update)
 
 
@@ -42,7 +42,7 @@ _true-update-stats-count($type)
 /// @param {Map} $stats [$_true-stats] -
 ///   Map that contains the stats counts for modules, tests, and assertions found
 /// @return {String} - Stats count message
-_true-stats-message($linebreak = false, $stats = $_true-stats.value)
+_true-stats-message($linebreak = true, $stats = $_true-stats.value)
   $modules = $stats.modules
   $tests = $stats.tests
   $assertions = $stats.assertions
@@ -60,6 +60,7 @@ _true-stats-message($linebreak = false, $stats = $_true-stats.value)
   // Linebreaks
   if $linebreak
     $message = "Stats:", "- %s" % $modules, "- %s" % $tests, "- %s" % $assertions
+    p($message)
     return $message
 
   // No Linebreaks

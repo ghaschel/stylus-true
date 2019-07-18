@@ -35,10 +35,12 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "css": "^2.2.1",
+    "fclone": "^1.0.11",
     "glob": "^7.1.4",
     "lodash.find": "^4.6.0",
     "lodash.foreach": "^4.5.0",
     "lodash.last": "^3.0.0",
+    "smart-circular": "^1.0.2",
     "stylus": "^0.54.5"
   },
   "devDependencies": {

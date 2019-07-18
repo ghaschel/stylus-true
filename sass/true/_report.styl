@@ -64,12 +64,20 @@ report($terminal = $true-terminal-output.value, $fail-on-error = false, $results
 ///   A map of module, test, and assertion-counts in your project
 _true-report-message($linebreak = false, $results = $_true-results.value, $stats = $_true-stats.value)
   if $linebreak
-    return _true-join-multiple(
+    $a = _true-results-message("linebreak", $results)
+    $b = _true-stats-message("linebreak", $stats),
+    p('a: ' + $a)
+    p('b: ' + $b)
+    $test = _true-join-multiple(
       "# SUMMARY ----------",
-      _true-results-message("linebreak", $results),
-      _true-stats-message("linebreak", $stats),
+      $a,
+      $b,
       "--------------------"
     )
+
+    p($test)
+
+    return $test
 
   $report = _true-results-message(null, $results), _true-stats-message(null, $stats)
 

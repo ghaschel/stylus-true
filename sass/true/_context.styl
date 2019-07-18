@@ -1,5 +1,3 @@
-use('lib/dynamic-hash.js')
-use('lib/unwrap.js')
 use('lib/unwrap-list.js')
 // Context Management
 // ==================
@@ -43,14 +41,16 @@ _true-context-mixin($scope, $name)
 /// Remove the deepest context layer from `$_true-context`
 /// @access private
 /// @group private-context
-_true-context-pop()
+_true-context-pop($type = null)
   $new = ()
 
-  for $i in (0)..(length($_true-context.buffer) - 1)
-    push($new, $_true-context.buffer[$i])
+  if ($type == null)
+    for $i in (0)..(length($_true-context.buffer) - 1)
+      push($new, $_true-context.buffer[$i])
 
-  $_true-context.buffer = $new
-
+    $_true-context.buffer = $new
+  else 
+    $_true-context.buffer = ()
 
 
 

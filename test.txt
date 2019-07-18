@@ -1,57 +1,7 @@
-/*! # Module: is-px()1 */
+/*! # Module: is-px()2 */
 /*! ------------------ */
-/*! Test: 'first it' */
-/*!   ✔ [assert-true]  */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*! Test: 'second it' */
-/*!   ✔ [assert-true] 'first it' */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*!  */
-/*! # Module: is-px()2 :: null */
-/*! -------------------------- */
-/*! Test: 'third it' */
-/*!   ✔ [assert-true] 'second it' */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*! Test: 'fourth it' */
-/*!   ✔ [assert-true] 'third it' */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*!  */
-/*! # Module: is-px()3 :: is-px()2 :: is-px()1 :: null */
-/*! -------------------------------------------------- */
 /*! Test: 'fifth it' */
-/*!   ✔ [assert-true] 'fourth it' */
+/*!   ✔ [assert-true]  */
 /*!   ✖ FAILED: '[assert-true] ' */
 /*!     - Output: ['boolean']  */
 /*!     - Expected: ['boolean']  */
@@ -72,29 +22,20 @@
 /*!   ✔ [assert-true]  */
 /*!   ✔ [assert-true]  */
 /*!  */
-/*! # Module: is-px()4 :: is-px()1 :: null */
-/*! -------------------------------------- */
+/*!  */
+/*! # Module: is-px()3 */
+/*! ------------------ */
 /*! Test: 'seventh it' */
-/*!   ✔ [assert-true] 'sixth it' */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
+/*!   ✔ [assert-true]  */
+/*!   ✔ [assert-true]  */
 /*!   ✔ [assert-true]  */
 /*!   ✔ [assert-true]  */
 /*!  */
 /*! Test: 'eight it' */
 /*!   ✔ [assert-true] 'seventh it' */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
+/*!   ✔ [assert-true]  */
 /*!   ✔ [assert-true]  */
 /*!   ✔ [assert-true]  */
 /*!  */
 /*!  */
-/*!  */
+/*! null--------------------Stats: - 2  - 4  - 16  null# SUMMARY ----------    */

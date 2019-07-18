@@ -1,0 +1,29 @@
+Fix (after initial release):
+  ☐ Context
+    ☐ Find a way to create associations between modules (child + parent). stylus rendering order works differently than SASS
+      - This is essential for `describe inside describe`
+      - Try to keep with mixins and not with functions
+  ☐ Messages
+    ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
+    ☐ Assert `$default` is being added wrong, and only to the first element `IF used with child + parent`
+  @critical --- `above this only after initial release` --- @critical 
+
+Fix/to do now:
+  ☐ Assert
+    ☐ `output/expect` is broken
+  ☐ Stats
+    ✔ Counter is partially broken @done(19-07-18 17:09)
+    ☐ Test with multiple files
+  ☐ Update SASSDOC
+  ☐ Clean up
+  ☐ Readme.md
+  ☐ KnownIssues.md
+    ☐ Describe > Describe
+  ☐ Changelog
+  ☐ StylusSupremacy / Stylint
+  ☐ Prettierc
+  ☐ EditorConfig
+  ☐ Rewrite to TS?
+  ☐ Badges
+  ☐ Report is broken
+
