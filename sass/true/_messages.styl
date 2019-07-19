@@ -1,38 +1,50 @@
-use('lib/stdout.js')
+use('lib/stdout.js');
 // Messages
 // ========
 
-comment($string)
+// MIXIN
+comment($string) {
   unquote('/*! ' + replace('(?![\t ])\s\s*', '\n * ', $string) + ' */')
+}
 
 
 // True Message
 // ------------
 /// Output a message to CSS comments,
-/// or command line terminal (via debug/warn)
+/// or comm&& line terminal (via debug/warn)
 /// @access private
 /// @group private-message
 /// @param {String} $message -
 ///   Message to output
 /// @param {String} $output [comments] -
 ///   Type of output, either `comments`, `terminal`, `debug` or `warn`
-_true-message($message, $output = "comments", $comment-padding = 0)
-  $pad = ""
+_true-message($message, $output = 'comments', $comment-padding = 0) {
+  $pad = ''
   
-  if $comment-padding > 0
-    for $i in (0)..(($comment-padding) - 1)
-      $pad = $pad + " "
-  for $line in $message
-    $comments = index($output, "comments")
-    if $comments != null and $comments >= 0
+  if ($comment-padding > 0) {
+    for $i in ((0)..(($comment-padding) - 1)) {
+      $pad = $pad + ' '
+    }
+  }
+
+  for $line in ($message) {
+    $comments = index($output, 'comments')
+
+    if ($comments != null && $comments >= 0) {
       $tmp = $pad + $line
+
       comment($tmp)
+    }
 
-    $debug = index($output, "debug")
-    $terminal = index($output, "terminal")
-    if ($debug != null and $debug >= 0) or ($terminal != null and $terminal >= 0)
+    $debug = index($output, 'debug')
+    $terminal = index($output, 'terminal')
+    if (($debug != null && $debug >= 0) || ($terminal != null && $terminal >= 0)) {
       stdout($line)
+    }
 
-    $warn = index($output, "warn")
-    if $warn != null and $warn >= 0
+    $warn = index($output, 'warn')
+    if ($warn != null && $warn >= 0) {
       stdout($line, 'warn')
+    }
+  }
+}

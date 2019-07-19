@@ -22,10 +22,13 @@
 ///       zip(1px 1px 3px, solid dashed solid, red green blue),
 ///       (1px solid red, 1px dashed green, 3px solid blue));
 ///   }
-test($name)
-  _true-test-start($name)
-  {block}
-  _true-test-stop()
+test($name) {
+  _true-test-start($name);
+
+  {block};
+
+  _true-test-stop();
+}
 
 
 
@@ -49,9 +52,11 @@ test($name)
 ///       zip(1px 1px 3px, solid dashed solid, red green blue),
 ///       (1px solid red, 1px dashed green, 3px solid blue));
 ///   }
-it($name)
-  +test($name)
-    {block}
+it($name) {
+  +test($name) {
+    {block};
+  }
+}
 
 
 
@@ -63,9 +68,10 @@ it($name)
 /// @group private-test
 /// @param {string} $name -
 ///   Describe what is being tested
-_true-test-start($name)
-  _true-context-mixin("test", $name)
-  _true-message("Test: %s" % $name, "comments")
+_true-test-start($name) {
+  _true-context-mixin('test', $name);
+  _true-message('Test: %s' % $name, 'comments');
+}
 
 
 
@@ -75,8 +81,9 @@ _true-test-start($name)
 /// Test stop helper
 /// @access private
 /// @group private-test
-_true-test-stop()
-  _true-update($_true-test-result.value)
-  _true-update-stats-count("tests")
-  _true-context-pop()
-  _true-message("", "comments")
+_true-test-stop() {
+  _true-update($_true-test-result.value);
+  _true-update-stats-count('tests');
+  _true-context-pop();
+  _true-message('', 'comments');
+}

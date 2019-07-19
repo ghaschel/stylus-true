@@ -22,29 +22,31 @@
 ///   $true-terminal-output: false;
 ///   @include report;
 report($terminal = $true-terminal-output.value, $fail-on-error = false, $results = $_true-results.value, $stats = $_true-stats.value)
-  $fail = $results.fail
-  $run = $results.run
-  $pass = $results.pass
-  $fail = $results.fail
-  $output = $results.output-to-css
-  $total = $pass + $fail + $output
-  $tests = $stats.tests
-  $comment = _true-report-message("linebreak", $results, $stats)
+  $fail = $results.fail;
+  $run = $results.run;
+  $pass = $results.pass;
+  $fail = $results.fail;
+  $output = $results.output-to-css;
+  $total = $pass + $fail + $output;
+  $tests = $stats.tests;
+  $comment = _true-report-message('linebreak', $results, $stats);
 
-  _true-message($comment, "comments")
+  _true-message($comment, 'comments');
 
-  if $terminal
-    p(not "linebreak")
-    $debug = _true-report-message(not "linebreak", $results, $stats)
-    _true-message($debug, "debug")
+  if ($terminal) {
+    $debug = _true-report-message(!'linebreak', $results, $stats);
+    _true-message($debug, 'debug');
+  }
 
-  if $run != $tests or $run != $total
-    $error = "The results don’t add up. Are all your tests properly structured?"
-    _true-error-mixin($error, "report")
+  if ($run != $tests || $run != $total) {
+    $error = 'The results don’t add up. Are all your tests properly structured?';
+    _true-error-mixin($error, 'report');
+  }
 
-  if $fail-on-error and $fail > 0
-    $plural = $fail == 1 ? "test" : "tests"
-    _true-error-mixin("%s %s failed", "report") % $fail $plural
+  if ($fail-on-error && $fail > 0) {
+    $plural = $fail == 1 ? 'test' : 'tests';
+    _true-error-mixin('%s %s failed', 'report') % $fail $plural;
+  }
 
 
 
@@ -63,15 +65,17 @@ report($terminal = $true-terminal-output.value, $fail-on-error = false, $results
 ///   A map of run, pass, fail, and output-to-css results
 /// @param {map} $stats [$_true-stats] -
 ///   A map of module, test, and assertion-counts in your project
-_true-report-message($linebreak = false, $results = $_true-results.value, $stats = $_true-stats.value)
-  if $linebreak
+_true-report-message($linebreak = false, $results = $_true-results.value, $stats = $_true-stats.value) {
+  if ($linebreak) {
     return _true-join-multiple(
-      "\n--------------------",
-      _true-stats-message("linebreak", $stats),
-      _true-results-message("linebreak", $results),
-      "\n# SUMMARY ----------"
-    )
+      '\n--------------------',
+      _true-stats-message('linebreak', $stats),
+      _true-results-message('linebreak', $results),
+      '\n# SUMMARY ----------'
+    );
+  }
 
-  $report = _true-results-message(null, $results), _true-stats-message(null, $stats)
+  $report = _true-results-message(null, $results), _true-stats-message(null, $stats);
 
-  return $report
+  return $report;
+}

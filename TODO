@@ -5,16 +5,16 @@ Fix (after initial release):
       - Try to keep with mixins and not with functions
   ☐ Messages
     ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
-    ☐ Assert `$default` is being added wrong, and only to the first element `IF used with child + parent`
-  @critical --- `above this only after initial release` --- @critical 
-
-Fix/to do now:
-  ☐ Assert
+    @critical --- `above this only after initial release` --- @critical 
+    
+    Fix/to do now:
+    ☐ Assert is broken, not saying test is correct (variable value) even though it says it passed
     ☐ `output/expect` is broken
+    ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
   ☐ Stats
     ✔ Counter is partially broken @done(19-07-18 17:09)
     ☐ Test with multiple files
-  ☐ Update SASSDOC
+  ☐ Update SASSDOC or switch to DSS
   ☐ Clean up
   ☐ Readme.md
   ☐ KnownIssues.md
@@ -25,5 +25,6 @@ Fix/to do now:
   ☐ EditorConfig
   ☐ Rewrite to TS?
   ☐ Badges
-  ☐ Report is broken
-
+  ✔ Report is broken @done(19-07-19 09:11)
+  ✔ Change stylus syntax @done(19-07-19 13:15)
+  ☐ Check other parts of the code

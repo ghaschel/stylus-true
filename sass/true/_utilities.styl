@@ -1,4 +1,4 @@
-use('lib/map-keys.js')
+use('lib/map-keys.js');
 // Utilities
 // =========
 
@@ -13,7 +13,7 @@ use('lib/map-keys.js')
 /// @type bool
 $_true-error-output-override = {
   value: false
-}
+};
 
 
 
@@ -35,13 +35,15 @@ $_true-error-output-override = {
 /// @throw
 ///   A message detailing the source and error,
 ///   when the `$override` is `false`
-_true-error($message, $source, $override = $_true-error-output-override.value)
-  $error = "ERROR [%s] %s" % $source $message
+_true-error($message, $source, $override = $_true-error-output-override.value) {
+  $error = 'ERROR [%s] %s' % $source $message;
 
-  if $override
-    return $error
+  if ($override){
+    return $error;
+  }
 
-  error($error)
+  error($error);
+}
 
 
 
@@ -63,13 +65,16 @@ _true-error($message, $source, $override = $_true-error-output-override.value)
 /// @throw
 ///   A message detailing the source and error,
 ///   when the `$override` is `false`
-_true-error-mixin($message, $source, $override = $_true-error-output-override.value)
-  $error = "ERROR [%s] %s" % $source $message
+_true-error-mixin($message, $source, $override = $_true-error-output-override.value) {
+  $error = 'ERROR [%s] %s' % $source $message;
 
-  if $override
-    _true-message($error, "comments")
-  else
-    error($error)
+  if ($override) {
+    _true-message($error, 'comments');
+  } else {
+    error($error);
+  }
+}
+
 
 
 
@@ -84,15 +89,19 @@ _true-error-mixin($message, $source, $override = $_true-error-output-override.va
 /// @param {map} $add -
 ///   Map of values to be added
 /// @return {map}
-_true-map-increment($base, $add)
-  for $key in map-keys($add)
-    $value = $add[$key]
+_true-map-increment($base, $add) {
+  for $key in (map-keys($add)) {
+    $value = $add[$key];
 
-    if $value
-      $base-value = $base[$key]
-      $new-value = $base-value ? $base-value + $value : $value
-      $base[$key] = $new-value
-  return $base
+    if ($value) {
+      $base-value = $base[$key];
+      $new-value = $base-value ? ($base-value + $value) : $value;
+      $base[$key] = $new-value;
+    }
+  }
+
+  return $base;
+}
 
 
 
@@ -108,22 +117,26 @@ _true-map-increment($base, $add)
 ///   with an optional final argument describing
 ///   the desired list-separator ('space' or 'comma')
 /// @return {list} Joined items in a single list
-_true-join-multiple($lists...)
-  $return = $lists[0]
-  $type = list-separator($return)
-  $last = $lists[-1]
-  $length = length($lists)
+_true-join-multiple($lists...) {
+  $return = $lists[0];
+  $type = list-separator($return);
+  $last = $lists[-1];
+  $length = length($lists);
 
-  if $last == "space" or $last == "comma"
-    $length = $length - 1
-    $type = $last
+  if ($last == 'space' || $last == 'comma') {
+    $length = $length - 1;
+    $type = $last;
+  }
 
-  if $length < 2
-    $error = "Must provide at least 2 lists"
-    return _true-error($error, "_true-join-multiple")
+  if ($length < 2) {
+    $error = 'Must provide at least 2 lists';
 
-  for $i in (1)..($length - 1)
-    p($lists[$i])
-    $return = join($return, $lists[$i], $type)
+    return _true-error($error, '_true-join-multiple');
+  }
 
-  return $return
+  for $i in ((1)..($length - 1)) {
+    $return = join($return, $lists[$i], $type);
+  }
+
+  return $return;
+}

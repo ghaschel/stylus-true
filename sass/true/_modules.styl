@@ -1,6 +1,6 @@
-use('lib/str-length.js')
-use('lib/arrange-test-list.js')
-use('lib/unwrap-list.js')
+use('lib/str-length.js');
+use('lib/arrange-test-list.js');
+use('lib/unwrap-list.js');
 // Test Module
 // ===========
 
@@ -34,11 +34,13 @@ use('lib/unwrap-list.js')
 // /         (1px solid red, 1px dashed green, 3px solid blue));
 // /     }
 // /   }
-test-module($name)
-  // /$_true-context.value = null
-  _true-module-start($name)
-  {block}
-  _true-module-stop()
+test-module($name) {
+  _true-module-start($name);
+
+  {block};
+
+  _true-module-stop();
+}
 
 
 
@@ -68,9 +70,11 @@ test-module($name)
 // /         (1px solid red, 1px dashed green, 3px solid blue));
 // /     }
 // /   }
-describe($name)
-  +test-module($name)
-    {block}
+describe($name) {
+  +test-module($name) {
+    {block};
+  }
+}
 
 
 
@@ -80,25 +84,29 @@ describe($name)
 /// @access private
 /// @group private-test
 /// @param {string} $name - module name
-_true-module-start($name)
+_true-module-start($name) {
   _true-context-mixin(module, $name)
-  $_true-context.buffer = arrange-test-list($_true-context.buffer)
-  $module-list = _true-context-all("module")
+  $_true-context.buffer = arrange-test-list($_true-context.buffer);
+  $module-list = _true-context-all('module');
 
-  $modules = $module-list[0]
-  $length = length($module-list)
+  $modules = $module-list[0];
+  $length = length($module-list);
 
-  if $length > 1
-    for $i in (2)..($length)
-      $modules = $modules + " :: " + $module-list[$i]
+  if ($length > 1) {
+    for $i in ((2)..($length)) {
+      $modules = $modules + ' :: ' + $module-list[$i];
+    }
+  }
 
-  _true-message("# Module: %s" % unquote($modules), "comments")
-  $underline = "----------"
+  _true-message('# Module: %s' % unquote($modules), 'comments');
+  $underline = '----------';
 
-  for $i in (0)..(str-length(unquote($modules)) - 1)
-    $underline = "%s-" % unquote($underline)
+  for $i in ((0)..(str-length(unquote($modules)) - 1)) {
+    $underline = '%s-' % unquote($underline);
+  }
 
-  _true-message($underline, "comments")
+  _true-message($underline, 'comments');
+}
 
 
 
@@ -109,7 +117,8 @@ _true-module-start($name)
 /// Module stop helper
 /// @access private
 /// @group private-test
-_true-module-stop()
-  _true-update-stats-count("modules")
+_true-module-stop() {
+  _true-update-stats-count('modules')
   _true-context-pop('modules')
-  _true-message("", "comments")
+  _true-message('', 'comments')
+}

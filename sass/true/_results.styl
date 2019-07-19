@@ -14,10 +14,12 @@
 /// @param {bool} $unequal [false] -
 ///   Set to `true` if the comparison is expected to fail
 /// @return {'pass' | 'fail'}
-_true-get-result($assert, $expected, $unequal = false)
-  $equal = $assert == $expected
-  $pass = $unequal ? not $equal : $equal
-  return $pass ? "pass" : "fail"
+_true-get-result($assert, $expected, $unequal = false) {
+  $equal = $assert == $expected;
+  $pass = $unequal ? !$equal : $equal;
+  
+  return $pass ? 'pass' : 'fail';
+}
 
 
 
@@ -29,10 +31,10 @@ _true-get-result($assert, $expected, $unequal = false)
 /// @type Map
 $_true-results = {
   value: {
-    "run": 0,
-    "pass": 0,
-    "fail": 0,
-    "output-to-css": 0
+    'run': 0,
+    'pass': 0,
+    'fail': 0,
+    'output-to-css': 0
   }
 }
 
@@ -45,12 +47,13 @@ $_true-results = {
 /// @access private
 /// @group private-context
 /// @param {'pass' | 'fail' | 'output-to-css'} $result -
-_true-update($result)
+_true-update($result) {
   $update = {
-    run: 1
-  }
-  $update[$result] = 1
-  $_true-results.value = _true-map-increment($_true-results.value, $update)
+    'run': 1
+  };
+  $update[$result] = 1;
+  $_true-results.value = _true-map-increment($_true-results.value, $update);
+}
 
 
 
@@ -73,11 +76,13 @@ $_true-test-result = {
 /// @access private
 /// @group private-context
 /// @param {'pass' | 'fail' | 'output-to-css'} $result -
-_true-update-test($result)
-  if $result == "fail" or $_true-test-result.value == "fail"
-    $_true-test-result.value = "fail"
-  else if $_true-test-result.value != "output-to-css"
+_true-update-test($result) {
+  if ($result == 'fail' || $_true-test-result.value == 'fail') {
+    $_true-test-result.value = 'fail'
+  } else if ($_true-test-result.value != 'output-to-css') {
     $_true-test-result.value = $result
+  }
+}
 
 
 
@@ -93,29 +98,31 @@ _true-update-test($result)
 ///   A map of run, pass, fail, and output-to-css results
 /// @return {String} -
 ///   Single or multi-line message for reporting
-_true-results-message($linebreak = false, $results = $_true-results.value)
-  $run = $results.run
-  $pass = $results.pass
-  $fail = $results.fail
-  $output-to-css = $results.output-to-css
+_true-results-message($linebreak = false, $results = $_true-results.value) {
+  $run = $results.run;
+  $pass = $results.pass;
+  $fail = $results.fail;
+  $output-to-css = $results.output-to-css;
 
-  $items = $run == 1 ? "Test" : "Tests"
-  $items = "%s %s" % ($run unquote($items))
-  $passed = "%s Passed" % ($pass)
-  $failed = "%s Failed" % ($fail)
-  $compiled = $output-to-css > 0 ? "%s Output to CSS" % $output-to-css : false
+  $items = $run == 1 ? 'Test' : 'Tests';
+  $items = '%s %s' % ($run unquote($items));
+  $passed = '%s Passed' % ($pass);
+  $failed = '%s Failed' % ($fail);
+  $compiled = $output-to-css > 0 ? '%s Output to CSS' % $output-to-css : false;
 
   // Linebreaks
-  if $linebreak
-    $message = "\n%s:" % $items, "\n- %s" % $passed, "\n- %s" % $failed
-    $message = $compiled ? push($message, "\n- %s" % $compiled) : $message
+  if ($linebreak) {
+    $message = '\n%s:' % $items, '\n- %s' % $passed, '\n- %s' % $failed;
+    $message = $compiled ? push($message, '\n- %s' % $compiled) : $message;
   
-    return $message
+    return $message;
+  }
 
   // No Linebreaks
-  $message = "%s, " % $items
-  $message = $message + "%s, " % $passed
-  $message = $message + "%s" % $failed
-  $message = $compiled ? $message + "%s" % $compiled : $message
+  $message = '%s, ' % $items;
+  $message = $message + '%s, ' % $passed;
+  $message = $message + '%s' % $failed;
+  $message = $compiled ? $message + '%s' % $compiled : $message;
   
-  return $message
+  return $message;
+}
