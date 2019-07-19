@@ -122,7 +122,8 @@ _true-join-multiple($lists...)
     $error = "Must provide at least 2 lists"
     return _true-error($error, "_true-join-multiple")
 
-  for $i in (2)..($length)
+  for $i in (1)..($length - 1)
+    p($lists[$i])
     $return = join($return, $lists[$i], $type)
 
   return $return

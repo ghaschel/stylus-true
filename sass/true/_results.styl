@@ -93,31 +93,29 @@ _true-update-test($result)
 ///   A map of run, pass, fail, and output-to-css results
 /// @return {String} -
 ///   Single or multi-line message for reporting
-_true-results-message($linebreak = true, $results = $_true-results.value)
+_true-results-message($linebreak = false, $results = $_true-results.value)
   $run = $results.run
   $pass = $results.pass
   $fail = $results.fail
   $output-to-css = $results.output-to-css
 
   $items = $run == 1 ? "Test" : "Tests"
-  $items = "%s %s" % $run $items
-  $passed = "%s Passed" % $pass
-  $failed = "%s Failed" % $fail
-  $compiled = $output-to-css > 0 ? "%s Output to CSS" % $output-to-css : null
-
-  // p($failed)
-  // p($items)
-  // p($passed)
-  // p($compiled)
+  $items = "%s %s" % ($run unquote($items))
+  $passed = "%s Passed" % ($pass)
+  $failed = "%s Failed" % ($fail)
+  $compiled = $output-to-css > 0 ? "%s Output to CSS" % $output-to-css : false
 
   // Linebreaks
   if $linebreak
-    $message = "%s:" % $items, "- %s" % $passed, "- %s" % $failed
-    $message = $compiled ? push($message, "- %s" % $compiled) : $message
-    p($message)
+    $message = "\n%s:" % $items, "\n- %s" % $passed, "\n- %s" % $failed
+    $message = $compiled ? push($message, "\n- %s" % $compiled) : $message
+  
     return $message
 
   // No Linebreaks
-  $message = "%s, %s, %s" % $items $passed $failed
-  $message = $compiled ? "%s, %s" % $message $compiled : $message
+  $message = "%s, " % $items
+  $message = $message + "%s, " % $passed
+  $message = $message + "%s" % $failed
+  $message = $compiled ? $message + "%s" % $compiled : $message
+  
   return $message

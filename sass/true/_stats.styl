@@ -53,16 +53,17 @@ _true-stats-message($linebreak = true, $stats = $_true-stats.value)
   $assertions-label = $assertions == 1 ? "Assertion" : "Assertions"
 
   // Combine Results with Labels
-  $modules = "%s %s" % $modules $modules-label
-  $tests = "%s %s" % $tests $tests-label
-  $assertions = "%s %s" % $assertions $assertions-label
+  $modules = "%s %s" % ($modules unquote($modules-label))
+  $tests = "%s %s" % ($tests unquote($tests-label))
+  $assertions = "%s %s" % ($assertions unquote($assertions-label))
 
   // Linebreaks
   if $linebreak
-    $message = "Stats:", "- %s" % $modules, "- %s" % $tests, "- %s" % $assertions
-    p($message)
+    $message = "\nStats:", "\n- %s" % $modules, "\n- %s" % $tests, "\n- %s" % $assertions
     return $message
 
   // No Linebreaks
-  $message = "%s, %s, %s" % $modules $tests $assertions
+  $message = "%s, " % $modules
+  $message = $message + "%s, " % $tests
+  $message = $message + "%s" % $assertions
   return $message

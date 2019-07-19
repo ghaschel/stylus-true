@@ -20,3 +20,12 @@
 /*   ✔ [assert-true] should strip the unit from a % value */
 /*  */
 /*  */
+/* # SUMMARY ---------- */
+/* 6 Tests: */
+/* - 5 Passed */
+/* - 1 Failed */
+/* Stats: */
+/* - 3 Modules */
+/* - 6 Tests */
+/* - 6 Assertions */
+/* -------------------- */
