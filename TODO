@@ -7,13 +7,15 @@ Fix (after initial release):
     ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
     @critical --- `above this only after initial release` --- @critical 
     
-    Fix/to do now:
-    ☐ Assert is broken, not saying test is correct (variable value) even though it says it passed
+Fix/to do now:
+    ✔ Assert is broken, not saying test is correct (variable value) even though it says it passed @done(19-07-19 20:17)
+    ☐ Report is completely broken in js (reports true and wrong amount)
     ☐ `output/expect` is broken
     ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
   ☐ Stats
     ✔ Counter is partially broken @done(19-07-18 17:09)
-    ☐ Test with multiple files
+    ✔ Multiple files works in css. @done(19-07-19 20:24)
+    ☐ Multiple files wont work in js yet.
   ☐ Update SASSDOC or switch to DSS
   ☐ Clean up
   ☐ Readme.md

@@ -51,8 +51,17 @@ _true-update($result) {
   $update = {
     'run': 1
   };
+
+  $successful = true;
+  for $i in ((0)..(length($test.test) - 1)) {
+    $successful = $successful && $test.test[$i] == 'pass'
+  }
+
+  $result = $successful ? 'pass' : 'fail';
+
   $update[$result] = 1;
   $_true-results.value = _true-map-increment($_true-results.value, $update);
+  $test.test = ()
 }
 
 
@@ -77,7 +86,8 @@ $_true-test-result = {
 /// @group private-context
 /// @param {'pass' | 'fail' | 'output-to-css'} $result -
 _true-update-test($result) {
-  if ($result == 'fail' || $_true-test-result.value == 'fail') {
+  push($test.test, $result)
+  if ($result == 'fail') {
     $_true-test-result.value = 'fail'
   } else if ($_true-test-result.value != 'output-to-css') {
     $_true-test-result.value = $result

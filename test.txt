@@ -1,50 +1,57 @@
-/*! # Module: is-px()2 */
-/*! ------------------ */
-/*! Test: 'fifth it' */
-/*!   ✔ [assert-true]  */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*! Test: 'sixth it' */
-/*!   ✔ [assert-true] 'fifth it' */
-/*!   ✖ FAILED: '[assert-true] ' */
-/*!     - Output: ['boolean']  */
-/*!     - Expected: ['boolean']  */
-/*!     - Details: (set `$inspect: true` to compare output values) */
-/*!     - Module:  */
-/*!     - Test:  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*!  */
-/*! # Module: is-px()3 */
-/*! ------------------ */
-/*! Test: 'seventh it' */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*! Test: 'eight it' */
-/*!   ✔ [assert-true] 'seventh it' */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!   ✔ [assert-true]  */
-/*!  */
-/*!  */
-/*! 
+/* # Module: is-px()2 */
+/* ------------------ */
+/* Test: 'fifth it' */
+/*   ✔ [assert-true]  */
+/*   ✖ FAILED: '[assert-true] ' */
+/*     - Output: ['boolean']  */
+/*     - Expected: ['boolean']  */
+/*     - Details: (set `$inspect: true` to compare output values) */
+/*     - Module:  */
+/*     - Test:  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'sixth it' */
+/*   ✔ [assert-true] 'fifth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'sixth it' */
+/*   ✔ [assert-false] 'sixth it' */
+/*   ✔ [assert-false]  */
+/*   ✖ FAILED: '[assert-false] ' */
+/*     - Output: ['boolean']  */
+/*     - Expected: ['boolean']  */
+/*     - Details: (set `$inspect: true` to compare output values) */
+/*     - Module:  */
+/*     - Test:  */
+/*   ✔ [assert-false]  */
+/*   ✔ [assert-false]  */
+/*  */
+/*  */
+/* # Module: is-px()3 */
+/* ------------------ */
+/* Test: 'seventh it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'eight it' */
+/*   ✔ [assert-true] 'seventh it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/*  */
+/* 
  * # SUMMARY ----------
- * 4 Tests: 
- * - 0 Passed 
- * - 4 Failed
+ * 5 Tests: 
+ * - 3 Passed 
+ * - 2 Failed
  * Stats: 
  * - 2 Modules 
- * - 4 Tests 
- * - 16 Assertions
+ * - 5 Tests 
+ * - 21 Assertions
  * --------------------    */

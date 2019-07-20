@@ -4,7 +4,7 @@ use('lib/stdout.js');
 
 // MIXIN
 comment($string) {
-  unquote('/*! ' + replace('(?![\t ])\s\s*', '\n * ', $string) + ' */')
+  unquote('/* ' + replace('(?![\t ])\s\s*', '\n * ', $string) + ' */')
 }
 
 
