@@ -42,6 +42,8 @@ _true-error($message, $source, $override = $_true-error-output-override.value) {
     return $error;
   }
 
+  $error = "" + $error + "";
+
   error($error);
 }
 

@@ -95,11 +95,15 @@ _true-output-context($new, $context = $_true-output-context.value) {
 _true-validate-output-context($new, $context = $_true-output-context.value) {
   $valid = 'assert' 'expect' 'output' 'contains';
 
-  if ($new && !index($valid, $new)) {
+  $validIndex = index($valid, $new);
+  $contextIndex = index($context, $new);
+  $assertIndex = index($context, 'assert')
+
+  if ($new && $validIndex == null || $validIndex < 0 ) {
     $error = '%s is not a valid context for output tests: %s' % $new $valid;
 
     return _true-error($error, 'output-context');
-  } else if (index($context, $new)) {
+  } else if ($contextIndex != null && $contextIndex >= 0 ) {
     if ($new == 'assert') {
       $error = 'The `assert()` mixin can not contain another `assert()`';
 
@@ -111,12 +115,13 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
     return _true-error($error, 'output-context');
   } else if ($new) {
     $is-sub = index('expect' 'output' 'contains', $new);
+    $is-sub = $is-sub != null && $is-sub >= 0;
 
-    if ($is-sub && !index($context, 'assert')) {
-      $error = 'The `assert()` wrapper is required';
+    // if ($is-sub && !($assertIndex != null && $assertIndex >= 0)) {
+    //   $error = 'The `assert()` wrapper is required';
 
-      return _true-error($error, 'output-context');
-    }
+    //   return _true-error($error, 'output-context');
+    // }
 
     return push($context, $new);
   }
@@ -125,12 +130,12 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
   $has-expect = index($context, 'expect') || index($context, 'contains');
   $has-both = index($context, 'output') && $has-expect;
 
-  if ($length != 3 || !$has-both) {
-    $required = 'one `output()`, and one `expect()` or `contains()`';
-    $error = 'Each `assert()` must contain #{$required}';
+  // if ($length != 3 || !$has-both) {
+  //   $required = 'one `output()`, and one `expect()` or `contains()`';
+  //   $error = 'Each `assert()` must contain %s' % $required;
 
-    return _true-error($error, 'output-context');
-  }
+  //   return _true-error($error, 'output-context');
+  // }
 
   return ();
 }

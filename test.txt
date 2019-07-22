@@ -1,6 +1,24 @@
 /* # Module: is-px()2 */
 /* ------------------ */
+/* Test: 'sixth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
 /* Test: 'fifth it' */
+/*  ASSERT:   */
+/*  OUTPUT  */
+.test-output .body {
+  color: #00f;
+}
+/*  END_OUTPUT  */
+/*  EXPECTED  */
+.test-output .body {
+  color: #f00;
+}
+/*  END_EXPECTED  */
+/*  END_ASSERT  */
 /*   ✔ [assert-true]  */
 /*   ✖ FAILED: '[assert-true] ' */
 /*     - Output: ['boolean']  */
@@ -12,13 +30,7 @@
 /*   ✔ [assert-true]  */
 /*  */
 /* Test: 'sixth it' */
-/*   ✔ [assert-true] 'fifth it' */
-/*   ✔ [assert-true]  */
-/*   ✔ [assert-true]  */
-/*   ✔ [assert-true]  */
-/*  */
-/* Test: 'sixth it' */
-/*   ✔ [assert-false] 'sixth it' */
+/*   ✔ [assert-false] 'fifth it' */
 /*   ✔ [assert-false]  */
 /*   ✖ FAILED: '[assert-false] ' */
 /*     - Output: ['boolean']  */
@@ -53,5 +65,5 @@
  * Stats: 
  * - 2 Modules 
  * - 5 Tests 
- * - 21 Assertions
+ * - 22 Assertions
  * --------------------    */

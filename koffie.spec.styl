@@ -14,19 +14,35 @@
   //   }
   // }
   +describe('is-px()2') {
-    +it('fifth it') {
-      assert-true(true)
-      assert-true(false)
-      assert-true(true)
-      assert-true(true)
-    }
-
     +it('sixth it') {
       assert-true(true)
       assert-true(true)
       assert-true(true)
       assert-true(true)
     }
+    
+    +it('fifth it') {
+      +assert() {
+        +output() {
+          .body {
+            color: blue;
+          }
+        }
+
+        +expect() {
+          .body {
+            color: red;
+          }
+        }
+      }
+      
+      assert-true(true)
+      assert-true(false)
+      assert-true(true)
+      assert-true(true)
+    }
+
+    
 
     +it('sixth it') {
       assert-false(false)
