@@ -3,6 +3,8 @@ Fix (after initial release):
     ☐ Find a way to create associations between modules (child + parent). stylus rendering order works differently than SASS
       - This is essential for `describe inside describe`
       - Try to keep with mixins and not with functions
+  ☐ Assert
+    ☐ Find a way to validate the use of the assert wrapper function, it falls in the same bag of the module inside module thing.
   ☐ Messages
     ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
     @critical --- `above this only after initial release` --- @critical 
@@ -10,7 +12,8 @@ Fix (after initial release):
 Fix/to do now:
     ✔ Assert is broken, not saying test is correct (variable value) even though it says it passed @done(19-07-19 20:17)
     ☐ Report is completely broken in js (reports true and wrong amount)
-    ☐ `output/expect` is broken
+    ✔ `output/expect` is broken @done(19-07-22 10:46)
+    ☐ Using assert wrapper causes the next tests (it) to be ignored by jest/mocha
     ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
   ☐ Stats
     ✔ Counter is partially broken @done(19-07-18 17:09)
