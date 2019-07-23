@@ -12,8 +12,12 @@ Fix (after initial release):
 Fix/to do now:
     ✔ Assert is broken, not saying test is correct (variable value) even though it says it passed @done(19-07-19 20:17)
     ☐ Report is completely broken in js (reports true and wrong amount)
+      - Now is reporting correctly the number, but still reports false as true after an assert with output/expect
+      - If one single assert true is false, removes the next tests
+    ☐ Rename $test.test
     ✔ `output/expect` is broken @done(19-07-22 10:46)
     ☐ Using assert wrapper causes the next tests (it) to be ignored by jest/mocha
+      - the output at the end of the assert function is 'output, expect, assert' maybe something?
     ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
   ☐ Stats
     ✔ Counter is partially broken @done(19-07-18 17:09)

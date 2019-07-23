@@ -73,6 +73,7 @@ _true-output-context($new, $context = $_true-output-context.value) {
   $valid = 'assert' 'expect' 'output' 'contains';
 
   $_true-output-context.value = _true-validate-output-context($new, $context);
+  p($_true-output-context.value)
 }
 
 // Validate Output-context [function]
@@ -123,7 +124,8 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
     //   return _true-error($error, 'output-context');
     // }
 
-    return push($context, $new);
+    push($context, $new);
+    return $context
   }
 
   $length = length($context);

@@ -6,7 +6,37 @@
 /*   ✔ [assert-true]  */
 /*   ✔ [assert-true]  */
 /*  */
+/* Test: 'sixth it' */
+/*   ✔ [assert-true] 'sixth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'sixth it' */
+/*   ✔ [assert-true] 'sixth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'sixth it' */
+/*   ✔ [assert-true] 'sixth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'sixth it' */
+/*   ✔ [assert-true] 'sixth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
 /* Test: 'fifth it' */
+/*   ✔ [assert-true] 'sixth it' */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*  */
+/* Test: 'aaaaaaaaaaaaaaaaaaaa' */
 /*  ASSERT:   */
 /*  OUTPUT  */
 .test-output .body {
@@ -15,31 +45,25 @@
 /*  END_OUTPUT  */
 /*  EXPECTED  */
 .test-output .body {
-  color: #f00;
+  color: #008000;
 }
 /*  END_EXPECTED  */
 /*  END_ASSERT  */
 /*   ✔ [assert-true]  */
-/*   ✖ FAILED: '[assert-true] ' */
-/*     - Output: ['boolean']  */
-/*     - Expected: ['boolean']  */
-/*     - Details: (set `$inspect: true` to compare output values) */
-/*     - Module:  */
-/*     - Test:  */
+/*   ✔ [assert-true]  */
 /*   ✔ [assert-true]  */
 /*   ✔ [assert-true]  */
 /*  */
-/* Test: 'sixth it' */
-/*   ✔ [assert-false] 'fifth it' */
-/*   ✔ [assert-false]  */
-/*   ✖ FAILED: '[assert-false] ' */
+/* Test: 'fifth lllllllllllllllllllllllllllll' */
+/*   ✖ FAILED: '[assert-true] 'aaaaaaaaaaaaaaaaaaaa'' */
 /*     - Output: ['boolean']  */
 /*     - Expected: ['boolean']  */
 /*     - Details: (set `$inspect: true` to compare output values) */
 /*     - Module:  */
 /*     - Test:  */
-/*   ✔ [assert-false]  */
-/*   ✔ [assert-false]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
+/*   ✔ [assert-true]  */
 /*  */
 /*  */
 /* # Module: is-px()3 */
@@ -59,11 +83,12 @@
 /*  */
 /* 
  * # SUMMARY ----------
- * 5 Tests: 
- * - 3 Passed 
- * - 2 Failed
+ * 10 Tests: 
+ * - 8 Passed 
+ * - 1 Failed 
+ * - 1 Output to CSS
  * Stats: 
  * - 2 Modules 
- * - 5 Tests 
- * - 22 Assertions
+ * - 10 Tests 
+ * - 41 Assertions
  * --------------------    */

@@ -54,10 +54,19 @@ _true-update($result) {
 
   $successful = true;
   for $i in ((0)..(length($test.test) - 1)) {
-    $successful = $successful && $test.test[$i] == 'pass'
+    if ($test.test[$i] == 'output-to-css' || $successful == 'output-to-css') {
+      $successful = 'output-to-css'
+    } else {
+      $successful = $successful && $test.test[$i] == 'pass'
+    }
   }
 
-  $result = $successful ? 'pass' : 'fail';
+  if ($successful == 'output-to-css') {
+    $result = 'output-to-css';
+  } else {
+    $result = $successful ? 'pass' : 'fail';
+  }
+
 
   $update[$result] = 1;
   $_true-results.value = _true-map-increment($_true-results.value, $update);
@@ -123,7 +132,10 @@ _true-results-message($linebreak = false, $results = $_true-results.value) {
   // Linebreaks
   if ($linebreak) {
     $message = '\n%s:' % $items, '\n- %s' % $passed, '\n- %s' % $failed;
-    $message = $compiled ? push($message, '\n- %s' % $compiled) : $message;
+
+    if ($compiled) {
+      push($message, '\n- %s' % $compiled)
+    }
   
     return $message;
   }
@@ -132,7 +144,7 @@ _true-results-message($linebreak = false, $results = $_true-results.value) {
   $message = '%s, ' % $items;
   $message = $message + '%s, ' % $passed;
   $message = $message + '%s' % $failed;
-  $message = $compiled ? $message + '%s' % $compiled : $message;
+  $message = $compiled ? $message + ', %s' % $compiled : $message;
   
   return $message;
 }
