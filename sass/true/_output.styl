@@ -1,3 +1,4 @@
+use('lib/inspect.js');
 // Test Result Output
 // ==================
 
@@ -37,7 +38,7 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
 
   // Title Messages
   $assertion = _true-context('assert');
-  $title = 'FAILED: %s' % $assertion;
+  $title = 'FAILED: %s' % unquote($assertion);
   $message = '✖ %s' % $title;
   _true-message($message, $location, 2);
 
@@ -49,7 +50,7 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
 
   // Edge Failure Notes
   if (str-index($assertion, 'assert-equal')) {
-    $notes = _true-edgefail-notes($assert, $expected)
+    $notes = _true-edgefail-notes($assert, $expected);
 
     if ($notes) {
       _true-message($notes, $location, 4)
@@ -86,6 +87,9 @@ _true-variable-details($var) {
   $inspect = inspect($var);
   $type = type-of($var);
 
+  p($inspect)
+  p($type)
+
   if ($type == 'list') {
     $separator = list-separator($var);
     $type = '#%s-%s' % $separator $type;
@@ -99,7 +103,10 @@ _true-variable-details($var) {
     return '`[%s] %s`' % $type $inspect;
   }
 
-  return '[%s] %s' % $type $inspect;
+  $return = '[' + $type + '] ' + $inspect
+
+  //return '[%s] %s' % unquote($type) unquote($inspect);
+  return unquote($return);
 }
 
 

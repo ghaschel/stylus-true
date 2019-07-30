@@ -1,4 +1,5 @@
 use('lib/unwrap-list.js');
+use('lib/inspect.js');
 
 // Assert
 // ======
@@ -28,7 +29,8 @@ assert-true($assert, $description = null) {
   $truthy = _true-is-truthy($assert);
   $tmp = $description || $default;
 
-  _true-context-mixin('assert', '[assert-true] %s' % $tmp);
+  //_true-context-mixin('assert', '[assert-true] %s' % $tmp);
+  _true-context-mixin('assert', '[assert-true]');
   _true-assert-results($truthy, true);
 }
 
@@ -57,7 +59,8 @@ assert-false($assert, $description = null) {
   $falsey = !_true-is-truthy($assert);
   $tmp = $description || $default;
 
-  _true-context-mixin('assert', '[assert-false] %s' % $tmp);
+  // _true-context-mixin('assert', '[assert-false] %s' % $tmp);
+  _true-context-mixin('assert', '[assert-false]');
   _true-assert-results($falsey, true);
 }
 
@@ -87,7 +90,7 @@ assert-false($assert, $description = null) {
 // / 4,
 // / 'You can optionally describe the assertion...');
 // / }
-assert-equal($assert, $expected, $description = null, $inspect = false) {
+assert-equal($assert, $expected, $description = null, $inspect = true) {
   $default = _true-context('test');
 
   if ($inspect) {
@@ -97,7 +100,8 @@ assert-equal($assert, $expected, $description = null, $inspect = false) {
 
   $tmp = $description || $default;
 
-  _true-context-mixin('assert', '[assert-equal] %s' % $tmp);
+  // _true-context-mixin('assert', '[assert-equal] %s' % $tmp);
+  _true-context-mixin('assert', '[assert-equal]');
   _true-assert-results($assert, $expected);
 }
 
@@ -126,7 +130,7 @@ assert-equal($assert, $expected, $description = null, $inspect = false) {
 // / 1em,
 // / '1em');
 // / }
-assert-unequal($assert, $expected, $description = null, $inspect = false) {
+assert-unequal($assert, $expected, $description = null, $inspect = true) {
   $default = _true-context('test');
 
   if ($inspect) {
@@ -136,7 +140,8 @@ assert-unequal($assert, $expected, $description = null, $inspect = false) {
 
   $tmp = $description || $default;
 
-  _true-context-mixin('assert', '[assert-unequal] %s' % $tmp);
+  // _true-context-mixin('assert', '[assert-unequal] %s' % $tmp);
+  _true-context-mixin('assert', '[assert-unequal]');
   _true-assert-results($assert, $expected, 'unequal');
 }
 
@@ -181,7 +186,8 @@ assert($description = null) {
   $tmp = $description || $default;
 
   _true-output-context('assert');
-  _true-context-mixin('assert', '[output] %s' % $tmp);
+  // _true-context-mixin('assert', '[output] %s' % $tmp);
+  _true-context-mixin('assert', '[output]');
   _true-message(' ASSERT: %s ' % $description, 'comments');
 
   {block};
@@ -189,7 +195,7 @@ assert($description = null) {
   _true-output-context(null);
   _true-update-test('output-to-css');
   _true-update-stats-count('assertions');
-  _true-context-pop();
+  // _true-context-pop();
   _true-message(' END_ASSERT ', 'comments');
 }
 
@@ -370,6 +376,8 @@ $test = {
 _true-assert-results($assert, $expected, $unequal = false, $terminal = $true-terminal-output.value) {
   $result = _true-get-result($assert, $expected, $unequal);
 
+  //p($result)
+
   if ($result == 'pass') {
     _true-pass-details();
   } else {
@@ -378,7 +386,7 @@ _true-assert-results($assert, $expected, $unequal = false, $terminal = $true-ter
 
   _true-update-test($result);
   _true-update-stats-count('assertions');
-  _true-context-pop();
+  // _true-context-pop();
 }
 
 // Is Truthy

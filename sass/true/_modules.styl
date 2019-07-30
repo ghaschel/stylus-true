@@ -85,18 +85,18 @@ describe($name) {
 /// @group private-test
 /// @param {string} $name - module name
 _true-module-start($name) {
-  _true-context-mixin(module, $name)
+  _true-context-mixin(module, $name);
   $_true-context.buffer = arrange-test-list($_true-context.buffer);
   $module-list = _true-context-all('module');
 
   $modules = $module-list[0];
   $length = length($module-list);
 
-  if ($length > 1) {
-    for $i in ((2)..($length)) {
-      $modules = $modules + ' :: ' + $module-list[$i];
-    }
-  }
+  // if ($length > 1) {
+  //   for $i in ((2)..($length)) {
+  //     $modules = $modules + ' :: ' + $module-list[$i];
+  //   }
+  // }
 
   _true-message('# Module: %s' % unquote($modules), 'comments');
   $underline = '----------';
@@ -118,7 +118,7 @@ _true-module-start($name) {
 /// @access private
 /// @group private-test
 _true-module-stop() {
-  _true-update-stats-count('modules')
-  _true-context-pop('modules')
-  _true-message('', 'comments')
+  _true-update-stats-count('modules');
+  // _true-context-pop('modules')
+  _true-message('', 'comments');
 }

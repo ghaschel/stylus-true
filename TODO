@@ -11,10 +11,14 @@ Fix (after initial release):
     
 Fix/to do now:
     ✔ Assert is broken, not saying test is correct (variable value) even though it says it passed @done(19-07-19 20:17)
+    ✔ Assert equal is broken @done(19-07-30 17:49)
+      ✔ Maybe because of missing `inspect()` @done(19-07-30 17:49)
+    ☐ Unequal still outputs "set inspect to true"
     ☐ Report is completely broken in js (reports true and wrong amount)
       - Now is reporting correctly the number, but still reports false as true after an assert with output/expect
       - If one single assert true is false, removes the next tests
     ☐ Rename $test.test
+    ☐ $output: true not working
     ✔ `output/expect` is broken @done(19-07-22 10:46)
     ☐ Using assert wrapper causes the next tests (it) to be ignored by jest/mocha
       - the output at the end of the assert function is 'output, expect, assert' maybe something?

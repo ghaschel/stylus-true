@@ -1,14 +1,11 @@
-import lodash from 'lodash';
-import glob from 'glob';
-import { isEmptyFile } from './utils';
-import stylusRenderer from './stylus';
-import getTests from './parser';
+import glob from "glob";
+import lodash from "lodash";
 
-/* eslint-disable */ /* jshint ignore:start */
-import { should } from 'chai';
-/* jshint ignore:end */ /* eslint-enable */
+import getTests from "./parser";
+import stylusRenderer from "./stylus";
+import { isEmptyFile } from "./utils"; /* jshint ignore:start */ /* eslint-enable */
 
-/**
+/* eslint-disable */ /* jshint ignore:end */ /**
  * Search for all tests.
  *
  * @param  {Array}    config
@@ -18,16 +15,11 @@ import { should } from 'chai';
  */
 function forEachTest(config, callback) {
   const testFiles = lodash.reject(
-    glob.sync(config.testDirPath + '/**/*.styl'),
+    glob.sync(config.testDirPath + "/**/*.styl"),
     isEmptyFile
   );
 
-  lodash.each(
-    lodash.flatten(
-      lodash.map(testFiles, getTests)
-    ),
-    callback
-  );
+  lodash.each(lodash.flatten(lodash.map(testFiles, getTests)), callback);
 }
 
 /**
@@ -41,13 +33,9 @@ export default function(config) {
   describe(config.describe, function() {
     forEachTest(config, function(test) {
       it(test.description, function() {
-        stylusRenderer(
-          test.givenStylus,
-          config.stylus,
-          function(actualCss) {
-            actualCss.should.equal(test.expectedCss);
-          }
-        );
+        stylusRenderer(test.givenStylus, config.stylus, function(actualCss) {
+          actualCss.should.equal(test.expectedCss);
+        });
       });
     });
   });

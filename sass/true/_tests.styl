@@ -84,6 +84,6 @@ _true-test-start($name) {
 _true-test-stop() {
   _true-update($_true-test-result.value);
   _true-update-stats-count('tests');
-  _true-context-pop();
+  // _true-context-pop();
   _true-message('', 'comments');
 }
