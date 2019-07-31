@@ -1,83 +1,24 @@
-/* # Module: is-px()2 */
-/* ------------------ */
-/* Test: 'sixth it' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/* # Module: Is Truthy */
+/* ------------------- */
+/* Test: 'True is truthy' */
 /*   ✔ [assert-equal] */
-/*   ✔ [assert-unequal] */
-/*   ✔ [assert-true] */
 /*  */
-/* Test: 'sixth itaaaaaaaaaaa' */
-/*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: [boolean] false */
-/*     - Expected: [boolean] true */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/* Test: 'String is truthy' */
+/*   ✔ [assert-equal] */
 /*  */
-/* Test: 'sixth itsssssssss' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/* Test: 'List is truthy' */
+/*   ✔ [assert-equal] */
 /*  */
-/* Test: 'sixth itddddddddddd' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/* Test: 'False is not truthy' */
+/*   ✔ [assert-equal] */
 /*  */
-/* Test: 'sixth itdasdas' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/* Test: 'Null is not truthy' */
+/*   ✔ [assert-equal] */
 /*  */
-/* Test: 'fifth itdasadsda' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: [boolean] false */
-/*     - Expected: [boolean] true */
+/* Test: 'Empty string is not truthy' */
+/*   ✔ [assert-equal] */
 /*  */
-/* Test: 'aaaaaaaaaaaaaaaaaaaa' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output .body {
-  color: #00f;
-}
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-.test-output .body {
-  color: #00f;
-}
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'fifth lllllllllllllllllllllllllllll' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/*  */
-/* # Module: is-px()3 */
-/* ------------------ */
-/* Test: 'seventh it' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'eight it' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/* Test: 'Empty list is not truthy' */
+/*   ✔ [assert-equal] */
 /*  */
 /*  */

@@ -1,92 +1,440 @@
 @import 'sass/_true.styl';
 
-+describe('is-px()2') {
-  +it('sixth it') {
-    assert-true(true);
-    assert-true(true);
-    assert-equal('test', 'test');
-    assert-unequal('test', 'atest');
-    assert-true(true);
+// +describe('is-px()2') {
+//   +it('sixth it') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-equal('test', 'test');
+//     assert-unequal('test', 'atest');
+//     assert-true(true);
+//   }
+
+//   +it('sixth itaaaaaaaaaaa') {
+//     assert-true(true);
+//     assert-true(false);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+
+//   +it('sixth itsssssssss') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+
+//   +it('sixth itddddddddddd') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+
+//   +it('sixth itdasdas') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+
+//   +it('fifth itdasadsda') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(false);
+//   }
+
+//   +it('aaaaaaaaaaaaaaaaaaaa') {
+//     +assert() {
+//       +output() {
+//         .body {
+//           color: blue;
+//         }
+//       }
+
+//       +expect() {
+//         .body {
+//           color: blue;
+//         }
+//       }
+//     }
+
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+
+//   +it('fifth lllllllllllllllllllllllllllll') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+// }
+
+// +describe('is-px()3') {
+//   +it('seventh it') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+
+//   +it('eight it') {
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//     assert-true(true);
+//   }
+// }
+
+// // report();
+
+
+// Test Assertions
+// ===============
+
+// Is Truthy
++test-module('Is Truthy') {
+  +test('True is truthy') {
+    assert-equal(_true-is-truthy(true), true);
   }
 
-  +it('sixth itaaaaaaaaaaa') {
-    assert-true(true);
-    assert-true(false);
-    assert-true(true);
-    assert-true(true);
+  +test('String is truthy') {
+    assert-equal(_true-is-truthy('string'), true);
   }
 
-  +it('sixth itsssssssss') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
+  +test('List is truthy') {
+    assert-equal(_true-is-truthy('one' 'two' 'three'), true);
   }
 
-  +it('sixth itddddddddddd') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
+  +test('False is not truthy') {
+    assert-equal(_true-is-truthy(false), false);
   }
 
-  +it('sixth itdasdas') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
+  +test('Null is not truthy') {
+    assert-equal(_true-is-truthy(null), false);
   }
 
-  +it('fifth itdasadsda') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(false);
+  +test('Empty string is not truthy') {
+    assert-equal(_true-is-truthy(''), false);
   }
 
-  +it('aaaaaaaaaaaaaaaaaaaa') {
-    +assert() {
-      +output() {
-        .body {
-          color: blue;
-        }
-      }
+  +test('Empty list is not truthy') {
+    $list = ();
 
-      +expect() {
-        .body {
-          color: blue;
-        }
-      }
-    }
-
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-  }
-
-  +it('fifth lllllllllllllllllllllllllllll') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
+    assert-equal(_true-is-truthy($list), false);
   }
 }
 
-+describe('is-px()3') {
-  +it('seventh it') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-  }
+// // Assert True
+// +test-module('Assert True') {
+//   +test('Truthiness') {
+//     assert-true('this string', 'Non-false properties return true.');
+//   }
+// }
 
-  +it('eight it') {
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-    assert-true(true);
-  }
-}
+// // Assert False
+// +test-module('Assert False') {
+//   +test('Falsiness') {
+//     assert-false(not 'anything', 'Negated properties return false.');
+//   }
 
-// report();
+//   +test('null') {
+//     assert-false(null, 'Null properties return false.');
+//   }
+
+//   +test('Empty string') {
+//     assert-false('', 'Empty string return false.');
+//   }
+
+//   +test('empty list') {
+//     $empty = ();
+
+//     assert-false($empty, 'Empty lists return false.');
+//   }
+// }
+
+// // Assert Equal
+// +test-module('Assert Equal') {
+//   +test('Equality') {
+//     assert-equal(2 - 1, 1, '2 - 1 should equal 1.');
+//   }
+
+//   +test('Empty description') {
+//     assert-equal(1, 1);
+//   }
+
+//   +test('Adding floats') {
+//     assert-equal(0.1 + 0.2, 0.3, true);
+//   }
+
+//   +test('Rounded numbers with $inspect') {
+//     assert-equal(1/3, 0.333333, true);
+//   }
+
+//   +test('Rounded colors with $inspect') {
+//     $origin = #246;
+//     $expected = #356a9f;
+
+//     assert-equal(lighten($origin, 15%), $expected, true);
+//   }
+
+//   +test('Mismatched types with $inspect') {
+//     assert-unequal(unquote('1rem'), 1rem, 'normally unequal');
+//     assert-equal(unquote('1rem'), 1rem, true);
+//   }
+// }
+
+
+// Assert UnEqual
+// +test-module('Assert UnEqual') {
+//   +test('Inequality') {
+//     assert-unequal(3 - 1, 3, '3 - 1 is not equal to 3.');
+//   }
+
+//   +test('Mismatched types') {
+//     assert-unequal(unquote('1rem'), 1rem);
+//   }
+
+//   +test('Mismatched units with $inspect') {
+//     assert-equal(1, 1rem, 'normally equal');
+
+//     assert-unequal(1, 1rem, true);
+//   }
+// }
+
+// Assert [output]
+//+test-module('Assert(output)') {
+  // +test('CSS output math') {
+  //   +assert('Output math compares properly') {
+  //     +output() {
+  //       -property1: 0.1 + 0.2;
+  //       -property2: (1 / 3);
+  //     }
+
+  //     +expect() {
+  //       -property1: 0.3;
+  //       -property2: 0.33333;
+  //     }
+  //   }
+  // }
+
+  // +test('output/expect [mixins]') {
+  //   +assert('Output and expected selector patterns match') {
+  //     +output() {
+  //       -property: value;
+
+  //       @media (min-width: 30em) {
+  //         -prop: val;
+
+  //         /.selector {
+  //           -prop: val;
+  //         }
+  //       }
+  //     }
+
+  //     +expect() {
+  //       -property: value;
+  //       @media (min-width: 30em) {
+  //         -prop: val;
+  //         /.selector {
+  //           -prop: val;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  //+test-module('Assert(contains)') {
+    // +test('Passes if the property in "contains" exists in the "output" and has the same value') {
+    //   +assert() {
+    //     +output() {
+    //       height: 10px;
+    //       width: 20px;
+    //     }
+
+    //     +contains() {
+    //       height: 10px;
+    //     }
+    //   }
+    // }
+
+    // +test('Passes if the property and its value in class in "contains" exists in the same class in "output"') {
+    //   +assert() {
+    //     +output() {
+    //       height: 20px;
+    //       .class {
+    //         height: 10px;
+    //       }
+    //       .other-class {
+    //         height: 10px;
+    //       }
+    //     }
+
+    //     +contains() {
+    //       .class {
+    //         height: 10px;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // +test('Can be used with nested classes') {
+    //   +assert() {
+    //     +output() {
+    //       height: 20px;
+    //       .class {
+    //         height: 10px;
+    //         .other-class {
+    //           height: 10px;
+    //         }
+    //       }
+    //     }
+
+    //     +contains() {
+    //       .class {
+    //         .other-class {
+    //           height: 10px;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    // +test('Can be used with nested @media queries') {
+    //   +assert() {
+    //     +output() {
+    //       .class {
+    //         height: 20px;
+    //       }
+    //       @media (min-width: 30em) {
+    //         @media (min-width: 40em) {
+    //           .selector {
+    //             height: 10px;
+    //           }
+    //           .selector2 {
+    //             height: 10px;
+    //           }
+    //         }
+    //         .selector3 {
+    //           height: 10px;
+    //         }
+    //       }
+    //     }
+
+    //     +contains() {
+    //       @media (min-width: 30em) {
+    //         @media (min-width: 40em) {
+    //           .selector2 {
+    //             height: 10px;
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    // +test('Can be used with @at-root') {
+    //   +assert() {
+    //     +output() {
+    //       /.selector {
+    //         height: 10px;
+    //       }
+    //     }
+
+    //     +contains() {
+    //       /.selector {
+    //         height: 10px;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // +test('Can be used for all selector types') {
+    //   +assert() {
+    //     +output() {
+    //       .selector {
+    //         -prop: val;
+    //       }
+    //       #id {
+    //         -prop: value1;
+    //       }
+    //       div {
+    //         -prop: value2;
+    //         min-height: 20px;
+    //         max-height: 30px;
+    //       }
+
+    //       input[type='text'] {
+    //         color: rebeccapurple;
+    //       }
+
+    //       * + * {
+    //         color: red;
+    //         display: none;
+    //       }
+
+    //       body > h1 {
+    //         font-weight: bold;
+    //       }
+
+    //       i::before {
+    //         -prop: value3;
+    //       }
+
+    //       div ~ p {
+    //         color: green;
+    //       }
+
+    //       i:not(.italic) {
+    //         text-decoration: underline;
+    //         --custom: val;
+    //       }
+    //     }
+
+    //     +contains() {
+    //       .selector {
+    //         -prop: val;
+    //       }
+
+    //       div {
+    //         max-height: 30px;
+    //       }
+
+    //       body > h1 {
+    //         font-weight: bold;
+    //       }
+
+    //       * + * {
+    //         display: none;
+    //       }
+
+    //       i:not(.italic) {
+    //         text-decoration: underline;
+    //       }
+    //     }
+    //   }
+    // }
+
+  //   +test('Can assert multiple properties within a selector') {
+  //     +assert() {
+  //       +output() {
+  //         .selector {
+  //           width: 10px;
+  //           min-height: 5px;
+  //           max-height: 20px;
+  //         }
+  //       }
+
+  //       +contains() {
+  //         .selector {
+  //           width: 10px;
+  //           max-height: 20px;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+//}
