@@ -1,6 +1,6 @@
 {
   "blocks": true,
-  "brackets": "always",
+  "brackets": "none",
   "colons": "always",
   "colors": "always",
   "commaSpace": "always",
@@ -8,7 +8,7 @@
   "cssLiteral": "never",
   "customProperties": [],
   "depthLimit": false,
-  "duplicates": true,
+  "duplicates": false,
   "efficient": "always",
   "exclude": [],
   "extendPref": false,
@@ -35,7 +35,7 @@
   "truncate": true
   },
   "semicolons": "always",
-  "sortOrder": "alphabetical",
+  "sortOrder": "none",
   "stackedProperties": "never",
   "trailingWhitespace": "never",
   "universal": false,

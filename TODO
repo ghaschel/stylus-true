@@ -5,39 +5,59 @@ Fix (after initial release):
       - Try to keep with mixins and not with functions
   ☐ Assert
     ☐ Find a way to validate the use of the assert wrapper function, it falls in the same bag of the module inside module thing.
+    ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
   ☐ Messages
     ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
-    @critical --- `above this only after initial release` --- @critical 
+
+@critical --- `above this only after initial release` --- @critical 
     
-Fix/to do now:
-    ✔ Assert is broken, not saying test is correct (variable value) even though it says it passed @done(19-07-19 20:17)
-    ✔ Assert equal is broken @done(19-07-30 17:49)
-      ✔ Maybe because of missing `inspect()` @done(19-07-30 17:49)
-    ☐ Unequal still outputs "set inspect to true"
-    ☐ Report is completely broken in js (reports true and wrong amount)
-      - Now is reporting correctly the number, but still reports false as true after an assert with output/expect
-      - If one single assert true is false, removes the next tests
-    ☐ Rename $test.test
-    ☐ $output: true not working
-    ✔ `output/expect` is broken @done(19-07-22 10:46)
-    ☐ Using assert wrapper causes the next tests (it) to be ignored by jest/mocha
-      - the output at the end of the assert function is 'output, expect, assert' maybe something?
-    ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
+Fix:
+  ☐ Output (`$output: true`)
+    ☐ Review
+      ☐ assert-true
+      ☐ assert-false
+      ☐ assert-equal
+      ☐ assert-unequal
+      ☐ assert
+        ☐ output/expect
+        ☐ output/contains
+  ☐ Report
+    ✔ Report is partially broken in JS @done(19-07-31 13:35)
+      ✔ reports the correct pass number, but the wrong fail number @done(19-07-31 13:35)
+      ✔ if one single assert fails, it removes the next ones from the queue @critical @done(19-07-31 13:35)
+    ☐ Review output and grant its working before release (`check edgefail cases`)
+      ☐ assert-true
+      ☐ assert-false
+      ☐ assert-equal
+      ☐ assert-unequal
+      ☐ assert
+        ☐ output/expect
+        ☐ output/contains
   ☐ Stats
     ✔ Counter is partially broken @done(19-07-18 17:09)
     ✔ Multiple files works in css. @done(19-07-19 20:24)
     ☐ Multiple files wont work in js yet.
+
+TODO:
   ☐ Update SASSDOC or switch to DSS
+  ☐ Make repository public
+  ☐ Check for unused lib js files
   ☐ Clean up
   ☐ Readme.md
   ☐ KnownIssues.md
     ☐ Describe > Describe
   ☐ Changelog
   ☐ StylusSupremacy / Stylint
+    ☐ Fix Styllint
   ☐ Prettierc
   ☐ EditorConfig
-  ☐ Rewrite to TS?
+  ☐ Rewrite to TS/ES6?
   ☐ Badges
+    ☐ Greenkeeper
+    ☐ Codecov
+    ☐ StylusSupremacy ??
+    ☐ TravisCI
+    ☐ NPM
   ✔ Report is broken @done(19-07-19 09:11)
   ✔ Change stylus syntax @done(19-07-19 13:15)
   ☐ Check other parts of the code

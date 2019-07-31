@@ -3,25 +3,15 @@
 /* Test: 'sixth it' */
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-equal] */
-/*     - Output: `['string'] ` */
-/*     - Expected: `['string'] ` */
-/*     - Module:  */
-/*     - Test:  */
-/*   ✖ FAILED: [assert-unequal] */
-/*     - Output: `['string'] ` */
-/*     - Expected: `['string'] ` */
-/*     - Module:  */
-/*     - Test:  */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: [boolean] false */
-/*     - Expected: [boolean] true */
-/*     - Module:  */
-/*     - Test:  */
+/*   ✔ [assert-equal] */
+/*   ✔ [assert-unequal] */
+/*   ✔ [assert-true] */
 /*  */
 /* Test: 'sixth itaaaaaaaaaaa' */
 /*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/*   ✖ FAILED: [assert-true] */
+/*     - Output: [boolean] false */
+/*     - Expected: [boolean] true */
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
 /*  */
@@ -29,11 +19,7 @@
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: [boolean] false */
-/*     - Expected: [boolean] true */
-/*     - Module:  */
-/*     - Test:  */
+/*   ✔ [assert-true] */
 /*  */
 /* Test: 'sixth itddddddddddd' */
 /*   ✔ [assert-true] */
@@ -51,7 +37,9 @@
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
+/*   ✖ FAILED: [assert-true] */
+/*     - Output: [boolean] false */
+/*     - Expected: [boolean] true */
 /*  */
 /* Test: 'aaaaaaaaaaaaaaaaaaaa' */
 /*  ASSERT:   */
@@ -62,7 +50,7 @@
 /*  END_OUTPUT  */
 /*  EXPECTED  */
 .test-output .body {
-  color: #f00;
+  color: #00f;
 }
 /*  END_EXPECTED  */
 /*  END_ASSERT  */
@@ -73,11 +61,7 @@
 /*  */
 /* Test: 'fifth lllllllllllllllllllllllllllll' */
 /*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: [boolean] false */
-/*     - Expected: [boolean] true */
-/*     - Module:  */
-/*     - Test:  */
+/*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
 /*  */

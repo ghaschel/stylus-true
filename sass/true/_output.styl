@@ -50,25 +50,24 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
 
   // Edge Failure Notes
 
-  $assert-equal = index($assertion, '[assert-equal]')
+  $assert-equal = index($assertion, '[assert-equal]');
   if ($assert-equal != null && $assert-equal >= 0) {
     $notes = _true-edgefail-notes($assert, $expected);
 
-    p($notes)
     if ($notes) {
-      _true-message($notes, $location, 4)
+      _true-message($notes, $location, 4);
     }
   }
 
   // Context Message
-  $module = _true-context('module');
-  $test = _true-context('test');
-  $context = '- Module: %s' % $module, '- Test: %s' % $test;
-  _true-message($context, $location, 4);
+  // $module = _true-context('module');
+  // $test = _true-context('test');
+  // $context = '- Module: %s' % $module, '- Test: %s' % $test;
+  // _true-message($context, $location, 4);
 
   // Terminal Warning
   if ($terminal) {
-    _true-message($assertion, 'warn')
+    _true-message($assertion, 'warn');
   }
 }
 
@@ -103,9 +102,9 @@ _true-variable-details($var) {
     return '`[%s] %s`' % $type $inspect;
   }
 
-  $return = '[' + $type + '] ' + $inspect
+  $return = '[' + $type + '] ' + $inspect;
 
-  //return '[%s] %s' % unquote($type) unquote($inspect);
+  // return '[%s] %s' % unquote($type) unquote($inspect);
   return unquote($return);
 }
 
@@ -134,8 +133,8 @@ _true-edgefail-notes($one, $two) {
   $inspect = '(set `$inspect: true` to compare output values)';
 
   // List Separators
-  p(unquote($one))
-  p(unquote($two))
+  p(unquote($one));
+  p(unquote($two));
   if ($one-type == 'list' && $two-type == 'list') {
     if (join((), $one, comma) == join((), $two, comma)) {
       $message = 'list-separators do not match';
@@ -171,9 +170,9 @@ _true-edgefail-notes($one, $two) {
 
     // Catch-All (I think this may not be currently possible)
     if (!$note) {
-      $note = $pre + $inspect
+      $note = $pre + $inspect;
     }
   }
 
-  return $note
+  return $note;
 }

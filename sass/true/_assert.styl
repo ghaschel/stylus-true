@@ -27,9 +27,9 @@ use('lib/inspect.js');
 assert-true($assert, $description = null) {
   $default = _true-context('test');
   $truthy = _true-is-truthy($assert);
-  //$tmp = $description || $default;
+  // $tmp = $description || $default;
 
-  //_true-context-mixin('assert', '[assert-true] %s' % $tmp);
+  // _true-context-mixin('assert', '[assert-true] %s' % $tmp);
   _true-context-mixin('assert', '[assert-true]');
   _true-assert-results($truthy, true);
 }
@@ -57,7 +57,7 @@ assert-true($assert, $description = null) {
 assert-false($assert, $description = null) {
   $default = _true-context('test');
   $falsey = !_true-is-truthy($assert);
-  //$tmp = $description || $default;
+  // $tmp = $description || $default;
 
   // _true-context-mixin('assert', '[assert-false] %s' % $tmp);
   _true-context-mixin('assert', '[assert-false]');
@@ -353,8 +353,8 @@ contains($selector = true) {
 }
 
 
-$test = {
-  test: ()
+$map = {
+  asserts: ()
 }
 
 // Assert Results
@@ -375,8 +375,6 @@ $test = {
 // / @output - Document the passing or failing result of the test
 _true-assert-results($assert, $expected, $unequal = false, $terminal = $true-terminal-output.value) {
   $result = _true-get-result($assert, $expected, $unequal);
-
-  //p($result)
 
   if ($result == 'pass') {
     _true-pass-details();

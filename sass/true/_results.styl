@@ -53,11 +53,11 @@ _true-update($result) {
   };
 
   $successful = true;
-  for $i in ((0)..(length($test.test) - 1)) {
-    if ($test.test[$i] == 'output-to-css' || $successful == 'output-to-css') {
-      $successful = 'output-to-css'
+  for $i in ((0)..(length($map.asserts) - 1)) {
+    if ($map.asserts[$i] == 'output-to-css' || $successful == 'output-to-css') {
+      $successful = 'output-to-css';
     } else {
-      $successful = $successful && $test.test[$i] == 'pass'
+      $successful = $successful && $map.asserts[$i] == 'pass';
     }
   }
 
@@ -70,7 +70,7 @@ _true-update($result) {
 
   $update[$result] = 1;
   $_true-results.value = _true-map-increment($_true-results.value, $update);
-  $test.test = ()
+  $map.asserts = ();
 }
 
 
@@ -95,11 +95,12 @@ $_true-test-result = {
 /// @group private-context
 /// @param {'pass' | 'fail' | 'output-to-css'} $result -
 _true-update-test($result) {
-  push($test.test, $result)
+  push($map.asserts, $result);
+
   if ($result == 'fail') {
-    $_true-test-result.value = 'fail'
+    $_true-test-result.value = 'fail';
   } else if ($_true-test-result.value != 'output-to-css') {
-    $_true-test-result.value = $result
+    $_true-test-result.value = $result;
   }
 }
 
@@ -134,7 +135,7 @@ _true-results-message($linebreak = false, $results = $_true-results.value) {
     $message = '\n%s:' % $items, '\n- %s' % $passed, '\n- %s' % $failed;
 
     if ($compiled) {
-      push($message, '\n- %s' % $compiled)
+      push($message, '\n- %s' % $compiled);
     }
   
     return $message;

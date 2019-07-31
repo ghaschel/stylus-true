@@ -1,31 +1,102 @@
 @charset "UTF-8";
-/* # Module: strip-unit() */
-/* ---------------------- */
-/* Test: should strip the unit from a px value */
-/*   ✔ [assert-true] should strip the unit from a px value */
+/* # Module: is-px()2 */
+/* ------------------ */
+/* Test: sixth it */
+/*   ✖ FAILED: [assert-true] sixth it */
+/*     - Output: [bool] false */
+/*     - Expected: [bool] true */
+/*     - Module: is-px()2 */
+/*     - Test: sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✖ FAILED: [assert-equal] sixth it */
+/*     - Output: [bool] true */
+/*     - Expected: [bool] false */
+/*     - Module: is-px()2 */
+/*     - Test: sixth it */
 /*  */
-/* Test: should strip the unit from a pt value */
-/*   ✔ [assert-true] should strip the unit from a pt value */
+/* Test: sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
 /*  */
-/* Test: should strip the unit from a rem value */
-/*   ✔ [assert-true] should strip the unit from a rem value */
+/* Test: sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
 /*  */
-/* Test: should strip the unit from a em value */
-/*   ✔ [assert-true] should strip the unit from a em value */
+/* Test: sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
 /*  */
-/* Test: should strip the unit from a pc value */
-/*   ✔ [assert-true] should strip the unit from a pc value */
+/* Test: sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
+/*   ✔ [assert-true] sixth it */
 /*  */
-/* Test: should strip the unit from a % value */
-/*   ✔ [assert-true] should strip the unit from a % value */
+/* Test: fifth it */
+/*   ✔ [assert-true] fifth it */
+/*   ✔ [assert-true] fifth it */
+/*   ✔ [assert-true] fifth it */
+/*   ✔ [assert-true] fifth it */
+/*  */
+/* Test: aaaaaaaaaaaaaaaaaaaa */
+/*   ASSERT:    */
+/*   OUTPUT   */
+.test-output .body {
+  color: blue; }
+
+/*   END_OUTPUT   */
+/*   EXPECTED   */
+.test-output .body {
+  color: red; }
+
+/*   END_EXPECTED   */
+/*   END_ASSERT   */
+/*   ✔ [assert-true] aaaaaaaaaaaaaaaaaaaa */
+/*   ✔ [assert-true] aaaaaaaaaaaaaaaaaaaa */
+/*   ✔ [assert-true] aaaaaaaaaaaaaaaaaaaa */
+/*   ✔ [assert-true] aaaaaaaaaaaaaaaaaaaa */
+/*  */
+/* Test: fifth lllllllllllllllllllllllllllll */
+/*   ✔ [assert-true] fifth lllllllllllllllllllllllllllll */
+/*   ✖ FAILED: [assert-true] fifth lllllllllllllllllllllllllllll */
+/*     - Output: [bool] false */
+/*     - Expected: [bool] true */
+/*     - Module: is-px()2 */
+/*     - Test: fifth lllllllllllllllllllllllllllll */
+/*   ✔ [assert-true] fifth lllllllllllllllllllllllllllll */
+/*   ✔ [assert-true] fifth lllllllllllllllllllllllllllll */
+/*  */
+/*  */
+/* # Module: is-px()3 */
+/* ------------------ */
+/* Test: seventh it */
+/*   ✔ [assert-true] seventh it */
+/*   ✔ [assert-true] seventh it */
+/*   ✔ [assert-true] seventh it */
+/*   ✔ [assert-true] seventh it */
+/*  */
+/* Test: eight it */
+/*   ✔ [assert-true] eight it */
+/*   ✔ [assert-true] eight it */
+/*   ✔ [assert-true] eight it */
+/*   ✔ [assert-true] eight it */
 /*  */
 /*  */
 /* # SUMMARY ---------- */
-/* 6 Tests: */
-/* - 5 Passed */
-/* - 1 Failed */
+/* 10 Tests: */
+/* - 7 Passed */
+/* - 2 Failed */
+/* - 1 Output to CSS */
 /* Stats: */
-/* - 3 Modules */
-/* - 6 Tests */
-/* - 6 Assertions */
+/* - 2 Modules */
+/* - 10 Tests */
+/* - 42 Assertions */
 /* -------------------- */
