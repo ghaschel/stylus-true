@@ -33,22 +33,24 @@ Fix:
       ☐ assert
         ☐ output/expect
         ☐ output/contains
-  ☐ Stats
+  ✔ Stats @done(19-07-31 14:00)
     ✔ Counter is partially broken @done(19-07-18 17:09)
     ✔ Multiple files works in css. @done(19-07-19 20:24)
-    ☐ Multiple files wont work in js yet.
+    ✔ Multiple files wont work in js yet. @done(19-07-31 14:00)
 
 TODO:
   ☐ Update SASSDOC or switch to DSS
   ☐ Make repository public
-  ☐ Check for unused lib js files
+  ✔ Check for unused lib js files @done(19-07-31 13:57)
   ☐ Clean up
   ☐ Readme.md
   ☐ KnownIssues.md
     ☐ Describe > Describe
+    ☐ Unable to detect missing assert before expect/output/contains
   ☐ Changelog
   ☐ StylusSupremacy / Stylint
-    ☐ Fix Styllint
+    ✔ Fix Styllint @done(19-07-31 14:02)
+    ☐ Make stylus supremacy respect doc and empty lines or else dont use it
   ☐ Prettierc
   ☐ EditorConfig
   ☐ Rewrite to TS/ES6?

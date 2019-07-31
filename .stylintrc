@@ -29,15 +29,15 @@
   "prefixVarsWithDollar": "always",
   "quotePref": false,
   "reporterOptions": {
-  "columns": ["lineData", "severity", "description", "rule"],
-  "columnSplitter": " ",
-  "showHeaders": false,
-  "truncate": true
+    "columns": ["lineData", "severity", "description", "rule"],
+    "columnSplitter": " ",
+    "showHeaders": false,
+    "truncate": true
   },
   "semicolons": "always",
-  "sortOrder": "none",
+  "sortOrder": false,
   "stackedProperties": "never",
-  "trailingWhitespace": "never",
+  "trailingWhitespace": "always",
   "universal": false,
   "valid": false,
   "zeroUnits": "never",
