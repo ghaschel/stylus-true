@@ -27,7 +27,7 @@ use('lib/inspect.js');
 assert-true($assert, $description = null) {
   $default = _true-context('test');
   $truthy = _true-is-truthy($assert);
-  $tmp = $description || $default;
+  //$tmp = $description || $default;
 
   //_true-context-mixin('assert', '[assert-true] %s' % $tmp);
   _true-context-mixin('assert', '[assert-true]');
@@ -57,7 +57,7 @@ assert-true($assert, $description = null) {
 assert-false($assert, $description = null) {
   $default = _true-context('test');
   $falsey = !_true-is-truthy($assert);
-  $tmp = $description || $default;
+  //$tmp = $description || $default;
 
   // _true-context-mixin('assert', '[assert-false] %s' % $tmp);
   _true-context-mixin('assert', '[assert-false]');
@@ -98,7 +98,7 @@ assert-equal($assert, $expected, $description = null, $inspect = true) {
     $expected = inspect($expected);
   }
 
-  $tmp = $description || $default;
+  // $tmp = $description || $default;
 
   // _true-context-mixin('assert', '[assert-equal] %s' % $tmp);
   _true-context-mixin('assert', '[assert-equal]');

@@ -3,10 +3,14 @@
 /* Test: 'sixth it' */
 /*   ✔ [assert-true] */
 /*   ✔ [assert-true] */
+/*   ✖ FAILED: [assert-equal] */
+/*     - Output: `['string'] ` */
+/*     - Expected: `['string'] ` */
+/*     - Module:  */
+/*     - Test:  */
 /*   ✖ FAILED: [assert-unequal] */
-/*     - Output: [boolean] true */
-/*     - Expected: [boolean] true */
-/*     - Details: (set `$inspect: true` to compare output values) */
+/*     - Output: `['string'] ` */
+/*     - Expected: `['string'] ` */
 /*     - Module:  */
 /*     - Test:  */
 /*   ✖ FAILED: [assert-true] */
