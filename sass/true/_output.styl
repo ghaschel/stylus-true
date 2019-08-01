@@ -1,4 +1,4 @@
-use('lib/inspect.js');
+use('lib/unwrap-list.js')
 // Test Result Output
 // ==================
 
@@ -86,26 +86,37 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
 ///   Pass in asserted and expected values individually
 ///   to retrieve comparable details for both
 _true-variable-details($var) {
-  $inspect = inspect($var);
+  $inspect = s('%s' % $var);
   $type = type-of($var);
 
-  if ($type == 'list') {
+  if (is-list($var)) {
+    $inspect = '' + $var + ''
+    $inspect = s('%s' % ($inspect))
+    p($inspect)
     $separator = list-separator($var);
-    $type = '#%s-%s' % $separator $type;
+
+    if (unquote($separator) == unquote(',')) {
+      $separator = comma
+    }
+
+    if (unquote($separator) == unquote(' ')) {
+      $separator = space
+    }
+
+    $type = '%s-list' % $separator;
+    p($inspect)
   }
 
   if ($type == 'string') {
     if ($var != unquote($var)) {
-      $type = 'quoted-%s' % $type;
+      $type = 'quoted-%s' % unquote($type);
     }
 
-    return '`[%s] %s`' % $type $inspect;
+    return '`[' + unquote($type) + '] %s`' % $inspect;
   }
 
   $return = '[' + $type + '] ' + $inspect;
-
-  // return '[%s] %s' % unquote($type) unquote($inspect);
-  return unquote($return);
+  return $return
 }
 
 
@@ -133,10 +144,8 @@ _true-edgefail-notes($one, $two) {
   $inspect = '(set `$inspect: true` to compare output values)';
 
   // List Separators
-  p(unquote($one));
-  p(unquote($two));
-  if ($one-type == 'list' && $two-type == 'list') {
-    if (join((), $one, comma) == join((), $two, comma)) {
+  if (is-list($one-type) && is-list($two-type)) {
+    if (join((), $one, unquote(',')) == join((), $two, unquote(','))) {
       $message = 'list-separators do not match';
       $note = $pre + $message;
     }
@@ -152,7 +161,7 @@ _true-edgefail-notes($one, $two) {
 
   $one = $one-type == 'string' ? unquote($one) : $one;
   $two = $two-type == 'string' ? unquote($two) : $two;
-  if (inspect($one) == inspect($two)) {
+  if (s('%s' % $one) == s('%s' % $two)) {
     // Type
     if ($one-type != $two-type) {
       $message = 'variable types do not match';

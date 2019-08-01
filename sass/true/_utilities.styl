@@ -3,6 +3,15 @@ use('lib/map-keys.js');
 // =========
 
 
+is-list() {
+  if (type(arguments) == 'object') {
+    return type(keys(arguments)[0]) == 'object'
+  } else {
+    return length(arguments) > 1
+  } 
+}
+  
+
 
 
 // True Error Output Override

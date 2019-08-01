@@ -1,0 +1,29 @@
+// Message Tests
+// =============
+
++test-module('True Message') {
+  +test('Simple messages') {
+    +assert('Render as CSS comments') {
+      +output(false) {
+        _true-message('This is a simple message', 'comments');
+      }
+
+      +expect(false) {
+        /* This is a simple message */
+      }
+    }
+  }
+
+  +test('Multi-line messages') {
+    +assert('Render as multiple CSS comments') {
+      +output(false) {
+        _true-message('This is a' 'multiline message', 'comments');
+      }
+
+      +expect(false) {
+        /* This is a */
+        /* multiline message */
+      }
+    }
+  }
+}

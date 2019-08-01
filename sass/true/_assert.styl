@@ -1,5 +1,4 @@
 use('lib/unwrap-list.js');
-use('lib/inspect.js');
 
 // Assert
 // ======
@@ -90,12 +89,12 @@ assert-false($assert, $description = null) {
 // / 4,
 // / 'You can optionally describe the assertion...');
 // / }
-assert-equal($assert, $expected, $description = null, $inspect = true) {
+assert-equal($assert, $expected, $description = null, $inspect = false) {
   $default = _true-context('test');
 
   if ($inspect) {
-    $assert = inspect($assert);
-    $expected = inspect($expected);
+    $assert = s('%s' % $assert);
+    $expected = s('%s' % $expected);
   }
 
   // $tmp = $description || $default;
@@ -130,12 +129,12 @@ assert-equal($assert, $expected, $description = null, $inspect = true) {
 // / 1em,
 // / '1em');
 // / }
-assert-unequal($assert, $expected, $description = null, $inspect = true) {
+assert-unequal($assert, $expected, $description = null, $inspect = false) {
   $default = _true-context('test');
 
-  if ($inspect) {
-    $assert = inspect($assert);
-    $expected = inspect($expected);
+  if ($inspect) { 
+    $assert = s('%s' % $assert);
+    $expected = s('%s' % $expected);
   }
 
   $tmp = $description || $default;
@@ -403,6 +402,5 @@ _true-is-truthy($assert) {
   $list = $assert != ();
   $string = $assert != '';
   $truthy = ($not && $list && $string) ? true : false;
-
   return $truthy;
 }
