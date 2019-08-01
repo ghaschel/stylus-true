@@ -37,10 +37,20 @@ Fix:
     ✔ Counter is partially broken @done(19-07-18 17:09)
     ✔ Multiple files works in css. @done(19-07-19 20:24)
     ✔ Multiple files wont work in js yet. @done(19-07-31 14:00)
+  ☐ Fix issues with lists @started(19-08-01 01:02)
+  
 
 TODO:
-  ☐ Convert 
-
+  ☐ Convert old scss tests to stylus
+    ✔ asserts @done(19-08-01 01:00)
+    ☐ context
+    ✔ messages @done(19-08-01 01:00)
+    ☐ modules
+    ☐ output @started(19-08-01 01:00)
+    ☐ result
+    ☐ stats
+    ☐ tests
+    ☐ utilities
   ☐ Update SASSDOC or switch to DSS
   ☐ Make repository public
   ✔ Check for unused lib js files @done(19-07-31 13:57)
