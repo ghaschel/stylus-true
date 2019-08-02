@@ -1,4 +1,4 @@
-use('lib/unwrap-list.js')
+
 // Test Result Output
 // ==================
 
@@ -38,7 +38,8 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
 
   // Title Messages
   $assertion = _true-context('assert');
-  $title = 'FAILED: %s' % unquote($assertion);
+  $string = typeof($assertion) == 'string' ? unquote($assertion) : $assertion
+  $title = 'FAILED: %s' % $string;
   $message = '✖ %s' % $title;
   _true-message($message, $location, 2);
 
@@ -90,9 +91,8 @@ _true-variable-details($var) {
   $type = type-of($var);
 
   if (is-list($var)) {
-    $inspect = '' + $var + ''
+    $inspect = unquote('' + $var + '')
     $inspect = s('%s' % ($inspect))
-    p($inspect)
     $separator = list-separator($var);
 
     if (unquote($separator) == unquote(',')) {
@@ -104,7 +104,6 @@ _true-variable-details($var) {
     }
 
     $type = '%s-list' % $separator;
-    p($inspect)
   }
 
   if ($type == 'string') {
@@ -139,20 +138,23 @@ _true-variable-details($var) {
 _true-edgefail-notes($one, $two) {
   $one-type = type-of($one);
   $two-type = type-of($two);
+  
   $note = null;
   $pre = '- Details: ';
   $inspect = '(set `$inspect: true` to compare output values)';
 
+  $test-string = 'test';
   // List Separators
-  if (is-list($one-type) && is-list($two-type)) {
-    if (join((), $one, unquote(',')) == join((), $two, unquote(','))) {
+  if (is-list($one) && is-list($two)) {
+    if (join(', ', $one, $test-string) == join(', ', $two, $test-string)) {
       $message = 'list-separators do not match';
       $note = $pre + $message;
     }
  }
 
+  // TODO check if this is removable. Stylus doesn't differenciate between quotations
   // String Quotes
-  if ($one-type == 'string' && $two-type == 'string') {
+  if (($one-type == 'string' && $two-type == 'string') && (!is-list($one) && !is-list($two))) {
     if (unquote($one) == unquote($two)) {
       $message = 'string quotations do not match';
       $note = $pre + $message;

@@ -81,332 +81,6 @@
 /*   ✔ [assert-true] */
 /*  */
 /*  */
-/* # Module: Is Truthy */
-/* ------------------- */
-/* Test: 'True is truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'String is truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'List is truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'False is not truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Null is not truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Empty string is not truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Empty list is not truthy' */
-/*   ✔ [assert-equal] */
-/*  */
-/*  */
-/* # Module: Assert True */
-/* --------------------- */
-/* Test: 'Truthiness' */
-/*   ✔ [assert-true] */
-/*  */
-/*  */
-/* # Module: Assert False */
-/* ---------------------- */
-/* Test: 'Falsiness' */
-/*   ✔ [assert-false] */
-/*  */
-/* Test: 'null' */
-/*   ✔ [assert-false] */
-/*  */
-/* Test: 'Empty string' */
-/*   ✔ [assert-false] */
-/*  */
-/* Test: 'empty list' */
-/*   ✔ [assert-false] */
-/*  */
-/*  */
-/* # Module: Assert Equal */
-/* ---------------------- */
-/* Test: 'Equality' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Empty description' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Adding floats' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Rounded numbers with $inspect' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Rounded colors with $inspect' */
-/*   ✔ [assert-equal] */
-/*  */
-/* Test: 'Mismatched types with $inspect' */
-/*   ✔ [assert-unequal] */
-/*   ✔ [assert-equal] */
-/*  */
-/*  */
-/* # Module: Assert UnEqual */
-/* ------------------------ */
-/* Test: 'Inequality' */
-/*   ✔ [assert-unequal] */
-/*  */
-/* Test: 'Mismatched types' */
-/*   ✔ [assert-unequal] */
-/*  */
-/* Test: 'Mismatched units with $inspect' */
-/*   ✔ [assert-equal] */
-/*   ✔ [assert-unequal] */
-/*  */
-/*  */
-/* # Module: Assert(output) */
-/* ------------------------ */
-/* Test: 'CSS output math' */
-/*  ASSERT: 'Output math compares properly'  */
-/*  OUTPUT  */
-.test-output {
-  -property1: 0.3;
-  -property2: 0.33333;
-}
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-.test-output {
-  -property1: 0.3;
-  -property2: 0.33333;
-}
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'output/expect [mixins]' */
-/*  ASSERT: 'Output and expected selector patterns match'  */
-/*  OUTPUT  */
-.test-output {
-  -property: value;
-}
-@media (min-width: 30em) {
-  .test-output {
-    -prop: val;
-  }
-  .selector {
-    -prop: val;
-  }
-}
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-.test-output {
-  -property: value;
-}
-@media (min-width: 30em) {
-  .test-output {
-    -prop: val;
-  }
-  .selector {
-    -prop: val;
-  }
-}
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
-/*  */
-/* # Module: Assert(contains) */
-/* -------------------------- */
-/* Test: 'Passes if the property in "contains" exists in the "output" and has the same value' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output {
-  height: 10px;
-  width: 20px;
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-.test-output {
-  height: 10px;
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Passes if the property and its value in class in "contains" exists in the same class in "output"' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output {
-  height: 20px;
-}
-.test-output .class {
-  height: 10px;
-}
-.test-output .other-class {
-  height: 10px;
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-.test-output .class {
-  height: 10px;
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Can be used with nested classes' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output {
-  height: 20px;
-}
-.test-output .class {
-  height: 10px;
-}
-.test-output .class .other-class {
-  height: 10px;
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-.test-output .class .other-class {
-  height: 10px;
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Can be used with nested @media queries' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output .class {
-  height: 20px;
-}
-@media (min-width: 30em) {
-  .test-output .selector3 {
-    height: 10px;
-  }
-}
-@media (min-width: 30em) and (min-width: 40em) {
-  .selector {
-    height: 10px;
-  }
-  .selector2 {
-    height: 10px;
-  }
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-@media (min-width: 30em) and (min-width: 40em) {
-  .selector2 {
-    height: 10px;
-  }
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Can be used with root selector' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.selector {
-  height: 10px;
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-.selector {
-  height: 10px;
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Can be used for all selector types' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output .selector {
-  -prop: val;
-}
-.test-output #id {
-  -prop: value1;
-}
-.test-output div {
-  -prop: value2;
-  min-height: 20px;
-  max-height: 30px;
-}
-.test-output input[type='text'] {
-  color: #639;
-}
-.test-output * + * {
-  color: #f00;
-  display: none;
-}
-.test-output body > h1 {
-  font-weight: bold;
-}
-.test-output i::before {
-  -prop: value3;
-}
-.test-output div ~ p {
-  color: #008000;
-}
-.test-output i:not(.italic) {
-  text-decoration: underline;
-  --custom: val;
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-.test-output .selector {
-  -prop: val;
-}
-.test-output div {
-  max-height: 30px;
-}
-.test-output body > h1 {
-  font-weight: bold;
-}
-.test-output * + * {
-  display: none;
-}
-.test-output i:not(.italic) {
-  text-decoration: underline;
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Can assert multiple properties within a selector' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output .selector {
-  width: 10px;
-  min-height: 5px;
-  max-height: 20px;
-}
-/*  END_OUTPUT  */
-/*  CONTAINED  */
-.test-output .selector {
-  width: 10px;
-  max-height: 20px;
-}
-/*  END_CONTAINED  */
-/*  END_ASSERT  */
-/*  */
-/*  */
-/*  */
-/* # Module: True Message */
-/* ---------------------- */
-/* Test: 'Simple messages' */
-/*  ASSERT: 'Render as CSS comments'  */
-/*  OUTPUT  */
-/* This is a simple message */
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-/* This is a simple message */
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
-/*  */
-/* Test: 'Multi-line messages' */
-/*  ASSERT: 'Render as multiple CSS comments'  */
-/*  OUTPUT  */
-/* This is a */
-/* multiline message */
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-/* This is a */
-/* multiline message */
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
-/*  */
-/*  */
 /* # Module: variable-details [function] */
 /* ------------------------------------- */
 /* Test: 'Number' */
@@ -425,12 +99,49 @@
 /*  */
 /* Test: 'Comma List' */
 /*   ✖ FAILED: [assert-equal] */
-/*     - Output: '`[string] '[comma-list] 'one two''`' */
+/*     - Output: '`[string] '[comma-list] one two'`' */
 /*     - Expected: '`[string] '[comma-list] "one", "two"'`' */
 /*  */
 /* Test: 'Space List' */
 /*   ✖ FAILED: [assert-equal] */
-/*     - Output: '`[string] '[space-list] 'one two''`' */
+/*     - Output: '`[string] '[space-list] one two'`' */
 /*     - Expected: '`[string] '[space-list] "one" "two"'`' */
+/*  */
+/*  */
+/* # Module: edgefail-notes [function] */
+/* ----------------------------------- */
+/* Test: 'Type mismatch' */
+/*   ✔ [assert-equal] */
+/*   ✖ FAILED: [assert-equal] */
+/*     - Output: '[null] ' */
+/*     - Expected: '`[string] '- Details: variable types do not match (set `$inspect: true` to compare output values)'`' */
+/*  */
+/* Test: 'Number rounding' */
+/*   ✖ FAILED: [assert-equal] */
+/*     - Output: '[null] ' */
+/*     - Expected: '`[string] '- Details: numbers may need to be rounded before comparison (set `$inspect: true` to compare output values)'`' */
+/*  */
+/* Test: 'Color rounding' */
+/*   ✖ FAILED: [assert-equal] */
+/*     - Output: '[null] ' */
+/*     - Expected: '`[string] '- Details: colors may need to be rounded before comparison (set `$inspect: true` to compare output values)'`' */
+/*  */
+/* Test: 'List Separators' */
+/*   ✔ [assert-equal] */
+/*  */
+/*  */
+/*     - Details: numbers may need to be rounded before comparison (set `$inspect: true` to compare output values) */
+/* # Module: fail-details [mixin] */
+/* ------------------------------ */
+/* Test: 'Compiles full failure details' */
+/*  ASSERT:   */
+/*  OUTPUT  */
+/*   ✖ FAILED:  */
+/*     - Output: '[unit] 0.333333333333333' */
+/*     - Expected: '[unit] 0.333333333' */
+/*  END_OUTPUT  */
+/*  EXPECTED  */
+/*  END_EXPECTED  */
+/*  END_ASSERT  */
 /*  */
 /*  */
