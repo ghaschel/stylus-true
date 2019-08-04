@@ -47,7 +47,7 @@ $_true-results = {
 /// @access private
 /// @group private-context
 /// @param {'pass' | 'fail' | 'output-to-css'} $result -
-_true-update($result) {
+_true-update($result, $ignore-asserts-map = false) {
   $update = {
     'run': 1
   };
@@ -63,13 +63,15 @@ _true-update($result) {
 
   if ($successful == 'output-to-css') {
     $result = 'output-to-css';
+  } else if (length($map.asserts) == 0) { 
+    $result = $result;
   } else {
     $result = $successful ? 'pass' : 'fail';
   }
 
-
   $update[$result] = 1;
   $_true-results.value = _true-map-increment($_true-results.value, $update);
+  
   $map.asserts = ();
 }
 
@@ -97,7 +99,7 @@ $_true-test-result = {
 _true-update-test($result) {
   push($map.asserts, $result);
 
-  if ($result == 'fail') {
+  if ($result == 'fail' || $_true-test-result.value == 'fail') {
     $_true-test-result.value = 'fail';
   } else if ($_true-test-result.value != 'output-to-css') {
     $_true-test-result.value = $result;

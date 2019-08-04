@@ -1,0 +1,53 @@
+// Stats Reporting Tests
+// =====================
+
++test-module('Update Stats Count') {
+  $assert-before = $_true-stats.value['assertions']
+  $modules-before = $_true-stats.value['modules']
+  $tests-before = $_true-stats.value['tests']
+
+  _true-update-stats-count('assertions');
+
+  $actual = $_true-stats.value;
+
+  +test('Assertions counts are updated') {
+    assert-equal(
+      $actual['assertions'],
+      $assert-before + 1
+    );
+  }
+
+  +test('Modules counts are left as-is') {
+    assert-equal(
+      $actual['modules'],
+      $modules-before
+    );
+  }
+
+  +test('Tests counts are updated') {
+    assert-equal($actual['tests'], $tests-before + 2);
+  }
+}
+
++test-module('`-message [function]') {
+  $test-map = {
+    'modules': 4,
+    'tests': 6,
+    'assertions': 25,
+  };
+
+  +test('Single Line') {
+    assert-equal(
+      _true-stats-message(not 'linebreak', $test-map),
+      '4 Modules, 6 Tests, 25 Assertions'
+    );
+  }
+
+  +test('Linebreaks') {
+    $message = '\nStats:', '\n- 4 Modules', '\n- 6 Tests', '\n- 25 Assertions';
+    assert-equal(
+      _true-stats-message('linebreaks', $test-map),
+      $message
+    );
+  }
+}

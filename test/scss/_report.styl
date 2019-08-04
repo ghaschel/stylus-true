@@ -1,0 +1,99 @@
+// Report Tests
+// ============
+
+$fake-stats = {
+  'modules': 4,
+  'tests': 6,
+  'assertions': 25,
+};
+
+$single-stats = '4 Modules, 6 Tests, 25 Assertions';
+$multi-stats = '\nStats:', '\n- 4 Modules', '\n- 6 Tests', '\n- 25 Assertions';
+
+$fake-results = {
+  'run': 6,
+  'pass': 5,
+  'fail': 1,
+  'output-to-css': 0,
+};
+
+$single-results = '6 Tests, 5 Passed, 1 Failed';
+$multi-results = '\n6 Tests:', '\n- 5 Passed', '\n- 1 Failed';
+
+$single = $single-results, $single-stats;
+
+$multi = _true-join-multiple(
+  '\n--------------------',
+  $multi-stats,
+  $multi-results,
+  '\n# SUMMARY ----------'
+);
+
++test-module('report-message [function]') {
+  +test('Single Line') {
+    assert-equal(
+      _true-report-message(not 'linebreaks', $fake-results, $fake-stats),
+      $single
+    );
+  }
+
+  +test('Linebreaks') {
+    assert-equal(
+      _true-report-message('linebreaks', $fake-results, $fake-stats),
+      $multi
+    );
+  }
+}
+
++test-module('report [mixin]') {
+  +test('Output Message') {
+    +assert() {
+      +output() {
+        report(false, false, $fake-results, $fake-stats);
+      }
+      +expect() {
+        _true-message($multi, 'comments');
+      }
+    }
+  }
+
+  +test('Fail on Error') {
+    $_true-error-output-override.value = true
+    +assert() {
+      +output() {
+        report(false, 'fail on error', $fake-results, $fake-stats);
+      }
+      +expect() {
+        _true-message($multi, 'comments');
+        _true-error-mixin('1 test failed', 'report', 'override');
+      }
+    }
+  }
+
+  +test('Bad results') {
+    $bad-results = $fake-results
+    $bad-results['pass'] = 4
+    
+    $bad-lines = '\n6 Tests:', '\n- 4 Passed', '\n- 1 Failed';
+    $bad = _true-join-multiple(
+      '\n--------------------',
+      $multi-stats,
+      $bad-lines,
+      '\n# SUMMARY ----------'
+    );
+
+    +assert() {
+      +output() {
+        report(false, false, $bad-results, $fake-stats);
+      }
+      +expect() {
+        _true-message($bad, 'comments');
+        _true-error-mixin(
+          'The results don’t add up. Are all your tests properly structured?',
+          'report',
+          'override'
+        );
+      }
+    }
+  }
+}

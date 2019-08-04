@@ -45,7 +45,8 @@ report($terminal = $true-terminal-output.value, $fail-on-error = false, $results
 
   if ($fail-on-error && $fail > 0) {
     $plural = $fail == 1 ? 'test' : 'tests';
-    _true-error-mixin('%s %s failed', 'report') % $fail $plural;
+    $message = '' + $fail + ' ' + $plural + ' failed';
+    _true-error-mixin($message, 'report');
   }
 
 

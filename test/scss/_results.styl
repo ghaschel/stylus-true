@@ -1,0 +1,137 @@
+// Test Results
+// ============
+
++test-module('Get Result') {
+  +test('Equal Pass') {
+    assert-equal(_true-get-result(1em, 1em), 'pass');
+  }
+
+  +test('Equal Fail') {
+    assert-equal(_true-get-result(1em, true), 'fail');
+  }
+
+  +test('Unequal pass') {
+    assert-equal(_true-get-result(true, 'hello', 'unequal'), 'pass');
+  }
+
+  +test('Unequal fail') {
+    assert-equal(
+      _true-get-result('hello', 'hello', 'unequal'),
+      'fail'
+    );
+  }
+}
+
++test-module('Update Results') {
+  $run-before = $_true-results.value['run'];
+  $pass-before = $_true-results.value['pass'];
+  $fail-before = $_true-results.value['fail'];
+  $output-before = $_true-results.value['output-to-css'];
+
+  _true-update('pass');
+  $actual = $_true-results.value;
+
+  +test('Add one pass') {
+    assert-equal(
+      $actual['pass'],
+      $pass-before + 1
+    );
+  }
+
+  +test('Add one run') {
+    assert-equal($actual['run'], $run-before + 2);
+  }
+
+  +test('Fail counts are left as-is') {
+    assert-equal($actual['fail'], $fail-before);
+  }
+
+  +test('Output counts are left as-is') {
+    assert-equal(
+      $actual['output-to-css'],
+      $output-before
+    );
+  }
+}
+
++test-module('Update Test') {
+  $_true-test-result.value = null
+  $before = $_true-test-result.value;
+  _true-update-test('pass');
+  $pass = $_true-test-result.value;
+  _true-update-test('output-to-css');
+  $css = $_true-test-result.value;
+  _true-update-test('pass');
+  $css2 = $_true-test-result.value;
+  _true-update-test('fail');
+  $fail = $_true-test-result.value;
+  _true-update-test('pass');
+  _true-update-test('output-to-css');
+  $fail2 = $_true-test-result.value;
+  $_true-test-result.value = $before
+
+  +test('Updates global test-result') {
+    assert-equal($before, null, 'confirm the default state');
+    assert-equal($pass, 'pass', 'confirm updated test-result');
+  }
+
+  +test('Output-to-css overrides pass') {
+    assert-equal($css, 'output-to-css');
+  }
+
+  +test('Pass does not override output-to-css') {
+    assert-equal($css, $css2);
+  }
+
+  +test('Fail overrides everything') {
+    assert-equal($fail, 'fail');
+  }
+
+  +test('Nothing overrides fail') {
+    p($fail)
+    p($fail2)
+    assert-equal($fail, $fail2);
+  }
+}
+
++test-module('results-message [function]') {
+  $test-map = {
+    'run': 10,
+    'pass': 6,
+    'fail': 1,
+    'output-to-css': 3,
+  };
+
+  +test('Single Line') {
+    assert-equal(
+      _true-results-message(not 'linebreak', $test-map),
+      '10 Tests, 6 Passed, 1 Failed, 3 Output to CSS'
+    );
+  }
+
+  +test('Linebreaks') {
+    $message = '\n10 Tests:', '\n- 6 Passed', '\n- 1 Failed', '\n- 3 Output to CSS';
+    assert-equal(
+      _true-results-message('linebreaks', $test-map),
+      $message
+    );
+  }
+
+  $test-map['output-to-css'] = 0
+
+  +test('No output tests') {
+    assert-equal(
+      _true-results-message(not 'linebreak', $test-map),
+      '10 Tests, 6 Passed, 1 Failed'
+    );
+  }
+
+  $test-map['run'] = 1
+
+  +test('Single test') {
+    assert-equal(
+      _true-results-message(not 'linebreak', $test-map),
+      '1 Test, 6 Passed, 1 Failed'
+    );
+  }
+}

@@ -45,7 +45,7 @@ $_true-error-output-override = {
 ///   A message detailing the source and error,
 ///   when the `$override` is `false`
 _true-error($message, $source, $override = $_true-error-output-override.value) {
-  $error = 'ERROR [%s] %s' % $source $message;
+  $error = 'ERROR [' + $source + '] ' + $message;
 
   if ($override){
     return $error;
@@ -77,7 +77,7 @@ _true-error($message, $source, $override = $_true-error-output-override.value) {
 ///   A message detailing the source and error,
 ///   when the `$override` is `false`
 _true-error-mixin($message, $source, $override = $_true-error-output-override.value) {
-  $error = 'ERROR [%s] %s' % $source $message;
+  $error = 'ERROR [' + $source + '] ' + $message
 
   if ($override) {
     _true-message($error, 'comments');

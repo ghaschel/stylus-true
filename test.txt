@@ -1,147 +1,64 @@
-/* # Module: is-px()2 */
-/* ------------------ */
-/* Test: 'sixth it' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-equal] */
-/*   ✔ [assert-unequal] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'sixth itaaaaaaaaaaa' */
-/*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: '[boolean] false' */
-/*     - Expected: '[boolean] true' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'sixth itsssssssss' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'sixth itddddddddddd' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'sixth itdasdas' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'fifth itdasadsda' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✖ FAILED: [assert-true] */
-/*     - Output: '[boolean] false' */
-/*     - Expected: '[boolean] true' */
-/*  */
-/* Test: 'aaaaaaaaaaaaaaaaaaaa' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-.test-output .body {
-  color: #00f;
-}
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-.test-output .body {
-  color: #00f;
-}
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'fifth lllllllllllllllllllllllllllll' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/*  */
-/* # Module: is-px()3 */
-/* ------------------ */
-/* Test: 'seventh it' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/* Test: 'eight it' */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*   ✔ [assert-true] */
-/*  */
-/*  */
-/* # Module: variable-details [function] */
-/* ------------------------------------- */
-/* Test: 'Number' */
+/* # Module: Get Result */
+/* -------------------- */
+/* Test: 'Equal Pass' */
 /*   ✔ [assert-equal] */
 /*  */
-/* Test: 'Strings get back-ticks' */
-/*   ✔ [assert-equal] */
-/*   ✔ [assert-equal] */
-/*   ✔ [assert-unequal] */
-/*  */
-/* Test: 'Color' */
+/* Test: 'Equal Fail' */
 /*   ✔ [assert-equal] */
 /*  */
-/* Test: 'Object' */
+/* Test: 'Unequal pass' */
 /*   ✔ [assert-equal] */
 /*  */
-/* Test: 'Comma List' */
-/*   ✖ FAILED: [assert-equal] */
-/*     - Output: '`[string] '[comma-list] one two'`' */
-/*     - Expected: '`[string] '[comma-list] "one", "two"'`' */
-/*  */
-/* Test: 'Space List' */
-/*   ✖ FAILED: [assert-equal] */
-/*     - Output: '`[string] '[space-list] one two'`' */
-/*     - Expected: '`[string] '[space-list] "one" "two"'`' */
-/*  */
-/*  */
-/* # Module: edgefail-notes [function] */
-/* ----------------------------------- */
-/* Test: 'Type mismatch' */
-/*   ✔ [assert-equal] */
-/*   ✖ FAILED: [assert-equal] */
-/*     - Output: '[null] ' */
-/*     - Expected: '`[string] '- Details: variable types do not match (set `$inspect: true` to compare output values)'`' */
-/*  */
-/* Test: 'Number rounding' */
-/*   ✖ FAILED: [assert-equal] */
-/*     - Output: '[null] ' */
-/*     - Expected: '`[string] '- Details: numbers may need to be rounded before comparison (set `$inspect: true` to compare output values)'`' */
-/*  */
-/* Test: 'Color rounding' */
-/*   ✖ FAILED: [assert-equal] */
-/*     - Output: '[null] ' */
-/*     - Expected: '`[string] '- Details: colors may need to be rounded before comparison (set `$inspect: true` to compare output values)'`' */
-/*  */
-/* Test: 'List Separators' */
+/* Test: 'Unequal fail' */
 /*   ✔ [assert-equal] */
 /*  */
 /*  */
-/*     - Details: numbers may need to be rounded before comparison (set `$inspect: true` to compare output values) */
-/* # Module: fail-details [mixin] */
-/* ------------------------------ */
-/* Test: 'Compiles full failure details' */
-/*  ASSERT:   */
-/*  OUTPUT  */
-/*   ✖ FAILED:  */
-/*     - Output: '[unit] 0.333333333333333' */
-/*     - Expected: '[unit] 0.333333333' */
-/*  END_OUTPUT  */
-/*  EXPECTED  */
-/*  END_EXPECTED  */
-/*  END_ASSERT  */
+/* # Module: Update Results */
+/* ------------------------ */
+/* Test: 'Add one pass' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Add one run' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Fail counts are left as-is' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Output counts are left as-is' */
+/*   ✔ [assert-equal] */
+/*  */
+/*  */
+/* # Module: Update Test */
+/* --------------------- */
+/* Test: 'Updates global test-result' */
+/*   ✔ [assert-equal] */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Output-to-css overrides pass' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Pass does not override output-to-css' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Fail overrides everything' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Nothing overrides fail' */
+/*   ✔ [assert-equal] */
+/*  */
+/*  */
+/* # Module: results-message [function] */
+/* ------------------------------------ */
+/* Test: 'Single Line' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Linebreaks' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'No output tests' */
+/*   ✔ [assert-equal] */
+/*  */
+/* Test: 'Single test' */
+/*   ✔ [assert-equal] */
 /*  */
 /*  */
