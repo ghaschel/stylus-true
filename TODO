@@ -56,8 +56,8 @@ TODO:
     ✔ result @done(19-08-04 03:40)
     ✔ stats done(19-08-04 03:40)
     ✔ tests @done(19-08-04 03:40)
-    ☐ utilities
-    ☐ Update SASSDOC or switch to DSS
+    ✔ utilities @done(19-08-05 13:21)
+    ☐ Switch from SASSDOC to DSS
   ☐ Convert js tests to stylus?
   ☐ Make repository public
   ☐ Reimplement $description to asserts and outputs

@@ -1,3 +1,5 @@
 node_modules
 .hushlogin
 .DS_Store
+coverage
+.nyc_output

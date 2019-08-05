@@ -30,10 +30,10 @@ describe("#fail", function() {
 describe("#runStyl", function() {
   it("throws AssertionError on failure", function() {
     var sass = [
-      '@import "true";',
-      '@include test-module("Throw an error") {',
-      '  @include test("assertionError") {',
-      '    @include assert-true(false, "This test is meant to fail.");',
+      '@require "styl/true";',
+      '+test-module("Throw an error") {',
+      '  +test("assertionError") {',
+      '    assert-true(false, "This test is meant to fail.");',
       "  }",
       "}"
     ].join("\n");
