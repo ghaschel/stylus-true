@@ -1,0 +1,69 @@
+// Utility Tests
+// =============
+
++test-module('True Error [function]') {
+  +test('Allow errors to return without blocking compilation') {
+    assert-equal(
+      _true-error('This is a test error message', '_true-error test', true), 'ERROR [_true-error test] This is a test error message'
+    );
+  }
+}
+
++test-module('True Error [mixin]') {
+  +test('Allow errors to output without blocking compilation') {
+    assert() {
+      +output() {
+        _true-error-mixin(
+          'This is a test error message',
+          '_true-error test',
+        );
+      }
+      expect() {
+        _true-message(
+          'ERROR [_true-error test] This is a test error message',
+          'comments'
+        );
+      }
+    }
+  }
+}
+
++test-module('Map Add [function]') {
+  +test('Returns a map with the sum-values of two numeric maps') {
+    $base = {
+      one: 1,
+      two: 1,
+      three: 1,
+    };
+    $add = {
+      one: 1,
+      two: 2,
+      three: -1,
+    };
+
+    $expect = {
+      one: 2,
+      two: 3,
+      three: 0,
+    };
+    assert-equal(_true-map-increment($base, $add), $expect);
+  }
+}
+
++test-module('Join Multiple [function') {
+  $one = 'one', 'two', 'three';
+  $two = 'four' 'five' 'six';
+  $three = 'seven', 'eight', 'nine';
+  $joined =  'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine';
+
+  +test('Combines multiple lists') {
+    assert-equal(_true-join-multiple($one, $two, $three), $joined);
+  }
+
+  +test('Sets new list-separator') {
+    assert-equal(
+      _true-join-multiple($one, $two, $three, 'space'),
+      join(' ', $joined, ())
+    );
+  }
+}

@@ -50,18 +50,21 @@ TODO:
     ✔ asserts @done(19-08-01 01:00)
     ☐ context
     ✔ messages @done(19-08-01 01:00)
-    ☐ modules
-    ☐ output @started(19-08-01 01:00)
-    ☐ result
-    ☐ stats
-    ☐ tests
+    ✔ modules @done(19-08-04 03:40)
+    ☐ output @critical Fix issues related to quoting
+    ✔ report @done(19-08-04 03:40)
+    ✔ result @done(19-08-04 03:40)
+    ✔ stats done(19-08-04 03:40)
+    ✔ tests @done(19-08-04 03:40)
     ☐ utilities
-  ☐ Update SASSDOC or switch to DSS
+    ☐ Update SASSDOC or switch to DSS
+  ☐ Convert js tests to stylus?
   ☐ Make repository public
   ☐ Reimplement $description to asserts and outputs
   ✔ Check for unused lib js files @done(19-07-31 13:57)
   ☐ Clean up
   ☐ Readme.md
+    ☐ LICENSE
   ☐ KnownIssues.md
     ☐ Describe > Describe
     ☐ Unable to detect missing assert before expect/output/contains

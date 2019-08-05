@@ -1,36 +1,11 @@
 {
-  "name": "stylus-unit",
-  "version": "0.1.0",
-  "description": "Testing your stylus source code.",
-  "author": {
-    "name": "Daniel Bannert",
-    "email": "d.bannert@anolilab.de"
-  },
-  "homepage": "http://anolilab.de",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/anolilab/stylus-unit.git"
-  },
+  "name": "stylus-true",
+  "version": "0.0.1",
+  "description": "Framework to unit test your Stylus files.",
+  "main": "styl/true.styl",
   "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "npm run test:mocha; npm run test:jest",
-    "test:mocha": "nyc --reporter=html --reporter=text mocha",
-    "test:jest": "jest stylus.spec.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "debug": "mocha debug",
-    "sassdoc": "sassdoc sass/",
-    "compile": "node-sass test/scss/test.scss test/css/test.css --include-path ./sass/",
-    "commit": "npm run test; npm run compile; gulp sasslint; npm run sassdoc"
-  },
-  "bugs": {
-    "url": "https://github.com/anolilab/stylus-unit/issues"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">= 0.10.0"
+    "lib": "lib",
+    "test": "test"
   },
   "dependencies": {
     "chalk": "^2.4.2",
@@ -40,6 +15,7 @@
     "lodash.find": "^4.6.0",
     "lodash.foreach": "^4.5.0",
     "lodash.last": "^3.0.0",
+    "mocha": "^6.2.0",
     "smart-circular": "^1.0.2",
     "stylint": "^2.0.0",
     "stylus": "^0.54.5",
@@ -48,6 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.0.0",
+    "chai": "^4.2.0",
     "cz-conventional-changelog": "^2.1.0",
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
@@ -59,18 +36,39 @@
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },
+  "scripts": {
+    "test": "npm run test:mocha; npm run test:jest",
+    "test:nyc": "nyc --reporter=html --reporter=text mocha",
+    "test:mocha": "mocha test/stylus.spec.js",
+    "test:jest": "jest test/stylus.spec.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "debug": "mocha debug",
+    "sassdoc": "sassdoc sass/",
+    "compile": "node-sass test/scss/test.scss test/css/test.css --include-path ./sass/",
+    "commit": "npm run test; npm run compile; gulp sasslint; npm run sassdoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghaschel/stylus-true.git"
+  },
   "keywords": [
-    "grunt",
-    "development",
-    "dev",
-    "tool",
-    "unit",
     "stylus",
-    "stylus-unit",
-    "anolilab",
+    "unit",
+    "test",
+    "unit-test",
+    "unit",
+    "test",
+    "css",
+    "jest",
     "mocha",
-    "chai"
+    "framework"
   ],
+  "author": "Guilherme Haschel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ghaschel/stylus-true/issues"
+  },
+  "homepage": "https://github.com/ghaschel/stylus-true#readme",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",

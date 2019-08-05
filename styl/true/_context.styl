@@ -100,7 +100,7 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
   $assertIndex = index($context, 'assert')
 
   if ($new && $validIndex == null || $validIndex < 0 ) {
-    $error = '%s is not a valid context for output tests: %s' % $new $valid;
+    $error = $new + ' is not a valid context for output tests: ' + $valid;
 
     return _true-error($error, 'output-context');
   } else if ($contextIndex != null && $contextIndex >= 0 ) {
@@ -110,7 +110,7 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
       return _true-error($error, 'output-context');
     }
 
-    $error = 'The `%()` mixin must only be used once per `assert()`' % $new;
+    $error = 'The `%s()` mixin must only be used once per `assert()`' % unquote($new);
 
     return _true-error($error, 'output-context');
   } else if ($new) {

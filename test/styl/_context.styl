@@ -1,0 +1,160 @@
+
+// Settings Tests
+// ==============
+
+// Adding and removing context
+// TODO: uncomment after finding a way to overcome the limitations caused by the stylus rendering order
+// +test-module('true-context & true-context-pop [mixins]') {
+//   +test('Adds scope and name to context') {
+//     for $entry-scope, $entry-name in $_true-context {
+//       assert-unequal(
+//         $entry-scope,
+//         'fake',
+//         'Confirm that there is currently no "fake" scope'
+//       );
+//     }
+
+//     _true-context('fake', 'this scope is not real');
+
+//     assert-equal(
+//       _true-context('fake'),
+//       'this scope is not real',
+//       'Sets the value of scope "fake" to "this scope is not real"'
+//     );
+
+//     _true-context-pop();
+
+//     for $entry-scope, $entry-name in $_true-context {
+//       assert-unequal(
+//         $entry-scope,
+//         'fake',
+//         'Confirm that "fake" scope has been removed'
+//       );
+//     }
+//   }
+// }
+
+// Inspecting context
++test-module('true-context & true-context-all [functions]') {
+  // TODO: uncomment when has it sorted out about the rendering order (stylus related)
+
+  // +test('Returns current module context') {
+  //   assert-equal(
+  //     _true-context('module'),
+  //     'true-context & true-context-all [functions]'
+  //   );
+  // }
+
+  // +test('Returns current test context') {
+  //   assert-equal(
+  //     _true-context('test'),
+  //     'Returns current test context'
+  //   );
+  // }
+
+  // +test-module('nested') {
+  //   +test('Returns the innermost module name') {
+  //     assert-equal(_true-context('module'), 'nested');
+  //   }
+
+  //   +test('_true-context-all [function]') {
+  //     assert-equal(
+  //       _true-context-all('module'),
+  //       'true-context & true-context-all [functions]' 'nested',
+  //       'Returns the current stack of module names'
+  //     );
+  //   }
+  // }
+}
+
+// // valid output context
++test-module('true-validate-output-context [function]') {
+  $valid = 'assert' 'expect' 'output' 'contains';
+
+  +test('unknown context name') {
+    assert-equal(
+      _true-validate-output-context('wtf'),
+      "ERROR [output-context] wtf is not a valid context for output tests: " + $valid
+    )
+  }
+
+  +test('duplicate assert') {
+    $_true-output-context.value = 'assert' 'output'
+
+    assert-equal(
+      _true-validate-output-context('assert'),
+      'ERROR [output-context] The `assert()` mixin can not contain another `assert()`'
+    );
+
+    $_true-output-context.value = ()
+  }
+
+  +test('duplicate output/expect') {
+    $_true-output-context.value = 'assert' 'output';
+
+    assert-equal(
+      _true-validate-output-context('output'),
+      'ERROR [output-context] The `output()` mixin must only be used once per `assert()`'
+    );
+
+    $_true-output-context.value = ()
+  }
+
+  // TODO unable to cover by now (stylus related)
+  // +test('missing assert') {
+  //   assert-equal(
+  //     _true-validate-output-context('output'),
+  //     'ERROR [output-context] The `assert()` wrapper is required'
+  //   );
+  // }
+
+  // +test('wrong length') {
+  //   $_true-output-context.value = 'assert' 'wtf' 'output' 'expect' 'contains';
+
+  //   assert-equal(
+  //     _true-validate-output-context(null),
+  //     'ERROR [output-context] Each `assert()` must contain one `output()`, and one `expect()` or `contains()`'
+  //   );
+
+  //   $_true-output-context.value = ();
+  // }
+
+  // +test('missing context') {
+  //   $_true-output-context.value = 'assert' 'wtf' 'output' 'contains';
+
+  //   assert-equal(
+  //     _true-validate-output-context(null),
+  //     'ERROR [output-context] Each `assert()` must contain one `output()`, and one `expect()` or `contains()`'
+  //   );
+
+  //   $_true-output-context.value = ();
+  // }
+}
+
+// Output context
++test-module('true-output-context [mixin]') {
+  $empty-list = ();
+
+  +test('Appends new context') {
+    $before = $_true-output-context.value;
+    assert-equal($before, $empty-list, 'Check initial value');
+
+    _true-output-context('assert');
+    $assert = $_true-output-context.value;
+    assert-equal($assert, join((), 'assert'));
+
+    _true-output-context('expect');
+    $expect = $_true-output-context.value;
+    assert-equal($expect, ('assert' 'expect'));
+
+    _true-output-context('output');
+    $output = $_true-output-context.value
+    assert-equal($output, ('assert' 'expect' 'output'));
+  }
+
+  +test('Resets context') {
+    _true-output-context(null);
+    $reset = $_true-output-context.value
+    assert-equal($reset, null, 'inspecting values', true);
+  }
+}
