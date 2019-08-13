@@ -1,0 +1,8 @@
+{
+  "title": "Title of the Style Guide",
+  "source": "styl/",
+  "custom": ["Colors", "Wrapper", "RequireJS", "BodyClass"],
+  "destination": "styleguide/",
+  "builder": "node_modules/kss-scheibo/kss_styleguide/scheibo-template/",
+  "css": ["../main.css"]
+}
