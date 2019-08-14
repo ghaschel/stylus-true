@@ -1,8 +1,7 @@
 {
-  "title": "Title of the Style Guide",
+  "title": "stylus-true",
   "source": "styl/",
-  "custom": ["Colors", "Wrapper", "RequireJS", "BodyClass"],
   "destination": "styleguide/",
-  "builder": "node_modules/kss-scheibo/kss_styleguide/scheibo-template/",
+  "builder": "node_modules/michelangelo/kss_styleguide/custom-template/",
   "css": ["../main.css"]
 }

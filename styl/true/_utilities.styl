@@ -1,19 +1,29 @@
 use('lib/map-keys.js');
 
-/*
-  isList [function]
+// $_true-error-output-override = { value }
+// 
+// **[public]** Value key stores the desired value
+// 
+// Weight: -10
+// 
+// $value = true - **{boolean}** ***The actual output override value***
+// 
+// Styleguide Utilities.Variables.$_true-error-output-override
+$_true-error-output-override = {
+  value: true
+};
 
-  [private] Returns whether an argument is a list or not
-
-  form-input--error - This is a alert style
-  form-input--success - This is a success style
-  form-input--small - This is a large style
-
-  Markup: isList()
-
-  Styleguide Utilities.isList
-*/
+// is-list($list)
+// 
+// **[private:{boolean}]** Returns whether an argument is a list or not
+// 
+// Weight: 0
+// 
+// $list - **{list}** ***The list to analyze***
+// 
+// Styleguide Utilities.Functions.is-list
 is-list() {
+  // arguments is injected by stylus
   if (type(arguments) == 'object') {
     return type(keys(arguments)[0]) == 'object';
   } else {
@@ -21,27 +31,17 @@ is-list() {
   }
 }
 
-$_true-error-output-override = {
-  value: true
-};
-
-// True Error [function]
-// ---------------------
-// / Optionally override error-output for testing failure-cases
-// / @access private
-// / @group private-utils
-// / @param {string} $message -
-// /   The error to report
-// / @param {string} $source -
-// /   The source of the error
-// / @param {bool} $override [$_true-error-output-override] -
-// /   Optionally override error-output for testing failure-cases
-// / @return {string}
-// /   A message detailing the source and error,
-// /   when the `$override` is `true`
-// / @throw
-// /   A message detailing the source and error,
-// /   when the `$override` is `false`
+// _true-error($message, $source, $override)
+// 
+// **[private]** Throw or returns an error with a message detailing the source and error
+// 
+// Weight: 0
+// 
+// $message - **{string}** ***The error to report***
+// $source - **{string}** ***The source of the error***
+// $override = $_true-error-output-override.value - **{boolean}** ***Optionally override error-output for testing failure-cases***
+// 
+// Styleguide Utilities.Functions._true-error
 _true-error($message, $source, $override = $_true-error-output-override.value) {
   $error = 'ERROR [' + $source + '] ' + $message;
 
@@ -96,7 +96,7 @@ _true-map-increment($base, $add) {
 
     if ($value) {
       $base-value = $base[$key];
-      $new-value = $base-value ? ((((((((((($base-value + $value))))))))))) : $value;
+      $new-value = $base-value ? ($base-value + $value) : $value;
       $base[$key] = $new-value;
     }
   }

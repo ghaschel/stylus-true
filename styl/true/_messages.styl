@@ -4,7 +4,7 @@ use('lib/stdout.js');
 
 // MIXIN
 comment($string) {
-  unquote('/* ' + replace('(?![\t ])\s\s*', '\n * ', $string) + ' */')
+  unquote('/* ' + replace('(?![\t ])\s\s*', '\n * ', $string) + ' */');
 }
 
 
@@ -23,28 +23,28 @@ _true-message($message, $output = 'comments', $comment-padding = 0) {
   
   if ($comment-padding > 0) {
     for $i in ((0)..(($comment-padding) - 1)) {
-      $pad = $pad + ' '
+      $pad = $pad + ' ';
     }
   }
 
   for $line in ($message) {
-    $comments = index($output, 'comments')
+    $comments = index($output, 'comments');
 
     if ($comments != null && $comments >= 0) {
-      $tmp = $pad + $line
+      $tmp = $pad + $line;
 
-      comment($tmp)
+      comment($tmp);
     }
 
-    $debug = index($output, 'debug')
-    $terminal = index($output, 'terminal')
+    $debug = index($output, 'debug');
+    $terminal = index($output, 'terminal');
     if (($debug != null && $debug >= 0) || ($terminal != null && $terminal >= 0)) {
-      stdout($line)
+      stdout($line);
     }
 
-    $warn = index($output, 'warn')
+    $warn = index($output, 'warn');
     if ($warn != null && $warn >= 0) {
-      stdout($line, 'warn')
+      stdout($line, 'warn');
     }
   }
 }
