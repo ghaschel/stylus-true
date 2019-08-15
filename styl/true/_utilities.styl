@@ -8,7 +8,7 @@ use('lib/map-keys.js');
 // 
 // $value = true - **{boolean}** ***The actual output override value***
 // 
-// Styleguide Utilities.Variables.$_true-error-output-override
+// Styleguide Variables.$_true-error-output-override
 $_true-error-output-override = {
   value: true
 };
@@ -21,7 +21,7 @@ $_true-error-output-override = {
 // 
 // $list - **{list}** ***The list to analyze***
 // 
-// Styleguide Utilities.Functions.is-list
+// Styleguide Functions.is-list
 is-list() {
   // arguments is injected by stylus
   if (type(arguments) == 'object') {
@@ -33,7 +33,7 @@ is-list() {
 
 // _true-error($message, $source, $override)
 // 
-// **[private]** Throw or returns an error with a message detailing the source and error
+// **[private:void|string]** Throw or returns an error with a message detailing the source and error
 // 
 // Weight: 0
 // 
@@ -41,7 +41,7 @@ is-list() {
 // $source - **{string}** ***The source of the error***
 // $override = $_true-error-output-override.value - **{boolean}** ***Optionally override error-output for testing failure-cases***
 // 
-// Styleguide Utilities.Functions._true-error
+// Styleguide Functions._true-error
 _true-error($message, $source, $override = $_true-error-output-override.value) {
   $error = 'ERROR [' + $source + '] ' + $message;
 
@@ -53,23 +53,17 @@ _true-error($message, $source, $override = $_true-error-output-override.value) {
   error($error);
 }
 
-// True Error [mixin]
-// ---------------------
-// / Optionally override error-output for testing failure-cases
-// / @access private
-// / @group private-utils
-// / @param {string} $message -
-// /   The error to report
-// / @param {string} $source -
-// /   The source of the error
-// / @param {bool} $override [$_true-error-output-override] -
-// /   Optionally override error-output for testing failure-cases
-// / @output
-// /   A message detailing the source and error,
-// /   when the `$override` is `true`
-// / @throw
-// /   A message detailing the source and error,
-// /   when the `$override` is `false`
+// _true-error-mixin($message, $source, $override)
+// 
+// **[private:void]** Outputs an error with a message detailing the source and error
+// 
+// Weight: 0
+// 
+// $message - **{string}** ***The error to report***
+// $source - **{string}** ***The source of the error***
+// $override = $_true-error-output-override.value - **{boolean}** ***Optionally override error-output for testing failure-cases***
+// 
+// Styleguide Mixins._true-error-mixin
 _true-error-mixin($message, $source, $override = $_true-error-output-override.value) {
   $error = 'ERROR [' + $source + '] ' + $message;
 
@@ -80,16 +74,17 @@ _true-error-mixin($message, $source, $override = $_true-error-output-override.va
   }
 }
 
-// Map Increment
-// -------------
-// / Add map values together
-// / @access private
-// / @group private-utils
-// / @param {map} $base -
-// /   Initial map to add values to
-// / @param {map} $add -
-// /   Map of values to be added
-// / @return {map}
+
+// _true-map-increment($base, $add)
+// 
+// **[private:string]** Add hash values together
+// 
+// Weight: 0
+// 
+// $base - **{string}** ***Initial map to add values to***
+// $add - **{string}** ***Map of values to be added***
+// 
+// Styleguide Functions._true-map-increment
 _true-map-increment($base, $add) {
   for $key in (map-keys($add)) {
     $value = $add[$key];
@@ -104,17 +99,15 @@ _true-map-increment($base, $add) {
   return $base;
 }
 
-// Join Multiple
-// -------------
-// / Extends the Sass `join()` function
-// / to accept and combine any number of lists
-// / @access private
-// / @group private-utils
-// / @param {list | 'space' | 'comma'} $lists... -
-// /   Any number of lists to be joined,
-// /   with an optional final argument describing
-// /   the desired list-separator ('space' or 'comma')
-// / @return {list} Joined items in a single list
+// _true-join-multiple($lists...)
+// 
+// **[private:list]** Any number of lists to be joined, with an optional final argument describing the desired list-separator ('space' or 'comma')
+// 
+// Weight: 0
+// 
+// $lists - **{list[]}** ***Lists***
+// 
+// Styleguide Functions._true-join-multiple
 _true-join-multiple($lists...) {
   $return = $lists[0];
   $type = list-separator($return);

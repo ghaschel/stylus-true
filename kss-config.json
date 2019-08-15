@@ -2,6 +2,5 @@
   "title": "stylus-true",
   "source": "styl/",
   "destination": "styleguide/",
-  "builder": "node_modules/michelangelo/kss_styleguide/custom-template/",
   "css": ["../main.css"]
 }

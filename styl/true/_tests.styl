@@ -58,29 +58,27 @@ it($name) {
   }
 }
 
-
-
-
-// Test Start
-// ----------
-/// Test start helper
-/// @access private
-/// @group private-test
-/// @param {string} $name -
-///   Describe what is being tested
+// _true-test-start($name)
+// 
+// **[private]** Test start helper
+// 
+// Weight: -10
+// 
+// $name - **{string}** ***Describe what is being tested***
+// 
+// Styleguide Functions._true-test-start($name)
 _true-test-start($name) {
   _true-context-mixin('test', $name);
   _true-message('Test: %s' % $name, 'comments');
 }
 
-
-
-
-// Test Stop
-// ---------
-/// Test stop helper
-/// @access private
-/// @group private-test
+// _true-test-stop()
+// 
+// **[private:vod]** Test stop helper
+// 
+// Weight:0
+// 
+// Styleguide Functions._true-test-stop
 _true-test-stop() {
   _true-update($_true-test-result.value);
   _true-update-stats-count('tests');
