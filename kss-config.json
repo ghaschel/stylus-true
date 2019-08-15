@@ -1,6 +1,6 @@
 {
   "title": "stylus-true",
   "source": "styl/",
-  "destination": "styleguide/",
-  "css": ["../main.css"]
+  "destination": "docs/",
+  "css": ["kss-assets/custom.css"]
 }

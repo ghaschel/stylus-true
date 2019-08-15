@@ -1,27 +1,29 @@
-// Tests
-// =====
-
-
-
-
-// Test
-// ----
-/// The `test()` wrapper-mixin groups related assertions,
-/// to describe the behavior they are testing.
-/// Tests should always contain one or more assertions.
-/// @group api-test
-/// @param {string} $name -
-///   Describe what is being tested
-/// @content Include any assertions that are part of this test
-/// @example scss
-///   @include test('Returns lists zipped together') {
-///     @include assert-equal(
-///       zip(a b c, 1 2 3),
-///       (a 1, b 2, c 3));
-///     @include assert-equal(
-///       zip(1px 1px 3px, solid dashed solid, red green blue),
-///       (1px solid red, 1px dashed green, 3px solid blue));
-///   }
+// test($name)
+// 
+// **[public:void]** Test start helper
+// 
+// Weight: -10
+// 
+// <ul>
+// <li>$name - <b>{string}</b> <i>Describe what is being tested</i></li>
+// <li>{block} - Include any assertions that are part of this test</li>
+// </ul>
+//
+//~
+// 
+// **Example**:
+// <pre class="code">+test('Returns lists zipped together') {
+//     assert-equal(
+//       zip(a b c, 1 2 3),
+//       (a 1, b 2, c 3)
+//     );
+//     +assert-equal(
+//       zip(1px 1px 3px, solid dashed solid, red green blue),
+//       (1px solid red, 1px dashed green, 3px solid blue)
+//     );
+// }</pre>
+//
+// Styleguide Mixins.test
 test($name) {
   _true-test-start($name);
 
@@ -31,27 +33,33 @@ test($name) {
 }
 
 
-
-
-// Test
-// ----
-/// Describe the behavior being tested.
-/// This works just like `test()`,
-/// providing a wrapper for one or more assertions.
-/// @alias test
-/// @group api-test
-/// @param {string} $name -
-///   Describe the behavior being tested
-/// @content Include any assertions that are part of testing this behavior
-/// @example scss
-///   @include it('Returns lists zipped together') {
-///     @include assert-equal(
-///       zip(a b c, 1 2 3),
-///       (a 1, b 2, c 3));
-///     @include assert-equal(
-///       zip(1px 1px 3px, solid dashed solid, red green blue),
-///       (1px solid red, 1px dashed green, 3px solid blue));
-///   }
+// it($name)
+// 
+// **[public:void]** Describe the behavior being tested. This works just like `test()`
+// 
+// Weight: -10
+// 
+// Parameters:
+// <ul>
+// <li>$name - <b>{string}</b> <i>Describe what is being tested</i></li>
+// <li>{block} - Include any assertions that are part of this test</li>
+// </ul>
+//
+// **Example**:
+// ```stylus
+// +it('Returns lists zipped together') {
+//     assert-equal(
+//       zip(a b c, 1 2 3),
+//       (a 1, b 2, c 3)
+//     );
+//     +assert-equal(
+//       zip(1px 1px 3px, solid dashed solid, red green blue),
+//       (1px solid red, 1px dashed green, 3px solid blue)
+//     );
+// }
+// ```
+//
+// Styleguide Mixins.it
 it($name) {
   +test($name) {
     {block};
@@ -60,13 +68,13 @@ it($name) {
 
 // _true-test-start($name)
 // 
-// **[private]** Test start helper
+// **[private:void]** Test start helper
 // 
 // Weight: -10
 // 
 // $name - **{string}** ***Describe what is being tested***
 // 
-// Styleguide Functions._true-test-start($name)
+// Styleguide Functions._true-test-start
 _true-test-start($name) {
   _true-context-mixin('test', $name);
   _true-message('Test: %s' % $name, 'comments');
@@ -74,7 +82,7 @@ _true-test-start($name) {
 
 // _true-test-stop()
 // 
-// **[private:vod]** Test stop helper
+// **[private:void]** Test stop helper
 // 
 // Weight:0
 // 

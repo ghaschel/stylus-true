@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>stylus-true</title>
+
+    <meta name="description" content="" />
+    <meta name="generator" content="kss-node" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="kss-assets/kss.css" />
+    <link rel="stylesheet" href="kss-assets/custom.css" />
+  </head>
+  <body id="kss-node">
+    <div class="kss-sidebar kss-style">
+      <header class="kss-header">
+        <h1 class="kss-doc-title">stylus-true</h1>
+      </header>
+      <nav class="kss-nav" aria-label="Style Guide">
+        <ul class="kss-nav__menu">
+          <li class="kss-nav__menu-item">
+            <a class="kss-nav__menu-link" href="./">
+              <span class="kss-nav__ref">0</span
+              ><span class="kss-nav__name">Overview</span>
+            </a>
+          </li>
+          <li class="kss-nav__menu-item">
+            <a class="kss-nav__menu-link" href="section-functions.html">
+              <span class="kss-nav__ref">1</span
+              ><span class="kss-nav__name">Functions</span>
+            </a>
+            <ul class="kss-nav__menu-child">
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-_true-test-start"
+                >
+                  <span class="kss-nav__ref ">1.1</span
+                  ><span class="kss-nav__name">_true-test-start($name)</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-_true-error"
+                >
+                  <span class="kss-nav__ref ">1.2</span
+                  ><span class="kss-nav__name"
+                    >_true-error($message, $source, $override)</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-_true-join-multiple"
+                >
+                  <span class="kss-nav__ref ">1.3</span
+                  ><span class="kss-nav__name"
+                    >_true-join-multiple($lists...)</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-_true-map-increment"
+                >
+                  <span class="kss-nav__ref ">1.4</span
+                  ><span class="kss-nav__name"
+                    >_true-map-increment($base, $add)</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-_true-test-stop"
+                >
+                  <span class="kss-nav__ref ">1.5</span
+                  ><span class="kss-nav__name">_true-test-stop()</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-is-list"
+                >
+                  <span class="kss-nav__ref ">1.6</span
+                  ><span class="kss-nav__name">is-list($list)</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="kss-nav__menu-item">
+            <a class="kss-nav__menu-link" href="section-mixins.html">
+              <span class="kss-nav__ref">2</span
+              ><span class="kss-nav__name">Mixins</span>
+            </a>
+          </li>
+          <li class="kss-nav__menu-item">
+            <a class="kss-nav__menu-link" href="section-variables.html">
+              <span class="kss-nav__ref">3</span
+              ><span class="kss-nav__name">Variables</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <main class="kss-main" aria-label="Content">
+      <article>
+        <div id="kssref-functions" class="kss-section kss-section--depth-1 ">
+          <div class="kss-style">
+            <h1 class="kss-title kss-title--level-1">
+              <a class="kss-title__permalink" href="#kssref-functions">
+                <span class="kss-title__ref">
+                  1
+                  <span class="kss-title__permalink-hash">
+                    #Functions
+                  </span>
+                </span>
+                Functions
+              </a>
+            </h1>
+          </div>
+        </div>
+        <section
+          id="kssref-functions-_true-test-start"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-_true-test-start"
+              >
+                <span class="kss-title__ref">
+                  1.1
+                  <span class="kss-title__permalink-hash">
+                    #Functions._true-test-start
+                  </span>
+                </span>
+                _true-test-start($name)
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p><strong>[private:void]</strong> Test start helper</p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$name</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>Describe what is being tested</strong></em>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_tests.styl</code>, line 69
+          </div>
+        </section>
+        <section
+          id="kssref-functions-_true-error"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-_true-error"
+              >
+                <span class="kss-title__ref">
+                  1.2
+                  <span class="kss-title__permalink-hash">
+                    #Functions._true-error
+                  </span>
+                </span>
+                _true-error($message, $source, $override)
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private:void|string]</strong> Throw or returns an error
+                with a message detailing the source and error
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$message</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>The error to report</strong></em>
+                </div>
+              </li>
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$source</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>The source of the error</strong></em>
+                </div>
+              </li>
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$override</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean}</strong>
+                  <em
+                    ><strong
+                      >Optionally override error-output for testing
+                      failure-cases</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>$_true-error-output-override.value</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_utilities.styl</code>, line 34
+          </div>
+        </section>
+        <section
+          id="kssref-functions-_true-join-multiple"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-_true-join-multiple"
+              >
+                <span class="kss-title__ref">
+                  1.3
+                  <span class="kss-title__permalink-hash">
+                    #Functions._true-join-multiple
+                  </span>
+                </span>
+                _true-join-multiple($lists...)
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private:list]</strong> Any number of lists to be
+                joined, with an optional final argument describing the desired
+                list-separator ('space' or 'comma')
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$lists</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{list[]}</strong> <em><strong>Lists</strong></em>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_utilities.styl</code>, line 102
+          </div>
+        </section>
+        <section
+          id="kssref-functions-_true-map-increment"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-_true-map-increment"
+              >
+                <span class="kss-title__ref">
+                  1.4
+                  <span class="kss-title__permalink-hash">
+                    #Functions._true-map-increment
+                  </span>
+                </span>
+                _true-map-increment($base, $add)
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p><strong>[private:string]</strong> Add hash values together</p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$base</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>Initial map to add values to</strong></em>
+                </div>
+              </li>
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$add</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>Map of values to be added</strong></em>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_utilities.styl</code>, line 78
+          </div>
+        </section>
+        <section
+          id="kssref-functions-_true-test-stop"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-_true-test-stop"
+              >
+                <span class="kss-title__ref">
+                  1.5
+                  <span class="kss-title__permalink-hash">
+                    #Functions._true-test-stop
+                  </span>
+                </span>
+                _true-test-stop()
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p><strong>[private:void]</strong> Test stop helper</p>
+            </div>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_tests.styl</code>, line 83
+          </div>
+        </section>
+        <section
+          id="kssref-functions-is-list"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a class="kss-title__permalink" href="#kssref-functions-is-list">
+                <span class="kss-title__ref">
+                  1.6
+                  <span class="kss-title__permalink-hash">
+                    #Functions.is-list
+                  </span>
+                </span>
+                is-list($list)
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private:{boolean}]</strong> Returns whether an argument
+                is a list or not
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$list</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{list}</strong>
+                  <em><strong>The list to analyze</strong></em>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_utilities.styl</code>, line 16
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="kss-assets/kss.js"></script>
+    <script src="kss-assets/scrollspy.js"></script>
+    <script src="kss-assets/kss-fullscreen.js"></script>
+    <script src="kss-assets/kss-guides.js"></script>
+    <script src="kss-assets/kss-markup.js"></script>
+    <script>
+      var spy = new ScrollSpy("#kss-node", {
+        nav: ".kss-nav__menu-child > li > a",
+        className: "is-in-viewport"
+      });
+      var kssFullScreen = new KssFullScreen({
+        idPrefix: "kss-fullscreen-",
+        bodyClass: "kss-fullscreen-mode",
+        elementClass: "is-fullscreen"
+      });
+      var kssGuides = new KssGuides({
+        bodyClass: "kss-guides-mode"
+      });
+      var kssMarkup = new KssMarkup({
+        bodyClass: "kss-markup-mode",
+        detailsClass: "kss-markup"
+      });
+    </script>
+
+    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+  </body>
+</html>
