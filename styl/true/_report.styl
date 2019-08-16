@@ -1,27 +1,16 @@
-// Final Reporting
-// ===============
-
-
-
-
-// Report
-// ------
-/// Report results summary to CSS
-/// and (optionally) the command line
-/// @access public
-/// @group api-xreport
-/// @param {bool} $terminal [$true-terminal-output] -
-///   Optionally output results to the terminal
-/// @param {bool} $fail-on-error [false] -
-///   Optionally error out the compiler if tests have failed
-/// @param {map} $results [$_true-results] -
-///   A map of run, pass, fail, and output-to-css results
-/// @param {map} $stats [$_true-stats] -
-///   A map of module, test, and assertion statistics
-/// @example scss
-///   $true-terminal-output: false;
-///   @include report;
-report($terminal = $true-terminal-output.value, $fail-on-error = false, $results = $_true-results.value, $stats = $_true-stats.value)
+// report($terminal, $fail-on-error, $results, $stats)
+// 
+// **[public:{output}]** Report results summary to CSS and (optionally) the command line
+// 
+// Weight: -10
+// 
+// $terminal = $true-terminal-output.value - **{boolean}** ***Optionally output results to the terminal***
+// $fail-on-error = false - **{boolean}** ***Optionally error out the compiler if tests have failed***
+// $results = $_true-results.value - **{hash}** ***A hash of run, pass, fail, and output-to-css results***
+// $stats = $_true-stats - **{hash}** ***A map of module, test, and assertion statistics***
+//
+// Styleguide Mixins.report
+report($terminal = $true-terminal-output.value, $fail-on-error = false, $results = $_true-results.value, $stats = $_true-stats.value) {
   $fail = $results.fail;
   $run = $results.run;
   $pass = $results.pass;
@@ -48,24 +37,19 @@ report($terminal = $true-terminal-output.value, $fail-on-error = false, $results
     $message = '' + $fail + ' ' + $plural + ' failed';
     _true-error-mixin($message, 'report');
   }
+}
 
-
-
-
-
-// Report Message
-// --------------
-/// Report results summary to CSS
-/// and (optionally) the command line
-/// @access private
-/// @group private-message
-/// @param {bool} $linebreak [false] -
-///   Return single-line messages for results/stats,
-///   or optionally break into multi-line lists.
-/// @param {map} $results [$_true-results] -
-///   A map of run, pass, fail, and output-to-css results
-/// @param {map} $stats [$_true-stats] -
-///   A map of module, test, and assertion-counts in your project
+// _true-report-message($linebreak, $results, $stats)
+// 
+// **[private:{string}]** Report results summary to CSS and (optionally) the command line
+// 
+// Weight: 0
+// 
+// $linebreak = false - **{boolean}** ***Return single-line messages for results/stats, or optionally break into multi-line lists.***
+// $results = $_true-results.value - **{hash}** ***A map of run, pass, fail, and output-to-css results***
+// $stats = $_true-stats.value - **{hash}** ***A hash of module, test, and assertion-counts in your project***
+// 
+// Styleguide Functions._true-report-message
 _true-report-message($linebreak = false, $results = $_true-results.value, $stats = $_true-stats.value) {
   if ($linebreak) {
     return _true-join-multiple(

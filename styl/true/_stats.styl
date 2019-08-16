@@ -1,48 +1,41 @@
-// Stats Tracking & Reporting
-// ==========================
-
-
-
-
-// Stats Count
-// -----------
-/// Global stats count of how many modules, tests, and assertions are found
-/// @access private
-/// @group private-context
-/// @type Map<String: Number>
+// $_true-stats = { value }
+// 
+// **[private]** Value key stores the desired value
+// 
+// Weight: 0
+// 
+// $value = { 'modules': 0, 'tests': 0, 'assertions': 0 } - **{hash}** ***Global stats count of how many modules, tests, and assertions are found***
+// 
+// Styleguide Variables.$_true-stats
 $_true-stats = {
   value: { 'modules': 0, 'tests': 0, 'assertions': 0 }
 }
 
-
-
-
-// Update stats count
-// ------------------
-
-/// Add to a stats count type count by 1
-/// @param {String} $type - The stats type to add to
-/// @access private
-/// @group private-context
+// _true-update-stats-count($type)
+// 
+// **[private:{void}]** Add to a stats count type count by 1
+// 
+// Weight: 0
+// 
+// $type - **{string}** ***The stats type to add to***
+// 
+// Styleguide Functions._true-update-stats-count
 _true-update-stats-count($type) {
   $update = {};
   $update[$type] = 1;
   $_true-stats.value = _true-map-increment($_true-stats.value, $update);
 }
 
-
-
-
-// Stats Message
-// -------------
-/// Stats message
-/// @access private
-/// @group private-message
-/// @param {Bool} $linebreak [false] -
-///   Return message either as a single line or in multiple lines
-/// @param {Map} $stats [$_true-stats] -
-///   Map that contains the stats counts for modules, tests, and assertions found
-/// @return {String} - Stats count message
+// _true-stats-message($linebreak, $stats)
+// 
+// **[private:{string}]** Stats message
+// 
+// Weight: 0
+// 
+// $linebreak = false - **{boolean}** ***Return message either as a single line or in multiple lines***
+// $stats = $_true-stats.value - **{hash}** ***Map that contains the stats counts for modules, tests, and assertions found***
+//
+// Styleguide Functions._true-stats-message
 _true-stats-message($linebreak = true, $stats = $_true-stats.value) {
   $modules = $stats.modules;
   $tests = $stats.tests;

@@ -1,26 +1,41 @@
+// stdout($string, $type)
+// 
+// **[private:{output}]** Output to terminal
+// 
+// Weight: 0
+// 
+// $string - **{string}** ***Text to output to terminal***
+// $type - **{'debug'|'warn'|'error'}** ***Type of output***
+// 
+// Styleguide Functions.stdout
 use('lib/stdout.js');
-// Messages
-// ========
 
-// MIXIN
+// comment($string)
+// 
+// **[private:{output}]** Output a message to CSS comments
+// 
+// Weight: -10
+// 
+// $string - **{string}** ***Message to output***
+// 
+// Styleguide Mixins.comment
 comment($string) {
   unquote('/* ' + replace('(?![\t ])\s\s*', '\n * ', $string) + ' */');
 }
 
-
-// True Message
-// ------------
-/// Output a message to CSS comments,
-/// or comm&& line terminal (via debug/warn)
-/// @access private
-/// @group private-message
-/// @param {String} $message -
-///   Message to output
-/// @param {String} $output [comments] -
-///   Type of output, either `comments`, `terminal`, `debug` or `warn`
+// _true-message($message, $output, $comment-padding)
+// 
+// **[private:{output}]** Output a message to CSS comments, or commandline terminal (via debug/warn)
+// 
+// Weight: 0
+// 
+// $message - **{string}** ***Message to output***
+// $output = 'comments' - **{string}** ***Type of output, either `comments`, `terminal`, `debug` or `warn`***
+// 
+// Styleguide Mixins._true-message
 _true-message($message, $output = 'comments', $comment-padding = 0) {
-  $pad = ''
-  
+  $pad = '';
+
   if ($comment-padding > 0) {
     for $i in ((0)..(($comment-padding) - 1)) {
       $pad = $pad + ' ';

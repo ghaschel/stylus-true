@@ -1,38 +1,61 @@
+// str-length($list)
+// 
+// **[private:{number}]** Return the desired list length
+// 
+// Weight: 0
+// 
+// $list - **{list}** ***List to check length***
+// 
+// Styleguide Functions.str-length
 use('lib/str-length.js');
+
+// arrange-test-list($test-list)
+// 
+// **[private:{void}]** Fix the test list order to work with currently used order
+// 
+// Weight: 0
+// 
+// $test-list - **{list}** ***List to reorganize***
+// 
+// Styleguide Functions.arrange-test-list
 use('lib/arrange-test-list.js');
-// Test Module
-// ===========
 
-
-
-
-// Test Module
-//  -----------
-// / Test Modules are optional,
-// / and can be used to group tests and other modules
-// / for organizational purposes.
-// / Modules can be nested for additional organization.
-// / @access public
-// / @group api-test
-// / @param {string} $name - module name
-// / @content Include all the tests & modules that are part of this module
-// / @example scss
-// /   // Module Group
-// /   @include test-module('zip [function]') {
-// /     // Test 1
-// /     @include test('Returns two lists zipped together') {
-// /       @include assert-equal(
-// /         zip(a b c, 1 2 3),
-// /         (a 1, b 2, c 3));
-// /     }
+// test-module($name)
+// 
+// **[public:void]** Test Modules are optional, and can be used to group tests and other modules for organizational purposes.
+// 
+// Weight: -10
+// 
+// <b>Parameters:</b>
+// <ul>
+// <li>$name - <b>{string}</b> <b><i>Module name</i></b></li>
+// <li>{block} - <b><i>Include all the tests that are part of this module</i></b></li>
+// </ul>
 //
-// /     // Test 2
-// /     @include test('Returns three zipped lists') {
-// /       @include assert-equal(
-// /         zip(1px 1px 3px, solid dashed solid, red green blue),
-// /         (1px solid red, 1px dashed green, 3px solid blue));
-// /     }
-// /   }
+// ~
+// 
+// **Usage:**
+// ```stylus
+// +test-module('zip [function]') {
+//   // Test 1
+//   +test('Returns two lists zipped together') {
+//     assert-equal(
+//       zip(a b c, 1 2 3),
+//       (a 1, b 2, c 3)
+//     );
+//   }
+
+//   // Test 2
+//   +test('Returns three zipped lists') {
+//     assert-equal(
+//       zip(1px 1px 3px, solid dashed solid, red green blue),
+//       (1px solid red, 1px dashed green, 3px solid blue)
+//     );
+//   }
+// }
+// ```
+//
+// Styleguide Mixins.test-module
 test-module($name) {
   _true-module-start($name);
 
@@ -41,48 +64,57 @@ test-module($name) {
   _true-module-stop();
 }
 
-
-
-
-// Describe
-//  --------
-// / Describe the unit to be tested.
-// / This works just like a test module,
-// / allowing you to group one or more related tests.
-// / @alias test-module
-// / @group api-test
-// / @param {string} $name - module name
-// / @content Include all the tests that are part of this module
-// / @example scss
-// /   @include describe('zip [function]') {
-// /     // Test 1
-// /     @include it('Returns two lists zipped together') {
-// /       @include assert-equal(
-// /         zip(a b c, 1 2 3),
-// /         (a 1, b 2, c 3));
-// /     }
+// describe($name)
+// 
+// **[public:void]** Describe the unit to be tested. This works just like a test module, allowing you to group one or more related tests.
+// 
+// Weight: -10
+// 
+// <b>Parameters:</b>
+// <ul>
+// <li>$name - <b>{string}</b> <b><i>Module name</i></b></li>
+// <li>{block} - <b><i>Include all the tests that are part of this module</i></b></li>
+// </ul>
 //
-// /     // Test 2
-// /     @include it('Returns three zipped lists') {
-// /       @include assert-equal(
-// /         zip(1px 1px 3px, solid dashed solid, red green blue),
-// /         (1px solid red, 1px dashed green, 3px solid blue));
-// /     }
-// /   }
+// ~
+// 
+// **Usage:**
+// ```stylus
+// +describe('zip [function]') {
+//   // Test 1
+//   +it('Returns two lists zipped together') {
+//     assert-equal(
+//       zip(a b c, 1 2 3),
+//       (a 1, b 2, c 3)
+//     );
+//   }
+
+//   // Test 2
+//   +it('Returns three zipped lists') {
+//     assert-equal(
+//       zip(1px 1px 3px, solid dashed solid, red green blue),
+//       (1px solid red, 1px dashed green, 3px solid blue)
+//     );
+//   }
+// }
+// ```
+//
+// Styleguide Mixins.describe
 describe($name) {
   +test-module($name) {
     {block};
   }
 }
 
-
-
-// Module Start
-// ------------
-/// Module start helper
-/// @access private
-/// @group private-test
-/// @param {string} $name - module name
+// _true-module-start($name)
+// 
+// **[private:{output}]** Module start helper
+// 
+// Weight: 0
+// 
+// $name - **{string}** ***Module name***
+// 
+// Styleguide Mixins._true-module-start
 _true-module-start($name) {
   _true-context-mixin(module, $name);
   $_true-context.buffer = arrange-test-list($_true-context.buffer);
@@ -107,15 +139,13 @@ _true-module-start($name) {
   _true-message($underline, 'comments');
 }
 
-
-
-
-
-// Module Stop
-// -----------
-/// Module stop helper
-/// @access private
-/// @group private-test
+// _true-module-stop()
+// 
+// **[private:{output}]** Module stop helper
+// 
+// Weight: 0
+// 
+// Styleguide Mixins._true-module-stop
 _true-module-stop() {
   _true-update-stats-count('modules');
   // _true-context-pop('modules')

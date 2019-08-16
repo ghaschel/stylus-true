@@ -1,43 +1,50 @@
+// unwrap-list($list)
+// 
+// **[private:{list}]** Transforms a wrapped list into a unwrapped one
+// 
+// Weight: 0
+// 
+// $list - **{list}** ***List to be unwrapped***
+// 
+// Styleguide Functions.unwrap-list
 use('lib/unwrap-list.js');
 
-// Context Management
-// ==================
-
-
-
-
-// Context [variable]
-// ------------------
-/// Stores the current module/test/assertion context stack
-/// @access private
-
-/// @group private-context
-/// @type list
-
+// $_true-context = { buffer }
+// 
+// **[private]** Stores the current module/test/assertion context stack
+// 
+// Weight: 0
+// 
+// $buffer = () - **{list}** ***List to use as buffer for parsing***
+// 
+// Styleguide Variables.$_true-context
 $_true-context = {
   buffer: ()
 };
 
-// Context [mixin]
-// ---------------
-// / Update the current context for a given scope
-// / @access private
-// / @group private-context
-// / @param {string} $scope -
-// / Either `module`, `test` or `assert`
-// / @param {string} $name -
-// / Name or description of the current scope
+// _true-context-mixin($scope, $name)
+// 
+// **[private:{void}]** Update the current context for a given scope
+// 
+// Weight: 0
+// 
+// $scope - **{string}** ***Either `module`, `test` or `assert`***
+// $name - **{string}** ***Name or description of the current scope***
+// 
+// Styleguide Functions._true-context-mixin
 _true-context-mixin($scope, $name) {
   push($_true-context.buffer, '%s|%s' % (unquote($scope) unquote($name)));
 
   $_true-context.buffer = unwrap-list($_true-context.buffer);
 }
 
-// Context Pop [mixin]
-// -------------------
-// / Remove the deepest context layer from `$_true-context`
-// / @access private
-// / @group private-context
+// _true-context-pop($type)
+// 
+// **[private:{void}]** Remove the deepest context layer from `$_true-context.buffer`
+// 
+// Weight: 0
+// 
+// Styleguide Functions._true-output-pop
 _true-context-pop($type = null) {
   $new = ();
 
@@ -56,42 +63,32 @@ $_true-output-context = {
   value: ()
 };
 
-// Output-context [mixin]
-// ----------------------
-// / Add `assert`, `output`, `expect`, or `contains` context to an output test,
-// / or check to make sure they all exist before resetting the context.
-// / @access private
-// / @group private-context
-// / @param {'assert' | 'output' | 'expect' | 'contains' | null} $new -
-// / Add a new `assert`, `output`, `expect`, or `contains` layer
-// / to the context of an output-test,
-// / or use `null` to check that all context is properly formed
-// / and then reset it at the end of a test
-// / @param {list} $context [$_true-output-context] -
-// / The current output context
+// _true-output-context($new, $context)
+// 
+// **[private:{void}]** Add `assert`, `output`, `expect`, or `contains` context to an output test, or check to make sure they all exist before resetting the context.
+// 
+// Weight: 0
+// 
+// $new - **{'assert'|'output'|'expect'|'contains'|null}** ***Add a new `assert`, `output`, `expect`, or `contains` layer to the context of an output-test, or use `null` to check that all context is properly formed and then reset it at the end of a test***
+// $context = $_true-output-context.value - **{list}** ***The current output context***
+// 
+// Styleguide Functions._true-output-context
 _true-output-context($new, $context = $_true-output-context.value) {
   $valid = 'assert' 'expect' 'output' 'contains';
 
   $_true-output-context.value = _true-validate-output-context($new, $context);
 }
 
-// Validate Output-context [function]
-// ----------------------------------
-// / Validate the new context, and return an updated context value
-// / @access private
-// / @group private-context
-// / @param {'assert' | 'output' | 'expect' | 'contains' | null} $new -
-// / Add a new `assert`, `output`, `expect`, or `contains` layer
-// / to the context of an output-test,
-// / or use `null` to check that all context is properly formed
-// / and then reset it at the end of a test
-// / @param {list} $context [$_true-output-context] -
-// / The current output context
-// / @return {list} Updated output context
-// / @throw When adding unknown context
-// / @throw When trying to add context that already exists
-// / @throw When `assert()` is missing before `expect`, `output`, or `contains`
-// / @throw When context is missing before a reset
+// _true-validate-output-context($new, $context)
+// 
+// **[private:{string}]** Validate the new context, and return an updated context value
+// 
+// Weight: 0
+// 
+// $new - **{'assert'|'output'|'expect'|'contains'|null}** ***Add a new `assert`, `output`, `expect`, or `contains` layer to the context of an output-test, or use `null` to check that all context is properly formed and then reset it at the end of a test***
+// $context = $_true-output-context.value - **{list}** ***The current output context***
+// 
+// Styleguide Functions._true-validate-output-context
 _true-validate-output-context($new, $context = $_true-output-context.value) {
   $valid = 'assert' 'expect' 'output' 'contains';
 
@@ -141,13 +138,15 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
   return ();
 }
 
-// Context [function]
-// ------------------
-// / Get information on current context for a given scope
-// / @access private
-// / @group private-context
-// / @param {string} $scope
-// / @return {string}
+// _true-context($scope)
+// 
+// **[private:{string}]** Get information on current context for a given scope
+// 
+// Weight: 0
+// 
+// $scope - **{string}** ***Scope to search for***
+// 
+// Styleguide Functions._true-context
 _true-context($scope) {
   $value = null;
 
@@ -165,13 +164,15 @@ _true-context($scope) {
   return $value;
 }
 
-// Context All [function]
-// ----------------------
-// / Get list of context names for a given scope
-// / @access private
-// / @group private-context
-// / @param {string} $scope
-// / @return {list}
+// _true-context-all($scope)
+// 
+// **[private:{list}]** Get list of context names for a given scope
+// 
+// Weight: 0
+// 
+// $scope - **{string}** ***Scope to search for***
+// 
+// Styleguide Functions._true-context-all
 _true-context-all($scope) {
   $list = ();
 

@@ -53,6 +53,70 @@
                   >
                 </a>
               </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-_true-context"
+                >
+                  <span class="kss-nav__ref ">3.2</span
+                  ><span class="kss-nav__name"
+                    >$_true-context &#x3D; { buffer }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-_true-results"
+                >
+                  <span class="kss-nav__ref ">3.3</span
+                  ><span class="kss-nav__name"
+                    >$_true-results &#x3D; { value }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-_true-stats"
+                >
+                  <span class="kss-nav__ref ">3.4</span
+                  ><span class="kss-nav__name"
+                    >$true-terminal-output &#x3D; { value }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-_true-stats"
+                >
+                  <span class="kss-nav__ref ">3.4</span
+                  ><span class="kss-nav__name"
+                    >$_true-stats &#x3D; { value }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-_true-test-result"
+                >
+                  <span class="kss-nav__ref ">3.5</span
+                  ><span class="kss-nav__name"
+                    >$_true-test-result &#x3D; { value }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-map"
+                >
+                  <span class="kss-nav__ref ">3.6</span
+                  ><span class="kss-nav__name">$map &#x3D; { asserts }</span>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -117,7 +181,297 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_utilities.styl</code>, line 3
+            Source: <code>true/_utilities.styl</code>, line 12
+          </div>
+        </section>
+        <section
+          id="kssref-variables-_true-context"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-_true-context"
+              >
+                <span class="kss-title__ref">
+                  3.2
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$_true-context
+                  </span>
+                </span>
+                $_true-context &#x3D; { buffer }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private]</strong> Stores the current
+                module/test/assertion context stack
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$buffer</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{list}</strong>
+                  <em><strong>List to use as buffer for parsing</strong></em>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>()</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_context.styl</code>, line 12
+          </div>
+        </section>
+        <section
+          id="kssref-variables-_true-results"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-_true-results"
+              >
+                <span class="kss-title__ref">
+                  3.3
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$_true-results
+                  </span>
+                </span>
+                $_true-results &#x3D; { value }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p><strong>[private]</strong> Global test-results map</p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$value</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean}</strong>
+                  <em
+                    ><strong
+                      >Enable or disables terminal report while compiling to
+                      css</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to:
+                    <code
+                      >{ &#x27;run&#x27;: 0, &#x27;pass&#x27;: 0,
+                      &#x27;fail&#x27;: 0, &#x27;output-to-css&#x27;: 0 }</code
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_results.styl</code>, line 19
+          </div>
+        </section>
+        <section
+          id="kssref-variables-_true-stats"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-_true-stats"
+              >
+                <span class="kss-title__ref">
+                  3.4
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$_true-stats
+                  </span>
+                </span>
+                $true-terminal-output &#x3D; { value }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[public]</strong> While Mocha always reports to the
+                terminal, this setting allows you to get terminal reports even
+                when compiling True manually with Stylus.
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$value</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean}</strong>
+                  <em
+                    ><strong
+                      >Enable or disables terminal report while compiling to
+                      css</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>true</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_settings.styl</code>, line 1
+          </div>
+        </section>
+        <section
+          id="kssref-variables-_true-stats"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-_true-stats"
+              >
+                <span class="kss-title__ref">
+                  3.4
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$_true-stats
+                  </span>
+                </span>
+                $_true-stats &#x3D; { value }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private]</strong> Value key stores the desired value
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$value</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{hash}</strong>
+                  <em
+                    ><strong
+                      >Global stats count of how many modules, tests, and
+                      assertions are found</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to:
+                    <code
+                      >{ &#x27;modules&#x27;: 0, &#x27;tests&#x27;: 0,
+                      &#x27;assertions&#x27;: 0 }</code
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_stats.styl</code>, line 1
+          </div>
+        </section>
+        <section
+          id="kssref-variables-_true-test-result"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-_true-test-result"
+              >
+                <span class="kss-title__ref">
+                  3.5
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$_true-test-result
+                  </span>
+                </span>
+                $_true-test-result &#x3D; { value }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private]</strong> Local flags for tracking assertion
+                results in a test.
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$value</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean}</strong>
+                  <em><strong>Enable or disables assertion reports</strong></em>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>null</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_results.styl</code>, line 74
+          </div>
+        </section>
+        <section
+          id="kssref-variables-map"
+          class="kss-section kss-section--depth-2 "
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a class="kss-title__permalink" href="#kssref-variables-map">
+                <span class="kss-title__ref">
+                  3.6
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$map
+                  </span>
+                </span>
+                $map &#x3D; { asserts }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p><strong>[private]</strong> Variable to store asserts.</p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$asserts</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string[]}</strong>
+                  <em><strong>List of asserts</strong></em>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>()</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_assert.styl</code>, line 338
           </div>
         </section>
       </article>

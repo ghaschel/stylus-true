@@ -4,15 +4,17 @@
 // 
 // Weight: -10
 // 
+// <b>Parameters:</b>
 // <ul>
-// <li>$name - <b>{string}</b> <i>Describe what is being tested</i></li>
-// <li>{block} - Include any assertions that are part of this test</li>
+// <li>$name - <b>{string}</b> <b><i>Describe what is being tested</i></b></li>
+// <li>{block} - <b><i>Include any assertions that are part of this test</i></b></li>
 // </ul>
 //
-//~
+// ~
 // 
-// **Example**:
-// <pre class="code">+test('Returns lists zipped together') {
+// **Usage:**
+// ```stylus
+// +test('Returns lists zipped together') {
 //     assert-equal(
 //       zip(a b c, 1 2 3),
 //       (a 1, b 2, c 3)
@@ -21,7 +23,8 @@
 //       zip(1px 1px 3px, solid dashed solid, red green blue),
 //       (1px solid red, 1px dashed green, 3px solid blue)
 //     );
-// }</pre>
+// }
+// ```
 //
 // Styleguide Mixins.test
 test($name) {
@@ -39,13 +42,15 @@ test($name) {
 // 
 // Weight: -10
 // 
-// Parameters:
+// <b>Parameters:</b>
 // <ul>
-// <li>$name - <b>{string}</b> <i>Describe what is being tested</i></li>
-// <li>{block} - Include any assertions that are part of this test</li>
+// <li>$name - <b>{string}</b> <b><i>Describe what is being tested</i></b></li>
+// <li>{block} - <b><i>Include any assertions that are part of this test</i></b></li>
 // </ul>
 //
-// **Example**:
+// ~
+// 
+// **Usage:**
 // ```stylus
 // +it('Returns lists zipped together') {
 //     assert-equal(
@@ -68,7 +73,7 @@ it($name) {
 
 // _true-test-start($name)
 // 
-// **[private:void]** Test start helper
+// **[private:{void}]** Test start helper
 // 
 // Weight: -10
 // 
@@ -82,7 +87,7 @@ _true-test-start($name) {
 
 // _true-test-stop()
 // 
-// **[private:void]** Test stop helper
+// **[private:{void}]** Test stop helper
 // 
 // Weight:0
 // 

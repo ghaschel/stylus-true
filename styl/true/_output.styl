@@ -1,44 +1,34 @@
-
-// Test Result Output
-// ==================
-
-
-
-
-// Pass Details
-// ------------
-/// Ouptut a success message for passing tests
-/// @access private
-/// @group private-assert
-/// @output -
-///   a passing-test comment with the name of the passing assertion
+// _true-pass-details()
+// 
+// **[private:{output}]** Ouptut a success message for passing tests
+// 
+// Weight: 0
+// 
+// Styleguide Mixins._true-pass-details
 _true-pass-details() {
   $assertion = _true-context('assert');
   $message = '✔ %s' % unquote($assertion);
   _true-message($message, 'comments', 2);
 }
 
-
-
-
-
-// Fail Details
-// ------------
-/// Failure message, with appropriate details
-/// to help you debug various common problems.
-/// @access private
-/// @group private-assert
-/// @param {*} $assert - The assertion value
-/// @param {*} $expected - The expected value
-/// @param {bool} $terminal [$true-terminal-output] -
-///   whether to use the terminal as an output stream
+// _true-fail-details($assert, $expected, $terminal)
+// 
+// **[private:{output}]** Failure message, with appropriate details to help you debug various common problems.
+// 
+// Weight: 0
+// 
+// $assert - **{any}** ***The assertion value***
+// $expected - **{any}** ***The expected value***
+// $terminal = $true-terminal-output.value - **{boolean}** ***Whether to use the terminal as an output stream***
+// 
+// Styleguide Mixins._true-fail-details
 _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) {
   $list = 'comments', 'debug';
   $location = $terminal ? $list : 'comments';
 
   // Title Messages
   $assertion = _true-context('assert');
-  $string = typeof($assertion) == 'string' ? unquote($assertion) : $assertion
+  $string = typeof($assertion) == 'string' ? unquote($assertion) : $assertion;
   $title = 'FAILED: %s' % $string;
   $message = '✖ %s' % $title;
   _true-message($message, $location, 2);
@@ -72,20 +62,15 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
   }
 }
 
-
-
-
-
-// Variable Details
-// ----------------
-/// Provide the details (type, list-separator, quotation)
-/// for a given variable -
-/// used to provide context in failure reporting
-/// @access private
-/// @group private-assert
-/// @param {*} $var -
-///   Pass in asserted and expected values individually
-///   to retrieve comparable details for both
+// _true-variable-details($var)
+// 
+// **[private:{string}]** Provide the details (type, list-separator, quotation) for a given variable - used to provide context in failure reporting.
+// 
+// Weight: 0
+// 
+// $var - **{any}** ***Pass in asserted and expected values individually to retrieve comparable details for both***
+// 
+// Styleguide Functions._true-variable-details
 _true-variable-details($var) {
   $inspect = s('%s' % $var);
   $type = type-of($var);
@@ -115,26 +100,19 @@ _true-variable-details($var) {
   }
 
   $return = '[' + $type + '] ' + $inspect;
-  return $return
+  return $return;
 }
 
-
-
-
-
-// EdgeFail Notes
-// --------------
-/// There are some common test failures that can be confusing,
-/// where results look identical in the output,
-/// but represent different values internally.
-/// This function looks for those edge-case failures
-/// and adds a clarifying note in the results.
-/// @access private
-/// @group private-assert
-/// @param {*} $one - One of the values being compared
-/// @param {*} $two - The other calue being compared
-/// @return {null | string} -
-///   A helpful note related to your edge-case, when appropriate
+// _true-edgefail-notes($one, $two)
+// 
+// **[private:{null|string}]** There are some common test failures that can be confusing, where results look identical in the output, but represent different values internally. This function looks for those edge-case failures and adds a clarifying note in the results.
+// 
+// Weight: 0
+// 
+// $one - **{any}** ***One of the values being compared***
+// $two - **{any}** ***The other calue being compared***
+// 
+// Styleguide Functions._true-edgefail-notes
 _true-edgefail-notes($one, $two) {
   $one-type = type-of($one);
   $two-type = type-of($two);

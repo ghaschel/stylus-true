@@ -1,19 +1,14 @@
-// Result Tracking
-// ===============
-
-
-
-
-// Get Result
-// ----------
-/// Compare two values, and return a `pass` or `fail` result.
-/// @access private
-/// @group private-context
-/// @param {*} $assert - Value to consider
-/// @param {*} $expected - Expected match
-/// @param {bool} $unequal [false] -
-///   Set to `true` if the comparison is expected to fail
-/// @return {'pass' | 'fail'}
+// _true-get-result($assert, $expected, $unequal)
+// 
+// **[private:{'pass' | 'fail'}]** Compare two values, and return a `pass` or `fail` result.
+// 
+// Weight: 0
+// 
+// $assert - **{any}** ***Value to consider***
+// $expected - **{any}** ***Expected match***
+// $unequal = false - **{boolean}** ***Set to `true` if the comparison is expected to fail***
+// 
+// Styleguide Functions._true-get-result
 _true-get-result($assert, $expected, $unequal = false) {
   $equal = $assert == $expected;
   $pass = $unequal ? !$equal : $equal;
@@ -21,14 +16,15 @@ _true-get-result($assert, $expected, $unequal = false) {
   return $pass ? 'pass' : 'fail';
 }
 
-
-
-// Results
-// -------
-/// Global test-results map
-/// @access private
-/// @group private-context
-/// @type Map
+// $_true-results = { value }
+// 
+// **[private]** Global test-results map
+// 
+// Weight: 0
+// 
+// $value = { 'run': 0, 'pass': 0, 'fail': 0, 'output-to-css': 0 } - **{boolean}** ***Enable or disables terminal report while compiling to css***
+// 
+// Styleguide Variables.$_true-results
 $_true-results = {
   value: {
     'run': 0,
@@ -38,16 +34,16 @@ $_true-results = {
   }
 }
 
-
-
-
-// Update
-// ------
-/// Update global results data
-/// @access private
-/// @group private-context
-/// @param {'pass' | 'fail' | 'output-to-css'} $result -
-_true-update($result, $ignore-asserts-map = false) {
+// _true-update($result)
+// 
+// **[private:{void}]** Update global results data
+// 
+// Weight: 0
+// 
+// $result - **{'pass'|'fail'|'output-to-css' }** **The current status to update global results**
+// 
+// Styleguide Functions._true-update
+_true-update($result) {
   $update = {
     'run': 1
   };
@@ -75,27 +71,28 @@ _true-update($result, $ignore-asserts-map = false) {
   $map.asserts = ();
 }
 
-
-
-// Test Results
-// ------------
-// Local flags for tracking assertion results in a test
-/// @access private
-/// @group private-context
-/// @type String
+// $_true-test-result = { value }
+// 
+// **[private]** Local flags for tracking assertion results in a test.
+// 
+// Weight: 0
+// 
+// $value = null - **{boolean}** ***Enable or disables assertion reports***
+// 
+// Styleguide Variables.$_true-test-result
 $_true-test-result = {
   value: null
 }
 
-
-
-
-// Update Test
-// -----------
-/// Update test result flag with new data
-/// @access private
-/// @group private-context
-/// @param {'pass' | 'fail' | 'output-to-css'} $result -
+// _true-update-test($result)
+// 
+// **[private:{void}]** Update test result flag with new data
+// 
+// Weight: 0
+// 
+// $result - **{'pass'|'fail'|'output-to-css'}** ***The current status to update test stats***
+// 
+// Styleguide Functions._true-update-test
 _true-update-test($result) {
   push($map.asserts, $result);
 
@@ -106,20 +103,16 @@ _true-update-test($result) {
   }
 }
 
-
-
-
-// Results Message
-// ---------------
-/// Report message
-/// @access private
-/// @group private-message
-/// @param {Bool} $linebreak [false] -
-///   Return message either as a single line or in multiple lines
-/// @param {Map} $results [$_true-results] -
-///   A map of run, pass, fail, and output-to-css results
-/// @return {String} -
-///   Single or multi-line message for reporting
+// _true-results-message($linebreak, $results)
+// 
+// **[private:{string}]** Report message
+// 
+// Weight: 0
+// 
+// $linebreak = false - **{boolean}** ***Return message either as a single line or in multiple lines***
+// $results = $_true-results.value - **{hash}** ***A map of run, pass, fail, and output-to-css results***
+// 
+// Styleguide Functions._true-results-message
 _true-results-message($linebreak = false, $results = $_true-results.value) {
   $run = $results.run;
   $pass = $results.pass;

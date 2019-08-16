@@ -1,3 +1,12 @@
+// map-keys($hash)
+// 
+// **[private:{list}]** Returns a list with only the keys of the selected hash
+// 
+// Weight: 0
+// 
+// $hash - **{hash}** ***Hash to extract the keys from***
+// 
+// Styleguide Functions.map-keys
 use('lib/map-keys.js');
 
 // $_true-error-output-override = { value }
@@ -33,7 +42,7 @@ is-list() {
 
 // _true-error($message, $source, $override)
 // 
-// **[private:void|string]** Throw or returns an error with a message detailing the source and error
+// **[private:{void|string}]** Throw or returns an error with a message detailing the source and error
 // 
 // Weight: 0
 // 
@@ -55,7 +64,7 @@ _true-error($message, $source, $override = $_true-error-output-override.value) {
 
 // _true-error-mixin($message, $source, $override)
 // 
-// **[private:void]** Outputs an error with a message detailing the source and error
+// **[private:{void}]** Outputs an error with a message detailing the source and error
 // 
 // Weight: 0
 // 
@@ -77,7 +86,7 @@ _true-error-mixin($message, $source, $override = $_true-error-output-override.va
 
 // _true-map-increment($base, $add)
 // 
-// **[private:string]** Add hash values together
+// **[private:{string}]** Add hash values together
 // 
 // Weight: 0
 // 
@@ -101,7 +110,7 @@ _true-map-increment($base, $add) {
 
 // _true-join-multiple($lists...)
 // 
-// **[private:list]** Any number of lists to be joined, with an optional final argument describing the desired list-separator ('space' or 'comma')
+// **[private:{list}]** Any number of lists to be joined, with an optional final argument describing the desired list-separator ('space' or 'comma')
 // 
 // Weight: 0
 // 
