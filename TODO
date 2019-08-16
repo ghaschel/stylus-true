@@ -57,7 +57,7 @@ TODO:
     ✔ stats done(19-08-04 03:40)
     ✔ tests @done(19-08-04 03:40)
     ✔ utilities @done(19-08-05 13:21)
-    ☐ Switch from SASSDOC to DSS
+    ✔ Switch from SASSDOC to DSS @done(19-08-16 17:02)
   ☐ Convert js tests to stylus?
   ☐ Make repository public
   ☐ Reimplement $description to asserts and outputs
@@ -81,7 +81,7 @@ TODO:
     ☐ StylusSupremacy ??
     ☐ TravisCI
     ☐ NPM
-    ☐ kss-node
+    ✔ kss-node @done(19-08-16 17:02)
   ✔ Report is broken @done(19-07-19 09:11)
   ✔ Change stylus syntax @done(19-07-19 13:15)
   ☐ Check other parts of the code
