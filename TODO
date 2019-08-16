@@ -79,8 +79,11 @@ TODO:
     ☐ Greenkeeper
     ☐ Codecov
     ☐ StylusSupremacy ??
-    ☐ TravisCI
-    ☐ NPM
+    ✔ Semantic-relase @done(19-08-16 18:25)
+    ✔ Semantic-version @done(19-08-16 18:25)
+    ✔ Commitizen @done(19-08-16 18:25)
+    ✔ TravisCI @done(19-08-16 18:21)
+    ✔ NPM @done(19-08-16 18:28)
     ✔ kss-node @done(19-08-16 17:02)
   ✔ Report is broken @done(19-07-19 09:11)
   ✔ Change stylus syntax @done(19-07-19 13:15)
