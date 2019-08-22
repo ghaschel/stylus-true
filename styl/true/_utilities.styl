@@ -128,13 +128,17 @@ _true-join-multiple($lists...) {
     $type = $last;
   }
 
+  if (unquote($type) == unquote(',')) {
+    $type = ', '
+  }
+
   if ($length < 2) {
     $error = 'Must provide at least 2 lists';
     return _true-error($error, '_true-join-multiple');
   }
 
   for $i in (1 .. ($length - 1)) {
-    $return = join($return, $lists[$i], $type);
+    $return = join($type, $return, $lists[$i]);
   }
 
   return $return;

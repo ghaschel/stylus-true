@@ -47,16 +47,16 @@
 
   // TODO fix - stylus is dropping quotes and commas 
   +test('Comma List') {
-    $list = "one", "two";
+    $list = "one", "two three";
 
-    assert-equal(_true-variable-details($list), '[comma-list] "one", "two"');
+    assert-equal(_true-variable-details($list), '[comma-list] one, two three');
   }
 
   // TODO fix - stylus is dropping quotes 
   +test('Space List') {
-    $list = "one" "two";
+    $list = "one" "two three";
 
-    assert-equal(_true-variable-details($list), '[space-list] "one" "two"');
+    assert-equal(_true-variable-details($list), '[space-list] one two three');
   }
 }
 
@@ -74,7 +74,7 @@
     assert-equal(_true-edgefail-notes($list, $string), $message);
   }
 
-  // TODO: Check if applicableto l
+  // TODO: Check if applicable to stylus
   +test('Number rounding') {
     $message = '- Details: numbers may need to be rounded before comparison (set `$inspect: true` to compare output values)';
 
@@ -105,14 +105,14 @@
   +test('Compiles full failure details') {
     +assert() {
       +output() {
-        _true-context('assert', '[assert-equal] Test assertion');
+        _true-context('assert');
         _true-fail-details(1/3, 0.333333333, false);
       }
 
       +expect() {
-        /*   ✖ FAILED: [assert-equal] Test assertion */
-        /*     - Output: '[unit] 0.333333333333333' */
-        /*     - Expected: '[unit] 0.333333333' */
+        /*!   ✖ FAILED:  */
+        /*!     - Output: '[unit] 0.333333333333333' */
+        /*!     - Expected: '[unit] 0.333333333' */
       }
     }
   }

@@ -1,3 +1,5 @@
+use('lib/str-length.js');
+
 // _true-pass-details()
 // 
 // **[private:{output}]** Ouptut a success message for passing tests
@@ -79,13 +81,20 @@ _true-variable-details($var) {
     $inspect = unquote('' + $var + '')
     $inspect = s('%s' % ($inspect))
     $separator = list-separator($var);
+    $buffer = '';
 
     if (unquote($separator) == unquote(',')) {
-      $separator = comma
+      $separator = comma;
+
+      for $line in (arguments) {
+        $buffer = $buffer + $line + list-separator($var) + ' ';
+      }
+
+      $inspect = substr($buffer, 0, (str-length($buffer) - 2));
     }
 
     if (unquote($separator) == unquote(' ')) {
-      $separator = space
+      $separator = space;
     }
 
     $type = '%s-list' % $separator;
