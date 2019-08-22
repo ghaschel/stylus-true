@@ -88,8 +88,6 @@
   }
 
   +test('Nothing overrides fail') {
-    p($fail)
-    p($fail2)
     assert-equal($fail, $fail2);
   }
 }
