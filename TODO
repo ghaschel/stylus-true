@@ -34,15 +34,15 @@ Fix:
         ☐ output/expect
         ☐ output/contains
   ☐ Output
-    ☐ fix type mismatch with lists
-    ☐ number rounding
-    ☐ color rounding
+    ✔ fix type mismatch with lists @done(19-08-29 09:54)
+    ✔ number rounding @done(19-08-29 15:54)
+    ✔ color rounding @done(19-08-29 15:54)
     ☐ add optional description again for asserts, outputs, tests and etc
   ✔ Stats @done(19-07-31 14:00)
     ✔ Counter is partially broken @done(19-07-18 17:09)
     ✔ Multiple files works in css. @done(19-07-19 20:24)
     ✔ Multiple files wont work in js yet. @done(19-07-31 14:00)
-  ☐ Fix issues with lists @started(19-08-01 01:02)
+  ✔ Fix issues with lists @started(19-08-01 01:02) @done(19-08-29 09:54) @lasted(4w8h52m20s)
   
 
 TODO:
@@ -51,7 +51,7 @@ TODO:
     ☐ context
     ✔ messages @done(19-08-01 01:00)
     ✔ modules @done(19-08-04 03:40)
-    ☐ output @critical Fix issues related to quoting
+    ✔ output @critical Fix issues related to quoting @done(19-08-29 15:55)
     ✔ report @done(19-08-04 03:40)
     ✔ result @done(19-08-04 03:40)
     ✔ stats done(19-08-04 03:40)
@@ -59,7 +59,7 @@ TODO:
     ✔ utilities @done(19-08-05 13:21)
     ✔ Switch from SASSDOC to DSS @done(19-08-16 17:02)
   ☐ Convert js tests to stylus?
-  ☐ Make repository public
+  ✔ Make repository public @done(19-08-29 15:55)
   ☐ Reimplement $description to asserts and outputs
   ✔ Check for unused lib js files @done(19-07-31 13:57)
   ☐ Clean up
@@ -78,7 +78,6 @@ TODO:
   ☐ Badges
     ☐ Greenkeeper
     ☐ Codecov
-    ☐ StylusSupremacy ??
     ✔ Semantic-relase @done(19-08-16 18:25)
     ✔ Semantic-version @done(19-08-16 18:25)
     ✔ Commitizen @done(19-08-16 18:25)
