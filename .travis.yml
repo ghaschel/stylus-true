@@ -1,8 +1,7 @@
 language: node_js
 node_js:
   - 12
-  - 8
-  - 6
+  - 10
 jobs:
   include:
     # Define the release stage that runs semantic-release
@@ -14,4 +13,5 @@ jobs:
         provider: script
         skip_cleanup: true
         script:
+          - npm run test
           # - npx semantic-release
