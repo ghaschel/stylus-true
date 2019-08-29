@@ -1,3 +1,5 @@
+use('lib/str-length.js');
+
 // map-keys($hash)
 // 
 // **[private:{list}]** Returns a list with only the keys of the selected hash
@@ -118,18 +120,12 @@ _true-map-increment($base, $add) {
 // 
 // Styleguide Functions._true-join-multiple
 _true-join-multiple($lists...) {
-  $return = $lists[0];
-  $type = list-separator($return);
+  $return = ();
   $last = $lists[-1];
   $length = length($lists);
 
-  if ($last == 'space' || ($last == 'comma')) {
+  if (unquote($last) == unquote(' ') || unquote($last) == unquote(',')) {
     $length = $length - 1;
-    $type = $last;
-  }
-
-  if (unquote($type) == unquote(',')) {
-    $type = ', '
   }
 
   if ($length < 2) {
@@ -137,8 +133,23 @@ _true-join-multiple($lists...) {
     return _true-error($error, '_true-join-multiple');
   }
 
-  for $i in (1 .. ($length - 1)) {
-    $return = join($type, $return, $lists[$i]);
+  for $i in (0 .. ($length - 1)) {
+    if (is-list($lists[$i])) {
+      for $j in (0 .. (length($lists[$i]) - 1)) {
+        push($return, $lists[$i][$j]);
+      }
+    } else {
+      push($return, $lists[$i]);
+    }
+  }
+
+  $first = slice($return, 0, 1);
+  if (unquote($first) == unquote(' ')) {
+    $return = substr($return, 1, str-length($return));
+  }
+
+  if (unquote($first) == unquote(',')) {
+    $return = substr($return, 2, str-length($return));
   }
 
   return $return;

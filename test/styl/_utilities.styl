@@ -55,16 +55,16 @@
   $two = 'four' 'five' 'six';
   $three = 'seven', 'eight', 'nine';
   $joined =  'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine';
+  $changed-separators = one two three four five six seven eight nine;
 
   +test('Combines multiple lists') {
-    p(_true-join-multiple($one, $two, $three))
     assert-equal(_true-join-multiple($one, $two, $three), $joined);
   }
 
   +test('Sets new list-separator') {
     assert-equal(
       _true-join-multiple($one, $two, $three, ' '),
-      join(' ', $joined, ())
+      $changed-separators
     );
   }
 }
