@@ -42,6 +42,7 @@
   "scripts": {
     "test": "npm run test:mocha && npm run test:jest",
     "nyc": "nyc --reporter=html --reporter=text mocha",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test:mocha": "mocha test/stylus.spec.js",
     "test:jest": "jest test/stylus.spec.js",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",

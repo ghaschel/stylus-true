@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - 12
   - 10
+script:
+  - npm run nyc
+  - npm run report-coverage
 jobs:
   include:
     # Define the release stage that runs semantic-release
@@ -14,4 +17,6 @@ jobs:
         skip_cleanup: true
         script:
           - npm run test
+          - npm run nyc
+          - npm run report-coverage
           # - npx semantic-release
