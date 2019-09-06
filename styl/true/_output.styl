@@ -38,6 +38,7 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
   // Details Message
   $out = _true-variable-details($assert);
   $exp = _true-variable-details($expected);
+
   $details = '- Output: %s' % $out, '- Expected: %s' % $exp;
   _true-message($details, $location, 4);
 
@@ -46,7 +47,6 @@ _true-fail-details($assert, $expected, $terminal = $true-terminal-output.value) 
   $assert-equal = index($assertion, '[assert-equal]');
   if ($assert-equal != null && $assert-equal >= 0) {
     $notes = _true-edgefail-notes($assert, $expected);
-
     if ($notes) {
       _true-message($notes, $location, 4);
     }
@@ -78,8 +78,8 @@ _true-variable-details($var) {
   $type = type-of($var);
 
   if (is-list($var)) {
-    $inspect = unquote('' + $var + '')
-    $inspect = s('%s' % ($inspect))
+    $inspect = unquote('' + $var + '');
+    $inspect = s('%s' % ($inspect));
     $separator = list-separator($var);
     $buffer = '';
 
@@ -149,7 +149,6 @@ _true-edgefail-notes($lists...) {
     }
  }
 
-  // TODO check if this is removable. Stylus doesn't differenciate between quotations
   // String Quotes
   if (($one-type == 'string' && $two-type == 'string') && (!is-list($one) && !is-list($two))) {
     if (unquote($one) == unquote($two)) {
@@ -172,7 +171,7 @@ _true-edgefail-notes($lists...) {
   }
   
   if (s('%s' % $one) == s('%s' % $two)) {
-    $number = false
+    $number = false;
 
     // Type
     if ($one-type != $two-type) {

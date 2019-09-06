@@ -38,7 +38,7 @@ is-list() {
   if (type(arguments) == 'object') {
     return type(keys(arguments)[0]) == 'object';
   } else {
-    return length(arguments) > 1 && type(arguments) != 'rgba';
+    return str-length(arguments) == 'NOT_A_STRING' && length(arguments) > 1 && type(arguments) != 'rgba';
   }
 }
 

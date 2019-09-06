@@ -1,10 +1,10 @@
 // str-length($list)
 // 
-// **[private:{number}]** Return the desired list length
+// **[private:{number|'NOT_A_STRING'}]** Return the desired string length
 // 
 // Weight: 0
 // 
-// $list - **{list}** ***List to check length***
+// $list - **{list}** ***string to check length***
 // 
 // Styleguide Functions.str-length
 use('lib/str-length.js');
@@ -22,7 +22,7 @@ use('lib/arrange-test-list.js');
 
 // test-module($name)
 // 
-// **[public:void]** Test Modules are optional, and can be used to group tests and other modules for organizational purposes.
+// **[public:{void}]** Test Modules are optional, and can be used to group tests and other modules for organizational purposes.
 // 
 // Weight: -10
 // 
@@ -66,7 +66,7 @@ test-module($name) {
 
 // describe($name)
 // 
-// **[public:void]** Describe the unit to be tested. This works just like a test module, allowing you to group one or more related tests.
+// **[public:{void}]** Describe the unit to be tested. This works just like a test module, allowing you to group one or more related tests.
 // 
 // Weight: -10
 // 

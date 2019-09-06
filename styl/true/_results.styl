@@ -1,3 +1,4 @@
+use('lib/str-length.js')
 // _true-get-result($assert, $expected, $unequal)
 // 
 // **[private:{'pass' | 'fail'}]** Compare two values, and return a `pass` or `fail` result.
@@ -49,11 +50,14 @@ _true-update($result) {
   };
 
   $successful = true;
-  for $i in ((0)..(length($map.asserts) - 1)) {
-    if ($map.asserts[$i] == 'output-to-css' || $successful == 'output-to-css') {
-      $successful = 'output-to-css';
-    } else {
-      $successful = $successful && $map.asserts[$i] == 'pass';
+
+  if (str-length($map.asserts) == 'NOT_A_STRING') {
+    for $i in ((1)..(length($map.asserts) - 1)) {
+      if ($map.asserts[$i] == 'output-to-css' || $successful == 'output-to-css') {
+        $successful = 'output-to-css';
+      } else {
+        $successful = $successful && $map.asserts[$i] == 'pass';
+      }
     }
   }
 

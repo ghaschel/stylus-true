@@ -29,11 +29,11 @@ describe("#fail", function() {
 
 describe("#runStyl", function() {
   it("throws AssertionError on failure", function() {
-    var sass = [
-      '@require "styl/true";',
+    var stylus = [
+      '@require "styl/_true";',
       '+test-module("Throw an error") {',
       '  +test("assertionError") {',
-      '    assert-true(false, "This test is meant to fail.");',
+      "    assert-true(false);",
       "  }",
       "}"
     ].join("\n");
@@ -41,24 +41,24 @@ describe("#runStyl", function() {
       cb();
     };
     var attempt = function() {
-      main.runStyl({ data: sass }, { describe: mock, it: mock });
+      main.runStyl({ data: stylus }, { describe: mock, it: mock });
     };
     expect(attempt).to.throw(
-      'This test is meant to fail. ("[bool] false" assert-true "[bool] true")'
+      '("[boolean] false\'" assert-true "[boolean] true\'")'
     );
   });
 
   it("can specify includePaths", function() {
-    var sass = [
-      '@import "include";',
-      '@import "true";',
-      '@include test-module("Module") {',
-      '  @include test("Test") {',
-      '    @include assert("Assertion") {',
-      "      @include output() {",
-      "        @include included-mixin();",
+    var stylus = [
+      '@require "test/styl/includes/_mixin";',
+      '@require "styl/_true";',
+      '+test-module("Module") {',
+      '  +test("Test") {',
+      '    +assert("Assertion") {',
+      "      +output() {",
+      "        included-mixin();",
       "      }",
-      "      @include expect() {",
+      "      +expect() {",
       "        -property: value;",
       "      }",
       "    }",
@@ -70,8 +70,8 @@ describe("#runStyl", function() {
     };
     main.runStyl(
       {
-        data: sass,
-        includePaths: [path.join(__dirname, "scss/includes")]
+        data: stylus,
+        includePaths: [path.join(__dirname, "styl/includes")]
       },
       {
         describe: mock,
@@ -80,19 +80,19 @@ describe("#runStyl", function() {
     );
   });
 
-  it("can specify sass engine to use", function() {
+  it("can specify stylus engine to use", function() {
     var mock = function(name, cb) {
       cb();
     };
     var attempt = function() {
       main.runStyl(
         {
-          data: ""
+          data: "body {color: red}"
         },
         {
-          sass: {
-            renderSync: function() {
-              throw new Error("Custom sass implementation called");
+          styl: {
+            render: function() {
+              throw new Error("Custom stylus implementation called");
             }
           },
           describe: mock,
@@ -100,7 +100,7 @@ describe("#runStyl", function() {
         }
       );
     };
-    expect(attempt).to.throw("Custom sass implementation called");
+    expect(attempt).to.throw("Custom stylus implementation called");
   });
 });
 

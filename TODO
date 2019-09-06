@@ -8,82 +8,21 @@ Fix (after initial release):
     ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
   ☐ Messages
     ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
+  ☐ Reimplement $description to asserts and outputs
 
 @critical --- `above this only after initial release` --- @critical 
     
-Fix:
-  ☐ Output (`$output: true`)
-    ☐ Review
-      ☐ assert-true
-      ☐ assert-false
-      ☐ assert-equal
-      ☐ assert-unequal
-      ☐ assert
-        ☐ output/expect
-        ☐ output/contains
-  ☐ Report
-    ✔ Report is partially broken in JS @done(19-07-31 13:35)
-      ✔ reports the correct pass number, but the wrong fail number @done(19-07-31 13:35)
-      ✔ if one single assert fails, it removes the next ones from the queue @critical @done(19-07-31 13:35)
-    ☐ Review output and grant its working before release (`check edgefail cases`)
-      ☐ assert-true
-      ☐ assert-false
-      ☐ assert-equal
-      ☐ assert-unequal
-      ☐ assert
-        ☐ output/expect
-        ☐ output/contains
-  ☐ Output
-    ✔ fix type mismatch with lists @done(19-08-29 09:54)
-    ✔ number rounding @done(19-08-29 15:54)
-    ✔ color rounding @done(19-08-29 15:54)
-    ☐ add optional description again for asserts, outputs, tests and etc
-  ✔ Stats @done(19-07-31 14:00)
-    ✔ Counter is partially broken @done(19-07-18 17:09)
-    ✔ Multiple files works in css. @done(19-07-19 20:24)
-    ✔ Multiple files wont work in js yet. @done(19-07-31 14:00)
-  ✔ Fix issues with lists @started(19-08-01 01:02) @done(19-08-29 09:54) @lasted(4w8h52m20s)
-  
-
 TODO:
-  ☐ Convert old scss tests to stylus
-    ✔ asserts @done(19-08-01 01:00)
-    ☐ context
-    ✔ messages @done(19-08-01 01:00)
-    ✔ modules @done(19-08-04 03:40)
-    ✔ output @critical Fix issues related to quoting @done(19-08-29 15:55)
-    ✔ report @done(19-08-04 03:40)
-    ✔ result @done(19-08-04 03:40)
-    ✔ stats done(19-08-04 03:40)
-    ✔ tests @done(19-08-04 03:40)
-    ✔ utilities @done(19-08-05 13:21)
-    ✔ Switch from SASSDOC to DSS @done(19-08-16 17:02)
-  ☐ Convert js tests to stylus?
-  ✔ Make repository public @done(19-08-29 15:55)
-  ☐ Reimplement $description to asserts and outputs
-  ✔ Check for unused lib js files @done(19-07-31 13:57)
-  ☐ Clean up
+  ✔ Convert js tests to stylus? @done(19-09-06 10:17)
+  ✔ Clean up @done(19-09-02 14:57)
   ☐ Readme.md
-    ☐ LICENSE
+  ✔ LICENSE @done(19-08-29 18:40)
   ☐ KnownIssues.md
     ☐ Describe > Describe
     ☐ Unable to detect missing assert before expect/output/contains
-  ☐ Changelog
-  ☐ StylusSupremacy / Stylint
-    ✔ Fix Styllint @done(19-07-31 14:02)
-    ☐ Make stylus supremacy respect doc and empty lines or else dont use it
-  ☐ Prettierc
-  ☐ EditorConfig
-  ☐ Rewrite to TS/ES6?
+  ✔ EditorConfig @done(19-09-02 14:10)
+  ☐ Rewrite to TS/ES6? @low 
+    ☐ Prettierc
   ☐ Badges
-    ☐ Greenkeeper
     ☐ Codecov
-    ✔ Semantic-relase @done(19-08-16 18:25)
-    ✔ Semantic-version @done(19-08-16 18:25)
-    ✔ Commitizen @done(19-08-16 18:25)
-    ✔ TravisCI @done(19-08-16 18:21)
-    ✔ NPM @done(19-08-16 18:28)
-    ✔ kss-node @done(19-08-16 17:02)
-  ✔ Report is broken @done(19-07-19 09:11)
-  ✔ Change stylus syntax @done(19-07-19 13:15)
-  ☐ Check other parts of the code
+  ✔ NYC @done(19-09-06 10:17)

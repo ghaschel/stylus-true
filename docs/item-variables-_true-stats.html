@@ -63,15 +63,13 @@
                     #Variables.$_true-stats
                   </span>
                 </span>
-                $true-terminal-output &#x3D; { value }
+                $_true-stats &#x3D; { value }
               </a>
             </h2>
 
             <div class="kss-description">
               <p>
-                <strong>[public]</strong> While Mocha always reports to the
-                terminal, this setting allows you to get terminal reports even
-                when compiling True manually with Stylus.
+                <strong>[private]</strong> Value key stores the desired value
               </p>
             </div>
 
@@ -80,15 +78,19 @@
               <li class="kss-parameters__item">
                 <div class="kss-parameters__name"><code>$value</code></div>
                 <div class="kss-parameters__description">
-                  <strong>{boolean}</strong>
+                  <strong>{hash}</strong>
                   <em
                     ><strong
-                      >Enable or disables terminal report while compiling to
-                      css</strong
+                      >Global stats count of how many modules, tests, and
+                      assertions are found</strong
                     ></em
                   >
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>false</code>
+                    Defaults to:
+                    <code
+                      >{ &#x27;modules&#x27;: 0, &#x27;tests&#x27;: 0,
+                      &#x27;assertions&#x27;: 0 }</code
+                    >
                   </div>
                 </div>
               </li>
@@ -96,7 +98,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_settings.styl</code>, line 1
+            Source: <code>true/_stats.styl</code>, line 1
           </div>
         </div>
       </article>
@@ -126,7 +128,5 @@
         detailsClass: "kss-markup"
       });
     </script>
-
-    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
   </body>
 </html>
