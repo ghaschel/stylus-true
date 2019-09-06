@@ -1,6 +1,6 @@
 {
   "name": "stylus-true",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Framework to unit test your Stylus files.",
   "main": "styl/true.styl",
   "directories": {
