@@ -126,8 +126,6 @@ report();
 
 You can call `runStyl` more than once, if you have multiple Styl test files you want to run separately.
 
-The first argument to `runStyl` _coming soon_
-
 The second argument is an object with required `describe` and `it` options, and optional and `contextLines` options.
 
 Any JS test runner with equivalents to Mocha's or Jest's `describe` and `it` should be usable in the same way: just pass your test runner's `describe` and `it` equivalents in the second argument to `runStyl`.
