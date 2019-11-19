@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ghaschel/stylus-true/compare/v1.0.0...v1.0.1) (2019-11-19)
+
+
+### Bug Fixes
+
+* **package:** update chalk to version 3.0.0 ([31cae3a](https://github.com/ghaschel/stylus-true/commit/31cae3a))
+
 # 1.0.0 (2019-09-06)
 
 
