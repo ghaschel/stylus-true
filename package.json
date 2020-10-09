@@ -8,14 +8,14 @@
     "test": "test"
   },
   "dependencies": {
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "css": "^2.2.4",
     "glob": "^7.1.4",
     "jest": "^24.9.0",
     "lodash.find": "^4.6.0",
     "lodash.foreach": "^4.5.0",
     "lodash.last": "^3.0.0",
-    "mocha": "^6.2.0",
+    "mocha": "^7.0.1",
     "niepsuj-kss-template": "^1.1.6",
     "nyc": "^15.0.0",
     "stylus": "^0.54.7"
@@ -23,20 +23,20 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
-    "@semantic-release/changelog": "^3.0.4",
-    "@semantic-release/git": "^7.0.16",
+    "@semantic-release/changelog": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
     "chai": "^4.2.0",
     "codecov": "^3.5.0",
     "cz-conventional-changelog": "^3.0.2",
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
-    "husky": "^3.0.5",
+    "husky": "^4.0.2",
     "kss": "^3.0.0-beta.25",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.0",
     "pretty-quick": "^2.0.0",
     "requirejs": "^2.3.6",
-    "semantic-release": "^15.13.24",
-    "standard-version": "^7.0.0",
+    "semantic-release": "^16.0.0",
+    "standard-version": "^8.0.0",
     "stylint": "^2.0.0"
   },
   "scripts": {
