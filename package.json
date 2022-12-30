@@ -15,7 +15,7 @@
     "lodash.find": "^4.6.0",
     "lodash.foreach": "^4.5.0",
     "lodash.last": "^3.0.0",
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "niepsuj-kss-template": "^1.1.6",
     "nyc": "^15.0.0",
     "stylus": "^0.54.7"
