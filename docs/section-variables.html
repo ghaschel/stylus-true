@@ -47,7 +47,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-error-output-override"
                 >
-                  <span class="kss-nav__ref ">3.1</span
+                  <span class="kss-nav__ref">3.1</span
                   ><span class="kss-nav__name"
                     >$_true-error-output-override &#x3D; { value }</span
                   >
@@ -56,9 +56,20 @@
               <li class="kss-nav__menu-item">
                 <a
                   class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-true-terminal-output"
+                >
+                  <span class="kss-nav__ref">3.2</span
+                  ><span class="kss-nav__name"
+                    >$true-terminal-output &#x3D; { value }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-context"
                 >
-                  <span class="kss-nav__ref ">3.2</span
+                  <span class="kss-nav__ref">3.3</span
                   ><span class="kss-nav__name"
                     >$_true-context &#x3D; { buffer }</span
                   >
@@ -69,7 +80,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-results"
                 >
-                  <span class="kss-nav__ref ">3.3</span
+                  <span class="kss-nav__ref">3.4</span
                   ><span class="kss-nav__name"
                     >$_true-results &#x3D; { value }</span
                   >
@@ -80,18 +91,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-stats"
                 >
-                  <span class="kss-nav__ref ">3.4</span
-                  ><span class="kss-nav__name"
-                    >$true-terminal-output &#x3D; { value }</span
-                  >
-                </a>
-              </li>
-              <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-variables.html#kssref-variables-_true-stats"
-                >
-                  <span class="kss-nav__ref ">3.4</span
+                  <span class="kss-nav__ref">3.5</span
                   ><span class="kss-nav__name"
                     >$_true-stats &#x3D; { value }</span
                   >
@@ -102,7 +102,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-test-result"
                 >
-                  <span class="kss-nav__ref ">3.5</span
+                  <span class="kss-nav__ref">3.6</span
                   ><span class="kss-nav__name"
                     >$_true-test-result &#x3D; { value }</span
                   >
@@ -113,7 +113,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-map"
                 >
-                  <span class="kss-nav__ref ">3.6</span
+                  <span class="kss-nav__ref">3.7</span
                   ><span class="kss-nav__name">$map &#x3D; { asserts }</span>
                 </a>
               </li>
@@ -124,7 +124,7 @@
     </div>
     <main class="kss-main" aria-label="Content">
       <article>
-        <div id="kssref-variables" class="kss-section kss-section--depth-1 ">
+        <div id="kssref-variables" class="kss-section kss-section--depth-1">
           <div class="kss-style">
             <h1 class="kss-title kss-title--level-1">
               <a class="kss-title__permalink" href="#kssref-variables">
@@ -141,7 +141,7 @@
         </div>
         <section
           id="kssref-variables-_true-error-output-override"
-          class="kss-section kss-section--depth-2 "
+          class="kss-section kss-section--depth-2"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
@@ -185,8 +185,60 @@
           </div>
         </section>
         <section
+          id="kssref-variables-true-terminal-output"
+          class="kss-section kss-section--depth-2"
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-true-terminal-output"
+              >
+                <span class="kss-title__ref">
+                  3.2
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$true-terminal-output
+                  </span>
+                </span>
+                $true-terminal-output &#x3D; { value }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[public]</strong> Controls direct terminal output from
+                Stylus. The default is <code>false</code>; JavaScript runners
+                such as Mocha and Jest still report through their own output.
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$value</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean}</strong>
+                  <em
+                    ><strong
+                      >Enable or disable direct Stylus terminal output for
+                      failure details and reports.</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>false</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_settings.styl</code>, line 1
+          </div>
+        </section>
+        <section
           id="kssref-variables-_true-context"
-          class="kss-section kss-section--depth-2 "
+          class="kss-section kss-section--depth-2"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
@@ -195,7 +247,7 @@
                 href="#kssref-variables-_true-context"
               >
                 <span class="kss-title__ref">
-                  3.2
+                  3.3
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-context
                   </span>
@@ -232,7 +284,7 @@
         </section>
         <section
           id="kssref-variables-_true-results"
-          class="kss-section kss-section--depth-2 "
+          class="kss-section kss-section--depth-2"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
@@ -241,7 +293,7 @@
                 href="#kssref-variables-_true-results"
               >
                 <span class="kss-title__ref">
-                  3.3
+                  3.4
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-results
                   </span>
@@ -284,7 +336,7 @@
         </section>
         <section
           id="kssref-variables-_true-stats"
-          class="kss-section kss-section--depth-2 "
+          class="kss-section kss-section--depth-2"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
@@ -293,59 +345,7 @@
                 href="#kssref-variables-_true-stats"
               >
                 <span class="kss-title__ref">
-                  3.4
-                  <span class="kss-title__permalink-hash">
-                    #Variables.$_true-stats
-                  </span>
-                </span>
-                $true-terminal-output &#x3D; { value }
-              </a>
-            </h2>
-
-            <div class="kss-description">
-              <p>
-                <strong>[public]</strong> While Mocha always reports to the
-                terminal, this setting allows you to get terminal reports even
-                when compiling True manually with Stylus.
-              </p>
-            </div>
-
-            <div class="kss-parameters__title">Parameters:</div>
-            <ul class="kss-parameters">
-              <li class="kss-parameters__item">
-                <div class="kss-parameters__name"><code>$value</code></div>
-                <div class="kss-parameters__description">
-                  <strong>{boolean}</strong>
-                  <em
-                    ><strong
-                      >Enable or disables terminal report while compiling to
-                      css</strong
-                    ></em
-                  >
-                  <div class="kss-parameters__default-value">
-                    Defaults to: <code>false</code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="kss-source kss-style">
-            Source: <code>true/_settings.styl</code>, line 1
-          </div>
-        </section>
-        <section
-          id="kssref-variables-_true-stats"
-          class="kss-section kss-section--depth-2 "
-        >
-          <div class="kss-style">
-            <h2 class="kss-title kss-title--level-2">
-              <a
-                class="kss-title__permalink"
-                href="#kssref-variables-_true-stats"
-              >
-                <span class="kss-title__ref">
-                  3.4
+                  3.5
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-stats
                   </span>
@@ -390,7 +390,7 @@
         </section>
         <section
           id="kssref-variables-_true-test-result"
-          class="kss-section kss-section--depth-2 "
+          class="kss-section kss-section--depth-2"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
@@ -399,7 +399,7 @@
                 href="#kssref-variables-_true-test-result"
               >
                 <span class="kss-title__ref">
-                  3.5
+                  3.6
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-test-result
                   </span>
@@ -436,13 +436,13 @@
         </section>
         <section
           id="kssref-variables-map"
-          class="kss-section kss-section--depth-2 "
+          class="kss-section kss-section--depth-2"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
               <a class="kss-title__permalink" href="#kssref-variables-map">
                 <span class="kss-title__ref">
-                  3.6
+                  3.7
                   <span class="kss-title__permalink-hash">
                     #Variables.$map
                   </span>
@@ -486,20 +486,22 @@
     <script>
       var spy = new ScrollSpy("#kss-node", {
         nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport"
+        className: "is-in-viewport",
       });
       var kssFullScreen = new KssFullScreen({
         idPrefix: "kss-fullscreen-",
         bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen"
+        elementClass: "is-fullscreen",
       });
       var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode"
+        bodyClass: "kss-guides-mode",
       });
       var kssMarkup = new KssMarkup({
         bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup"
+        detailsClass: "kss-markup",
       });
     </script>
+
+    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
   </body>
 </html>

@@ -1,6 +1,6 @@
 // assert-true($assert, $description)
 // 
-// **[public:{output}]** Assert that a parameter is truthy. - Empty lists and strings are excluded from default Stylus truthyness. Assertions are used inside the `test()` mixin
+// **[public:{output}]** Assert that a value is truthy. Empty lists and empty strings are treated as false for this assertion.
 // 
 // Weight: -10
 // 
@@ -35,7 +35,7 @@ assert-true($assert, $description = null) {
 
 // assert-false($assert, $description)
 // 
-// **[public:{output}]** Assert that a parameter is falsey. - Empty lists and strings are added to default Stylus falseyness. to define the expected results of the test.
+// **[public:{output}]** Assert that a value is falsy. Empty lists and empty strings are treated as false for this assertion.
 // 
 // Weight: -10
 // 
@@ -70,7 +70,7 @@ assert-false($assert, $description = null) {
 
 // assert-equal($assert, $expected, $description, $inspect)
 // 
-// **[public:{output}]** Assert that two parameters are `equal` Assertions are used inside the `test()` mixin to define the expected results of the test.
+// **[public:{output}]** Assert that two Stylus values are equal.
 // 
 // Weight: -10
 // 
@@ -113,7 +113,7 @@ assert-equal($assert, $expected, $description = null, $inspect = false) {
 
 // assert-unequal($assert, $expected, $description, $inspect)
 // 
-// **[public:{output}]** Assert that two parameters are `unequal` Assertions are used inside the `test()` mixin to define the expected results of the test.
+// **[public:{output}]** Assert that two Stylus values are not equal.
 // 
 // Weight: -10
 // 
@@ -155,7 +155,7 @@ assert-unequal($assert, $expected, $description = null, $inspect = false) {
 
 // assert($description = null)
 // 
-// **[public:{output}]** Define a CSS-output assertion. Assertions are used inside the `test()` mixin to define the expected results of the test. - The `assert()` mixin is a wrapper, and should contain one `output()` block and one `expect()` block as nested contents. - These three mixins together describe a single `assert-equal` comparison on output CSS. The compiled CSS-results of the `output()` mixin will be compared against the results of the `expect()` mixin. - When using Mocha integration, the output comparison is automated – otherwise you will have to compare the output manually. Using `git diff` is a great way to watch for changes in output.
+// **[public:{output}]** Define a CSS-output assertion. Use it as a wrapper around one `output()` block and one `expect()` or `contains()` block.
 // 
 // Weight: -10
 // 
@@ -202,7 +202,7 @@ assert($description = null) {
 
 // output($selector)
 // 
-// **[public:{output}]** Describe the expected results of the paired `output()` block. The `expect()` mixin requires a content block, and should be nested inside the `assert()` mixin, along with a single `output()` block. Assertions are used inside the `test()` mixin to define the expected results of the test. - These three mixins together describe a single `assert-equal` comparison on output CSS. The compiled CSS-results of the `output()` mixin will be compared against the results of the `expect()` mixin. - When using Mocha integration, the output comparison is automated – otherwise you will have to compare the output manually. Using `git diff` is a great way to watch for changes in output.
+// **[public:{output}]** Define the CSS produced by the code under test. Use inside `assert()` with a sibling `expect()` or `contains()` block.
 // 
 // Weight: -10
 // 
@@ -247,7 +247,7 @@ output($selector = true) {
 
 // expect($selector)
 // 
-// **[public:{output}]** Describe the expected results of the paired `output()` block. The `expect()` mixin requires a content block, and should be nested inside the `assert()` mixin, along with a single `output()` block. Assertions are used inside the `test()` mixin to define the expected results of the test. - These three mixins together describe a single `assert-equal` comparison on output CSS. The compiled CSS-results of the `output()` mixin will be compared against the results of the `expect()` mixin. - When using Mocha integration, the output comparison is automated – otherwise you will have to compare the output manually. Using `git diff` is a great way to watch for changes in output.
+// **[public:{output}]** Define the exact CSS expected from the sibling `output()` block.
 // 
 // Weight: -10
 // 
@@ -291,7 +291,7 @@ expect($selector = true) {
 
 // contains($selector)
 // 
-// **[public:{output}]** Describe the expected results of the paired `output()` block. The `contains()` mixin requires a content block, and should be nested inside the `assert()` mixin, along with a single `output()` block. Assertions are used inside the `test()` mixin to define the expected results of the test. - These three mixins together describe a single comparison on output CSS. The compiled CSS-results of the `contains()` mixin will be compared against the results of the `output()` mixin to see if all of the `contains` CSS is within the `output` CSS. - When using Mocha integration, the output comparison is automated – otherwise you will have to compare the output manually. Using `git diff` is a great way to watch for changes in output.
+// **[public:{output}]** Define CSS that must be present within the sibling `output()` block.
 // 
 // Weight: -10
 // 

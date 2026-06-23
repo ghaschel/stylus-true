@@ -1,16 +1,17 @@
 # Known Issues
 
-There are some technical issues with stylus-true:
+stylus-true works within Stylus evaluation rules, which differ from True's Sass environment in a few important ways.
 
-Think of the stylesheet as a tree. Stylus, differently from sass, starts from the leaf to root
+## Nested Module Context
 
-eg.:
+Stylus evaluates block contents before the wrapper mixins that contain them. For nested modules, that can make context tracking unreliable because assertions may run before the surrounding `describe()` or `test-module()` state has been recorded.
+
+For example, this structure can produce assertion output before the nested module wrappers are fully available:
 
 ```stylus
-+describe('describe 1') {
-   // Test 1
-   +describe('describe 2') {
-    +it('it 1') {
++describe('outer module') {
+  +describe('inner module') {
+    +it('first case') {
       assert-equal(
         zip(a b c, 1 2 3),
         (a 1, b 2, c 3)
@@ -21,42 +22,47 @@ eg.:
         (a 1, b 2, c 3s)
       );
     }
-
-    +it('it 2') {
-      assert-unequal(
-        zip(a b c, 1 2 3),
-        (a 1, b 2, c 3)
-      );
-
-      assert-equal(
-        zip(a b c, 1 2 3),
-        (a 1, b 2, c 3)
-      );
-    }
-   }
+  }
 }
 ```
-Scss would run it the logical way: `describe 1` -> `describe 2` -> `it1` -> `asert-equal` -> `assert-unequal` -> `it2` -> `assert-unequal` -> `assert-equal`
-The way stylus parses this is `assert-equal` -> `assert-unequal` -> `it1` -> `assert-unequal` -> `assert-equal` -> `it2` -> `describe 2` -> `describe 1`
 
-This breaks any logical way of keeping track of any viable architecture and logical link between the data.
+Sass/True evaluates the wrapper structure before the assertions. Stylus can evaluate assertion bodies first, which makes deeply nested module labels less reliable in the current implementation.
 
-This issue actually broke down a validation that was in the original code that kept the file from compiling if no `assert` was added before `expect/output/contains`
-So make sure to always include an `assert` before your `expect/contains/output`
+## CSS Output Assertion Validation
 
-eg.:
+The original validation model expected `assert()` to be known before `output()`, `expect()`, or `contains()` run. Stylus evaluation order means that validation cannot always detect a missing wrapper before compilation.
+
+Always use this safe structure:
 
 ```stylus
- ```stylus
 +test('Stylus math compiles before output') {
-  +assert() { // That validation granted this was added to the code
+  +assert('expected CSS') {
     +output() {
       height: 100%;
       width: 14em + 2;
     }
+
+    +expect() {
+      height: 100%;
+      width: 16em;
+    }
+  }
+}
+```
+
+You can replace `expect()` with `contains()` when the output only needs to include specific selectors or declarations:
+
+```stylus
++test('partial output') {
+  +assert('contains width') {
+    +output() {
+      height: 100%;
+      width: 14em + 2;
+    }
+
     +contains() {
       width: 16em;
     }
   }
-} 
+}
 ```

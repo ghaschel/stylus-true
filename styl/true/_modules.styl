@@ -22,7 +22,7 @@ use('../../lib/arrange-test-list.js');
 
 // test-module($name)
 // 
-// **[public:{void}]** Test Modules are optional, and can be used to group tests and other modules for organizational purposes.
+// **[public:{void}]** Group related tests under a module heading. Nested modules are allowed, but deep nested context can be unreliable because of Stylus block evaluation order.
 // 
 // Weight: -10
 // 
@@ -66,7 +66,7 @@ test-module($name) {
 
 // describe($name)
 // 
-// **[public:{void}]** Describe the unit to be tested. This works just like a test module, allowing you to group one or more related tests.
+// **[public:{void}]** Alias for `test-module()`, provided for JavaScript-style test syntax.
 // 
 // Weight: -10
 // 

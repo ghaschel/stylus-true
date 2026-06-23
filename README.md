@@ -10,72 +10,80 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/ghaschel/stylus-true.svg)](https://greenkeeper.io/)
 [![codecov](https://codecov.io/gh/ghaschel/stylus-true/branch/master/graph/badge.svg)](https://codecov.io/gh/ghaschel/stylus-true)
 
-> This is a [decremental](KNOWN-ISSUES.MD) port of [true](https://github.com/oddbird/true) for scss.
-
-stylus-true is a unit-testing tool for [Stylus](http://stylus-lang.com) code, All of the test code is written in Stylus and JS (via stylus plugins), and can be compiled by the stylus compiler – or used alongside Javascript test runners for extra features and improved reporting.
+stylus-true is a unit-testing framework for [Stylus](https://stylus-lang.com/) code, inspired by [True](https://github.com/oddbird/true). Tests are written in Stylus and can be compiled directly by Stylus or bridged into JavaScript runners for automated reporting.
 
 ## Install
 
-In command line:
-
 ```bash
-npm install stylus-true
+npm install --save-dev stylus-true
 ```
 
-Import in your test directory, like any other stylus file:
+Import the framework in a Stylus test file:
 
 ```stylus
 @require '../node_modules/stylus-true/styl/_true.styl';
 ```
 
-## One Setting
+## Supported API
 
-`$true-terminal-output.value` (boolean), defaults to `true`
+The public Stylus API currently supported by this package is:
 
-- `true` will show detailed information in the terminal for debugging failed assertions or reporting final results. This is the default, and best for compiling without a JavaScript test runner.
-- `false` will turn off all terminal output from Stylus, though Mocha/Jest will continue to use the terminal for reporting.
--
+| Area                  | API                                                                                                                     | Purpose                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Structure             | `test-module($name)` / `describe($name)`                                                                                | Group related tests.                                        |
+| Tests                 | `test($name)` / `it($name)`                                                                                             | Define a single behavior or case.                           |
+| Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)` | Compare Stylus values during compilation.                   |
+| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`                                                            | Emit CSS assertion blocks for JavaScript runner comparison. |
+| Reporting             | `report($terminal, $fail-on-error)`                                                                                     | Emit a summary to CSS comments and optionally the terminal. |
 
-## Usage
+Value assertions are evaluated by Stylus during compilation. CSS output assertions are emitted into compiled CSS and compared by the JavaScript runner integration.
 
-stylus-true, just as the original, [True](https://github.com/oddbird/true) is based on common JS-testing patterns, allowing both a `test-module`/`test` syntax, and the newer `describe`/`it` for defining the structure:
+## Setting
+
+`$true-terminal-output.value` is a boolean and defaults to `false`.
+
+- `false` turns off direct terminal output from Stylus. Mocha and Jest still report through their normal runner output.
+- `true` sends failure details and reports to the terminal through Stylus debug/warn output. This is useful when compiling manually without a JavaScript runner.
+
+You can also pass a terminal flag directly to `report()`:
+
+```stylus
+report(true);
+```
+
+## Value Tests
+
+The `test-module`/`test` syntax and `describe`/`it` syntax are equivalent:
 
 ```stylus
 +test-module('zip [function]') {
-    // Test 1
-     +test('Returns two lists zipped together') {
-        assert-equal(
-            zip(a b c, 1 2 3),
-            (a 1, b 2, c 3)
-        );
-    }
+  +test('returns two lists zipped together') {
+    assert-equal(
+      zip(a b c, 1 2 3),
+      (a 1, b 2, c 3)
+    );
+  }
 }
 ```
-
-This is the same as...
 
 ```stylus
 +describe('zip [function]') {
-    // Test 1
-     +it('Returns two lists zipped together') {
-        assert-equal(
-            zip(a b c, 1 2 3),
-            (a 1, b 2, c 3)
-        );
-    }
+  +it('returns two lists zipped together') {
+    assert-equal(
+      zip(a b c, 1 2 3),
+      (a 1, b 2, c 3)
+    );
+  }
 }
 ```
 
-Stylus is able to compare values internally, meaning function-output and variable values can easily be compared and reported during Stylus compilation.
+## CSS Output Tests
 
-CSS output tests, on the other hand, have to be compared after compilation is complete. You can do that by hand if you want (`git diff` is helpful for noticing changes), or you can use our [Mocha](https://mochajs.org/) or [Jest](https://jestjs.io/) integration.
-
-Output tests fit the same structure, but assertions take a slightly different form, with an outer `assert` mixin, and a matching pair of `output` and `expect` to contain the output-values.
+Use `assert()` as the wrapper for one `output()` block and one `expect()` or `contains()` block:
 
 ```stylus
-// Test CSS output from mixins
-+it('Outputs a font size and line height based on keyword') {
-  +assert() {
++it('outputs a font size and line height based on keyword') {
+  +assert('large font output') {
     +output() {
       font-size('large');
     }
@@ -88,50 +96,65 @@ Output tests fit the same structure, but assertions take a slightly different fo
 }
 ```
 
-You can optionally show a summary report in CSS and/or the command line, after the tests have completed:
+`expect()` requires the compiled CSS to match exactly. `contains()` passes when the expected declarations are present in the output.
 
-```stylus
-report();
+## JavaScript Runner Integration
+
+Use `runStyl(stylOptions, trueOptions)` from `stylus-true/lib/main.js` to compile Stylus tests and map the parsed results to a runner's `describe` and `it` functions.
+
+```js
+const path = require("path");
+const glob = require("glob");
+const stylTrue = require("stylus-true/lib/main.js");
+
+describe("Stylus tests", () => {
+  const stylTestFiles = glob.sync(
+    path.resolve(process.cwd(), "**/*.spec.styl")
+  );
+
+  stylTestFiles.forEach((file) => {
+    stylTrue.runStyl({ file }, { describe, it });
+  });
+});
 ```
 
-## Using Mocha, Jest, or other JS test runners
+`runStyl` accepts Stylus render options such as `file`, `data`, `filename`, `includePaths`, `paths`, `use`, and `compress`. The second argument requires `describe` and `it`, and accepts `contextLines` for parse-error output.
 
-1. Install `stylus-true` via npm:
+## Compatibility
 
-   ```bash
-   npm install --save-dev stylus-true
-   ```
+| Environment                | Status                   | Notes                                                                                                                      |
+| -------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Node.js                    | Supported on Node `>=16` | Stylus `0.64.0` and the current test stack no longer target Node 14.                                                       |
+| Stylus `0.64.0`            | Supported                | Direct compilation and package-internal plugin paths are covered by tests.                                                 |
+| Standalone Stylus compiler | Supported with limits    | Value assertions and reports compile to comments. CSS output assertions need manual review unless a JS runner parses them. |
+| Stylus CLI                 | Supported                | Use the same `@require` entrypoint; enable terminal output with `$true-terminal-output.value = true` or `report(true)`.    |
+| Mocha                      | Supported and tested     | The repository runs `npm run test:mocha`.                                                                                  |
+| Jest                       | Supported and tested     | The repository runs `npm run test:jest` with Jest 29.                                                                      |
+| Vitest-style runners       | Compatible in principle  | Any runner exposing `describe` and `it` can use `runStyl`, but this repo does not yet include a Vitest test script.        |
+| Stylus plugins             | Supported                | Direct Stylus `use()` calls and `runStyl({ use })` are supported.                                                          |
 
-2. Write some Stylus tests in `**/*.spec.styl` (see above).
+## Known Limits
 
-3. Write a shim JS test file `stylus.spec.js`:
+Stylus evaluates nested block contents before wrapper mixins. Because of that, nested module context can be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, or `contains()` before compilation.
 
-   ```js
-   const path = require("path");
-   const stylTrue = require("./lib/main.js");
-   const glob = require("glob");
+Use this safe structure for CSS output assertions:
 
-   describe("SaStylusss", () => {
-     const stylTestFiles = glob.sync(
-       path.resolve(process.cwd(), "*.spec.styl")
-     );
+```stylus
++test('output contract') {
+  +assert('expected CSS') {
+    +output() {
+      width: 14em + 2;
+    }
 
-     stylTestFiles.forEach(file =>
-       stylTrue.runStyl({ file }, { describe, it })
-     );
-   });
-   ```
+    +expect() {
+      width: 16em;
+    }
+  }
+}
+```
 
-4. Run Mocha/Jest, and see your Sass tests reported in the command line.
+See [KNOWN-ISSUES.MD](KNOWN-ISSUES.MD) for details.
 
-You can call `runStyl` more than once, if you have multiple Styl test files you want to run separately.
+## Acknowledgements
 
-The second argument is an object with required `describe` and `it` options, and optional and `contextLines` options.
-
-Any JS test runner with equivalents to Mocha's or Jest's `describe` and `it` should be usable in the same way: just pass your test runner's `describe` and `it` equivalents in the second argument to `runStyl`.
-
-If True can't parse the CSS output, it'll give you some context lines of CSS as part of the error message. This context will likely be helpful in understanding the parse failure. By default it provides up to 10 lines of context; if you need more, you can provide a numeric `contextLines` option: the maximum number of context lines to provide.
-
-## Disclaimer
-
-stylus-true wouldn't exist if it wasn't for [oddbird](https://github.com/oddbird)'s amazing job with the original true, so give her some love <3
+stylus-true exists because of the design and prior art in [True](https://github.com/oddbird/true).

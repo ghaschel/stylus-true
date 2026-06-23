@@ -1,7 +1,7 @@
-(function() {
+(function () {
   var KssStateGenerator;
 
-  KssStateGenerator = (function() {
+  KssStateGenerator = (function () {
     var pseudo_selectors;
 
     pseudo_selectors = [
@@ -17,7 +17,7 @@
       "first-of-type",
       "last-of-type",
       "first-child",
-      "last-child"
+      "last-child",
     ];
 
     function KssStateGenerator() {
@@ -49,7 +49,7 @@
                 rule.type === CSSRule.STYLE_RULE &&
                 pseudos.test(rule.selectorText)
               ) {
-                replaceRule = function(matched, stuff) {
+                replaceRule = function (matched, stuff) {
                   return matched.replace(/\:/g, ".pseudo-class-");
                 };
                 this.insertRule(rule.cssText.replace(pseudos, replaceRule));
@@ -61,7 +61,7 @@
       } catch (_error) {}
     }
 
-    KssStateGenerator.prototype.insertRule = function(rule) {
+    KssStateGenerator.prototype.insertRule = function (rule) {
       var headEl, styleEl;
       headEl = document.getElementsByTagName("head")[0];
       styleEl = document.createElement("style");

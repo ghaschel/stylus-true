@@ -1,13 +1,13 @@
-(function(window, document) {
+(function (window, document) {
   "use strict";
 
-  var KssGuides = function(config) {
+  var KssGuides = function (config) {
     this.bodyClass = config.bodyClass || "kss-guides-mode";
 
     this.init();
   };
 
-  KssGuides.prototype.init = function() {
+  KssGuides.prototype.init = function () {
     var self = this;
     // Initialize all guides toggle buttons.
     var elementList = document.querySelectorAll("a[data-kss-guides]");
@@ -17,7 +17,7 @@
   };
 
   // Toggle the guides mode.
-  KssGuides.prototype.showGuides = function() {
+  KssGuides.prototype.showGuides = function () {
     document.getElementsByTagName("body")[0].classList.toggle(this.bodyClass);
   };
 

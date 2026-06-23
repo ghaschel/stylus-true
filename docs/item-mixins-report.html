@@ -66,8 +66,8 @@
 
             <div class="kss-description">
               <p>
-                <strong>[public:{output}]</strong> Report results summary to CSS
-                and (optionally) the command line
+                <strong>[public:{output}]</strong> Emit the result summary as
+                CSS comments and optionally to the terminal.
               </p>
             </div>
 
@@ -79,7 +79,8 @@
                   <strong>{boolean}</strong>
                   <em
                     ><strong
-                      >Optionally output results to the terminal</strong
+                      >Optionally output results directly from Stylus to the
+                      terminal.</strong
                     ></em
                   >
                   <div class="kss-parameters__default-value">
@@ -95,8 +96,8 @@
                   <strong>{boolean}</strong>
                   <em
                     ><strong
-                      >Optionally error out the compiler if tests have
-                      failed</strong
+                      >Optionally stop compilation when value assertions have
+                      failed.</strong
                     ></em
                   >
                   <div class="kss-parameters__default-value">
@@ -152,20 +153,22 @@
     <script>
       var spy = new ScrollSpy("#kss-node", {
         nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport"
+        className: "is-in-viewport",
       });
       var kssFullScreen = new KssFullScreen({
         idPrefix: "kss-fullscreen-",
         bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen"
+        elementClass: "is-fullscreen",
       });
       var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode"
+        bodyClass: "kss-guides-mode",
       });
       var kssMarkup = new KssMarkup({
         bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup"
+        detailsClass: "kss-markup",
       });
     </script>
+
+    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
   </body>
 </html>

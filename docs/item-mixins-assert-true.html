@@ -66,10 +66,9 @@
 
             <div class="kss-description">
               <p>
-                <strong>[public:{output}]</strong> Assert that a parameter is
-                truthy. - Empty lists and strings are excluded from default
-                Stylus truthyness. Assertions are used inside the
-                <code>test()</code> mixin
+                <strong>[public:{output}]</strong> Assert that a value is
+                truthy. Empty lists and empty strings are treated as false for
+                this assertion.
               </p>
               <p><b>Parameters:</b></p>
               <ul>
@@ -116,20 +115,22 @@
     <script>
       var spy = new ScrollSpy("#kss-node", {
         nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport"
+        className: "is-in-viewport",
       });
       var kssFullScreen = new KssFullScreen({
         idPrefix: "kss-fullscreen-",
         bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen"
+        elementClass: "is-fullscreen",
       });
       var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode"
+        bodyClass: "kss-guides-mode",
       });
       var kssMarkup = new KssMarkup({
         bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup"
+        detailsClass: "kss-markup",
       });
     </script>
+
+    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
   </body>
 </html>

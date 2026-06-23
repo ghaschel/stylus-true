@@ -1,12 +1,12 @@
 // $true-terminal-output = { value }
 // 
-// **[public]** While Mocha always reports to the terminal, this setting allows you to get terminal reports even when compiling True manually with Stylus.
+// **[public]** Controls direct terminal output from Stylus. The default is `false`; JavaScript runners such as Mocha and Jest still report through their own output.
 // 
 // Weight: -10
 // 
-// $value = false - **{boolean}** ***Enable or disables terminal report while compiling to css***
+// $value = false - **{boolean}** ***Enable or disable direct Stylus terminal output for failure details and reports.***
 // 
-// Styleguide Variables.$_true-stats
+// Styleguide Variables.$true-terminal-output
 $true-terminal-output = {
   value: false
 };

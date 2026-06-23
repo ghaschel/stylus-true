@@ -66,20 +66,8 @@
 
             <div class="kss-description">
               <p>
-                <strong>[public:{output}]</strong> Describe the expected results
-                of the paired <code>output()</code> block. The
-                <code>expect()</code> mixin requires a content block, and should
-                be nested inside the <code>assert()</code> mixin, along with a
-                single <code>output()</code> block. Assertions are used inside
-                the <code>test()</code> mixin to define the expected results of
-                the test. - These three mixins together describe a single
-                <code>assert-equal</code> comparison on output CSS. The compiled
-                CSS-results of the <code>output()</code> mixin will be compared
-                against the results of the <code>expect()</code> mixin. - When
-                using Mocha integration, the output comparison is automated –
-                otherwise you will have to compare the output manually. Using
-                <code>git diff</code> is a great way to watch for changes in
-                output.
+                <strong>[public:{output}]</strong> Define the exact CSS expected
+                from the sibling <code>output()</code> block.
               </p>
               <p><b>Parameters:</b></p>
               <ul>
@@ -136,20 +124,22 @@
     <script>
       var spy = new ScrollSpy("#kss-node", {
         nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport"
+        className: "is-in-viewport",
       });
       var kssFullScreen = new KssFullScreen({
         idPrefix: "kss-fullscreen-",
         bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen"
+        elementClass: "is-fullscreen",
       });
       var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode"
+        bodyClass: "kss-guides-mode",
       });
       var kssMarkup = new KssMarkup({
         bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup"
+        detailsClass: "kss-markup",
       });
     </script>
+
+    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
   </body>
 </html>

@@ -69,9 +69,9 @@
 
             <div class="kss-description">
               <p>
-                <strong>[public:{output}]</strong> Assert that a parameter is
-                falsey. - Empty lists and strings are added to default Stylus
-                falseyness. to define the expected results of the test.
+                <strong>[public:{output}]</strong> Assert that a value is falsy.
+                Empty lists and empty strings are treated as false for this
+                assertion.
               </p>
               <p><b>Parameters:</b></p>
               <ul>
@@ -117,20 +117,22 @@
     <script>
       var spy = new ScrollSpy("#kss-node", {
         nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport"
+        className: "is-in-viewport",
       });
       var kssFullScreen = new KssFullScreen({
         idPrefix: "kss-fullscreen-",
         bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen"
+        elementClass: "is-fullscreen",
       });
       var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode"
+        bodyClass: "kss-guides-mode",
       });
       var kssMarkup = new KssMarkup({
         bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup"
+        detailsClass: "kss-markup",
       });
     </script>
+
+    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
   </body>
 </html>

@@ -48,54 +48,47 @@
     <main class="kss-main" aria-label="Content">
       <article>
         <div
-          id="kssref-mixins-_true-message"
+          id="kssref-variables-true-terminal-output"
           class="kss-section kss-section--depth-2 is-fullscreen"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
               <a
                 class="kss-title__permalink"
-                href="#kssref-mixins-_true-message"
+                href="#kssref-variables-true-terminal-output"
               >
                 <span class="kss-title__ref">
-                  2.16
+                  3.2
                   <span class="kss-title__permalink-hash">
-                    #Mixins._true-message
+                    #Variables.$true-terminal-output
                   </span>
                 </span>
-                _true-message($message, $output, $comment-padding)
+                $true-terminal-output &#x3D; { value }
               </a>
             </h2>
 
             <div class="kss-description">
               <p>
-                <strong>[private:{output}]</strong> Output a message to CSS
-                comments, or commandline terminal (via debug/warn)
+                <strong>[public]</strong> Controls direct terminal output from
+                Stylus. The default is <code>false</code>; JavaScript runners
+                such as Mocha and Jest still report through their own output.
               </p>
             </div>
 
             <div class="kss-parameters__title">Parameters:</div>
             <ul class="kss-parameters">
               <li class="kss-parameters__item">
-                <div class="kss-parameters__name"><code>$message</code></div>
+                <div class="kss-parameters__name"><code>$value</code></div>
                 <div class="kss-parameters__description">
-                  <strong>{string}</strong>
-                  <em><strong>Message to output</strong></em>
-                </div>
-              </li>
-              <li class="kss-parameters__item">
-                <div class="kss-parameters__name"><code>$output</code></div>
-                <div class="kss-parameters__description">
-                  <strong>{string}</strong>
+                  <strong>{boolean}</strong>
                   <em
                     ><strong
-                      >Type of output, either <code>comments</code>,
-                      <code>terminal</code>, <code>debug</code> or
-                      <code>warn</code></strong
+                      >Enable or disable direct Stylus terminal output for
+                      failure details and reports.</strong
                     ></em
                   >
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>&#x27;comments&#x27;</code>
+                    Defaults to: <code>false</code>
                   </div>
                 </div>
               </li>
@@ -103,7 +96,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_messages.styl</code>, line 26
+            Source: <code>true/_settings.styl</code>, line 1
           </div>
         </div>
       </article>

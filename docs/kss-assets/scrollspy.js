@@ -11,7 +11,7 @@
       var l = (n[o] = { exports: {} });
       t[o][0].call(
         l.exports,
-        function(e) {
+        function (e) {
           var n = t[o][1][e];
           return s(n ? n : e);
         },
@@ -31,7 +31,7 @@
 })(
   {
     1: [
-      function(require, module, exports) {
+      function (require, module, exports) {
         function ScrollSpy(wrapper, opt) {
           this.doc = document;
           this.wrapper =
@@ -52,12 +52,12 @@
           this.init();
         }
 
-        ScrollSpy.prototype.init = function() {
+        ScrollSpy.prototype.init = function () {
           this.contents = this.getContents();
           this.attachEvent();
         };
 
-        ScrollSpy.prototype.getContents = function() {
+        ScrollSpy.prototype.getContents = function () {
           var targetList = [];
 
           for (var i = 0, max = this.nav.length; i < max; i++) {
@@ -69,10 +69,10 @@
           return targetList;
         };
 
-        ScrollSpy.prototype.attachEvent = function() {
+        ScrollSpy.prototype.attachEvent = function () {
           this.win.addEventListener(
             "load",
-            function() {
+            function () {
               this.spy(this.callback);
             }.bind(this)
           );
@@ -81,14 +81,14 @@
 
           this.win.addEventListener(
             "scroll",
-            function() {
+            function () {
               if (scrollingTimer) {
                 clearTimeout(scrollingTimer);
               }
 
               var _this = this;
 
-              scrollingTimer = setTimeout(function() {
+              scrollingTimer = setTimeout(function () {
                 _this.spy(_this.callback);
               }, 10);
             }.bind(this)
@@ -98,21 +98,21 @@
 
           this.win.addEventListener(
             "resize",
-            function() {
+            function () {
               if (resizingTimer) {
                 clearTimeout(resizingTimer);
               }
 
               var _this = this;
 
-              resizingTimer = setTimeout(function() {
+              resizingTimer = setTimeout(function () {
                 _this.spy(_this.callback);
               }, 10);
             }.bind(this)
           );
         };
 
-        ScrollSpy.prototype.spy = function(cb) {
+        ScrollSpy.prototype.spy = function (cb) {
           var elems = this.getElemsViewState();
 
           this.markNav(elems);
@@ -122,7 +122,7 @@
           }
         };
 
-        ScrollSpy.prototype.getElemsViewState = function() {
+        ScrollSpy.prototype.getElemsViewState = function () {
           var elemsInView = [],
             elemsOutView = [],
             viewStatusList = [];
@@ -142,11 +142,11 @@
           return {
             inView: elemsInView,
             outView: elemsOutView,
-            viewStatusList: viewStatusList
+            viewStatusList: viewStatusList,
           };
         };
 
-        ScrollSpy.prototype.isInView = function(el) {
+        ScrollSpy.prototype.isInView = function (el) {
           var winH = this.winH,
             scrollTop =
               this.doc.documentElement.scrollTop || this.doc.body.scrollTop,
@@ -158,7 +158,7 @@
           return elTop < scrollBottom && elBottom > scrollTop;
         };
 
-        ScrollSpy.prototype.markNav = function(elems) {
+        ScrollSpy.prototype.markNav = function (elems) {
           var navItems = this.nav,
             isAlreadyMarked = false;
 
@@ -174,11 +174,11 @@
 
         module.exports = ScrollSpy;
       },
-      {}
+      {},
     ],
     2: [
-      function(require, module, exports) {
-        (function(global) {
+      function (require, module, exports) {
+        (function (global) {
           /**
            * ScrollSpy
            *
@@ -198,8 +198,8 @@
             : {}
         ));
       },
-      { "./modules/scrollspy": 1 }
-    ]
+      { "./modules/scrollspy": 1 },
+    ],
   },
   {},
   [2]
