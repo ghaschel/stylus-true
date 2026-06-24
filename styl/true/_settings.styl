@@ -1,12 +1,25 @@
 // $true-terminal-output = { value }
-// 
+//
 // **[public]** Controls direct terminal output from Stylus. The default is `false`; JavaScript runners such as Mocha and Jest still report through their own output.
-// 
+//
 // Weight: -10
-// 
+//
 // $value = false - **{boolean}** ***Enable or disable direct Stylus terminal output for failure details and reports.***
-// 
+//
 // Styleguide Variables.$true-terminal-output
 $true-terminal-output = {
+  value: false
+};
+
+// $catch-errors = { value }
+//
+// **[public]** Controls whether `true-error()` throws immediately or returns/output catchable error messages.
+//
+// Weight: -10
+//
+// $value = false - **{boolean|'warn'}** ***Use `true` to catch errors, `false` to throw, or `'warn'` to catch and emit a warning.***
+//
+// Styleguide Variables.$catch-errors
+$catch-errors ?= {
   value: false
 };

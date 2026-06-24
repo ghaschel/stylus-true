@@ -48,47 +48,39 @@
     <main class="kss-main" aria-label="Content">
       <article>
         <div
-          id="kssref-mixins-assert"
+          id="kssref-mixins-contains-string"
           class="kss-section kss-section--depth-2 is-fullscreen"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
-              <a class="kss-title__permalink" href="#kssref-mixins-assert">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-mixins-contains-string"
+              >
                 <span class="kss-title__ref">
-                  2.1
+                  2.8
                   <span class="kss-title__permalink-hash">
-                    #Mixins.assert
+                    #Mixins.contains-string
                   </span>
                 </span>
-                assert($description &#x3D; null)
+                contains-string($string-to-find)
               </a>
             </h2>
 
             <div class="kss-description">
               <p>
-                <strong>[public:{output}]</strong> Define a CSS-output
-                assertion. Use it as a wrapper around one
-                <code>output()</code> block and one <code>expect()</code>,
-                <code>contains()</code>, or
-                <code>contains-string()</code> check.
+                <strong>[public:{output}]</strong> Define a case-sensitive
+                substring that must be present in the sibling
+                <code>output()</code> block.
               </p>
               <p><b>Parameters:</b></p>
               <ul>
                 <li>
-                  $description = null - <b>{string}</b>
+                  $string-to-find - <b>{string}</b>
                   <b
                     ><i
-                      >Description of the assertion being tested. A `null` of
-                      `false` value generates a default description.</i
-                    ></b
-                  >
-                </li>
-                <li>
-                  {block} -
-                  <b
-                    ><i
-                      >Use `output()` and `expect()` mixins to define blocks for
-                      comparison</i
+                      >The substring to search for within the compiled CSS
+                      output.</i
                     ></b
                   >
                 </li>
@@ -97,14 +89,14 @@
               <p><strong>Usage:</strong></p>
               <pre
                 class="hljs"
-              ><code class="language-stylus">+test(<span class="hljs-string">'Stylus math compiles before output'</span>) {
-  +assert(<span class="hljs-string">'You can also describe the assertion...'</span>) {
+              ><code class="language-stylus">+test(<span class="hljs-string">'Contains output strings'</span>) {
+  +assert() {
     +output() {
-      <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">10px</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;
     }
-    +expect() {
-      <span class="hljs-attribute">width</span>: <span class="hljs-number">16em</span>;
-    }
+    contains-string(<span class="hljs-string">'height'</span>);
+    contains-string(<span class="hljs-string">'20px'</span>);
   }
 }
 </code></pre>
@@ -112,7 +104,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_assert.styl</code>, line 200
+            Source: <code>true/_assert.styl</code>, line 381
           </div>
         </div>
       </article>

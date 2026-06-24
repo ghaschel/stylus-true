@@ -90,14 +90,29 @@
                 <td>Compare Stylus values during compilation.</td>
               </tr>
               <tr>
+                <td>Value aliases</td>
+                <td>
+                  <code>is-truthy($value)</code>, <code>is-falsy($value)</code>,
+                  <code>is-equal($actual, $expected)</code>,
+                  <code>not-equal($actual, $expected)</code>
+                </td>
+                <td>sass-true-compatible aliases for value assertions.</td>
+              </tr>
+              <tr>
                 <td>CSS output assertions</td>
                 <td>
                   <code>assert($description)</code>, <code>output()</code>,
-                  <code>expect()</code>, <code>contains()</code>
+                  <code>expect()</code>, <code>contains()</code>,
+                  <code>contains-string($string)</code>
                 </td>
                 <td>
                   Emit CSS assertion blocks for JavaScript runner comparison.
                 </td>
+              </tr>
+              <tr>
+                <td>Errors</td>
+                <td><code>true-error($message, $source, $catch)</code></td>
+                <td>Throw or catch testable error messages.</td>
               </tr>
               <tr>
                 <td>Reporting</td>
@@ -108,6 +123,12 @@
               </tr>
             </tbody>
           </table>
+          <p>
+            <code>$catch-errors.value</code> defaults to <code>false</code>. Set
+            it to <code>true</code> to make <code>true-error()</code> return
+            strings from functions or emit CSS comments from mixin calls; set it
+            to <code>'warn'</code> to catch and warn.
+          </p>
           <h2>Compatibility</h2>
           <table>
             <thead>
@@ -188,8 +209,9 @@
             Stylus evaluates nested block contents before wrapper mixins. Nested
             module context can therefore be unreliable, and validation cannot
             always detect a missing <code>assert()</code> wrapper around
-            <code>output()</code>, <code>expect()</code>, or
-            <code>contains()</code> before compilation.
+            <code>output()</code>, <code>expect()</code>,
+            <code>contains()</code>, or <code>contains-string()</code> before
+            compilation.
           </p>
           <p>Use this structure for CSS output assertions:</p>
           <pre

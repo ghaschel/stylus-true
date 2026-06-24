@@ -9,8 +9,12 @@ stylus-true is a unit-testing framework for Stylus code. Tests are written in St
 | Structure             | `test-module($name)`, `describe($name)`                                                                                 | Group related tests.                                        |
 | Tests                 | `test($name)`, `it($name)`                                                                                              | Define a single test case.                                  |
 | Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)` | Compare Stylus values during compilation.                   |
-| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`                                                            | Emit CSS assertion blocks for JavaScript runner comparison. |
+| Value aliases         | `is-truthy($value)`, `is-falsy($value)`, `is-equal($actual, $expected)`, `not-equal($actual, $expected)`                | sass-true-compatible aliases for value assertions.          |
+| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`, `contains-string($string)`                                | Emit CSS assertion blocks for JavaScript runner comparison. |
+| Errors                | `true-error($message, $source, $catch)`                                                                                 | Throw or catch testable error messages.                     |
 | Reporting             | `report($terminal, $fail-on-error)`                                                                                     | Emit a summary to CSS comments and optionally the terminal. |
+
+`$catch-errors.value` defaults to `false`. Set it to `true` to make `true-error()` return strings from functions or emit CSS comments from mixin calls; set it to `'warn'` to catch and warn.
 
 ## Compatibility
 
@@ -27,7 +31,7 @@ stylus-true is a unit-testing framework for Stylus code. Tests are written in St
 
 ## Known limits
 
-Stylus evaluates nested block contents before wrapper mixins. Nested module context can therefore be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, or `contains()` before compilation.
+Stylus evaluates nested block contents before wrapper mixins. Nested module context can therefore be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, `contains()`, or `contains-string()` before compilation.
 
 Use this structure for CSS output assertions:
 

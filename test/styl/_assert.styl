@@ -39,6 +39,10 @@
   +test('Truthiness') {
     assert-true('this string', 'Non-false properties return true.');
   }
+
+  +test('Supports is-truthy alias') {
+    is-truthy(5);
+  }
 }
 
 // Assert False
@@ -59,6 +63,10 @@
     $empty = ();
 
     assert-false($empty, 'Empty lists return false.');
+  }
+
+  +test('Supports is-falsy alias') {
+    is-falsy(());
   }
 }
 
@@ -91,6 +99,14 @@
     assert-unequal(unquote('1rem'), 1rem, null);
     assert-equal(unquote('1rem'), 1rem, null, true);
   }
+
+  +test('Supports is-equal alias') {
+    is-equal(5, 10 / 2);
+  }
+
+  +test('Supports is-equal alias with $inspect') {
+    is-equal(unquote('1rem'), 1rem, null, true);
+  }
 }
 
 
@@ -107,6 +123,14 @@
   +test('Mismatched units with $inspect') {
     assert-equal(1, 1rem, 'normally equal');
     assert-unequal(1, 1rem, null, true);
+  }
+
+  +test('Supports not-equal alias') {
+    not-equal(5, 10 * 2);
+  }
+
+  +test('Supports not-equal alias with $inspect') {
+    not-equal(1, 1rem, null, true);
   }
 }
 
@@ -340,6 +364,56 @@
             max-height: 20px;
           }
         }
+      }
+    }
+
+    +test('Can assert multiple contains blocks') {
+      +assert() {
+        +output() {
+          height: 10px;
+          width: 20px;
+          border: thin solid currentColor;
+        }
+
+        +contains() {
+          height: 10px;
+        }
+
+        +contains() {
+          width: 20px;
+        }
+
+        +contains() {
+          border: thin solid currentColor;
+        }
+      }
+    }
+  }
+
+  +test-module('Assert(contains-string)') {
+    +test('Passes if the output contains a string') {
+      +assert() {
+        +output() {
+          height: 10px;
+          width: 20px;
+        }
+
+        contains-string('height');
+      }
+    }
+
+    +test('Can assert multiple and overlapping strings') {
+      +assert() {
+        +output() {
+          height: 10px;
+          width: 20px;
+          border: thin solid currentColor;
+        }
+
+        contains-string('height');
+        contains-string('solid');
+        contains-string('20px');
+        contains-string('thin solid currentColor');
       }
     }
   }

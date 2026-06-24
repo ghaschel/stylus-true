@@ -4,14 +4,14 @@ var path = require("path");
 
 var main = require("../lib/main.js");
 
-describe("#fail", function() {
-  it("formats failure message", function() {
+describe("#fail", function () {
+  it("formats failure message", function () {
     var msg = main.formatFailureMessage({
       description: "It broke.",
       assertionType: "assert-equal",
       expected: "1",
       output: "2",
-      details: "It really broke."
+      details: "It really broke.",
     });
     var expected =
       'It broke. ("2" assert-equal "1" -- It really broke.)' +
@@ -25,22 +25,59 @@ describe("#fail", function() {
 
     expect(msg).to.equal(expected);
   });
+
+  it("formats failure message for multiple contains-string assertions", function () {
+    var msg = main.formatFailureMessage({
+      description: "Missing strings.",
+      assertionType: "contains-string",
+      expected: "height\nbackground-color\n20px",
+      output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
+    });
+
+    expect(msg).to.contain("Missing strings.");
+    expect(msg).to.contain(
+      "Expected output to contain all of the following strings:"
+    );
+    expect(msg).to.contain('✓ "height"');
+    expect(msg).to.contain('✗ "background-color"');
+    expect(msg).to.contain('✓ "20px"');
+    expect(msg).to.contain("Actual output:");
+  });
+
+  it("formats failure message for multiple contains assertions", function () {
+    var msg = main.formatFailureMessage({
+      description: "Missing CSS blocks.",
+      assertionType: "contains",
+      expected:
+        ".test-output {\n  height: 10px;\n}\n---\n.test-output {\n  background-color: red;\n}\n---\n.test-output {\n  width: 20px;\n}",
+      output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
+    });
+
+    expect(msg).to.contain("Missing CSS blocks.");
+    expect(msg).to.contain(
+      "Expected output to contain all of the following CSS blocks:"
+    );
+    expect(msg).to.contain("✓ Block 1:");
+    expect(msg).to.contain("✗ Block 2:");
+    expect(msg).to.contain("✓ Block 3:");
+    expect(msg).to.contain("Actual output:");
+  });
 });
 
-describe("#runStyl", function() {
-  it("throws AssertionError on failure", function() {
+describe("#runStyl", function () {
+  it("throws AssertionError on failure", function () {
     var stylus = [
       '@require "styl/_true";',
       '+test-module("Throw an error") {',
       '  +test("assertionError") {',
       "    assert-true(false);",
       "  }",
-      "}"
+      "}",
     ].join("\n");
-    var mock = function(name, cb) {
+    var mock = function (name, cb) {
       cb();
     };
-    var attempt = function() {
+    var attempt = function () {
       main.runStyl({ data: stylus }, { describe: mock, it: mock });
     };
     expect(attempt).to.throw(
@@ -48,7 +85,7 @@ describe("#runStyl", function() {
     );
   });
 
-  it("can specify includePaths", function() {
+  it("can specify includePaths", function () {
     var stylus = [
       '@require "test/styl/includes/_mixin";',
       '@require "styl/_true";',
@@ -63,40 +100,40 @@ describe("#runStyl", function() {
       "      }",
       "    }",
       "  }",
-      "}"
+      "}",
     ].join("\n");
-    var mock = function(name, cb) {
+    var mock = function (name, cb) {
       cb();
     };
     main.runStyl(
       {
         data: stylus,
-        includePaths: [path.join(__dirname, "styl/includes")]
+        includePaths: [path.join(__dirname, "styl/includes")],
       },
       {
         describe: mock,
-        it: mock
+        it: mock,
       }
     );
   });
 
-  it("can specify stylus engine to use", function() {
-    var mock = function(name, cb) {
+  it("can specify stylus engine to use", function () {
+    var mock = function (name, cb) {
       cb();
     };
-    var attempt = function() {
+    var attempt = function () {
       main.runStyl(
         {
-          data: "body {color: red}"
+          data: "body {color: red}",
         },
         {
           styl: {
-            render: function() {
+            render: function () {
               throw new Error("Custom stylus implementation called");
-            }
+            },
           },
           describe: mock,
-          it: mock
+          it: mock,
         }
       );
     };
@@ -104,13 +141,13 @@ describe("#runStyl", function() {
   });
 });
 
-describe("#parse", function() {
-  it("parses a passing non-output test", function() {
+describe("#parse", function () {
+  it("parses a passing non-output test", function () {
     var css = [
       "/* # Module: Utilities */",
       "/* ------------------- */",
       "/* Test: Map Add [function] */",
-      "/*   ✔ Returns the sum of two numeric maps */"
+      "/*   ✔ Returns the sum of two numeric maps */",
     ].join("\n");
     var expected = [
       {
@@ -121,37 +158,37 @@ describe("#parse", function() {
             assertions: [
               {
                 description: "Returns the sum of two numeric maps",
-                passed: true
-              }
-            ]
-          }
-        ]
-      }
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("ignores a summary", function() {
+  it("ignores a summary", function () {
     var css = [
       "/* # SUMMARY ---------- */",
       "/* 17 Tests: */",
       "/*  - 14 Passed */",
       "/*  - 0 Failed */",
       "/*  - 3 Output to CSS */",
-      "/* -------------------- */"
+      "/* -------------------- */",
     ].join("\n");
     var expected = [];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a passing non-output test sans description", function() {
+  it("parses a passing non-output test sans description", function () {
     var css = [
       "/* # Module: Utilities */",
       "/* ------------------- */",
       "/* Test: Map Add [function] */",
-      "/*   ✔ */"
+      "/*   ✔ */",
     ].join("\n");
     var expected = [
       {
@@ -162,18 +199,18 @@ describe("#parse", function() {
             assertions: [
               {
                 description: "<no description>",
-                passed: true
-              }
-            ]
-          }
-        ]
-      }
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a test following a summary", function() {
+  it("parses a test following a summary", function () {
     var css = [
       "/* # SUMMARY ---------- */",
       "/* 17 Tests: */",
@@ -184,7 +221,7 @@ describe("#parse", function() {
       "/* # Module: Utilities */",
       "/* ------------------- */",
       "/* Test: Map Add [function] */",
-      "/*   ✔ Returns the sum of two numeric maps */"
+      "/*   ✔ Returns the sum of two numeric maps */",
     ].join("\n");
     var expected = [
       {
@@ -195,23 +232,23 @@ describe("#parse", function() {
             assertions: [
               {
                 description: "Returns the sum of two numeric maps",
-                passed: true
-              }
-            ]
-          }
-        ]
-      }
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a nested passing non-output test", function() {
+  it("parses a nested passing non-output test", function () {
     var css = [
       "/* # Module: Utilities :: nested */",
       "/* ------------------- */",
       "/* Test: Map Add [function] */",
-      "/*   ✔ Returns the sum of two numeric maps */"
+      "/*   ✔ Returns the sum of two numeric maps */",
     ].join("\n");
     var expected = [
       {
@@ -225,20 +262,20 @@ describe("#parse", function() {
                 assertions: [
                   {
                     description: "Returns the sum of two numeric maps",
-                    passed: true
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+                    passed: true,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a failing non-output test", function() {
+  it("parses a failing non-output test", function () {
     var css = [
       "/* # Module: Assert */",
       "/* ---------------- */",
@@ -246,7 +283,7 @@ describe("#parse", function() {
       "/*   ✖ FAILED: [assert-true] True should assert true. */",
       "/*     - Output: [bool] false */",
       "/*     - Expected: [bool] true */",
-      "/*     - Details: Broken tautology is broken. */"
+      "/*     - Details: Broken tautology is broken. */",
     ].join("\n");
     var expected = [
       {
@@ -261,24 +298,24 @@ describe("#parse", function() {
                 assertionType: "assert-true",
                 output: "[bool] false",
                 expected: "[bool] true",
-                details: "Broken tautology is broken."
-              }
-            ]
-          }
-        ]
-      }
+                details: "Broken tautology is broken.",
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a failing non-output test with no failure details", function() {
+  it("parses a failing non-output test with no failure details", function () {
     var css = [
       "/* # Module: Assert */",
       "/* ---------------- */",
       "/* Test: Simple assertions */",
       "/*   ✖ FAILED: [assert-true] True should assert true. */",
-      "/*   ✔ False should assert false */"
+      "/*   ✔ False should assert false */",
     ].join("\n");
     var expected = [
       {
@@ -290,22 +327,22 @@ describe("#parse", function() {
               {
                 description: "True should assert true.",
                 passed: false,
-                assertionType: "assert-true"
+                assertionType: "assert-true",
               },
               {
                 description: "False should assert false",
-                passed: true
-              }
-            ]
-          }
-        ]
-      }
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a passing output test", function() {
+  it("parses a passing output test", function () {
     var css = [
       "/* # Module: Assert */",
       "/* Test: CSS output assertions */",
@@ -323,7 +360,7 @@ describe("#parse", function() {
       "",
       "/*   END_EXPECTED   */",
       "/* */",
-      "/*   END_ASSERT   */"
+      "/*   END_ASSERT   */",
     ].join("\n");
     var expected = [
       {
@@ -337,18 +374,18 @@ describe("#parse", function() {
                 assertionType: "equal",
                 passed: true,
                 output: ".test-output {\n  -property: value;\n}",
-                expected: ".test-output {\n  -property: value;\n}"
-              }
-            ]
-          }
-        ]
-      }
+                expected: ".test-output {\n  -property: value;\n}",
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a passing output test with loud comments", function() {
+  it("parses a passing output test with loud comments", function () {
     var css = [
       "/* Some random loud comment */",
       "/* # Module: Assert */",
@@ -369,7 +406,7 @@ describe("#parse", function() {
       "",
       "/*   END_EXPECTED   */",
       "/* */",
-      "/*   END_ASSERT   */"
+      "/*   END_ASSERT   */",
     ].join("\n");
     var expected = [
       {
@@ -385,18 +422,18 @@ describe("#parse", function() {
                 output:
                   "/* Some loud comment */\n\n.test-output {\n  -property: value;\n}",
                 expected:
-                  "/* Some loud comment */\n\n.test-output {\n  -property: value;\n}"
-              }
-            ]
-          }
-        ]
-      }
+                  "/* Some loud comment */\n\n.test-output {\n  -property: value;\n}",
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses a failing output test", function() {
+  it("parses a failing output test", function () {
     var css = [
       "/* # Module: Assert */",
       "/* Test: CSS output assertions */",
@@ -411,7 +448,7 @@ describe("#parse", function() {
       "  -property: value2; }",
       "",
       "/*   END_EXPECTED   */",
-      "/*   END_ASSERT   */"
+      "/*   END_ASSERT   */",
     ].join("\n");
     var expected = [
       {
@@ -425,18 +462,18 @@ describe("#parse", function() {
                 assertionType: "equal",
                 passed: false,
                 expected: ".test-output {\n  -property: value2;\n}",
-                output: ".test-output {\n  -property: value1;\n}"
-              }
-            ]
-          }
-        ]
-      }
+                output: ".test-output {\n  -property: value1;\n}",
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("respects declaration order in output tests", function() {
+  it("respects declaration order in output tests", function () {
     var css = [
       "/* # Module: Assert */",
       "/* Test: CSS output assertions */",
@@ -454,7 +491,7 @@ describe("#parse", function() {
       "  -property2: value2; ",
       "}",
       "/*   END_EXPECTED   */",
-      "/*   END_ASSERT   */"
+      "/*   END_ASSERT   */",
     ].join("\n");
     var expected = [
       {
@@ -470,18 +507,18 @@ describe("#parse", function() {
                 expected:
                   ".test-output {\n  -property1: value1;\n  -property2: value2;\n}",
                 output:
-                  ".test-output {\n  -property2: value2;\n  -property1: value1;\n}"
-              }
-            ]
-          }
-        ]
-      }
+                  ".test-output {\n  -property2: value2;\n  -property1: value1;\n}",
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("parses tests of comment output", function() {
+  it("parses tests of comment output", function () {
     var css = [
       "/* # Module: True Message */",
       "/* ---------------------- */",
@@ -494,7 +531,7 @@ describe("#parse", function() {
       "/* This is a simple message */",
       "/*   END_EXPECTED   */",
       "/*   END_ASSERT   */",
-      "/*  */"
+      "/*  */",
     ].join("\n");
     var expected = [
       {
@@ -508,28 +545,28 @@ describe("#parse", function() {
                 assertionType: "equal",
                 passed: true,
                 expected: "/* This is a simple message */",
-                output: "/* This is a simple message */"
-              }
-            ]
-          }
-        ]
-      }
+                output: "/* This is a simple message */",
+              },
+            ],
+          },
+        ],
+      },
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
-  it("ignores unexpected rule types", function() {
+  it("ignores unexpected rule types", function () {
     var css = ".foo { -prop: value; }";
 
     expect(main.parse(css)).to.deep.equal([]);
   });
 
-  it("throws error on unexpected rule type instead of end summary", function() {
+  it("throws error on unexpected rule type instead of end summary", function () {
     var css = ["/* # SUMMARY ---------- */", ".foo { -prop: value; }"].join(
       "\n"
     );
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -539,16 +576,16 @@ describe("#parse", function() {
         "-- Context --",
         "/* # SUMMARY ---------- */",
         ".foo { -prop: value; }",
-        "^"
+        "^",
       ].join("\n")
     );
   });
 
-  it("accepts a number of context lines to display on error", function() {
+  it("accepts a number of context lines to display on error", function () {
     var css = ["/* # SUMMARY ---------- */", ".foo { -prop: value; }"].join(
       "\n"
     );
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css, 1);
     };
 
@@ -557,34 +594,34 @@ describe("#parse", function() {
         'Line 2, column 1: Unexpected rule type "rule"; looking for end summary.',
         "-- Context --",
         ".foo { -prop: value; }",
-        "^"
+        "^",
       ].join("\n")
     );
   });
 
-  it("handles a blank comment before module header", function() {
+  it("handles a blank comment before module header", function () {
     var css = ["/*  */", "/* # Module: M */"].join("\n");
 
     expect(main.parse(css)).to.deep.equal([
       {
         module: "M",
-        tests: []
-      }
+        tests: [],
+      },
     ]);
   });
 
-  it("ignores unexpected rule type instead of test", function() {
+  it("ignores unexpected rule type instead of test", function () {
     var css = ["/* # Module: M */", ".foo { -prop: value; }"].join("\n");
 
     expect(main.parse(css)).to.deep.equal([
       {
         module: "M",
-        tests: []
-      }
+        tests: [],
+      },
     ]);
   });
 
-  it("handles a blank comment before test header", function() {
+  it("handles a blank comment before test header", function () {
     var css = ["/* # Module: M */", "/*  */", "/* Test: T */"].join("\n");
 
     expect(main.parse(css)).to.deep.equal([
@@ -593,20 +630,20 @@ describe("#parse", function() {
         tests: [
           {
             test: "T",
-            assertions: []
-          }
-        ]
-      }
+            assertions: [],
+          },
+        ],
+      },
     ]);
   });
 
-  it("ignores unexpected rule type instead of assertion", function() {
+  it("ignores unexpected rule type instead of assertion", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
-      ".foo { -prop: value; }"
+      ".foo { -prop: value; }",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -616,19 +653,19 @@ describe("#parse", function() {
         tests: [
           {
             test: "T",
-            assertions: []
-          }
-        ]
-      }
+            assertions: [],
+          },
+        ],
+      },
     ]);
   });
 
-  it("handles a blank comment before assertion", function() {
+  it("handles a blank comment before assertion", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
       "/*  */",
-      "/*   ✔ Does the thing right */"
+      "/*   ✔ Does the thing right */",
     ].join("\n");
 
     expect(main.parse(css)).to.deep.equal([
@@ -640,22 +677,22 @@ describe("#parse", function() {
             assertions: [
               {
                 description: "Does the thing right",
-                passed: true
-              }
-            ]
-          }
-        ]
-      }
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
     ]);
   });
 
-  it("allows unexpected comment before next module header", function() {
+  it("allows unexpected comment before next module header", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
       "/*   ✖ FAILED: [assert-true] True should assert true. */",
       "/*     - foobar */",
-      "/* # Module: M2 */"
+      "/* # Module: M2 */",
     ].join("\n");
     expect(main.parse(css)).to.deep.equal([
       {
@@ -667,27 +704,27 @@ describe("#parse", function() {
               {
                 assertionType: "assert-true",
                 description: "True should assert true.",
-                passed: false
-              }
-            ]
-          }
-        ]
+                passed: false,
+              },
+            ],
+          },
+        ],
       },
       {
         module: "M2",
-        tests: []
-      }
+        tests: [],
+      },
     ]);
   });
 
-  it("throws error on unexpected rule type instead of failure detail", function() {
+  it("throws error on unexpected rule type instead of failure detail", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
       "/*   ✖ FAILED: [assert-true] True should assert true. */",
-      ".foo { -prop: val; }"
+      ".foo { -prop: val; }",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -696,14 +733,14 @@ describe("#parse", function() {
     );
   });
 
-  it("throws error on unexpected rule type instead of OUTPUT", function() {
+  it("throws error on unexpected rule type instead of OUTPUT", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
       "/*   ASSERT: Input and output selector patterns match   */",
-      ".foo { -prop: val; }"
+      ".foo { -prop: val; }",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -712,14 +749,14 @@ describe("#parse", function() {
     );
   });
 
-  it("throws error on unexpected comment instead of OUTPUT", function() {
+  it("throws error on unexpected comment instead of OUTPUT", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
       "/*   ASSERT: Input and output selector patterns match   */",
-      "/* foo */"
+      "/* foo */",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -728,7 +765,7 @@ describe("#parse", function() {
     );
   });
 
-  it("throws error on unexpected rule type instead of EXPECTED", function() {
+  it("throws error on unexpected rule type instead of EXPECTED", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
@@ -738,9 +775,9 @@ describe("#parse", function() {
       "  -property: value1; }",
       "",
       "/*   END_OUTPUT   */",
-      ".foo { -prop: val; }"
+      ".foo { -prop: val; }",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -749,7 +786,7 @@ describe("#parse", function() {
     );
   });
 
-  it("throws error on unexpected comment instead of EXPECTED", function() {
+  it("throws error on unexpected comment instead of EXPECTED", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
@@ -759,9 +796,9 @@ describe("#parse", function() {
       "  -property: value1; }",
       "",
       "/*   END_OUTPUT   */",
-      "/* foo */"
+      "/* foo */",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -770,7 +807,7 @@ describe("#parse", function() {
     );
   });
 
-  it("throws error on unexpected rule type instead of END_ASSERT", function() {
+  it("throws error on unexpected rule type instead of END_ASSERT", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
@@ -785,9 +822,9 @@ describe("#parse", function() {
       "  -property: value; }",
       "",
       "/*   END_EXPECTED   */",
-      ".foo { -prop: val; }"
+      ".foo { -prop: val; }",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -796,7 +833,7 @@ describe("#parse", function() {
     );
   });
 
-  it("throws error on unexpected comment instead of END_ASSERT", function() {
+  it("throws error on unexpected comment instead of END_ASSERT", function () {
     var css = [
       "/* # Module: M */",
       "/* Test: T */",
@@ -811,9 +848,9 @@ describe("#parse", function() {
       "  -property: value; }",
       "",
       "/*   END_EXPECTED   */",
-      "/* foo */"
+      "/* foo */",
     ].join("\n");
-    var attempt = function() {
+    var attempt = function () {
       main.parse(css);
     };
 
@@ -822,8 +859,36 @@ describe("#parse", function() {
     );
   });
 
-  describe("#contains", function() {
-    it("parses a passing output test", function() {
+  it("throws a clear error when expect is mixed with contains", function () {
+    var css = [
+      "/* # Module: M */",
+      "/* Test: T */",
+      "/*   ASSERT:    */",
+      "/*   OUTPUT   */",
+      ".test-output {",
+      "  width: 20px; }",
+      "/*   END_OUTPUT   */",
+      "/*   EXPECTED   */",
+      ".test-output {",
+      "  width: 20px; }",
+      "/*   END_EXPECTED   */",
+      "/*   CONTAINED   */",
+      ".test-output {",
+      "  width: 20px; }",
+      "/*   END_CONTAINED   */",
+      "/*   END_ASSERT   */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Cannot mix output assertion modes in one assert(): found "contains()" after "expect()". Split them into separate assert() blocks.'
+    );
+  });
+
+  describe("#contains", function () {
+    it("parses a passing output test", function () {
       var css = [
         "/* # Module: Contains */",
         "/* Test: CSS output contains */",
@@ -841,7 +906,7 @@ describe("#parse", function() {
         "",
         "/*   END_CONTAINED   */",
         "/* */",
-        "/*   END_ASSERT   */"
+        "/*   END_ASSERT   */",
       ].join("\n");
       var expected = [
         {
@@ -852,21 +917,21 @@ describe("#parse", function() {
               assertions: [
                 {
                   description: "Output selector pattern contains input pattern",
-                  assertionType: "equal",
+                  assertionType: "contains",
                   passed: true,
                   output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
-                  expected: ".test-output {\n  height: 10px;\n}"
-                }
-              ]
-            }
-          ]
-        }
+                  expected: ".test-output {\n  height: 10px;\n}",
+                },
+              ],
+            },
+          ],
+        },
       ];
 
       expect(main.parse(css)).to.deep.equal(expected);
     });
 
-    it("parses a passing output test with loud comments", function() {
+    it("parses a passing output test with loud comments", function () {
       var css = [
         "/* Some random loud comment */",
         "/* # Module: Contains */",
@@ -888,7 +953,7 @@ describe("#parse", function() {
         "",
         "/*   END_CONTAINED   */",
         "/* */",
-        "/*   END_ASSERT   */"
+        "/*   END_ASSERT   */",
       ].join("\n");
       var expected = [
         {
@@ -899,23 +964,23 @@ describe("#parse", function() {
               assertions: [
                 {
                   description: "Output selector pattern contains input pattern",
-                  assertionType: "equal",
+                  assertionType: "contains",
                   passed: true,
                   output:
                     "/* Some loud comment */\n\n.test-output {\n  height: 10px;\n  width: 20px;\n}",
                   expected:
-                    "/* Some loud comment */\n\n.test-output {\n  height: 10px;\n}"
-                }
-              ]
-            }
-          ]
-        }
+                    "/* Some loud comment */\n\n.test-output {\n  height: 10px;\n}",
+                },
+              ],
+            },
+          ],
+        },
       ];
 
       expect(main.parse(css)).to.deep.equal(expected);
     });
 
-    it("parses a failing output test", function() {
+    it("parses a failing output test", function () {
       var css = [
         "/* # Module: Contains */",
         "/* Test: CSS output contains */",
@@ -934,7 +999,7 @@ describe("#parse", function() {
         "",
         "/*   END_CONTAINED   */",
         "/* */",
-        "/*   END_ASSERT   */"
+        "/*   END_ASSERT   */",
       ].join("\n");
       var expected = [
         {
@@ -945,21 +1010,21 @@ describe("#parse", function() {
               assertions: [
                 {
                   description: "Output selector pattern contains input pattern",
-                  assertionType: "equal",
+                  assertionType: "contains",
                   passed: false,
                   output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
-                  expected: ".test-output {\n  height: 20px;\n}"
-                }
-              ]
-            }
-          ]
-        }
+                  expected: ".test-output {\n  height: 20px;\n}",
+                },
+              ],
+            },
+          ],
+        },
       ];
 
       expect(main.parse(css)).to.deep.equal(expected);
     });
 
-    it("parses a failing output test (wrong selector)", function() {
+    it("parses a failing output test (wrong selector)", function () {
       var css = [
         "/* # Module: Contains */",
         "/* Test: CSS output contains */",
@@ -978,7 +1043,7 @@ describe("#parse", function() {
         "",
         "/*   END_CONTAINED   */",
         "/* */",
-        "/*   END_ASSERT   */"
+        "/*   END_ASSERT   */",
       ].join("\n");
       var expected = [
         {
@@ -989,18 +1054,428 @@ describe("#parse", function() {
               assertions: [
                 {
                   description: "Output selector pattern contains input pattern",
-                  assertionType: "equal",
+                  assertionType: "contains",
                   passed: false,
                   output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
-                  expected: ".other-class {\n  height: 20px;\n}"
-                }
-              ]
-            }
-          ]
-        }
+                  expected: ".other-class {\n  height: 20px;\n}",
+                },
+              ],
+            },
+          ],
+        },
       ];
 
       expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("parses multiple contains assertions", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Multiple contains blocks */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px;",
+        "  border: thin solid currentColor;",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  height: 10px;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  width: 20px;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  border: thin solid currentColor;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var expected = [
+        {
+          module: "Contains",
+          tests: [
+            {
+              test: "Multiple contains blocks",
+              assertions: [
+                {
+                  description: "",
+                  assertionType: "contains",
+                  passed: true,
+                  output:
+                    ".test-output {\n  height: 10px;\n  width: 20px;\n  border: thin solid currentColor;\n}",
+                  expected:
+                    ".test-output {\n  height: 10px;\n}\n---\n.test-output {\n  width: 20px;\n}\n---\n.test-output {\n  border: thin solid currentColor;\n}",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("parses multiple failing contains assertions", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Multiple contains blocks with failure */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px;",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  height: 10px;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  background-color: red;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  width: 20px;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var expected = [
+        {
+          module: "Contains",
+          tests: [
+            {
+              test: "Multiple contains blocks with failure",
+              assertions: [
+                {
+                  description: "",
+                  assertionType: "contains",
+                  passed: false,
+                  output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
+                  expected:
+                    ".test-output {\n  height: 10px;\n}\n---\n.test-output {\n  background-color: red;\n}\n---\n.test-output {\n  width: 20px;\n}",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("throws on unexpected comments after CONTAINED", function () {
+      var css = [
+        "/* # Module: M */",
+        "/* Test: T */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px; }",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  height: 10px; }",
+        "/*   END_CONTAINED   */",
+        "/* unexpected comment */",
+      ].join("\n");
+      var attempt = function () {
+        main.parse(css);
+      };
+
+      expect(attempt).to.throw(
+        'Unexpected comment "unexpected comment"; looking for CONTAINED or END_ASSERT'
+      );
+    });
+
+    it("throws a clear error when contains is mixed with contains-string", function () {
+      var css = [
+        "/* # Module: M */",
+        "/* Test: T */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  width: 20px; }",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  width: 20px; }",
+        "/*   END_CONTAINED   */",
+        "/*   CONTAINS_STRING   */",
+        "/* width */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var attempt = function () {
+        main.parse(css);
+      };
+
+      expect(attempt).to.throw(
+        'Cannot mix output assertion modes in one assert(): found "contains-string()" after "contains()". Split them into separate assert() blocks.'
+      );
+    });
+  });
+
+  describe("#contains-string", function () {
+    it("parses a passing output test", function () {
+      var css = [
+        "/* # Module: Contains-string */",
+        "/* Test: CSS output contains-string */",
+        "/*   ASSERT: Output selector pattern contains-string input pattern   */",
+        "/* */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px; }",
+        "/*   END_OUTPUT   */",
+        "/* */",
+        "/*   CONTAINS_STRING   */",
+        "/* height */",
+        "/*   END_CONTAINS_STRING   */",
+        "/* */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var expected = [
+        {
+          module: "Contains-string",
+          tests: [
+            {
+              test: "CSS output contains-string",
+              assertions: [
+                {
+                  description:
+                    "Output selector pattern contains-string input pattern",
+                  assertionType: "contains-string",
+                  passed: true,
+                  output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
+                  expected: "height",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("parses a failing output test", function () {
+      var css = [
+        "/* # Module: Contains-string */",
+        "/* Test: CSS output contains-string */",
+        "/*   ASSERT: Output selector pattern contains-string input pattern   */",
+        "/* */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px; }",
+        "/*   END_OUTPUT   */",
+        "/* */",
+        "/*   CONTAINS_STRING   */",
+        "/* background-color */",
+        "/*   END_CONTAINS_STRING   */",
+        "/* */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var expected = [
+        {
+          module: "Contains-string",
+          tests: [
+            {
+              test: "CSS output contains-string",
+              assertions: [
+                {
+                  description:
+                    "Output selector pattern contains-string input pattern",
+                  assertionType: "contains-string",
+                  passed: false,
+                  output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
+                  expected: "background-color",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("parses multiple contains-string assertions", function () {
+      var css = [
+        "/* # Module: Contains-string */",
+        "/* Test: Multiple strings */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px;",
+        "  border: thin solid currentColor;",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINS_STRING   */",
+        "/* height */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   CONTAINS_STRING   */",
+        "/* solid */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   CONTAINS_STRING   */",
+        "/* 20px */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   CONTAINS_STRING   */",
+        "/* thin solid currentColor */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var expected = [
+        {
+          module: "Contains-string",
+          tests: [
+            {
+              test: "Multiple strings",
+              assertions: [
+                {
+                  description: "",
+                  assertionType: "contains-string",
+                  passed: true,
+                  output:
+                    ".test-output {\n  height: 10px;\n  width: 20px;\n  border: thin solid currentColor;\n}",
+                  expected: "height\nsolid\n20px\nthin solid currentColor",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("parses multiple failing contains-string assertions", function () {
+      var css = [
+        "/* # Module: Contains-string */",
+        "/* Test: Multiple strings with failure */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px; }",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINS_STRING   */",
+        "/* height */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   CONTAINS_STRING   */",
+        "/* background-color */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   CONTAINS_STRING   */",
+        "/* 20px */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var expected = [
+        {
+          module: "Contains-string",
+          tests: [
+            {
+              test: "Multiple strings with failure",
+              assertions: [
+                {
+                  description: "",
+                  assertionType: "contains-string",
+                  passed: false,
+                  output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
+                  expected: "height\nbackground-color\n20px",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("throws on unexpected comments after CONTAINS_STRING", function () {
+      var css = [
+        "/* # Module: M */",
+        "/* Test: T */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px; }",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINS_STRING   */",
+        "/* height */",
+        "/*   END_CONTAINS_STRING   */",
+        "/* unexpected comment */",
+      ].join("\n");
+      var attempt = function () {
+        main.parse(css);
+      };
+
+      expect(attempt).to.throw(
+        'Unexpected comment "unexpected comment"; looking for CONTAINS_STRING or END_ASSERT'
+      );
+    });
+
+    it("throws on unexpected rule types after CONTAINS_STRING", function () {
+      var css = [
+        "/* # Module: M */",
+        "/* Test: T */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  height: 10px; }",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINS_STRING   */",
+        "/* height */",
+        "/*   END_CONTAINS_STRING   */",
+        ".foo { -prop: val; }",
+      ].join("\n");
+      var attempt = function () {
+        main.parse(css);
+      };
+
+      expect(attempt).to.throw(
+        'Unexpected rule type "rule"; looking for CONTAINS_STRING or END_ASSERT'
+      );
+    });
+
+    it("throws a clear error when contains-string is mixed with contains", function () {
+      var css = [
+        "/* # Module: M */",
+        "/* Test: T */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  width: 20px; }",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINS_STRING   */",
+        "/* width */",
+        "/*   END_CONTAINS_STRING   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  width: 20px; }",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var attempt = function () {
+        main.parse(css);
+      };
+
+      expect(attempt).to.throw(
+        'Cannot mix output assertion modes in one assert(): found "contains()" after "contains-string()". Split them into separate assert() blocks.'
+      );
     });
   });
 });

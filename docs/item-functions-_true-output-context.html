@@ -58,7 +58,7 @@
                 href="#kssref-functions-_true-output-context"
               >
                 <span class="kss-title__ref">
-                  1.11
+                  1.14
                   <span class="kss-title__permalink-hash">
                     #Functions._true-output-context
                   </span>
@@ -69,10 +69,8 @@
 
             <div class="kss-description">
               <p>
-                <strong>[private:{void}]</strong> Add <code>assert</code>,
-                <code>output</code>, <code>expect</code>, or
-                <code>contains</code> context to an output test, or check to
-                make sure they all exist before resetting the context.
+                <strong>[private:{void}]</strong> Add output assertion context,
+                or check/reset the context at the end of an output assertion.
               </p>
             </div>
 
@@ -81,14 +79,14 @@
               <li class="kss-parameters__item">
                 <div class="kss-parameters__name"><code>$new</code></div>
                 <div class="kss-parameters__description">
-                  <strong>{'assert'|'output'|'expect'|'contains'|null}</strong>
+                  <strong
+                    >{'assert'|'output'|'expect'|'contains'|'contains-string'|null}</strong
+                  >
                   <em
                     ><strong
-                      >Add a new <code>assert</code>, <code>output</code>,
-                      <code>expect</code>, or <code>contains</code> layer to the
-                      context of an output-test, or use <code>null</code> to
-                      check that all context is properly formed and then reset
-                      it at the end of a test</strong
+                      >Add a new output assertion layer, or use
+                      <code>null</code> to check/reset the current output-test
+                      context.</strong
                     ></em
                   >
                 </div>

@@ -69,12 +69,12 @@
 
 // // valid output context
 +test-module('true-validate-output-context [function]') {
-  $valid = 'assert' 'expect' 'output' 'contains';
+  $valid = 'assert' 'expect' 'output' 'contains' 'contains-string';
 
   +test('unknown context name') {
     assert-equal(
       _true-validate-output-context('wtf'),
-      "ERROR [output-context] wtf is not a valid context for output tests: " + $valid
+      "ERROR [output-context]: wtf is not a valid context for output tests: " + $valid
     )
   }
 
@@ -83,7 +83,7 @@
 
     assert-equal(
       _true-validate-output-context('assert'),
-      'ERROR [output-context] The `assert()` mixin can not contain another `assert()`'
+      'ERROR [output-context]: The `assert()` mixin can not contain another `assert()`'
     );
 
     $_true-output-context.value = ()
@@ -94,7 +94,25 @@
 
     assert-equal(
       _true-validate-output-context('output'),
-      'ERROR [output-context] The `output()` mixin must only be used once per `assert()`'
+      'ERROR [output-context]: The `output()` mixin must only be used once per `assert()`'
+    );
+
+    $_true-output-context.value = ()
+  }
+
+  +test('mixed output assertion modes') {
+    $_true-output-context.value = 'assert' 'output' 'contains';
+
+    assert-equal(
+      _true-validate-output-context('contains-string'),
+      'ERROR [output-context]: Cannot mix output assertion modes in one `assert()`: found `contains-string()` after `contains()`. Split them into separate `assert()` blocks.'
+    );
+
+    $_true-output-context.value = 'assert' 'output' 'contains-string';
+
+    assert-equal(
+      _true-validate-output-context('contains'),
+      'ERROR [output-context]: Cannot mix output assertion modes in one `assert()`: found `contains()` after `contains-string()`. Split them into separate `assert()` blocks.'
     );
 
     $_true-output-context.value = ()

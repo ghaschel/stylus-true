@@ -1,9 +1,9 @@
 // assert-true($assert, $description)
-// 
+//
 // **[public:{output}]** Assert that a value is truthy. Empty lists and empty strings are treated as false for this assertion.
-// 
+//
 // Weight: -10
-// 
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
@@ -11,7 +11,7 @@
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Non-empty strings are truthy') {
@@ -33,12 +33,23 @@ assert-true($assert, $description = null) {
   _true-assert-results($truthy, true);
 }
 
-// assert-false($assert, $description)
-// 
-// **[public:{output}]** Assert that a value is falsy. Empty lists and empty strings are treated as false for this assertion.
-// 
+// is-truthy($assert, $description)
+//
+// **[public:{output}]** Alias for `assert-true()`, matching Sass True.
+//
 // Weight: -10
-// 
+//
+// Styleguide Mixins.is-truthy
+is-truthy($assert, $description = null) {
+  assert-true($assert, $description);
+}
+
+// assert-false($assert, $description)
+//
+// **[public:{output}]** Assert that a value is falsy. Empty lists and empty strings are treated as false for this assertion.
+//
+// Weight: -10
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
@@ -46,7 +57,7 @@ assert-true($assert, $description = null) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Empty strings are falsey') {
@@ -67,13 +78,24 @@ assert-false($assert, $description = null) {
   _true-assert-results($falsey, true);
 }
 
+// is-falsy($assert, $description)
+//
+// **[public:{output}]** Alias for `assert-false()`, matching Sass True.
+//
+// Weight: -10
+//
+// Styleguide Mixins.is-falsy
+is-falsy($assert, $description = null) {
+  assert-false($assert, $description);
+}
+
 
 // assert-equal($assert, $expected, $description, $inspect)
-// 
+//
 // **[public:{output}]** Assert that two Stylus values are equal.
-// 
+//
 // Weight: -10
-// 
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
@@ -83,7 +105,7 @@ assert-false($assert, $description = null) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Division works as expected in Stylus') {
@@ -111,12 +133,23 @@ assert-equal($assert, $expected, $description = null, $inspect = false) {
   _true-assert-results($assert, $expected);
 }
 
-// assert-unequal($assert, $expected, $description, $inspect)
-// 
-// **[public:{output}]** Assert that two Stylus values are not equal.
-// 
+// is-equal($assert, $expected, $description, $inspect)
+//
+// **[public:{output}]** Alias for `assert-equal()`, matching Sass True. The optional `$inspect` argument is Stylus-specific.
+//
 // Weight: -10
-// 
+//
+// Styleguide Mixins.is-equal
+is-equal($assert, $expected, $description = null, $inspect = false) {
+  assert-equal($assert, $expected, $description, $inspect);
+}
+
+// assert-unequal($assert, $expected, $description, $inspect)
+//
+// **[public:{output}]** Assert that two Stylus values are not equal.
+//
+// Weight: -10
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
@@ -126,7 +159,7 @@ assert-equal($assert, $expected, $description = null, $inspect = false) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Strings and numbers hare not the same') {
@@ -141,7 +174,7 @@ assert-equal($assert, $expected, $description = null, $inspect = false) {
 assert-unequal($assert, $expected, $description = null, $inspect = false) {
   $default = _true-context('test');
 
-  if ($inspect) { 
+  if ($inspect) {
     $assert = s('%s' % $assert);
     $expected = s('%s' % $expected);
   }
@@ -153,12 +186,23 @@ assert-unequal($assert, $expected, $description = null, $inspect = false) {
   _true-assert-results($assert, $expected, 'unequal');
 }
 
-// assert($description = null)
-// 
-// **[public:{output}]** Define a CSS-output assertion. Use it as a wrapper around one `output()` block and one `expect()` or `contains()` block.
-// 
+// not-equal($assert, $expected, $description, $inspect)
+//
+// **[public:{output}]** Alias for `assert-unequal()`, matching Sass True. The optional `$inspect` argument is Stylus-specific.
+//
 // Weight: -10
-// 
+//
+// Styleguide Mixins.not-equal
+not-equal($assert, $expected, $description = null, $inspect = false) {
+  assert-unequal($assert, $expected, $description, $inspect);
+}
+
+// assert($description = null)
+//
+// **[public:{output}]** Define a CSS-output assertion. Use it as a wrapper around one `output()` block and one `expect()`, `contains()`, or `contains-string()` check.
+//
+// Weight: -10
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$description = null - <b>{string}</b> <b><i>Description of the assertion being tested. A `null` of `false` value generates a default description.</i></b></li>
@@ -166,7 +210,7 @@ assert-unequal($assert, $expected, $description = null, $inspect = false) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Stylus math compiles before output') {
@@ -201,11 +245,11 @@ assert($description = null) {
 }
 
 // output($selector)
-// 
-// **[public:{output}]** Define the CSS produced by the code under test. Use inside `assert()` with a sibling `expect()` or `contains()` block.
-// 
+//
+// **[public:{output}]** Define the CSS produced by the code under test. Use inside `assert()` with sibling `expect()`, `contains()`, or `contains-string()` checks.
+//
 // Weight: -10
-// 
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$selector = true - <b>{boolean}</b> <b><i>Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly.</i></b></li>
@@ -213,7 +257,7 @@ assert($description = null) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Stylus math compiles before output') {
@@ -246,11 +290,11 @@ output($selector = true) {
 
 
 // expect($selector)
-// 
+//
 // **[public:{output}]** Define the exact CSS expected from the sibling `output()` block.
-// 
+//
 // Weight: -10
-// 
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$selector = true - <b>{boolean}</b> <b><i>Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly.</i></b></li>
@@ -258,7 +302,7 @@ output($selector = true) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Stylus math compiles before output') {
@@ -290,11 +334,11 @@ expect($selector = true) {
 }
 
 // contains($selector)
-// 
+//
 // **[public:{output}]** Define CSS that must be present within the sibling `output()` block.
-// 
+//
 // Weight: -10
-// 
+//
 // <b>Parameters:</b>
 // <ul>
 // <li>$selector = true - <b>{boolean}</b> <b><i>Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly.</i></b></li>
@@ -302,7 +346,7 @@ expect($selector = true) {
 // </ul>
 //
 // ~
-// 
+//
 // **Usage:**
 // ```stylus
 // +test('Stylus math compiles before output') {
@@ -334,30 +378,65 @@ contains($selector = true) {
   _true-message(' END_CONTAINED ', 'comments');
 }
 
+// contains-string($string-to-find)
+//
+// **[public:{output}]** Define a case-sensitive substring that must be present in the sibling `output()` block.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$string-to-find - <b>{string}</b> <b><i>The substring to search for within the compiled CSS output.</i></b></li>
+// </ul>
+//
+// ~
+//
+// **Usage:**
+// ```stylus
+// +test('Contains output strings') {
+//   +assert() {
+//     +output() {
+//       height: 10px;
+//       width: 20px;
+//     }
+//     contains-string('height');
+//     contains-string('20px');
+//   }
+// }
+// ```
+//
+// Styleguide Mixins.contains-string
+contains-string($string-to-find) {
+  _true-output-context('contains-string');
+  _true-message(' CONTAINS_STRING ', 'comments');
+  _true-message(unquote('' + $string-to-find), 'comments');
+  _true-message(' END_CONTAINS_STRING ', 'comments');
+}
+
 // $map = { asserts }
-// 
+//
 // **[private]** Variable to store asserts.
-// 
+//
 // Weight: -0
-// 
+//
 // $asserts = () - **{string[]}** ***List of asserts***
-// 
+//
 // Styleguide Variables.$map
 $map = {
   asserts: ()
 }
 
 // _true-assert-results($assert, $expected, $unequal, $terminal)
-// 
+//
 // **[private:{output}]** Get an official result, record it in the database and output, provide details as necessary, and end the assertion.
-// 
+//
 // Weight: 0
-// 
+//
 // $assert - **{any}** ***Value to consider***
 // $expected - **{any}** ***Expected match***
 // $unequal = false - **{boolean}** ***Set to `true` if the comparison is expected to fail***
 // $terminal = $true-terminal-output.value.value - **{boolean}** ***Whether in case of failing it should output to terminal***
-// 
+//
 // Styleguide Mixins.__true-assert-results
 _true-assert-results($assert, $expected, $unequal = false, $terminal = $true-terminal-output.value) {
   $result = _true-get-result($assert, $expected, $unequal);
@@ -374,13 +453,13 @@ _true-assert-results($assert, $expected, $unequal = false, $terminal = $true-ter
 }
 
 // _true-is-truthy($assert)
-// 
+//
 // **[private:{boolean}]** Check that a value is truthy (empty lists and strings return false)
-// 
+//
 // Weight: 0
-// 
+//
 // $assert - **{any}** ***Value to consider***
-// 
+//
 // Styleguide Functions._true-is-truthy
 _true-is-truthy($assert) {
   $not = !!$assert;

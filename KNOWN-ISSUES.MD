@@ -30,7 +30,7 @@ Sass/True evaluates the wrapper structure before the assertions. Stylus can eval
 
 ## CSS Output Assertion Validation
 
-The original validation model expected `assert()` to be known before `output()`, `expect()`, or `contains()` run. Stylus evaluation order means that validation cannot always detect a missing wrapper before compilation.
+The original validation model expected `assert()` to be known before `output()`, `expect()`, `contains()`, or `contains-string()` run. Stylus evaluation order means that validation cannot always detect a missing wrapper before compilation.
 
 Always use this safe structure:
 

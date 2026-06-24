@@ -33,7 +33,9 @@ The public Stylus API currently supported by this package is:
 | Structure             | `test-module($name)` / `describe($name)`                                                                                | Group related tests.                                        |
 | Tests                 | `test($name)` / `it($name)`                                                                                             | Define a single behavior or case.                           |
 | Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)` | Compare Stylus values during compilation.                   |
-| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`                                                            | Emit CSS assertion blocks for JavaScript runner comparison. |
+| Value aliases         | `is-truthy($value)`, `is-falsy($value)`, `is-equal($actual, $expected)`, `not-equal($actual, $expected)`                | sass-true-compatible aliases for value assertions.          |
+| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`, `contains-string($string)`                                | Emit CSS assertion blocks for JavaScript runner comparison. |
+| Errors                | `true-error($message, $source, $catch)`                                                                                 | Throw or catch testable error messages.                     |
 | Reporting             | `report($terminal, $fail-on-error)`                                                                                     | Emit a summary to CSS comments and optionally the terminal. |
 
 Value assertions are evaluated by Stylus during compilation. CSS output assertions are emitted into compiled CSS and compared by the JavaScript runner integration.
@@ -50,6 +52,8 @@ You can also pass a terminal flag directly to `report()`:
 ```stylus
 report(true);
 ```
+
+`$catch-errors.value` defaults to `false`, matching True. Set it to `true` to make `true-error()` return strings from functions or emit CSS comments from mixin calls instead of stopping compilation. Set it to `'warn'` to catch the error and also emit a Stylus warning.
 
 ## Value Tests
 
@@ -77,9 +81,11 @@ The `test-module`/`test` syntax and `describe`/`it` syntax are equivalent:
 }
 ```
 
+The `is-truthy`, `is-falsy`, `is-equal`, and `not-equal` aliases match sass-true naming. `assert-equal`, `assert-unequal`, `is-equal`, and `not-equal` also accept the existing Stylus-specific `$inspect` argument for stringified comparisons.
+
 ## CSS Output Tests
 
-Use `assert()` as the wrapper for one `output()` block and one `expect()` or `contains()` block:
+Use `assert()` as the wrapper for one `output()` block and one `expect()`, `contains()`, or `contains-string()` check:
 
 ```stylus
 +it('outputs a font size and line height based on keyword') {
@@ -96,7 +102,44 @@ Use `assert()` as the wrapper for one `output()` block and one `expect()` or `co
 }
 ```
 
-`expect()` requires the compiled CSS to match exactly. `contains()` passes when the expected declarations are present in the output.
+`expect()` requires the compiled CSS to match exactly. `contains()` passes when the expected declarations are present in the output. `contains-string()` passes when the compiled output includes a case-sensitive substring.
+
+You can use multiple `contains()` blocks or multiple `contains-string()` calls inside one `assert()`:
+
+```stylus
++it('outputs expected pieces') {
+  +assert('partial output') {
+    +output() {
+      height: 10px;
+      width: 20px;
+      border: thin solid currentColor;
+    }
+
+    contains-string('width: 20px');
+    contains-string('currentColor');
+  }
+}
+```
+
+Do not mix `expect()`, `contains()`, and `contains-string()` in the same `assert()`; keep each output assertion to one comparison mode.
+
+## Catchable Errors
+
+Stylus already has a global built-in `error()` function. Because Stylus does not provide Sass-style namespaces, this package exposes `true-error()` instead of a public `error()` helper to avoid shadowing the built-in.
+
+```stylus
+$catch-errors.value = true;
+
+validate-size($value) {
+  if (type($value) != 'unit') {
+    return true-error('$value must be a unit', 'validate-size');
+  }
+
+  return $value;
+}
+```
+
+When caught in a function context, `true-error()` returns a string such as `ERROR [validate-size]: $value must be a unit`. When caught as a mixin statement, it emits CSS comments. When not caught, it delegates to Stylus `error()` and stops compilation.
 
 ## JavaScript Runner Integration
 
@@ -135,7 +178,7 @@ describe("Stylus tests", () => {
 
 ## Known Limits
 
-Stylus evaluates nested block contents before wrapper mixins. Because of that, nested module context can be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, or `contains()` before compilation.
+Stylus evaluates nested block contents before wrapper mixins. Because of that, nested module context can be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, `contains()`, or `contains-string()` before compilation.
 
 Use this safe structure for CSS output assertions:
 

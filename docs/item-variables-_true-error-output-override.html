@@ -69,7 +69,8 @@
 
             <div class="kss-description">
               <p>
-                <strong>[public]</strong> Value key stores the desired value
+                <strong>[private]</strong> Deprecated compatibility alias for
+                <code>$catch-errors</code>.
               </p>
             </div>
 
@@ -78,10 +79,15 @@
               <li class="kss-parameters__item">
                 <div class="kss-parameters__name"><code>$value</code></div>
                 <div class="kss-parameters__description">
-                  <strong>{boolean}</strong>
-                  <em><strong>The actual output override value</strong></em>
+                  <strong>{boolean|'warn'|null}</strong>
+                  <em
+                    ><strong
+                      >When set, overrides <code>$catch-errors</code> for legacy
+                      tests and helpers.</strong
+                    ></em
+                  >
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>true</code>
+                    Defaults to: <code>null</code>
                   </div>
                 </div>
               </li>

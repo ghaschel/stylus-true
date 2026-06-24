@@ -304,4 +304,106 @@ describe("stylus interface", () => {
       removeDir(tmp);
     }
   });
+
+  it("throws uncaught true-error calls through Stylus", () => {
+    const source = [
+      '@require "styl/_true";',
+      'true-error("hard failure", "error api");',
+    ].join("\n");
+
+    assert.throws(
+      () =>
+        stylus.render(source, {
+          paths: [packagePath, packageStylPath],
+        }),
+      /hard failure/
+    );
+  });
+
+  it("warns and catches true-error when catch mode is warn", () => {
+    const source = [
+      '@require "styl/_true";',
+      "$catch-errors.value = 'warn';",
+      ".probe {",
+      '  value: true-error("soft failure", "error api");',
+      "}",
+    ].join("\n");
+    const warnings = [];
+    const originalWarn = console.warn;
+
+    console.warn = function () {
+      warnings.push(Array.prototype.slice.call(arguments).join(" "));
+    };
+
+    try {
+      const css = stylus.render(source, {
+        paths: [packagePath, packageStylPath],
+      });
+
+      assert(css.indexOf("ERROR [error api]: soft failure") !== -1);
+      assert(
+        warnings.some((warning) => warning.indexOf("soft failure") !== -1)
+      );
+    } finally {
+      console.warn = originalWarn;
+    }
+  });
+
+  it("supports scalar catch-errors assignment", () => {
+    const source = [
+      '@require "styl/_true";',
+      "$catch-errors = true;",
+      ".probe {",
+      '  value: true-error("scalar failure");',
+      "}",
+    ].join("\n");
+    const css = stylus.render(source, {
+      paths: [packagePath, packageStylPath],
+    });
+
+    assert(css.indexOf("ERROR: scalar failure") !== -1);
+  });
+
+  it("warns and catches true-error when catch mode is unquoted warn", () => {
+    const source = [
+      '@require "styl/_true";',
+      "$catch-errors.value = warn;",
+      ".probe {",
+      '  value: true-error("unquoted warning", "error api");',
+      "}",
+    ].join("\n");
+    const warnings = [];
+    const originalWarn = console.warn;
+
+    console.warn = function () {
+      warnings.push(Array.prototype.slice.call(arguments).join(" "));
+    };
+
+    try {
+      const css = stylus.render(source, {
+        paths: [packagePath, packageStylPath],
+      });
+
+      assert(css.indexOf("ERROR [error api]: unquoted warning") !== -1);
+      assert(
+        warnings.some((warning) => warning.indexOf("unquoted warning") !== -1)
+      );
+    } finally {
+      console.warn = originalWarn;
+    }
+  });
+
+  it("outputs no-source caught true-error mixin comments", () => {
+    const source = [
+      '@require "styl/_true";',
+      "$catch-errors.value = true;",
+      'true-error("mixin failure");',
+    ].join("\n");
+    const css = stylus.render(source, {
+      paths: [packagePath, packageStylPath],
+    });
+
+    assert(css.indexOf("/* ERROR: */") !== -1);
+    assert(css.indexOf("/*   mixin failure */") !== -1);
+  });
 });

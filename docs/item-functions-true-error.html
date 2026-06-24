@@ -48,71 +48,72 @@
     <main class="kss-main" aria-label="Content">
       <article>
         <div
-          id="kssref-mixins-assert"
+          id="kssref-functions-true-error"
           class="kss-section kss-section--depth-2 is-fullscreen"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
-              <a class="kss-title__permalink" href="#kssref-mixins-assert">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-true-error"
+              >
                 <span class="kss-title__ref">
-                  2.1
+                  1.2
                   <span class="kss-title__permalink-hash">
-                    #Mixins.assert
+                    #Functions.true-error
                   </span>
                 </span>
-                assert($description &#x3D; null)
+                true-error($message, $source, $catch)
               </a>
             </h2>
 
             <div class="kss-description">
               <p>
-                <strong>[public:{output}]</strong> Define a CSS-output
-                assertion. Use it as a wrapper around one
-                <code>output()</code> block and one <code>expect()</code>,
-                <code>contains()</code>, or
-                <code>contains-string()</code> check.
+                <strong>[public:{string|output}]</strong> Catchable Stylus error
+                helper, adapted from Sass True's namespaced
+                <code>throw.error()</code>.
               </p>
-              <p><b>Parameters:</b></p>
-              <ul>
-                <li>
-                  $description = null - <b>{string}</b>
-                  <b
-                    ><i
-                      >Description of the assertion being tested. A `null` of
-                      `false` value generates a default description.</i
-                    ></b
-                  >
-                </li>
-                <li>
-                  {block} -
-                  <b
-                    ><i
-                      >Use `output()` and `expect()` mixins to define blocks for
-                      comparison</i
-                    ></b
-                  >
-                </li>
-              </ul>
-              <p>~</p>
-              <p><strong>Usage:</strong></p>
-              <pre
-                class="hljs"
-              ><code class="language-stylus">+test(<span class="hljs-string">'Stylus math compiles before output'</span>) {
-  +assert(<span class="hljs-string">'You can also describe the assertion...'</span>) {
-    +output() {
-      <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
-    }
-    +expect() {
-      <span class="hljs-attribute">width</span>: <span class="hljs-number">16em</span>;
-    }
-  }
-}
-</code></pre>
             </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$message</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>The error to report</strong></em>
+                </div>
+              </li>
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$source</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string|null}</strong>
+                  <em><strong>Optional source of the error</strong></em>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>null</code>
+                  </div>
+                </div>
+              </li>
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$catch</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean|'warn'|object|null}</strong>
+                  <em
+                    ><strong
+                      >Optionally catch errors, using
+                      <code>$catch-errors</code> when omitted.</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>null</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_assert.styl</code>, line 200
+            Source: <code>true/_utilities.styl</code>, line 90
           </div>
         </div>
       </article>

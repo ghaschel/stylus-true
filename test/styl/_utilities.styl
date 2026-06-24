@@ -4,8 +4,27 @@
 +test-module('True Error [function]') {
   +test('Allow errors to return without blocking compilation') {
     assert-equal(
-      _true-error('This is a test error message', '_true-error test', true), 'ERROR [_true-error test] This is a test error message'
+      _true-error('This is a test error message', '_true-error test', true),
+      'ERROR [_true-error test]: This is a test error message'
     );
+  }
+
+  +test('Public true-error returns catchable errors') {
+    assert-equal(
+      true-error('This is a test error message', 'true-error test', true),
+      'ERROR [true-error test]: This is a test error message'
+    );
+  }
+
+  +test('Public true-error uses catch-errors setting') {
+    $catch-errors.value = true;
+
+    assert-equal(
+      true-error('This is a test error message', 'catch setting'),
+      'ERROR [catch setting]: This is a test error message'
+    );
+
+    $catch-errors.value = false;
   }
 }
 
@@ -19,10 +38,24 @@
         );
       }
       expect() {
-        _true-message(
-          'ERROR [_true-error test] This is a test error message',
-          'comments'
+        _true-message('ERROR [_true-error test]:', 'comments');
+        _true-message('This is a test error message', 'comments', 2);
+      }
+    }
+  }
+
+  +test('Public true-error outputs caught comments') {
+    assert() {
+      +output() {
+        true-error(
+          'This is a test error message',
+          'true-error test',
+          true
         );
+      }
+      expect() {
+        _true-message('ERROR [true-error test]:', 'comments');
+        _true-message('This is a test error message', 'comments', 2);
       }
     }
   }

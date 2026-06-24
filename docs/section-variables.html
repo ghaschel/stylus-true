@@ -56,9 +56,20 @@
               <li class="kss-nav__menu-item">
                 <a
                   class="kss-nav__menu-link"
-                  href="section-variables.html#kssref-variables-true-terminal-output"
+                  href="section-variables.html#kssref-variables-catch-errors"
                 >
                   <span class="kss-nav__ref">3.2</span
+                  ><span class="kss-nav__name"
+                    >$catch-errors &#x3D; { value }</span
+                  >
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-variables.html#kssref-variables-true-terminal-output"
+                >
+                  <span class="kss-nav__ref">3.3</span
                   ><span class="kss-nav__name"
                     >$true-terminal-output &#x3D; { value }</span
                   >
@@ -69,7 +80,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-context"
                 >
-                  <span class="kss-nav__ref">3.3</span
+                  <span class="kss-nav__ref">3.4</span
                   ><span class="kss-nav__name"
                     >$_true-context &#x3D; { buffer }</span
                   >
@@ -80,7 +91,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-results"
                 >
-                  <span class="kss-nav__ref">3.4</span
+                  <span class="kss-nav__ref">3.5</span
                   ><span class="kss-nav__name"
                     >$_true-results &#x3D; { value }</span
                   >
@@ -91,7 +102,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-stats"
                 >
-                  <span class="kss-nav__ref">3.5</span
+                  <span class="kss-nav__ref">3.6</span
                   ><span class="kss-nav__name"
                     >$_true-stats &#x3D; { value }</span
                   >
@@ -102,7 +113,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-_true-test-result"
                 >
-                  <span class="kss-nav__ref">3.6</span
+                  <span class="kss-nav__ref">3.7</span
                   ><span class="kss-nav__name"
                     >$_true-test-result &#x3D; { value }</span
                   >
@@ -113,7 +124,7 @@
                   class="kss-nav__menu-link"
                   href="section-variables.html#kssref-variables-map"
                 >
-                  <span class="kss-nav__ref">3.7</span
+                  <span class="kss-nav__ref">3.8</span
                   ><span class="kss-nav__name">$map &#x3D; { asserts }</span>
                 </a>
               </li>
@@ -161,7 +172,8 @@
 
             <div class="kss-description">
               <p>
-                <strong>[public]</strong> Value key stores the desired value
+                <strong>[private]</strong> Deprecated compatibility alias for
+                <code>$catch-errors</code>.
               </p>
             </div>
 
@@ -170,10 +182,15 @@
               <li class="kss-parameters__item">
                 <div class="kss-parameters__name"><code>$value</code></div>
                 <div class="kss-parameters__description">
-                  <strong>{boolean}</strong>
-                  <em><strong>The actual output override value</strong></em>
+                  <strong>{boolean|'warn'|null}</strong>
+                  <em
+                    ><strong
+                      >When set, overrides <code>$catch-errors</code> for legacy
+                      tests and helpers.</strong
+                    ></em
+                  >
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>true</code>
+                    Defaults to: <code>null</code>
                   </div>
                 </div>
               </li>
@@ -182,6 +199,59 @@
 
           <div class="kss-source kss-style">
             Source: <code>true/_utilities.styl</code>, line 14
+          </div>
+        </section>
+        <section
+          id="kssref-variables-catch-errors"
+          class="kss-section kss-section--depth-2"
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-variables-catch-errors"
+              >
+                <span class="kss-title__ref">
+                  3.2
+                  <span class="kss-title__permalink-hash">
+                    #Variables.$catch-errors
+                  </span>
+                </span>
+                $catch-errors &#x3D; { value }
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[public]</strong> Controls whether
+                <code>true-error()</code> throws immediately or returns/output
+                catchable error messages.
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$value</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean|'warn'}</strong>
+                  <em
+                    ><strong
+                      >Use <code>true</code> to catch errors,
+                      <code>false</code> to throw, or <code>'warn'</code> to
+                      catch and emit a warning.</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>false</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_settings.styl</code>, line 14
           </div>
         </section>
         <section
@@ -195,7 +265,7 @@
                 href="#kssref-variables-true-terminal-output"
               >
                 <span class="kss-title__ref">
-                  3.2
+                  3.3
                   <span class="kss-title__permalink-hash">
                     #Variables.$true-terminal-output
                   </span>
@@ -247,7 +317,7 @@
                 href="#kssref-variables-_true-context"
               >
                 <span class="kss-title__ref">
-                  3.3
+                  3.4
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-context
                   </span>
@@ -293,7 +363,7 @@
                 href="#kssref-variables-_true-results"
               >
                 <span class="kss-title__ref">
-                  3.4
+                  3.5
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-results
                   </span>
@@ -345,7 +415,7 @@
                 href="#kssref-variables-_true-stats"
               >
                 <span class="kss-title__ref">
-                  3.5
+                  3.6
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-stats
                   </span>
@@ -399,7 +469,7 @@
                 href="#kssref-variables-_true-test-result"
               >
                 <span class="kss-title__ref">
-                  3.6
+                  3.7
                   <span class="kss-title__permalink-hash">
                     #Variables.$_true-test-result
                   </span>
@@ -442,7 +512,7 @@
             <h2 class="kss-title kss-title--level-2">
               <a class="kss-title__permalink" href="#kssref-variables-map">
                 <span class="kss-title__ref">
-                  3.7
+                  3.8
                   <span class="kss-title__permalink-hash">
                     #Variables.$map
                   </span>
@@ -471,7 +541,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_assert.styl</code>, line 337
+            Source: <code>true/_assert.styl</code>, line 416
           </div>
         </section>
       </article>
