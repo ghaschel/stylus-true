@@ -1,5 +1,5 @@
 // unwrap-list($list)
-// 
+//
 // **[private:{list}]** Transforms a wrapped list into a unwrapped one
 // 
 // Weight: 0
@@ -38,25 +38,55 @@ _true-context-mixin($scope, $name) {
   $_true-context.buffer = unwrap-list($_true-context.buffer);
 }
 
-// _true-context-pop($type)
+// _true-context-pop($scope)
 // 
-// **[private:{void}]** Remove the deepest context layer from `$_true-context.buffer`
+// **[private:{void}]** Remove the deepest context layer from `$_true-context.buffer`, optionally matching a specific scope.
 // 
 // Weight: 0
 // 
-// Styleguide Functions._true-output-pop
-_true-context-pop($type = null) {
+// $scope = null - **{string|null}** ***Scope to remove, or `null` to remove the last context entry.***
+//
+// Styleguide Functions._true-context-pop
+_true-context-pop($scope = null) {
   $new = ();
+  $remove = null;
+  $length = 0;
 
-  if ($type == null) {
-    for $i in 0 .. (length($_true-context.buffer) - 1) {
-      push($new, $_true-context.buffer[$i]);
+  for $entry in ($_true-context.buffer) {
+    if ($entry != null) {
+      if ($scope != null) {
+        $entries = split('|', $entry);
+        $entry-scope = $entries[0];
+
+        if (length($entries) > 1 && $entry-scope == $scope) {
+          $remove = $length;
+        }
+      }
+
+      $length = $length + 1;
     }
-
-    $_true-context.buffer = $new;
-  } else {
-    $_true-context.buffer = ();
   }
+
+  if ($length == 0) {
+    return;
+  }
+
+  if ($scope == null) {
+    $remove = $length - 1;
+  }
+
+  $index = 0;
+  for $entry in ($_true-context.buffer) {
+    if ($entry != null) {
+      if ($index != $remove) {
+        push($new, $entry);
+      }
+
+      $index = $index + 1;
+    }
+  }
+
+  $_true-context.buffer = $new;
 }
 
 $_true-output-context = {
@@ -134,26 +164,31 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
     $is-sub = index('expect' 'output' 'contains' 'contains-string', $new);
     $is-sub = $is-sub != null && $is-sub >= 0;
 
-    // if ($is-sub && !($assertIndex != null && $assertIndex >= 0)) {
-    //   $error = 'The `assert()` wrapper is required';
-
-    //   return _true-error($error, 'output-context');
-    // }
-
     push($context, $new);
     return $context
   }
 
-  $length = length($context);
-  $has-expect = index($context, 'expect') || index($context, 'contains') || index($context, 'contains-string');
-  $has-both = index($context, 'output') && $has-expect;
+  $assertIndex = index($context, 'assert');
+  $outputIndex = index($context, 'output');
+  $expectIndex = index($context, 'expect');
+  $containsIndex = index($context, 'contains');
+  $containsStringIndex = index($context, 'contains-string');
+  $has-assert = $assertIndex != null && $assertIndex >= 0;
+  $has-output = $outputIndex != null && $outputIndex >= 0;
+  $has-expect = ($expectIndex != null && $expectIndex >= 0) || ($containsIndex != null && $containsIndex >= 0) || ($containsStringIndex != null && $containsStringIndex >= 0);
 
-  // if ($length != 3 || !$has-both) {
-  //   $required = 'one `output()`, and one `expect()`, `contains()`, or `contains-string()`';
-  //   $error = 'Each `assert()` must contain %s' % $required;
+  if (!$has-assert) {
+    $error = 'The `assert()` wrapper is required';
 
-  //   return _true-error($error, 'output-context');
-  // }
+    return _true-error($error, 'output-context');
+  }
+
+  if (!$has-output || !$has-expect) {
+    $required = 'one `output()`, and one `expect()`, `contains()`, or `contains-string()`';
+    $error = 'Each `assert()` must contain ' + unquote($required);
+
+    return _true-error($error, 'output-context');
+  }
 
   return ();
 }
@@ -171,14 +206,18 @@ _true-context($scope) {
   $value = null;
 
   for $entry in ($_true-context.buffer) {
-    $entries = split('|', $entry);
+    if ($entry != null) {
+      $entries = split('|', $entry);
 
-    $entry-scope = $entries[0];
-    $entry-value = $entries[1];
-  }
+      if (length($entries) > 1) {
+        $entry-scope = $entries[0];
+        $entry-value = $entries[1];
 
-  if ($entry-scope == $scope) {
-    $value = $entry-value;
+        if ($entry-scope == $scope) {
+          $value = $entry-value;
+        }
+      }
+    }
   }
 
   return $value;
@@ -197,13 +236,17 @@ _true-context-all($scope) {
   $list = ();
 
   for $entry in ($_true-context.buffer) {
-    $entries = split('|', $entry);
-    
-    $entry-scope = $entries[0];
-    $entry-value = $entries[1];
+    if ($entry != null) {
+      $entries = split('|', $entry);
 
-    if ($entry-scope == $scope) {
-      push($list, $entry-value);
+      if (length($entries) > 1) {
+        $entry-scope = $entries[0];
+        $entry-value = $entries[1];
+
+        if ($entry-scope == $scope) {
+          push($list, $entry-value);
+        }
+      }
     }
   }
 

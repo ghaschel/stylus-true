@@ -206,12 +206,21 @@
           </table>
           <h2>Known limits</h2>
           <p>
-            Stylus evaluates nested block contents before wrapper mixins. Nested
-            module context can therefore be unreliable, and validation cannot
-            always detect a missing <code>assert()</code> wrapper around
+            Stylus evaluates nested block contents before wrapper mixins.
+            <code>runStyl()</code> supports nested
+            <code>test-module()</code>/<code>describe()</code> structures by
+            parsing private module-boundary comments, but private live context
+            reads such as <code>_true-context('module')</code> inside nested
+            wrapper bodies are not a public guarantee.
+          </p>
+          <p>
+            CSS output assertions should still use an
+            <code>assert()</code> wrapper. The JavaScript parser reports stray
             <code>output()</code>, <code>expect()</code>,
-            <code>contains()</code>, or <code>contains-string()</code> before
-            compilation.
+            <code>contains()</code>, <code>contains-string()</code>, or
+            <code>END_ASSERT</code> markers outside an assertion, but the
+            standalone Stylus compiler cannot always reject a missing wrapper
+            before CSS is emitted.
           </p>
           <p>Use this structure for CSS output assertions:</p>
           <pre

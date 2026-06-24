@@ -270,6 +270,66 @@ describe("runStyl compatibility", () => {
       ["it", "'uses plugin functions'"],
     ]);
   });
+
+  it("reconstructs nested describe and it calls", () => {
+    const runner = createRunner();
+    const source = [
+      '@require "styl/_true";',
+      "+describe('Outer') {",
+      "  +describe('Inner') {",
+      "    +it('runs nested test') {",
+      "      assert-equal(1, 1, 'nested pass');",
+      "    }",
+      "  }",
+      "}",
+    ].join("\n");
+
+    stylTrue.runStyl(
+      {
+        data: source,
+      },
+      {
+        describe: runner.describe,
+        it: runner.it,
+      }
+    );
+
+    assert.deepStrictEqual(runner.calls, [
+      ["describe", "Outer"],
+      ["describe", "Inner"],
+      ["it", "'runs nested test'"],
+    ]);
+  });
+
+  it("reconstructs nested test-module and test calls", () => {
+    const runner = createRunner();
+    const source = [
+      '@require "styl/_true";',
+      "+test-module('Parent') {",
+      "  +test-module('Child') {",
+      "    +test('runs child test') {",
+      "      assert-equal(1, 1, 'child pass');",
+      "    }",
+      "  }",
+      "}",
+    ].join("\n");
+
+    stylTrue.runStyl(
+      {
+        data: source,
+      },
+      {
+        describe: runner.describe,
+        it: runner.it,
+      }
+    );
+
+    assert.deepStrictEqual(runner.calls, [
+      ["describe", "Parent"],
+      ["describe", "Child"],
+      ["it", "'runs child test'"],
+    ]);
+  });
 });
 
 describe("stylus interface", () => {
@@ -303,6 +363,67 @@ describe("stylus interface", () => {
     } finally {
       removeDir(tmp);
     }
+  });
+
+  it("emits explicit descriptions for value assertions and aliases", () => {
+    const source = [
+      '@require "styl/_true";',
+      "+test-module('Descriptions') {",
+      "  +test('Value descriptions') {",
+      "    assert-true(true, 'assert true description');",
+      "    assert-false(false, 'assert false description');",
+      "    assert-equal(1, 1, 'assert equal description');",
+      "    assert-unequal(1, 2, 'assert unequal description');",
+      "    is-truthy(true, 'is truthy description');",
+      "    is-falsy(false, 'is falsy description');",
+      "    is-equal(1, 1, 'is equal description');",
+      "    not-equal(1, 2, 'not equal description');",
+      "  }",
+      "}",
+    ].join("\n");
+    const css = stylus.render(source, {
+      paths: [packagePath, packageStylPath],
+    });
+
+    assert(
+      css.indexOf("/*   ✔ [assert-true] assert true description */") !== -1
+    );
+    assert(
+      css.indexOf("/*   ✔ [assert-false] assert false description */") !== -1
+    );
+    assert(
+      css.indexOf("/*   ✔ [assert-equal] assert equal description */") !== -1
+    );
+    assert(
+      css.indexOf("/*   ✔ [assert-unequal] assert unequal description */") !==
+        -1
+    );
+    assert(css.indexOf("/*   ✔ [assert-true] is truthy description */") !== -1);
+    assert(css.indexOf("/*   ✔ [assert-false] is falsy description */") !== -1);
+    assert(css.indexOf("/*   ✔ [assert-equal] is equal description */") !== -1);
+    assert(
+      css.indexOf("/*   ✔ [assert-unequal] not equal description */") !== -1
+    );
+  });
+
+  it("emits explicit descriptions for failing value assertions", () => {
+    const source = [
+      '@require "styl/_true";',
+      "+test-module('Descriptions') {",
+      "  +test('Failure descriptions') {",
+      "    assert-true(false, 'failing assert true description');",
+      "  }",
+      "}",
+    ].join("\n");
+    const css = stylus.render(source, {
+      paths: [packagePath, packageStylPath],
+    });
+
+    assert(
+      css.indexOf(
+        "/*   ✖ FAILED: [assert-true] failing assert true description */"
+      ) !== -1
+    );
   });
 
   it("throws uncaught true-error calls through Stylus", () => {

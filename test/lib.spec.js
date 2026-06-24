@@ -275,6 +275,64 @@ describe("#parse", function () {
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
+  it("parses nested modules from module boundary markers", function () {
+    var css = [
+      "/* # Module: Utilities */",
+      "/* Test: Parent test */",
+      "/*   ✔ [assert-equal] parent */",
+      "/* # Module: nested */",
+      "/* Test: Child test */",
+      "/*   ✔ [assert-equal] child */",
+      "/* END_MODULE */",
+      "/* END_MODULE */",
+    ].join("\n");
+    var expected = [
+      {
+        module: "Utilities",
+        tests: [
+          {
+            test: "Parent test",
+            assertions: [
+              {
+                description: "[assert-equal] parent",
+                passed: true,
+              },
+            ],
+          },
+        ],
+        modules: [
+          {
+            module: "nested",
+            tests: [
+              {
+                test: "Child test",
+                assertions: [
+                  {
+                    description: "[assert-equal] child",
+                    passed: true,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    expect(main.parse(css)).to.deep.equal(expected);
+  });
+
+  it("throws on END_MODULE without an open module", function () {
+    var css = ["/* END_MODULE */"].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected module end marker "END_MODULE"; looking for module'
+    );
+  });
+
   it("parses a failing non-output test", function () {
     var css = [
       "/* # Module: Assert */",
@@ -383,6 +441,27 @@ describe("#parse", function () {
     ];
 
     expect(main.parse(css)).to.deep.equal(expected);
+  });
+
+  it("defaults blank output assertion descriptions to the current test", function () {
+    var css = [
+      "/* # Module: Assert */",
+      "/* Test: CSS output assertions */",
+      "/*   ASSERT:    */",
+      "/*   OUTPUT   */",
+      ".test-output {",
+      "  -property: value; }",
+      "/*   END_OUTPUT   */",
+      "/*   EXPECTED   */",
+      ".test-output {",
+      "  -property: value; }",
+      "/*   END_EXPECTED   */",
+      "/*   END_ASSERT   */",
+    ].join("\n");
+
+    expect(main.parse(css)[0].tests[0].assertions[0].description).to.equal(
+      "CSS output assertions"
+    );
   });
 
   it("parses a passing output test with loud comments", function () {
@@ -560,6 +639,35 @@ describe("#parse", function () {
     var css = ".foo { -prop: value; }";
 
     expect(main.parse(css)).to.deep.equal([]);
+  });
+
+  it("throws on output markers outside assert blocks", function () {
+    var css = ["/* # Module: M */", "/* Test: T */", "/*   OUTPUT   */"].join(
+      "\n"
+    );
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected output assertion marker "OUTPUT" outside assert(); looking for ASSERT'
+    );
+  });
+
+  it("throws on incomplete output assertions at EOF", function () {
+    var css = [
+      "/* # Module: M */",
+      "/* Test: T */",
+      "/*   ASSERT: incomplete   */",
+      "/*   OUTPUT   */",
+      ".test-output {",
+      "  -property: value; }",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw("Unexpected end of CSS; looking for END_OUTPUT.");
   });
 
   it("throws error on unexpected rule type instead of end summary", function () {
@@ -1105,7 +1213,7 @@ describe("#parse", function () {
               test: "Multiple contains blocks",
               assertions: [
                 {
-                  description: "",
+                  description: "Multiple contains blocks",
                   assertionType: "contains",
                   passed: true,
                   output:
@@ -1158,7 +1266,7 @@ describe("#parse", function () {
               test: "Multiple contains blocks with failure",
               assertions: [
                 {
-                  description: "",
+                  description: "Multiple contains blocks with failure",
                   assertionType: "contains",
                   passed: false,
                   output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",
@@ -1345,7 +1453,7 @@ describe("#parse", function () {
               test: "Multiple strings",
               assertions: [
                 {
-                  description: "",
+                  description: "Multiple strings",
                   assertionType: "contains-string",
                   passed: true,
                   output:
@@ -1390,7 +1498,7 @@ describe("#parse", function () {
               test: "Multiple strings with failure",
               assertions: [
                 {
-                  description: "",
+                  description: "Multiple strings with failure",
                   assertionType: "contains-string",
                   passed: false,
                   output: ".test-output {\n  height: 10px;\n  width: 20px;\n}",

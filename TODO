@@ -1,25 +1,26 @@
 Fix (after initial release):
-  ☐ Context
-    ☐ Find a way to create associations between modules (child + parent). stylus rendering order works differently than SASS
-      - This is essential for `describe inside describe`
-      - Try to keep with mixins and not with functions
+  ✔ Context @done(26-06-24)
+    ✔ Create parser-backed associations between modules (child + parent) with private `END_MODULE` comments @done(26-06-24)
+      - `describe inside describe` is supported by `runStyl()` parsing.
+      - Live private context reads inside nested wrapper bodies remain a Stylus limitation.
   ☐ Assert
-    ☐ Find a way to validate the use of the assert wrapper function, it falls in the same bag of the module inside module thing.
-    ☐ Assert `$default` is being added wrong, and only to the first element `if not first test`
+    ✔ Validate complete output assertion context at `assert()` close @done(26-06-24)
+    ✔ Report stray output assertion markers outside `assert()` in the JS parser @done(26-06-24)
+    ✔ Remove unreliable `$default` assertion description behavior; emit explicit descriptions only @done(26-06-24)
   ☐ Messages
-    ☐ `module::child-module` not working. Depends on fixing the context first `IF used with child + parent`
-  ☐ Reimplement $description to asserts and outputs
+    ✔ Nested module associations work through parser-backed module boundaries @done(26-06-24)
+  ✔ Reimplement $description to asserts and outputs @done(26-06-24)
 
 @critical --- `above this only after initial release` --- @critical 
     
 TODO:
   ✔ Convert js tests to stylus? @done(19-09-06 10:17)
   ✔ Clean up @done(19-09-02 14:57)
-  ☐ Readme.md
+  ✔ Readme.md @done(26-06-24)
   ✔ LICENSE @done(19-08-29 18:40)
-  ☐ KnownIssues.md
-    ☐ Describe > Describe
-    ☐ Unable to detect missing assert before expect/output/contains
+  ✔ KnownIssues.md @done(26-06-24)
+    ✔ Describe > Describe is supported by `runStyl()` parser nesting @done(26-06-24)
+    ✔ Missing assert wrappers are reported by the JS parser when output markers are present @done(26-06-24)
   ✔ EditorConfig @done(19-09-02 14:10)
   ☐ Rewrite to TS/ES6? @low 
     ☐ Prettierc

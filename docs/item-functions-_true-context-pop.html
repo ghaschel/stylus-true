@@ -48,52 +48,55 @@
     <main class="kss-main" aria-label="Content">
       <article>
         <div
-          id="kssref-functions-_true-map-increment"
+          id="kssref-functions-_true-context-pop"
           class="kss-section kss-section--depth-2 is-fullscreen"
         >
           <div class="kss-style">
             <h2 class="kss-title kss-title--level-2">
               <a
                 class="kss-title__permalink"
-                href="#kssref-functions-_true-map-increment"
+                href="#kssref-functions-_true-context-pop"
               >
                 <span class="kss-title__ref">
-                  1.14
+                  1.7
                   <span class="kss-title__permalink-hash">
-                    #Functions._true-map-increment
+                    #Functions._true-context-pop
                   </span>
                 </span>
-                _true-map-increment($base, $add)
+                _true-context-pop($scope)
               </a>
             </h2>
 
             <div class="kss-description">
               <p>
-                <strong>[private:{string}]</strong> Add hash values together
+                <strong>[private:{void}]</strong> Remove the deepest context
+                layer from <code>$_true-context.buffer</code>, optionally
+                matching a specific scope.
               </p>
             </div>
 
             <div class="kss-parameters__title">Parameters:</div>
             <ul class="kss-parameters">
               <li class="kss-parameters__item">
-                <div class="kss-parameters__name"><code>$base</code></div>
+                <div class="kss-parameters__name"><code>$scope</code></div>
                 <div class="kss-parameters__description">
-                  <strong>{string}</strong>
-                  <em><strong>Initial map to add values to</strong></em>
-                </div>
-              </li>
-              <li class="kss-parameters__item">
-                <div class="kss-parameters__name"><code>$add</code></div>
-                <div class="kss-parameters__description">
-                  <strong>{string}</strong>
-                  <em><strong>Map of values to be added</strong></em>
+                  <strong>{string|null}</strong>
+                  <em
+                    ><strong
+                      >Scope to remove, or <code>null</code> to remove the last
+                      context entry.</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>null</code>
+                  </div>
                 </div>
               </li>
             </ul>
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_utilities.styl</code>, line 153
+            Source: <code>true/_context.styl</code>, line 41
           </div>
         </div>
       </article>

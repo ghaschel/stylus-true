@@ -2,11 +2,11 @@
 
 stylus-true works within Stylus evaluation rules, which differ from True's Sass environment in a few important ways.
 
-## Nested Module Context
+## Live Nested Context Reads
 
-Stylus evaluates block contents before the wrapper mixins that contain them. For nested modules, that can make context tracking unreliable because assertions may run before the surrounding `describe()` or `test-module()` state has been recorded.
+Stylus evaluates block contents before the wrapper mixins that contain them. `runStyl()` supports nested modules by parsing private `END_MODULE` boundary comments from compiled CSS, so JavaScript runners can still receive nested `describe()` calls.
 
-For example, this structure can produce assertion output before the nested module wrappers are fully available:
+The remaining limitation is private live context inspection inside nested wrapper bodies. For example, assertions that directly read `_true-context('module')` inside nested blocks can still observe Stylus evaluation order instead of source nesting:
 
 ```stylus
 +describe('outer module') {
@@ -26,11 +26,11 @@ For example, this structure can produce assertion output before the nested modul
 }
 ```
 
-Sass/True evaluates the wrapper structure before the assertions. Stylus can evaluate assertion bodies first, which makes deeply nested module labels less reliable in the current implementation.
+Sass/True evaluates the wrapper structure before the assertions. Stylus can evaluate assertion bodies first, so private context helpers are best-effort internals rather than a public API for nested runtime inspection.
 
 ## CSS Output Assertion Validation
 
-The original validation model expected `assert()` to be known before `output()`, `expect()`, `contains()`, or `contains-string()` run. Stylus evaluation order means that validation cannot always detect a missing wrapper before compilation.
+The original validation model expected `assert()` to be known before `output()`, `expect()`, `contains()`, or `contains-string()` run. Stylus evaluation order means the standalone compiler cannot always detect a missing wrapper before CSS is emitted. `runStyl()` does report stray output assertion markers outside an `assert()` block while parsing compiled CSS.
 
 Always use this safe structure:
 

@@ -83,6 +83,8 @@ The `test-module`/`test` syntax and `describe`/`it` syntax are equivalent:
 
 The `is-truthy`, `is-falsy`, `is-equal`, and `not-equal` aliases match sass-true naming. `assert-equal`, `assert-unequal`, `is-equal`, and `not-equal` also accept the existing Stylus-specific `$inspect` argument for stringified comparisons.
 
+Explicit assertion descriptions are emitted in compiled comments, for example `assert-equal(1, 1, 'numbers match')` outputs `✔ [assert-equal] numbers match`. When omitted, value assertions output the assertion type only.
+
 ## CSS Output Tests
 
 Use `assert()` as the wrapper for one `output()` block and one `expect()`, `contains()`, or `contains-string()` check:
@@ -178,7 +180,9 @@ describe("Stylus tests", () => {
 
 ## Known Limits
 
-Stylus evaluates nested block contents before wrapper mixins. Because of that, nested module context can be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, `contains()`, or `contains-string()` before compilation.
+Stylus evaluates nested block contents before wrapper mixins. `runStyl()` supports nested `test-module()`/`describe()` structures by parsing private module-boundary comments from compiled CSS, but private live context reads such as `_true-context('module')` inside nested wrapper bodies are not a public guarantee.
+
+CSS output assertions should still use an `assert()` wrapper. The JavaScript parser reports stray `output()`, `expect()`, `contains()`, `contains-string()`, or `END_ASSERT` markers outside an assertion, but the standalone Stylus compiler cannot always reject a missing wrapper before CSS is emitted.
 
 Use this safe structure for CSS output assertions:
 

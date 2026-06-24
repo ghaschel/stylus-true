@@ -22,7 +22,7 @@ use('../../lib/arrange-test-list.js');
 
 // test-module($name)
 // 
-// **[public:{void}]** Group related tests under a module heading. Nested modules are allowed, but deep nested context can be unreliable because of Stylus block evaluation order.
+// **[public:{void}]** Group related tests under a module heading. Nested modules are supported by the JavaScript runner parser; live private context inspection inside nested blocks remains limited by Stylus evaluation order.
 // 
 // Weight: -10
 // 
@@ -149,5 +149,6 @@ _true-module-start($name) {
 _true-module-stop() {
   _true-update-stats-count('modules');
   // _true-context-pop('modules')
+  _true-message(' END_MODULE ', 'comments');
   _true-message('', 'comments');
 }

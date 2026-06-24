@@ -91,9 +91,18 @@
               <li class="kss-nav__menu-item">
                 <a
                   class="kss-nav__menu-link"
-                  href="section-functions.html#kssref-functions-_true-edgefail-notes"
+                  href="section-functions.html#kssref-functions-_true-context-pop"
                 >
                   <span class="kss-nav__ref">1.7</span
+                  ><span class="kss-nav__name">_true-context-pop($scope)</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a
+                  class="kss-nav__menu-link"
+                  href="section-functions.html#kssref-functions-_true-edgefail-notes"
+                >
+                  <span class="kss-nav__ref">1.8</span
                   ><span class="kss-nav__name"
                     >_true-edgefail-notes($one, $two)</span
                   >
@@ -104,7 +113,7 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-error"
                 >
-                  <span class="kss-nav__ref">1.8</span
+                  <span class="kss-nav__ref">1.9</span
                   ><span class="kss-nav__name"
                     >_true-error($message, $source, $override)</span
                   >
@@ -115,7 +124,7 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-error-prefix"
                 >
-                  <span class="kss-nav__ref">1.9</span
+                  <span class="kss-nav__ref">1.10</span
                   ><span class="kss-nav__name"
                     >_true-error-prefix($source)</span
                   >
@@ -126,7 +135,7 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-get-result"
                 >
-                  <span class="kss-nav__ref">1.10</span
+                  <span class="kss-nav__ref">1.11</span
                   ><span class="kss-nav__name"
                     >_true-get-result($assert, $expected, $unequal)</span
                   >
@@ -137,7 +146,7 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-is-truthy"
                 >
-                  <span class="kss-nav__ref">1.11</span
+                  <span class="kss-nav__ref">1.12</span
                   ><span class="kss-nav__name">_true-is-truthy($assert)</span>
                 </a>
               </li>
@@ -146,7 +155,7 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-join-multiple"
                 >
-                  <span class="kss-nav__ref">1.12</span
+                  <span class="kss-nav__ref">1.13</span
                   ><span class="kss-nav__name"
                     >_true-join-multiple($lists...)</span
                   >
@@ -157,7 +166,7 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-map-increment"
                 >
-                  <span class="kss-nav__ref">1.13</span
+                  <span class="kss-nav__ref">1.14</span
                   ><span class="kss-nav__name"
                     >_true-map-increment($base, $add)</span
                   >
@@ -168,19 +177,10 @@
                   class="kss-nav__menu-link"
                   href="section-functions.html#kssref-functions-_true-output-context"
                 >
-                  <span class="kss-nav__ref">1.14</span
+                  <span class="kss-nav__ref">1.15</span
                   ><span class="kss-nav__name"
                     >_true-output-context($new, $context)</span
                   >
-                </a>
-              </li>
-              <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-functions.html#kssref-functions-_true-output-pop"
-                >
-                  <span class="kss-nav__ref">1.15</span
-                  ><span class="kss-nav__name">_true-context-pop($type)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
@@ -566,7 +566,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_context.styl</code>, line 161
+            Source: <code>true/_context.styl</code>, line 196
           </div>
         </section>
         <section
@@ -609,7 +609,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_context.styl</code>, line 187
+            Source: <code>true/_context.styl</code>, line 226
           </div>
         </section>
         <section
@@ -672,6 +672,58 @@
           </div>
         </section>
         <section
+          id="kssref-functions-_true-context-pop"
+          class="kss-section kss-section--depth-2"
+        >
+          <div class="kss-style">
+            <h2 class="kss-title kss-title--level-2">
+              <a
+                class="kss-title__permalink"
+                href="#kssref-functions-_true-context-pop"
+              >
+                <span class="kss-title__ref">
+                  1.7
+                  <span class="kss-title__permalink-hash">
+                    #Functions._true-context-pop
+                  </span>
+                </span>
+                _true-context-pop($scope)
+              </a>
+            </h2>
+
+            <div class="kss-description">
+              <p>
+                <strong>[private:{void}]</strong> Remove the deepest context
+                layer from <code>$_true-context.buffer</code>, optionally
+                matching a specific scope.
+              </p>
+            </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$scope</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string|null}</strong>
+                  <em
+                    ><strong
+                      >Scope to remove, or <code>null</code> to remove the last
+                      context entry.</strong
+                    ></em
+                  >
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>null</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="kss-source kss-style">
+            Source: <code>true/_context.styl</code>, line 41
+          </div>
+        </section>
+        <section
           id="kssref-functions-_true-edgefail-notes"
           class="kss-section kss-section--depth-2"
         >
@@ -682,7 +734,7 @@
                 href="#kssref-functions-_true-edgefail-notes"
               >
                 <span class="kss-title__ref">
-                  1.7
+                  1.8
                   <span class="kss-title__permalink-hash">
                     #Functions._true-edgefail-notes
                   </span>
@@ -735,7 +787,7 @@
                 href="#kssref-functions-_true-error"
               >
                 <span class="kss-title__ref">
-                  1.8
+                  1.9
                   <span class="kss-title__permalink-hash">
                     #Functions._true-error
                   </span>
@@ -800,7 +852,7 @@
                 href="#kssref-functions-_true-error-prefix"
               >
                 <span class="kss-title__ref">
-                  1.9
+                  1.10
                   <span class="kss-title__permalink-hash">
                     #Functions._true-error-prefix
                   </span>
@@ -843,7 +895,7 @@
                 href="#kssref-functions-_true-get-result"
               >
                 <span class="kss-title__ref">
-                  1.10
+                  1.11
                   <span class="kss-title__permalink-hash">
                     #Functions._true-get-result
                   </span>
@@ -908,7 +960,7 @@
                 href="#kssref-functions-_true-is-truthy"
               >
                 <span class="kss-title__ref">
-                  1.11
+                  1.12
                   <span class="kss-title__permalink-hash">
                     #Functions._true-is-truthy
                   </span>
@@ -937,7 +989,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_assert.styl</code>, line 455
+            Source: <code>true/_assert.styl</code>, line 443
           </div>
         </section>
         <section
@@ -951,7 +1003,7 @@
                 href="#kssref-functions-_true-join-multiple"
               >
                 <span class="kss-title__ref">
-                  1.12
+                  1.13
                   <span class="kss-title__permalink-hash">
                     #Functions._true-join-multiple
                   </span>
@@ -994,7 +1046,7 @@
                 href="#kssref-functions-_true-map-increment"
               >
                 <span class="kss-title__ref">
-                  1.13
+                  1.14
                   <span class="kss-title__permalink-hash">
                     #Functions._true-map-increment
                   </span>
@@ -1043,7 +1095,7 @@
                 href="#kssref-functions-_true-output-context"
               >
                 <span class="kss-title__ref">
-                  1.14
+                  1.15
                   <span class="kss-title__permalink-hash">
                     #Functions._true-output-context
                   </span>
@@ -1090,39 +1142,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_context.styl</code>, line 66
-          </div>
-        </section>
-        <section
-          id="kssref-functions-_true-output-pop"
-          class="kss-section kss-section--depth-2"
-        >
-          <div class="kss-style">
-            <h2 class="kss-title kss-title--level-2">
-              <a
-                class="kss-title__permalink"
-                href="#kssref-functions-_true-output-pop"
-              >
-                <span class="kss-title__ref">
-                  1.15
-                  <span class="kss-title__permalink-hash">
-                    #Functions._true-output-pop
-                  </span>
-                </span>
-                _true-context-pop($type)
-              </a>
-            </h2>
-
-            <div class="kss-description">
-              <p>
-                <strong>[private:{void}]</strong> Remove the deepest context
-                layer from <code>$_true-context.buffer</code>
-              </p>
-            </div>
-          </div>
-
-          <div class="kss-source kss-style">
-            Source: <code>true/_context.styl</code>, line 41
+            Source: <code>true/_context.styl</code>, line 96
           </div>
         </section>
         <section
@@ -1551,7 +1571,7 @@
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_context.styl</code>, line 82
+            Source: <code>true/_context.styl</code>, line 112
           </div>
         </section>
         <section

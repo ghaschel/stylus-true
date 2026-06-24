@@ -31,7 +31,9 @@ stylus-true is a unit-testing framework for Stylus code. Tests are written in St
 
 ## Known limits
 
-Stylus evaluates nested block contents before wrapper mixins. Nested module context can therefore be unreliable, and validation cannot always detect a missing `assert()` wrapper around `output()`, `expect()`, `contains()`, or `contains-string()` before compilation.
+Stylus evaluates nested block contents before wrapper mixins. `runStyl()` supports nested `test-module()`/`describe()` structures by parsing private module-boundary comments, but private live context reads such as `_true-context('module')` inside nested wrapper bodies are not a public guarantee.
+
+CSS output assertions should still use an `assert()` wrapper. The JavaScript parser reports stray `output()`, `expect()`, `contains()`, `contains-string()`, or `END_ASSERT` markers outside an assertion, but the standalone Stylus compiler cannot always reject a missing wrapper before CSS is emitted.
 
 Use this structure for CSS output assertions:
 
