@@ -315,6 +315,135 @@ describe("#parse", function () {
     expect(main.parse(css)).to.deep.equal(expected);
   });
 
+  it("parses nested modules and tests from TRUE marker comments", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Outer */",
+      "/* # Module: Outer */",
+      "/* --------------- */",
+      "/* TRUE_TEST_START: parent test */",
+      "/* Test: parent test */",
+      "/*   ✔ [assert-equal] parent */",
+      "/* TRUE_TEST_END: parent test */",
+      "/* TRUE_MODULE_START: Outer */",
+      "/* # Module: Outer */",
+      "/* --------------- */",
+      "/* TRUE_TEST_START: child test */",
+      "/* Test: child test */",
+      "/*   ✔ [assert-equal] child */",
+      "/* TRUE_TEST_END: child test */",
+      "/* TRUE_MODULE_END: Outer */",
+      "/* END_MODULE */",
+      "/* TRUE_MODULE_END: Outer */",
+      "/* END_MODULE */",
+    ].join("\n");
+    var expected = [
+      {
+        module: "Outer",
+        tests: [
+          {
+            test: "parent test",
+            assertions: [
+              {
+                description: "[assert-equal] parent",
+                passed: true,
+              },
+            ],
+          },
+        ],
+        modules: [
+          {
+            module: "Outer",
+            tests: [
+              {
+                test: "child test",
+                assertions: [
+                  {
+                    description: "[assert-equal] child",
+                    passed: true,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    expect(main.parse(css)).to.deep.equal(expected);
+  });
+
+  it("does not skip later legacy modules when a TRUE module display comment is missing", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Structured */",
+      "/* TRUE_MODULE_END: Structured */",
+      "/* # Module: Legacy */",
+      "/* Test: legacy test */",
+      "/*   ✔ [assert-equal] legacy */",
+      "/* END_MODULE */",
+    ].join("\n");
+    var expected = [
+      {
+        module: "Structured",
+        tests: [],
+      },
+      {
+        module: "Legacy",
+        tests: [
+          {
+            test: "legacy test",
+            assertions: [
+              {
+                description: "[assert-equal] legacy",
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    expect(main.parse(css)).to.deep.equal(expected);
+  });
+
+  it("does not skip later legacy tests when a TRUE test display comment is missing", function () {
+    var css = [
+      "/* # Module: Module */",
+      "/* TRUE_TEST_START: repeated */",
+      "/*   ✔ [assert-equal] structured */",
+      "/* TRUE_TEST_END: repeated */",
+      "/* Test: repeated */",
+      "/*   ✔ [assert-equal] legacy */",
+      "/* END_MODULE */",
+    ].join("\n");
+    var expected = [
+      {
+        module: "Module",
+        tests: [
+          {
+            test: "repeated",
+            assertions: [
+              {
+                description: "[assert-equal] structured",
+                passed: true,
+              },
+            ],
+          },
+          {
+            test: "repeated",
+            assertions: [
+              {
+                description: "[assert-equal] legacy",
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    expect(main.parse(css)).to.deep.equal(expected);
+  });
+
   it("throws on END_MODULE without an open module", function () {
     var css = ["/* END_MODULE */"].join("\n");
     var attempt = function () {
@@ -323,6 +452,118 @@ describe("#parse", function () {
 
     expect(attempt).to.throw(
       'Unexpected module end marker "END_MODULE"; looking for module'
+    );
+  });
+
+  it("throws on mismatched TRUE module end markers", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Outer */",
+      "/* # Module: Outer */",
+      "/* TRUE_MODULE_END: Inner */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Mismatched module end marker "Inner"; expected "Outer"'
+    );
+  });
+
+  it("throws on mismatched TRUE test end markers", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Module */",
+      "/* # Module: Module */",
+      "/* TRUE_TEST_START: expected test */",
+      "/* Test: expected test */",
+      "/* TRUE_TEST_END: other test */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Mismatched test end marker "other test"; expected "expected test"'
+    );
+  });
+
+  it("throws on TRUE test end markers without an open test", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Module */",
+      "/* # Module: Module */",
+      "/* TRUE_TEST_END: missing */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected test end marker "TRUE_TEST_END: missing"; looking for test'
+    );
+  });
+
+  it("throws on TRUE module start markers before closing the current test", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Module */",
+      "/* # Module: Module */",
+      "/* TRUE_TEST_START: test */",
+      "/* Test: test */",
+      "/* TRUE_MODULE_START: Nested */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected module start marker "TRUE_MODULE_START: Nested" before test end marker'
+    );
+  });
+
+  it("throws on TRUE module end markers before closing the current test", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Module */",
+      "/* # Module: Module */",
+      "/* TRUE_TEST_START: test */",
+      "/* Test: test */",
+      "/* TRUE_MODULE_END: Module */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected module end marker "TRUE_MODULE_END: Module" before test end marker'
+    );
+  });
+
+  it("throws on unclosed TRUE test markers at EOF", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Module */",
+      "/* # Module: Module */",
+      "/* TRUE_TEST_START: missing end */",
+      "/* Test: missing end */",
+      "/*   ✔ [assert-equal] pass */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      "Unexpected end of CSS; looking for TRUE_TEST_END: missing end."
+    );
+  });
+
+  it("throws on unclosed TRUE module markers at EOF", function () {
+    var css = [
+      "/* TRUE_MODULE_START: Module */",
+      "/* # Module: Module */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      "Unexpected end of CSS; looking for TRUE_MODULE_END: Module."
     );
   });
 
@@ -661,6 +902,66 @@ describe("#parse", function () {
     };
 
     expect(attempt).to.throw("Unexpected end of CSS; looking for END_OUTPUT.");
+  });
+
+  it("throws when an output assertion is missing output", function () {
+    var css = [
+      "/* # Module: M */",
+      "/* Test: T */",
+      "/*   ASSERT: missing output   */",
+      "/*   EXPECTED   */",
+      ".test-output {",
+      "  -property: value; }",
+      "/*   END_EXPECTED   */",
+      "/*   END_ASSERT   */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected comment "EXPECTED"; looking for OUTPUT'
+    );
+  });
+
+  it("throws when an output assertion is missing a comparison block", function () {
+    var css = [
+      "/* # Module: M */",
+      "/* Test: T */",
+      "/*   ASSERT: missing comparison   */",
+      "/*   OUTPUT   */",
+      ".test-output {",
+      "  -property: value; }",
+      "/*   END_OUTPUT   */",
+      "/*   END_ASSERT   */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected comment "END_ASSERT"; looking for EXPECTED'
+    );
+  });
+
+  it("throws on duplicate output markers inside an assertion", function () {
+    var css = [
+      "/* # Module: M */",
+      "/* Test: T */",
+      "/*   ASSERT: duplicate output   */",
+      "/*   OUTPUT   */",
+      "/*   OUTPUT   */",
+      ".test-output {",
+      "  -property: value; }",
+      "/*   END_OUTPUT   */",
+    ].join("\n");
+    var attempt = function () {
+      main.parse(css);
+    };
+
+    expect(attempt).to.throw(
+      'Unexpected output assertion marker "OUTPUT"; looking for END_OUTPUT'
+    );
   });
 
   it("throws error on unexpected rule type instead of end summary", function () {

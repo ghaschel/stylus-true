@@ -32,7 +32,7 @@ test($name) {
 
   {block};
 
-  _true-test-stop();
+  _true-test-stop($name);
 }
 
 
@@ -73,7 +73,7 @@ it($name) {
 
 // _true-test-start($name)
 // 
-// **[private:{void}]** Test start helper
+// **[private:{void}]** Test start helper. Emits a private `TRUE_TEST_START` marker for JavaScript runner nesting before the legacy `Test:` display comment.
 // 
 // Weight: -10
 // 
@@ -82,19 +82,23 @@ it($name) {
 // Styleguide Functions._true-test-start
 _true-test-start($name) {
   _true-context-mixin('test', $name);
+  _true-message(' TRUE_TEST_START: %s ' % $name, 'comments');
   _true-message('Test: %s' % $name, 'comments');
 }
 
-// _true-test-stop()
+// _true-test-stop($name)
 // 
-// **[private:{void}]** Test stop helper
+// **[private:{void}]** Test stop helper. Emits a private `TRUE_TEST_END` marker for JavaScript runner nesting before the legacy blank test boundary comment.
 // 
 // Weight:0
 // 
+// $name - **{string}** ***Describe what is being tested***
+//
 // Styleguide Functions._true-test-stop
-_true-test-stop() {
+_true-test-stop($name) {
   _true-update($_true-test-result.value);
   _true-update-stats-count('tests');
-  // _true-context-pop();
+  _true-context-pop('test');
+  _true-message(' TRUE_TEST_END: %s ' % $name, 'comments');
   _true-message('', 'comments');
 }

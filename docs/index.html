@@ -208,10 +208,13 @@
           <p>
             Stylus evaluates nested block contents before wrapper mixins.
             <code>runStyl()</code> supports nested
-            <code>test-module()</code>/<code>describe()</code> structures by
-            parsing private module-boundary comments, but private live context
-            reads such as <code>_true-context('module')</code> inside nested
-            wrapper bodies are not a public guarantee.
+            <code>test-module()</code>/<code>describe()</code> and
+            <code>test()</code>/<code>it()</code> structures by parsing private
+            <code>TRUE_MODULE_*</code> and <code>TRUE_TEST_*</code> marker
+            comments, then reconstructing the hierarchy in JavaScript. Private
+            live context reads such as
+            <code>_true-context('module')</code> inside nested wrapper bodies
+            are not a public guarantee.
           </p>
           <p>
             CSS output assertions should still use an

@@ -63,17 +63,32 @@
                     #Mixins._true-module-stop
                   </span>
                 </span>
-                _true-module-stop()
+                _true-module-stop($name)
               </a>
             </h2>
 
             <div class="kss-description">
-              <p><strong>[private:{output}]</strong> Module stop helper</p>
+              <p>
+                <strong>[private:{output}]</strong> Module stop helper. Emits a
+                private <code>TRUE_MODULE_END</code> marker and the legacy
+                <code>END_MODULE</code> display boundary.
+              </p>
             </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$name</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>Module name</strong></em>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_modules.styl</code>, line 142
+            Source: <code>true/_modules.styl</code>, line 134
           </div>
         </div>
       </article>

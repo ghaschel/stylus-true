@@ -69,8 +69,10 @@
 
             <div class="kss-description">
               <p>
-                <strong>[private]</strong> Stores the current
-                module/test/assertion context stack
+                <strong>[private]</strong> Stores the best-effort
+                module/test/assertion context stack. JavaScript runner nesting
+                is reconstructed from parser-visible marker comments instead of
+                relying on this live Stylus state.
               </p>
             </div>
 

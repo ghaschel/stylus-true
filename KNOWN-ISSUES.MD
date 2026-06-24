@@ -4,7 +4,7 @@ stylus-true works within Stylus evaluation rules, which differ from True's Sass 
 
 ## Live Nested Context Reads
 
-Stylus evaluates block contents before the wrapper mixins that contain them. `runStyl()` supports nested modules by parsing private `END_MODULE` boundary comments from compiled CSS, so JavaScript runners can still receive nested `describe()` calls.
+Stylus evaluates block contents before the wrapper mixins that contain them. `runStyl()` supports nested modules and tests by parsing private `TRUE_MODULE_*` and `TRUE_TEST_*` marker comments from compiled CSS, then reconstructing the hierarchy in JavaScript. JavaScript runners can still receive nested `describe()` and `it()` calls even when Stylus live context order is different from source order.
 
 The remaining limitation is private live context inspection inside nested wrapper bodies. For example, assertions that directly read `_true-context('module')` inside nested blocks can still observe Stylus evaluation order instead of source nesting:
 
@@ -26,7 +26,7 @@ The remaining limitation is private live context inspection inside nested wrappe
 }
 ```
 
-Sass/True evaluates the wrapper structure before the assertions. Stylus can evaluate assertion bodies first, so private context helpers are best-effort internals rather than a public API for nested runtime inspection.
+Sass/True evaluates the wrapper structure before the assertions. Stylus can evaluate assertion bodies first, so private context helpers are best-effort internals rather than a public API for nested runtime inspection. The parser-visible markers are the authoritative source for JavaScript runner nesting.
 
 ## CSS Output Assertion Validation
 

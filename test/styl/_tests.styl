@@ -6,10 +6,12 @@
     +assert('test start and stop comments') {
       +output() {
         _true-test-start('test [mixin]');
-        _true-test-stop();
+        _true-test-stop('test [mixin]');
       }
 
+      contains-string("TRUE_TEST_START: 'test [mixin]'");
       contains-string("Test: 'test [mixin]'");
+      contains-string("TRUE_TEST_END: 'test [mixin]'");
     }
   }
 }

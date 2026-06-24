@@ -360,6 +360,11 @@ describe("stylus interface", () => {
       assert(css.indexOf("/* # Module: Module */") !== -1, css);
       assert(css.indexOf("/* Test: 'Test' */") !== -1, css);
       assert(css.indexOf("/*   ✔ [assert-equal] */") !== -1, css);
+      assert(css.indexOf("/*  TRUE_MODULE_START: Module  */") !== -1, css);
+      assert(css.indexOf("/*  TRUE_TEST_START: 'Test'  */") !== -1, css);
+      assert(css.indexOf("/*  TRUE_TEST_END: 'Test'  */") !== -1, css);
+      assert(css.indexOf("/*  TRUE_MODULE_END: Module  */") !== -1, css);
+      assert(css.indexOf("/*  END_MODULE  */") !== -1, css);
     } finally {
       removeDir(tmp);
     }

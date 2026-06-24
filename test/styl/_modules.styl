@@ -6,10 +6,12 @@
     +assert('module start and stop comments') {
       +output() {
         _true-module-start('Helper Module');
-        _true-module-stop();
+        _true-module-stop('Helper Module');
       }
 
       contains-string('# Module: Helper Module');
+      contains-string('TRUE_MODULE_START: Helper Module');
+      contains-string('TRUE_MODULE_END: Helper Module');
       contains-string('END_MODULE');
     }
   }
@@ -20,10 +22,12 @@
     +assert('describe start and stop comments') {
       +output() {
         _true-module-start('Describe Helper');
-        _true-module-stop();
+        _true-module-stop('Describe Helper');
       }
 
       contains-string('# Module: Describe Helper');
+      contains-string('TRUE_MODULE_START: Describe Helper');
+      contains-string('TRUE_MODULE_END: Describe Helper');
       contains-string('END_MODULE');
     }
   }

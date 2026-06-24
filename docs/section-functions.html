@@ -222,7 +222,7 @@
                   href="section-functions.html#kssref-functions-_true-test-stop"
                 >
                   <span class="kss-nav__ref">1.19</span
-                  ><span class="kss-nav__name">_true-test-stop()</span>
+                  ><span class="kss-nav__name">_true-test-stop($name)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
@@ -387,7 +387,12 @@
             </h2>
 
             <div class="kss-description">
-              <p><strong>[private:{void}]</strong> Test start helper</p>
+              <p>
+                <strong>[private:{void}]</strong> Test start helper. Emits a
+                private <code>TRUE_TEST_START</code> marker for JavaScript
+                runner nesting before the legacy <code>Test:</code> display
+                comment.
+              </p>
             </div>
 
             <div class="kss-parameters__title">Parameters:</div>
@@ -549,7 +554,8 @@
             <div class="kss-description">
               <p>
                 <strong>[private:{string}]</strong> Get information on current
-                context for a given scope
+                context for a given scope. This is a best-effort private helper
+                and should not be used as a public nested-wrapper API.
               </p>
             </div>
 
@@ -592,7 +598,8 @@
             <div class="kss-description">
               <p>
                 <strong>[private:{list}]</strong> Get list of context names for
-                a given scope
+                a given scope. This is a best-effort private helper and should
+                not be used as a public nested-wrapper API.
               </p>
             </div>
 
@@ -1368,17 +1375,32 @@
                     #Functions._true-test-stop
                   </span>
                 </span>
-                _true-test-stop()
+                _true-test-stop($name)
               </a>
             </h2>
 
             <div class="kss-description">
-              <p><strong>[private:{void}]</strong> Test stop helper</p>
+              <p>
+                <strong>[private:{void}]</strong> Test stop helper. Emits a
+                private <code>TRUE_TEST_END</code> marker for JavaScript runner
+                nesting before the legacy blank test boundary comment.
+              </p>
             </div>
+
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$name</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{string}</strong>
+                  <em><strong>Describe what is being tested</strong></em>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div class="kss-source kss-style">
-            Source: <code>true/_tests.styl</code>, line 88
+            Source: <code>true/_tests.styl</code>, line 89
           </div>
         </section>
         <section
