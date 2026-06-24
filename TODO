@@ -10,6 +10,10 @@ Fix (after initial release):
   ☐ Messages
     ✔ Nested module/test associations work through parser-backed structured markers @done(26-06-24)
   ✔ Reimplement $description to asserts and outputs @done(26-06-24)
+  ✔ Stylus-specific feature layer @done(26-06-24)
+    ✔ Add type, unit, selector, defined-symbol, and JSON assertions @done(26-06-24)
+    ✔ Add render-only JS API, deps reporting, and plugin path loading @done(26-06-24)
+    ✔ Document Stylus introspection patterns and CLI-runner deferral @done(26-06-24)
 
 @critical --- `above this only after initial release` --- @critical 
     

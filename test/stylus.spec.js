@@ -80,7 +80,7 @@ describe("runStyl compatibility", () => {
     let renderContents;
     let renderOptions;
 
-    stylTrue.runStyl(
+    const result = stylTrue.runStyl(
       {
         file,
         includePaths,
@@ -120,6 +120,7 @@ describe("runStyl compatibility", () => {
       ["describe", "Options"],
       ["it", "render options"],
     ]);
+    assert.deepStrictEqual(result.deps, []);
   });
 
   it("passes normalized options for data renders", () => {
@@ -128,7 +129,7 @@ describe("runStyl compatibility", () => {
     let renderContents;
     let renderOptions;
 
-    stylTrue.runStyl(
+    const result = stylTrue.runStyl(
       {
         data: testSource("Inline", "uses data", "assert-equal(1, 1);"),
         filename,
@@ -149,12 +150,72 @@ describe("runStyl compatibility", () => {
     assert(renderContents.indexOf("+test-module('Inline')") !== -1);
     assert.strictEqual(renderOptions.filename, filename);
     assert.deepStrictEqual(renderOptions.paths, [packagePath, packageStylPath]);
+    assert.deepStrictEqual(result.deps, []);
+  });
+
+  it("renderStyl returns CSS, modules, and deps without runner callbacks", () => {
+    const result = stylTrue.renderStyl({
+      data: testSource(
+        "RenderStyl",
+        "returns parse data",
+        "assert-equal(1, 1);"
+      ),
+    });
+
+    assert(result.css.indexOf("# Module: RenderStyl") !== -1, result.css);
+    assert.deepStrictEqual(result.modules, [
+      {
+        module: "RenderStyl",
+        tests: [
+          {
+            test: "'returns parse data'",
+            assertions: [
+              {
+                description: "[assert-equal]",
+                passed: true,
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+    assert(Array.isArray(result.deps));
+  });
+
+  it("uses deps from injected Stylus engines when available", () => {
+    const filename = path.resolve(__dirname, "inline-with-deps.styl");
+    let depsFilename;
+
+    const result = stylTrue.renderStyl(
+      {
+        data: testSource(
+          "Injected Deps",
+          "uses custom deps",
+          "assert-equal(1, 1);"
+        ),
+        filename,
+      },
+      {
+        styl: {
+          render() {
+            return passingCss;
+          },
+          deps(renderFilename) {
+            depsFilename = renderFilename;
+            return ["mock-dependency.styl"];
+          },
+        },
+      }
+    );
+
+    assert.strictEqual(depsFilename, filename);
+    assert.deepStrictEqual(result.deps, ["mock-dependency.styl"]);
   });
 
   it("renders data requiring styl/_true through package lookup paths", () => {
     const runner = createRunner();
 
-    stylTrue.runStyl(
+    const result = stylTrue.runStyl(
       {
         data: testSource("Data", "loads package entry", "assert-equal(1, 1);"),
       },
@@ -168,6 +229,7 @@ describe("runStyl compatibility", () => {
       ["describe", "Data"],
       ["it", "'loads package entry'"],
     ]);
+    assert.strictEqual(result.modules[0].module, "Data");
   });
 
   it("supports includePaths as a compatibility alias", () => {
@@ -268,6 +330,119 @@ describe("runStyl compatibility", () => {
     assert.deepStrictEqual(runner.calls, [
       ["describe", "Use Plugin"],
       ["it", "'uses plugin functions'"],
+    ]);
+  });
+
+  it("passes multiple use plugins without mutating caller arrays", () => {
+    const runner = createRunner();
+    const use = [
+      (style) => {
+        style.define("first-plugin-value", () => new stylus.nodes.Unit(20));
+      },
+      (style) => {
+        style.define("second-plugin-value", () => new stylus.nodes.Unit(22));
+      },
+    ];
+
+    stylTrue.runStyl(
+      {
+        data: testSource(
+          "Use Plugins",
+          "uses multiple plugin functions",
+          "assert-equal(first-plugin-value() + second-plugin-value(), 42);"
+        ),
+        use,
+      },
+      {
+        describe: runner.describe,
+        it: runner.it,
+      }
+    );
+
+    assert.strictEqual(use.length, 2);
+    assert.deepStrictEqual(runner.calls, [
+      ["describe", "Use Plugins"],
+      ["it", "'uses multiple plugin functions'"],
+    ]);
+  });
+
+  it("loads CLI-style pluginPaths with options", () => {
+    const runner = createRunner();
+    const pluginPaths = [
+      {
+        path: "test/styl/plugins/cli-plugin.js",
+        options: { value: 64 },
+      },
+    ];
+
+    stylTrue.runStyl(
+      {
+        data: testSource(
+          "Plugin Paths",
+          "uses cli-style plugins",
+          "assert-equal(cli-plugin-value(), 64);"
+        ),
+        pluginPaths,
+      },
+      {
+        describe: runner.describe,
+        it: runner.it,
+      }
+    );
+
+    assert.deepStrictEqual(pluginPaths, [
+      {
+        path: "test/styl/plugins/cli-plugin.js",
+        options: { value: 64 },
+      },
+    ]);
+    assert.deepStrictEqual(runner.calls, [
+      ["describe", "Plugin Paths"],
+      ["it", "'uses cli-style plugins'"],
+    ]);
+  });
+
+  it("reports deps through return values and onDeps", () => {
+    const runner = createRunner();
+    const includePath = path.resolve(__dirname, "styl/includes");
+    const source = [
+      '@require "styl/_true";',
+      '@require "_mixin";',
+      "+test-module('Deps') {",
+      "  +test('imports user fixture') {",
+      "    assert-equal(1, 1);",
+      "  }",
+      "}",
+    ].join("\n");
+    let callbackDeps;
+    let callbackResult;
+
+    const result = stylTrue.runStyl(
+      {
+        data: source,
+        filename: path.resolve(__dirname, "deps-inline.styl"),
+        includePaths: [includePath],
+      },
+      {
+        describe: runner.describe,
+        it: runner.it,
+        onDeps(deps, renderResult) {
+          callbackDeps = deps;
+          callbackResult = renderResult;
+        },
+      }
+    );
+    const userDependency = path.join("test", "styl", "includes", "_mixin.styl");
+
+    assert(
+      result.deps.some((dep) => dep.endsWith(userDependency)),
+      result.deps
+    );
+    assert.strictEqual(callbackDeps, result.deps);
+    assert.strictEqual(callbackResult, result);
+    assert.deepStrictEqual(runner.calls, [
+      ["describe", "Deps"],
+      ["it", "'imports user fixture'"],
     ]);
   });
 
@@ -428,6 +603,65 @@ describe("stylus interface", () => {
       css.indexOf(
         "/*   ✖ FAILED: [assert-true] failing assert true description */"
       ) !== -1
+    );
+  });
+
+  it("supports selector assertions with contextual selector strings", () => {
+    const source = [
+      '@require "styl/_true";',
+      ".selector-fixture {",
+      "  color: red;",
+      "  a {",
+      "    color: blue;",
+      "    define('selector-context-path', selector(), true);",
+      "  }",
+      "}",
+      "+test-module('Selector Assertions') {",
+      "  +test('Selectors exist') {",
+      "    assert-selector('.selector-fixture', 'root selector exists');",
+      "    assert-selector(lookup('selector-context-path'), 'nested selector exists');",
+      "    assert-equal(lookup('selector-context-path'), '.selector-fixture a');",
+      "  }",
+      "}",
+    ].join("\n");
+    const result = stylTrue.renderStyl({ data: source });
+    const assertions = result.modules[0].tests[0].assertions;
+
+    assert.deepStrictEqual(
+      assertions.map((assertion) => assertion.passed),
+      [true, true, true]
+    );
+  });
+
+  it("emits failure comments for Stylus-specific assertions", () => {
+    const source = [
+      '@require "styl/_true";',
+      "+test-module('Stylus-specific failures') {",
+      "  +test('Reports failed assertions') {",
+      "    assert-type(10px, 'string', 'wrong type');",
+      "    assert-unit('value', px, 'non-unit value');",
+      "    assert-selector('.missing-selector', 'missing selector');",
+      "    assert-defined('missing-symbol', 'missing symbol');",
+      "    assert-json('test/styl/fixtures/assert-json.json', { name: 'wrong' }, 'json mismatch');",
+      "  }",
+      "}",
+    ].join("\n");
+    const result = stylTrue.renderStyl({ data: source });
+    const assertions = result.modules[0].tests[0].assertions;
+
+    assert.deepStrictEqual(
+      assertions.map((assertion) => assertion.assertionType),
+      [
+        "assert-type",
+        "assert-unit",
+        "assert-selector",
+        "assert-defined",
+        "assert-json",
+      ]
+    );
+    assert.deepStrictEqual(
+      assertions.map((assertion) => assertion.passed),
+      [false, false, false, false, false]
     );
   });
 

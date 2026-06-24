@@ -66,3 +66,9 @@ You can replace `expect()` with `contains()` when the output only needs to inclu
   }
 }
 ```
+
+## Stylus Introspection Assertions
+
+`assert-selector()` uses Stylus `selector-exists()` and is not relative to the caller's current selector context. Pass the full selector string you want to check. If you need the current context, capture it with Stylus `selector()` or `selectors()` and assert against that value directly.
+
+`assert-defined()` uses Stylus `lookup()` from inside the assertion helper. This works well for top-level variables, functions, and symbols created with `define($name, $value, true)`, but local variables from the caller's block are not guaranteed to be visible after the helper call crosses mixin/function scope. Stylus also returns `null` for both missing symbols and symbols intentionally set to `null`, so those cases cannot be distinguished by `assert-defined()`.

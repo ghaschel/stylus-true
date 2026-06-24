@@ -28,15 +28,16 @@ Import the framework in a Stylus test file:
 
 The public Stylus API currently supported by this package is:
 
-| Area                  | API                                                                                                                     | Purpose                                                     |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| Structure             | `test-module($name)` / `describe($name)`                                                                                | Group related tests.                                        |
-| Tests                 | `test($name)` / `it($name)`                                                                                             | Define a single behavior or case.                           |
-| Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)` | Compare Stylus values during compilation.                   |
-| Value aliases         | `is-truthy($value)`, `is-falsy($value)`, `is-equal($actual, $expected)`, `not-equal($actual, $expected)`                | sass-true-compatible aliases for value assertions.          |
-| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`, `contains-string($string)`                                | Emit CSS assertion blocks for JavaScript runner comparison. |
-| Errors                | `true-error($message, $source, $catch)`                                                                                 | Throw or catch testable error messages.                     |
-| Reporting             | `report($terminal, $fail-on-error)`                                                                                     | Emit a summary to CSS comments and optionally the terminal. |
+| Area                  | API                                                                                                                                                | Purpose                                                                   |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Structure             | `test-module($name)` / `describe($name)`                                                                                                           | Group related tests.                                                      |
+| Tests                 | `test($name)` / `it($name)`                                                                                                                        | Define a single behavior or case.                                         |
+| Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)`                            | Compare Stylus values during compilation.                                 |
+| Value aliases         | `is-truthy($value)`, `is-falsy($value)`, `is-equal($actual, $expected)`, `not-equal($actual, $expected)`                                           | sass-true-compatible aliases for value assertions.                        |
+| Stylus assertions     | `assert-type($value, $type)`, `assert-unit($value, $unit)`, `assert-selector($selector)`, `assert-defined($name)`, `assert-json($path, $expected)` | Test Stylus-specific types, units, selectors, symbols, and JSON fixtures. |
+| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`, `contains-string($string)`                                                           | Emit CSS assertion blocks for JavaScript runner comparison.               |
+| Errors                | `true-error($message, $source, $catch)`                                                                                                            | Throw or catch testable error messages.                                   |
+| Reporting             | `report($terminal, $fail-on-error)`                                                                                                                | Emit a summary to CSS comments and optionally the terminal.               |
 
 Value assertions are evaluated by Stylus during compilation. CSS output assertions are emitted into compiled CSS and compared by the JavaScript runner integration.
 
@@ -84,6 +85,51 @@ The `test-module`/`test` syntax and `describe`/`it` syntax are equivalent:
 The `is-truthy`, `is-falsy`, `is-equal`, and `not-equal` aliases match sass-true naming. `assert-equal`, `assert-unequal`, `is-equal`, and `not-equal` also accept the existing Stylus-specific `$inspect` argument for stringified comparisons.
 
 Explicit assertion descriptions are emitted in compiled comments, for example `assert-equal(1, 1, 'numbers match')` outputs `✔ [assert-equal] numbers match`. When omitted, value assertions output the assertion type only.
+
+## Stylus-Specific Assertions
+
+These assertions cover Stylus features that Sass True does not expose:
+
+```stylus
++test('uses Stylus type and unit introspection') {
+  assert-type(10px, 'unit');
+  assert-unit(50%, '%');
+  assert-unit(10, '');
+}
+```
+
+`assert-type($value, $expected-type)` compares `type($value)` to an exact string such as `'unit'`, `'string'`, `'rgba'`, `'object'`, or `'function'`. Pass type names as strings; bare names such as `unit` can resolve to Stylus built-in functions.
+
+`assert-unit($value, $expected-unit)` compares `unit($value)` for unit values without throwing on non-unit values. Use `''` for unitless numbers and `'%'` for percentages.
+
+`assert-selector($selector)` checks `selector-exists($selector)`. It is not current-context relative, so use Stylus introspection when context matters:
+
+```stylus
+.card
+  &:hover
+    define('hover-selector', selector(), true)
+
++test('generated hover selector exists') {
+  assert-selector(lookup('hover-selector'));
+}
+```
+
+`assert-defined($name)` checks that `lookup($name)` returns a non-null value. It covers variables, functions, and values created with `define()`. Stylus `lookup()` cannot distinguish a missing symbol from a symbol intentionally set to `null`, and symbols local to the caller's block may not be visible inside the assertion helper; prefer top-level fixtures or `define($name, $value, true)` for tests that need explicit lookup visibility.
+
+`assert-json($path, $expected, $description = null, $options = null)` loads a JSON file through Stylus `json()` and compares the resulting hash object to `$expected`. Options default to `{ hash: true, leave-strings: true }`; caller options are copied without mutation and `hash` is always forced to `true`.
+
+For selector stack and mixin-introspection behavior, use Stylus built-ins directly inside value assertions:
+
+```stylus
+.card
+  &:hover
+    assert-equal(selector(), '.card:hover');
+
+helper()
+  assert-true(mixin);
+```
+
+There is no `assert-mixin()` wrapper because wrapping Stylus's `mixin` local would change the context being tested.
 
 ## CSS Output Tests
 
@@ -147,7 +193,7 @@ When caught in a function context, `true-error()` returns a string such as `ERRO
 
 ## JavaScript Runner Integration
 
-Use `runStyl(stylOptions, trueOptions)` from `stylus-true/lib/main.js` to compile Stylus tests and map the parsed results to a runner's `describe` and `it` functions.
+Use `runStyl(stylOptions, trueOptions)` from `stylus-true/lib/main.js` to compile Stylus tests and map the parsed results to a runner's `describe` and `it` functions. Use `renderStyl(stylOptions, trueOptions)` when you want compilation, parsing, dependency reporting, and module data without invoking runner callbacks.
 
 ```js
 const path = require("path");
@@ -160,12 +206,31 @@ describe("Stylus tests", () => {
   );
 
   stylTestFiles.forEach((file) => {
-    stylTrue.runStyl({ file }, { describe, it });
+    const result = stylTrue.runStyl({ file }, { describe, it });
+    console.log(result.deps);
   });
 });
 ```
 
-`runStyl` accepts Stylus render options such as `file`, `data`, `filename`, `includePaths`, `paths`, `use`, and `compress`. The second argument requires `describe` and `it`, and accepts `contextLines` for parse-error output.
+Both functions return `{ css, modules, deps }`. `runStyl()` still invokes `describe` and `it`; `renderStyl()` does not. `deps` is collected from Stylus `.deps()` when the real Stylus renderer is used and falls back to `[]` for injected render mocks that do not expose dependency data.
+
+`runStyl` and `renderStyl` accept Stylus render options such as `file`, `data`, `filename`, `includePaths`, `paths`, `use`, and `compress`. Native `use` entries are renderer plugin functions and may be a single function or an array. `pluginPaths` is also supported for CLI-style plugin factories:
+
+```js
+stylTrue.runStyl(
+  {
+    file,
+    pluginPaths: [
+      { path: "./test/styl/plugins/theme-plugin.js", options: { scale: 2 } },
+    ],
+  },
+  { describe, it }
+);
+```
+
+Each `pluginPaths` entry loads a module that exports a factory function. The factory is called with the provided options and must return a Stylus renderer plugin function. Relative plugin paths resolve from `stylOptions.filename` when available, otherwise from `process.cwd()`. Package names resolve through Node `require`.
+
+The second argument accepts `describe`, `it`, `contextLines`, injected `styl`, and `onDeps(deps, result)`. `onDeps` runs after compilation when dependency data is available, which is useful for watch-mode tooling and future CLI runners.
 
 ## Compatibility
 
@@ -178,7 +243,9 @@ describe("Stylus tests", () => {
 | Mocha                      | Supported and tested     | The repository runs `npm run test:mocha`.                                                                                  |
 | Jest                       | Supported and tested     | The repository runs `npm run test:jest` with Jest 29.                                                                      |
 | Vitest-style runners       | Compatible in principle  | Any runner exposing `describe` and `it` can use `runStyl`, but this repo does not yet include a Vitest test script.        |
-| Stylus plugins             | Supported                | Direct Stylus `use()` calls and `runStyl({ use })` are supported.                                                          |
+| Stylus plugins             | Supported                | Direct Stylus `use()` calls, `runStyl({ use })`, and CLI-style `runStyl({ pluginPaths })` are supported.                   |
+| Dependency reporting       | Supported                | `renderStyl()` and `runStyl()` return Stylus `.deps()` data and support `trueOptions.onDeps`.                              |
+| CLI runner                 | Deferred                 | The reusable renderer/parser/dependency layer exists, but `stylus-true` does not yet ship a standalone file-discovery CLI. |
 
 ## Known Limits
 

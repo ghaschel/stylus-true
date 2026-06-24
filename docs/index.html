@@ -99,6 +99,20 @@
                 <td>sass-true-compatible aliases for value assertions.</td>
               </tr>
               <tr>
+                <td>Stylus assertions</td>
+                <td>
+                  <code>assert-type($value, $type)</code>,
+                  <code>assert-unit($value, $unit)</code>,
+                  <code>assert-selector($selector)</code>,
+                  <code>assert-defined($name)</code>,
+                  <code>assert-json($path, $expected)</code>
+                </td>
+                <td>
+                  Test Stylus-specific types, units, selectors, symbols, and
+                  JSON fixtures.
+                </td>
+              </tr>
+              <tr>
                 <td>CSS output assertions</td>
                 <td>
                   <code>assert($description)</code>, <code>output()</code>,
@@ -128,6 +142,41 @@
             it to <code>true</code> to make <code>true-error()</code> return
             strings from functions or emit CSS comments from mixin calls; set it
             to <code>'warn'</code> to catch and warn.
+          </p>
+          <h2>Stylus-specific feature layer</h2>
+          <p>
+            <code>assert-type()</code>, <code>assert-unit()</code>,
+            <code>assert-selector()</code>, <code>assert-defined()</code>, and
+            <code>assert-json()</code> test Stylus semantics directly. Pass type
+            names as strings, for example
+            <code>assert-type(10px, 'unit')</code>; use
+            <code>assert-unit(10, '')</code> for unitless numbers and
+            <code>assert-unit(50%, '%')</code> for percentages.
+          </p>
+          <p>
+            <code>assert-selector()</code> checks
+            <code>selector-exists()</code> and is not current-context relative.
+            Use Stylus introspection such as <code>selector()</code> or
+            <code>selectors()</code> directly in assertions when the current
+            selector stack matters. Use <code>assert-defined()</code> for
+            <code>lookup()</code> and <code>define()</code> behavior, with the
+            Stylus limitation that <code>lookup()</code> cannot distinguish a
+            missing symbol from a symbol set to <code>null</code>.
+          </p>
+          <p>
+            <code>assert-json()</code> loads fixtures through Stylus
+            <code>json()</code>, defaults to
+            <code>{ hash: true, leave-strings: true }</code>, copies caller
+            options, and always forces <code>hash: true</code>.
+          </p>
+          <p>
+            <code>renderStyl()</code> compiles and parses without invoking
+            runner callbacks, and <code>runStyl()</code> still invokes
+            <code>describe</code>/<code>it</code>. Both return
+            <code>{ css, modules, deps }</code>, both support
+            <code>trueOptions.onDeps(deps, result)</code>, and both support
+            native renderer plugins through <code>use</code> plus CLI-style
+            plugin factories through <code>pluginPaths</code>.
           </p>
           <h2>Compatibility</h2>
           <table>
@@ -198,8 +247,27 @@
                 <td>Stylus plugins</td>
                 <td>Supported</td>
                 <td>
-                  Direct Stylus <code>use()</code> calls and
-                  <code>runStyl({ use })</code> are supported.
+                  Direct Stylus <code>use()</code> calls,
+                  <code>runStyl({ use })</code>, and CLI-style
+                  <code>runStyl({ pluginPaths })</code> are supported.
+                </td>
+              </tr>
+              <tr>
+                <td>Dependency reporting</td>
+                <td>Supported</td>
+                <td>
+                  <code>renderStyl()</code> and <code>runStyl()</code> return
+                  Stylus <code>.deps()</code> data and support
+                  <code>trueOptions.onDeps</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>CLI runner</td>
+                <td>Deferred</td>
+                <td>
+                  The reusable renderer/parser/dependency layer exists, but
+                  <code>stylus-true</code> does not yet ship a standalone
+                  file-discovery CLI.
                 </td>
               </tr>
             </tbody>

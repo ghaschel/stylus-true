@@ -1,3 +1,58 @@
+use('../../lib/true-json-equal.js');
+
+// _true-assert-label($name, $description)
+//
+// **[private:{string}]** Build the output label for assertion comments.
+//
+// Weight: 0
+//
+// $name - **{string}** ***Assertion name***
+// $description = null - **{string|null}** ***Optional assertion description***
+//
+// Styleguide Functions._true-assert-label
+_true-assert-label($name, $description = null) {
+  return $description ? '[%s] %s' % (unquote($name) unquote($description)) : '[%s]' % unquote($name);
+}
+
+// _true-string-value($value)
+//
+// **[private:{string}]** Coerce identifiers or strings into a Stylus string value.
+//
+// Weight: 0
+//
+// $value - **{any}** ***Value to stringify***
+//
+// Styleguide Functions._true-string-value
+_true-string-value($value) {
+  return '' + $value;
+}
+
+// _true-json-options($options)
+//
+// **[private:{object}]** Build options for Stylus `json()` assertions without mutating caller options.
+//
+// Weight: 0
+//
+// $options = null - **{object|null}** ***Optional `json()` options***
+//
+// Styleguide Functions._true-json-options
+_true-json-options($options = null) {
+  $json-options = {
+    hash: true,
+    'leave-strings': true
+  };
+
+  if ($options != null && type($options) == 'object') {
+    for $key in (keys($options)) {
+      $json-options[$key] = $options[$key];
+    }
+  }
+
+  $json-options.hash = true;
+
+  return $json-options;
+}
+
 // assert-true($assert, $description)
 //
 // **[public:{output}]** Assert that a value is truthy. Empty lists and empty strings are treated as false for this assertion.
@@ -185,6 +240,112 @@ assert-unequal($assert, $expected, $description = null, $inspect = false) {
 // Styleguide Mixins.not-equal
 not-equal($assert, $expected, $description = null, $inspect = false) {
   assert-unequal($assert, $expected, $description, $inspect);
+}
+
+// assert-type($value, $expected-type, $description)
+//
+// **[public:{output}]** Assert that `type($value)` matches an exact Stylus type string, such as `'unit'`, `'string'`, `'rgba'`, `'object'`, or `'function'`.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$value - <b>{any}</b> <b><i>Stylus value to inspect</i></b></li>
+// <li>$expected-type - <b>{string}</b> <b><i>Expected result from Stylus `type()`</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-type
+assert-type($value, $expected-type, $description = null) {
+  $tmp = _true-assert-label('assert-type', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results(type($value), _true-string-value($expected-type));
+}
+
+// assert-unit($value, $expected-unit, $description)
+//
+// **[public:{output}]** Assert that a unit value uses the expected unit. Unitless numbers should be checked with an empty string (`''`), and percentages with `'%'`.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$value - <b>{any}</b> <b><i>Stylus value to inspect</i></b></li>
+// <li>$expected-unit - <b>{string|ident}</b> <b><i>Expected unit returned by Stylus `unit()`</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-unit
+assert-unit($value, $expected-unit, $description = null) {
+  $actual-unit = type($value) == 'unit' ? unit($value) : null;
+  $tmp = _true-assert-label('assert-unit', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results($actual-unit, _true-string-value($expected-unit));
+}
+
+// assert-selector($selector, $description)
+//
+// **[public:{output}]** Assert that a selector exists in the compiled selector map. This is not current-context relative; use `selector() + ' a'` when context should be included.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$selector - <b>{string}</b> <b><i>Selector to search for</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-selector
+assert-selector($selector, $description = null) {
+  $tmp = _true-assert-label('assert-selector', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results(selector-exists(_true-string-value($selector)), true);
+}
+
+// assert-defined($name, $description)
+//
+// **[public:{output}]** Assert that `lookup($name)` resolves to a non-null Stylus value. Variables and functions are supported; values intentionally set to `null` are indistinguishable from missing symbols.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$name - <b>{string|ident}</b> <b><i>Variable or function name to look up</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-defined
+assert-defined($name, $description = null) {
+  $tmp = _true-assert-label('assert-defined', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results(lookup(_true-string-value($name)) != null, true);
+}
+
+// assert-json($path, $expected, $description, $options)
+//
+// **[public:{output}]** Assert that a JSON fixture loaded through Stylus `json()` matches the expected hash object. Options default to `{ hash: true, leave-strings: true }`, and `hash` is always forced to `true`.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$path - <b>{string}</b> <b><i>JSON file path resolved by Stylus</i></b></li>
+// <li>$expected - <b>{object}</b> <b><i>Expected hash object</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// <li>$options = null - <b>{object|null}</b> <b><i>Optional Stylus `json()` options.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-json
+assert-json($path, $expected, $description = null, $options = null) {
+  $actual = json($path, _true-json-options($options));
+  $tmp = _true-assert-label('assert-json', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results(true-json-equal($actual, $expected), true);
 }
 
 // assert($description = null)

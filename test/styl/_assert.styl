@@ -1,6 +1,9 @@
 // Test Assertions
 // ===============
 
+use('test/styl/plugins/use-plugin.js', { value: 37 });
+defined-variable = 12px;
+
 // Is Truthy
 +test-module('Is Truthy') {
   +test('True is truthy') {
@@ -131,6 +134,95 @@
 
   +test('Supports not-equal alias with $inspect') {
     not-equal(1, 1rem, null, true);
+  }
+}
+
+// Assert Type
++test-module('Assert Type') {
+  +test('Recognizes Stylus value types') {
+    assert-type(10px, 'unit');
+    assert-type('value', 'string');
+    assert-type(#fff, 'rgba');
+    assert-type({ key: 'value' }, 'object');
+    assert-type(type, 'function');
+  }
+}
+
+// Assert Unit
++test-module('Assert Unit') {
+  +test('Recognizes units') {
+    assert-unit(10px, px);
+    assert-unit(50%, '%');
+    assert-unit(10, '');
+  }
+}
+
+// Assert Defined
++test-module('Assert Defined') {
+  +test('Finds variables, functions, and define-created symbols') {
+    define('defined-from-test', 42, true);
+
+    assert-defined('defined-variable');
+    assert-defined('type');
+    assert-defined('defined-from-test');
+  }
+
+  +test('Documents null lookup limitation') {
+    $null-defined-variable = null;
+
+    assert-equal(lookup('$null-defined-variable'), null);
+    assert-false(lookup('$null-defined-variable') != null);
+  }
+}
+
+// Assert JSON
++test-module('Assert JSON') {
+  +test('Compares JSON hash fixtures') {
+    assert-json(
+      'test/styl/fixtures/assert-json.json',
+      {
+        name: 'stylus-true',
+        size: 12,
+        nested: {
+          unit: '10px',
+          flag: true
+        }
+      }
+    );
+  }
+
+  +test('Supports custom json options without mutating caller options') {
+    $options = {
+      'leave-strings': false,
+      hash: false
+    };
+
+    assert-json(
+      'test/styl/fixtures/assert-json-values.json',
+      {
+        width: 10px,
+        enabled: true
+      },
+      'parsed JSON values',
+      $options
+    );
+    assert-equal($options.hash, false);
+  }
+
+  +test('Supports optional missing JSON fixtures') {
+    assert-json(
+      'test/styl/fixtures/missing.json',
+      null,
+      'optional missing fixture',
+      { optional: true }
+    );
+  }
+}
+
+// Stylus JS Plugin
++test-module('Stylus use() Plugin') {
+  +test('Loads JS plugins through Stylus use()') {
+    assert-equal(use-plugin-value(), 37);
   }
 }
 
