@@ -104,7 +104,9 @@ Use `assert()` as the wrapper for one `output()` block and one `expect()`, `cont
 }
 ```
 
-`expect()` requires the compiled CSS to match exactly. `contains()` passes when the expected declarations are present in the output. `contains-string()` passes when the compiled output includes a case-sensitive substring.
+CSS output assertions are parsed with PostCSS in the JavaScript runner. `expect()` requires the compiled CSS to match the expected block after normalized CSS serialization, so selector and declaration order remain significant. `contains()` is a structural subset check: expected rules, declarations, comments, and at-rules must exist in the output, but declaration order inside a matching rule does not matter. `contains-string()` passes when the compiled output includes a case-sensitive substring.
+
+`contains()` compares selectors as normalized strings, not as selector algebra. For example, `.a, .b` and `.b, .a` are treated as different selectors even though browsers match the same elements. Modern selector syntax such as `:is()`, `:where()`, `:not()`, and `:has()` is parsed safely, including commas inside pseudo-class arguments.
 
 You can use multiple `contains()` blocks or multiple `contains-string()` calls inside one `assert()`:
 

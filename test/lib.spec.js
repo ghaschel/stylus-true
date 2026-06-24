@@ -1,4 +1,3 @@
-var chalk = require("chalk");
 var expect = require("chai").expect;
 var path = require("path");
 
@@ -14,14 +13,8 @@ describe("#fail", function () {
       details: "It really broke.",
     });
     var expected =
-      'It broke. ("2" assert-equal "1" -- It really broke.)' +
-      "\n     " +
-      chalk.green("+ expected ") +
-      chalk.red("- actual") +
-      "\n\n     " +
-      chalk.red("-2") +
-      "\n     " +
-      chalk.green("+1\n");
+      "It broke. [type: assert-equal] -- It really broke." +
+      "\n\n- Expected\n+ Received\n\n- 1\n+ 2\n";
 
     expect(msg).to.equal(expected);
   });
@@ -80,9 +73,9 @@ describe("#runStyl", function () {
     var attempt = function () {
       main.runStyl({ data: stylus }, { describe: mock, it: mock });
     };
-    expect(attempt).to.throw(
-      '("[boolean] false\'" assert-true "[boolean] true\'")'
-    );
+    expect(attempt).to.throw("[type: assert-true]");
+    expect(attempt).to.throw("- [boolean] true'");
+    expect(attempt).to.throw("+ [boolean] false'");
   });
 
   it("can specify includePaths", function () {
@@ -1280,6 +1273,154 @@ describe("#parse", function () {
       ];
 
       expect(main.parse(css)).to.deep.equal(expected);
+    });
+
+    it("matches modern selectors without splitting selector arguments", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Modern selectors */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".card:has(.title, .media):where(:not(.disabled)) {",
+        "  color: red;",
+        "  display: grid;",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".card:has(.title, .media):where(:not(.disabled)) {",
+        "  display: grid;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var assertion = main.parse(css)[0].tests[0].assertions[0];
+
+      expect(assertion.passed).to.equal(true);
+      expect(assertion.assertionType).to.equal("contains");
+    });
+
+    it("does not treat reordered selector lists as equivalent", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Selector list order */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".a, .b {",
+        "  color: red;",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".b, .a {",
+        "  color: red;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var assertion = main.parse(css)[0].tests[0].assertions[0];
+
+      expect(assertion.passed).to.equal(false);
+    });
+
+    it("ignores declaration order for contains assertions", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Declaration order */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        ".test-output {",
+        "  width: 20px;",
+        "  height: 10px;",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        ".test-output {",
+        "  height: 10px;",
+        "  width: 20px;",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var assertion = main.parse(css)[0].tests[0].assertions[0];
+
+      expect(assertion.passed).to.equal(true);
+    });
+
+    it("parses non-standard at-rules that css 2.2.4 rejected", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Non-standard at-rules */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        "@container style(--responsive: true) {",
+        "  .card:has(.title, .media) {",
+        "    color: red;",
+        "    display: grid;",
+        "  }",
+        "}",
+        "@unknown-rule foo(bar, baz) {",
+        "  :root {",
+        "    --brand-color: rebeccapurple;",
+        "  }",
+        "}",
+        "@custom-media --small (width <= 30em);",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        "@container style(--responsive: true) {",
+        "  .card:has(.title, .media) {",
+        "    display: grid;",
+        "  }",
+        "}",
+        "@unknown-rule foo(bar, baz) {",
+        "  :root {",
+        "    --brand-color: rebeccapurple;",
+        "  }",
+        "}",
+        "@custom-media --small (width <= 30em);",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var assertion = main.parse(css)[0].tests[0].assertions[0];
+
+      expect(assertion.passed).to.equal(true);
+      expect(assertion.output).to.contain(
+        "@container style(--responsive: true)"
+      );
+      expect(assertion.output).to.contain("@custom-media --small");
+    });
+
+    it("matches nested at-rules structurally", function () {
+      var css = [
+        "/* # Module: Contains */",
+        "/* Test: Nested at-rules */",
+        "/*   ASSERT:    */",
+        "/*   OUTPUT   */",
+        "@supports selector(:has(*)) {",
+        "  @media (min-width: 30em) {",
+        "    @container card (inline-size > 20rem) {",
+        "      :root {",
+        "        --space: 1rem;",
+        "        --color: currentColor;",
+        "      }",
+        "    }",
+        "  }",
+        "}",
+        "/*   END_OUTPUT   */",
+        "/*   CONTAINED   */",
+        "@supports selector(:has(*)) {",
+        "  @media (min-width: 30em) {",
+        "    @container card (inline-size > 20rem) {",
+        "      :root {",
+        "        --color: currentColor;",
+        "      }",
+        "    }",
+        "  }",
+        "}",
+        "/*   END_CONTAINED   */",
+        "/*   END_ASSERT   */",
+      ].join("\n");
+      var assertion = main.parse(css)[0].tests[0].assertions[0];
+
+      expect(assertion.passed).to.equal(true);
     });
 
     it("throws on unexpected comments after CONTAINED", function () {

@@ -266,6 +266,31 @@
       }
     }
 
+    +test('Can be used with CSS level 4 selectors and nested at-rules') {
+      +assert() {
+        +output() {
+          @media (min-width: 30em) {
+            @container card (inline-size > 20rem) {
+              .card:has(.title, .media):where(:not(.disabled)) {
+                color: red;
+                display: grid;
+              }
+            }
+          }
+        }
+
+        +contains() {
+          @media (min-width: 30em) {
+            @container card (inline-size > 20rem) {
+              .card:has(.title, .media):where(:not(.disabled)) {
+                display: grid;
+              }
+            }
+          }
+        }
+      }
+    }
+
     +test('Can be used with root selector') {
       +assert() {
         +output() {

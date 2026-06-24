@@ -67,7 +67,12 @@
             <div class="kss-description">
               <p>
                 <strong>[public:{output}]</strong> Define CSS that must be
-                present within the sibling <code>output()</code> block.
+                present within the sibling <code>output()</code> block. The
+                JavaScript runner uses structural PostCSS containment: expected
+                rules, declarations, comments, and at-rules must exist,
+                declaration order inside a matching rule does not matter, and
+                selectors are compared as normalized strings rather than
+                selector algebra.
               </p>
               <p><b>Parameters:</b></p>
               <ul>

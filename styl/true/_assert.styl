@@ -189,7 +189,7 @@ not-equal($assert, $expected, $description = null, $inspect = false) {
 
 // assert($description = null)
 //
-// **[public:{output}]** Define a CSS-output assertion. Use it as a wrapper around one `output()` block and one `expect()`, `contains()`, or `contains-string()` check.
+// **[public:{output}]** Define a CSS-output assertion. Use it as a wrapper around one `output()` block and one `expect()`, `contains()`, or `contains-string()` check. JavaScript runner output assertions are parsed with PostCSS.
 //
 // Weight: -10
 //
@@ -279,7 +279,7 @@ output($selector = true) {
 
 // expect($selector)
 //
-// **[public:{output}]** Define the exact CSS expected from the sibling `output()` block.
+// **[public:{output}]** Define the exact CSS expected from the sibling `output()` block. The JavaScript runner compares normalized serialized CSS, so selector and declaration order remain significant.
 //
 // Weight: -10
 //
@@ -323,7 +323,7 @@ expect($selector = true) {
 
 // contains($selector)
 //
-// **[public:{output}]** Define CSS that must be present within the sibling `output()` block.
+// **[public:{output}]** Define CSS that must be present within the sibling `output()` block. The JavaScript runner uses structural PostCSS containment: expected rules, declarations, comments, and at-rules must exist, declaration order inside a matching rule does not matter, and selectors are compared as normalized strings rather than selector algebra.
 //
 // Weight: -10
 //

@@ -222,6 +222,14 @@
             standalone Stylus compiler cannot always reject a missing wrapper
             before CSS is emitted.
           </p>
+          <p>
+            The JavaScript runner parses CSS output assertions with PostCSS.
+            <code>expect()</code> compares normalized serialized CSS exactly,
+            while <code>contains()</code> performs structural subset matching
+            for rules, declarations, comments, and at-rules. Selectors are
+            compared as normalized strings rather than selector algebra, so
+            <code>.a, .b</code> and <code>.b, .a</code> are not equivalent.
+          </p>
           <p>Use this structure for CSS output assertions:</p>
           <pre
             class="hljs"

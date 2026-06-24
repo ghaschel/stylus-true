@@ -35,6 +35,8 @@ Stylus evaluates nested block contents before wrapper mixins. `runStyl()` suppor
 
 CSS output assertions should still use an `assert()` wrapper. The JavaScript parser reports stray `output()`, `expect()`, `contains()`, `contains-string()`, or `END_ASSERT` markers outside an assertion, but the standalone Stylus compiler cannot always reject a missing wrapper before CSS is emitted.
 
+The JavaScript runner parses CSS output assertions with PostCSS. `expect()` compares normalized serialized CSS exactly, while `contains()` performs structural subset matching for rules, declarations, comments, and at-rules. Selectors are compared as normalized strings rather than selector algebra, so `.a, .b` and `.b, .a` are not equivalent.
+
 Use this structure for CSS output assertions:
 
 ```stylus
