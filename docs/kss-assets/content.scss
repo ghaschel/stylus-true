@@ -1,0 +1,227 @@
+@mixin description {
+  color: $gray;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 300;
+    border-bottom: 1px solid #dedede;
+    margin: 1rem 0;
+    padding: 0 1rem;
+
+    @media only screen and (min-width: 1024px) {
+      padding: 0;
+    }
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    @media (min-width: 1024px) {
+      font-size: 2rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    @media (min-width: 1024px) {
+      font-size: 1.8rem;
+    }
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    @media (min-width: 1024px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    @media (min-width: 1024px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  h5 {
+    font-size: 1.1rem;
+    @media (min-width: 1024px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  h6 {
+    font-size: 1rem;
+  }
+
+  a {
+    color: #ff8a00;
+    text-decoration: none;
+  }
+
+  p,
+  ul,
+  ol {
+    margin: 1rem;
+    @media only screen and (min-width: 1024px) {
+      margin: 1rem 0;
+    }
+  }
+
+  ul,
+  ol {
+    padding: 0 0 0 2rem;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  p,
+  li {
+    font-size: 0.8rem;
+
+    @media (min-width: 1024px) {
+      font-size: 1rem;
+    }
+  }
+
+  pre {
+    padding: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: scroll;
+  }
+}
+
+.kss-content {
+  padding: 1rem 0;
+  @media only screen and (min-width: 1024px) {
+    padding: 1rem;
+  }
+
+  background-color: #eaeaea;
+  section {
+  }
+
+  .kss-overview {
+    margin: 0;
+    @include description();
+  }
+
+  .kss-title {
+    font-weight: 300;
+    padding: 0 1rem;
+    border-bottom: 1px solid #dedede;
+    margin: 1rem 0;
+
+    @media only screen and (min-width: 1024px) {
+      padding: 0;
+    }
+
+    .kss-ref {
+      color: $gray;
+      font-size: 0.5rem;
+    }
+  }
+
+  .kss-description {
+    @include description();
+
+    table {
+      border-collapse: collapse;
+      border: 1px solid #fff;
+
+      th {
+        background-color: #fff;
+        color: $gray;
+      }
+
+      td {
+        border-bottom: 1px dotted #fff;
+      }
+
+      tr:last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+
+      td,
+      th {
+        padding: 0.5em 1rem;
+      }
+    }
+  }
+
+  .kss-modifier-block {
+    margin-top: 1rem;
+    background-color: #fff;
+    margin: 1rem 0;
+
+    @media only screen and (min-width: 1024px) {
+      padding: 1rem;
+    }
+
+    .kss-modifier {
+      padding: 1em 0 1em 0;
+    }
+
+    .kss-modifier-original {
+      padding-top: 0;
+    }
+
+    .kss-modifier-name {
+      font-family: $fontsMono;
+      color: $gray;
+      font-size: 0.8rem;
+    }
+
+    .kss-modifier-description {
+      font-size: 0.8rem;
+      color: $gray;
+      padding-bottom: 0.5rem;
+      margin-left: 0.5rem;
+      color: #999;
+      font-size: 0.8rem;
+    }
+
+    .kss-modifier-head {
+      display: flex;
+      align-items: baseline;
+      border-bottom: 1px solid #eaeaea;
+      padding: 0 1rem;
+      margin-bottom: 0.5rem;
+
+      @media only screen and (min-width: 1024px) {
+        padding: 0;
+      }
+    }
+
+    .kss-markup {
+      padding: 1em;
+      font-family: $fontsMono;
+      color: $gray;
+      font-size: 0.8rem;
+      overflow-x: scroll;
+    }
+  }
+}
+
+.kss-source {
+  color: #bbb;
+  font-size: 0.6rem;
+  margin-top: 1rem 0;
+  padding: 0 1rem;
+  font-weight: 700;
+
+  @media only screen and (min-width: 1024px) {
+    padding: 0;
+  }
+
+  code {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+}

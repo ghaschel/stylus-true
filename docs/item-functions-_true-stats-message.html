@@ -1,117 +1,1023 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8">
   <title>stylus-true</title>
 
-  <meta name="description" content=""/>
-  <meta name="generator" content="kss-node"/>
-  <meta name="viewport" content="width=device-width"/>
+  <meta name="description" content="">
+  <meta name="generator" content="kss-node">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-  <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/custom.css"/>
-
+  <link rel="icon" href="kss-assets/kss-favicon.svg">
+  <link rel="stylesheet" href="kss-assets/kss-theme.css">
+  <link rel="stylesheet" href="kss-assets/kss.min.css">
+  <link rel="stylesheet" href="kss-assets/prism.css">
+  
 </head>
-<body id="kss-node" class="kss-fullscreen-mode">
+<body class="kss-scheibo__body" id="kss-node" class="kss-fullscreen-mode">
 
-<div class="kss-sidebar kss-style">
-  <header class="kss-header">
-    <h1 class="kss-doc-title">stylus-true</h1>
-  </header>
-  <nav class="kss-nav" aria-label="Style Guide">
-    <ul class="kss-nav__menu">
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="./">
-          <span class="kss-nav__ref">0</span
-          ><span class="kss-nav__name">Overview</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-functions.html">
-          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Functions</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-mixins.html">
-          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Mixins</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-variables.html">
-          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Variables</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-<main class="kss-main" aria-label="Content">
-  <article>
-
-    <div id="kssref-functions-_true-stats-message" class="kss-section kss-section--depth-2 is-fullscreen">
-
-      <div class="kss-style">
-        <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-functions-_true-stats-message">
-            <span class="kss-title__ref">
-              1.20
-              <span class="kss-title__permalink-hash">
-                  #Functions._true-stats-message
-              </span>
-            </span>
-            _true-stats-message($linebreak, $stats)
+<header class="kss-header">
+  <h1 class="kss-doc-title">stylus-true</h1>
+</header>
+<div class="kss-container">
+  <div class="kss-sidebar kss-style">
+    <div class="kss-search">
+      <input type="text" class="kss-search__input" id="kss-search__input" placeholder="Search">
+      <ul class="kss-search__list kss-nav__menu" id="kss-search__list">
+        <li class="kss-search__item kss-nav__menu-item">
+          <a class="kss-search__link kss-nav__menu-link  has-children" href="section-functions.html">
+              <span class="kss-nav__ref">1</span><span class="kss-nav__name">Functions</span>
           </a>
-        </h2>
+              <ul>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-test-start" data-singlesectiontrigger="kssref-functions-_true-test-start">
+                        <span class="kss-nav__ref">1.1</span><span class="kss-nav__name">_true-test-start($name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Test start helper. Emits a private <code>TRUE_TEST_START</code> marker for JavaScript runner nesting before the legacy <code>Test:</code> display comment.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-true-error" data-singlesectiontrigger="kssref-functions-true-error">
+                        <span class="kss-nav__ref">1.2</span><span class="kss-nav__name">true-error($message, $source, $catch)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{string|output}]</strong> Catchable Stylus error helper, adapted from Sass True's namespaced <code>throw.error()</code>.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-assert-label" data-singlesectiontrigger="kssref-functions-_true-assert-label">
+                        <span class="kss-nav__ref">1.3</span><span class="kss-nav__name">_true-assert-label($name, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Build the output label for assertion comments.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-catch-errors" data-singlesectiontrigger="kssref-functions-_true-catch-errors">
+                        <span class="kss-nav__ref">1.4</span><span class="kss-nav__name">_true-catch-errors($catch)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{boolean|'warn'}]</strong> Normalize catchable error settings from object or scalar configuration.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-context" data-singlesectiontrigger="kssref-functions-_true-context">
+                        <span class="kss-nav__ref">1.5</span><span class="kss-nav__name">_true-context($scope)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Get information on current context for a given scope. This is a best-effort private helper and should not be used as a public nested-wrapper API.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-context-all" data-singlesectiontrigger="kssref-functions-_true-context-all">
+                        <span class="kss-nav__ref">1.6</span><span class="kss-nav__name">_true-context-all($scope)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{list}]</strong> Get list of context names for a given scope. This is a best-effort private helper and should not be used as a public nested-wrapper API.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-context-mixin" data-singlesectiontrigger="kssref-functions-_true-context-mixin">
+                        <span class="kss-nav__ref">1.7</span><span class="kss-nav__name">_true-context-mixin($scope, $name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Update the current context for a given scope</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-context-pop" data-singlesectiontrigger="kssref-functions-_true-context-pop">
+                        <span class="kss-nav__ref">1.8</span><span class="kss-nav__name">_true-context-pop($scope)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Remove the deepest context layer from <code>$_true-context.buffer</code>, optionally matching a specific scope.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-edgefail-notes" data-singlesectiontrigger="kssref-functions-_true-edgefail-notes">
+                        <span class="kss-nav__ref">1.9</span><span class="kss-nav__name">_true-edgefail-notes($one, $two)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{null|string}]</strong> There are some common test failures that can be confusing, where results look identical in the output, but represent different values internally. This function looks for those edge-case failures and adds a clarifying note in the results.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-error" data-singlesectiontrigger="kssref-functions-_true-error">
+                        <span class="kss-nav__ref">1.10</span><span class="kss-nav__name">_true-error($message, $source, $override)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void|string}]</strong> Throw or returns an error with a message detailing the source and error</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-error-prefix" data-singlesectiontrigger="kssref-functions-_true-error-prefix">
+                        <span class="kss-nav__ref">1.11</span><span class="kss-nav__name">_true-error-prefix($source)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Format the standard True error prefix.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-get-result" data-singlesectiontrigger="kssref-functions-_true-get-result">
+                        <span class="kss-nav__ref">1.12</span><span class="kss-nav__name">_true-get-result($assert, $expected, $unequal)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{'pass' | 'fail'}]</strong> Compare two values, and return a <code>pass</code> or <code>fail</code> result.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-is-truthy" data-singlesectiontrigger="kssref-functions-_true-is-truthy">
+                        <span class="kss-nav__ref">1.13</span><span class="kss-nav__name">_true-is-truthy($assert)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{boolean}]</strong> Check that a value is truthy (empty lists and strings return false)</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-join-multiple" data-singlesectiontrigger="kssref-functions-_true-join-multiple">
+                        <span class="kss-nav__ref">1.14</span><span class="kss-nav__name">_true-join-multiple($lists...)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{list}]</strong> Any number of lists to be joined, with an optional final argument describing the desired list-separator ('space' or 'comma')</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-json-options" data-singlesectiontrigger="kssref-functions-_true-json-options">
+                        <span class="kss-nav__ref">1.15</span><span class="kss-nav__name">_true-json-options($options)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{object}]</strong> Build options for Stylus <code>json()</code> assertions without mutating caller options.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-map-increment" data-singlesectiontrigger="kssref-functions-_true-map-increment">
+                        <span class="kss-nav__ref">1.16</span><span class="kss-nav__name">_true-map-increment($base, $add)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Add hash values together</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-output-context" data-singlesectiontrigger="kssref-functions-_true-output-context">
+                        <span class="kss-nav__ref">1.17</span><span class="kss-nav__name">_true-output-context($new, $context)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Add output assertion context, or check/reset the context at the end of an output assertion.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-report-message" data-singlesectiontrigger="kssref-functions-_true-report-message">
+                        <span class="kss-nav__ref">1.18</span><span class="kss-nav__name">_true-report-message($linebreak, $results, $stats)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Report results summary to CSS and (optionally) the command line</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-results-message" data-singlesectiontrigger="kssref-functions-_true-results-message">
+                        <span class="kss-nav__ref">1.19</span><span class="kss-nav__name">_true-results-message($linebreak, $results)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Report message</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-stats-message" data-singlesectiontrigger="kssref-functions-_true-stats-message">
+                        <span class="kss-nav__ref">1.20</span><span class="kss-nav__name">_true-stats-message($linebreak, $stats)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Stats message</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-string-value" data-singlesectiontrigger="kssref-functions-_true-string-value">
+                        <span class="kss-nav__ref">1.21</span><span class="kss-nav__name">_true-string-value($value)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Coerce identifiers or strings into a Stylus string value.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-test-stop" data-singlesectiontrigger="kssref-functions-_true-test-stop">
+                        <span class="kss-nav__ref">1.22</span><span class="kss-nav__name">_true-test-stop($name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Test stop helper. Emits a private <code>TRUE_TEST_END</code> marker for JavaScript runner nesting before the legacy blank test boundary comment.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-update" data-singlesectiontrigger="kssref-functions-_true-update">
+                        <span class="kss-nav__ref">1.23</span><span class="kss-nav__name">_true-update($result)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Update global results data</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-update-stats-count" data-singlesectiontrigger="kssref-functions-_true-update-stats-count">
+                        <span class="kss-nav__ref">1.24</span><span class="kss-nav__name">_true-update-stats-count($type)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Add to a stats count type count by 1</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-update-test" data-singlesectiontrigger="kssref-functions-_true-update-test">
+                        <span class="kss-nav__ref">1.25</span><span class="kss-nav__name">_true-update-test($result)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Update test result flag with new data</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-validate-output-context" data-singlesectiontrigger="kssref-functions-_true-validate-output-context">
+                        <span class="kss-nav__ref">1.26</span><span class="kss-nav__name">_true-validate-output-context($new, $context)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Validate the new context, and return an updated context value</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-_true-variable-details" data-singlesectiontrigger="kssref-functions-_true-variable-details">
+                        <span class="kss-nav__ref">1.27</span><span class="kss-nav__name">_true-variable-details($var)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{string}]</strong> Provide the details (type, list-separator, quotation) for a given variable - used to provide context in failure reporting.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-arrange-test-list" data-singlesectiontrigger="kssref-functions-arrange-test-list">
+                        <span class="kss-nav__ref">1.28</span><span class="kss-nav__name">arrange-test-list($test-list)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Fix the test list order to work with currently used order</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-is-list" data-singlesectiontrigger="kssref-functions-is-list">
+                        <span class="kss-nav__ref">1.29</span><span class="kss-nav__name">is-list($list)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{boolean}]</strong> Returns whether an argument is a list or not</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-map-keys" data-singlesectiontrigger="kssref-functions-map-keys">
+                        <span class="kss-nav__ref">1.30</span><span class="kss-nav__name">map-keys($hash)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{list}]</strong> Returns a list with only the keys of the selected hash</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-stdout" data-singlesectiontrigger="kssref-functions-stdout">
+                        <span class="kss-nav__ref">1.31</span><span class="kss-nav__name">stdout($string, $type)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Output to terminal</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-str-length" data-singlesectiontrigger="kssref-functions-str-length">
+                        <span class="kss-nav__ref">1.32</span><span class="kss-nav__name">str-length($list)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{number|'NOT_A_STRING'}]</strong> Return the desired string length</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-functions.html#kssref-functions-unwrap-list" data-singlesectiontrigger="kssref-functions-unwrap-list">
+                        <span class="kss-nav__ref">1.33</span><span class="kss-nav__name">unwrap-list($list)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{list}]</strong> Transforms a wrapped list into a unwrapped one</p>
+
+                            </div>
+                    </a>
+                  </li>
+              </ul>
+        </li>
+        <li class="kss-search__item kss-nav__menu-item">
+          <a class="kss-search__link kss-nav__menu-link  has-children" href="section-mixins.html">
+              <span class="kss-nav__ref">2</span><span class="kss-nav__name">Mixins</span>
+          </a>
+              <ul>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert" data-singlesectiontrigger="kssref-mixins-assert">
+                        <span class="kss-nav__ref">2.1</span><span class="kss-nav__name">assert($description &#x3D; null)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Define a CSS-output assertion. Use it as a wrapper around one <code>output()</code> block and one <code>expect()</code>, <code>contains()</code>, or <code>contains-string()</code> check. JavaScript runner output assertions are parsed with PostCSS.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$description = null - <b>{string}</b> <b><i>Optional output assertion description. When omitted, the JavaScript parser uses the current test name for runner output.</i></b></li>
+<li>{block} - <b><i>Use `output()` and `expect()` mixins to define blocks for comparison</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Stylus math compiles before output&#x27;</span>) {
+  +assert(<span class="hljs-string">&#x27;You can also describe the assertion...&#x27;</span>) {
+    +output() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
+    }
+    +expect() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">16em</span>;
+    }
+  }
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-current-selector" data-singlesectiontrigger="kssref-mixins-assert-current-selector">
+                        <span class="kss-nav__ref">2.2</span><span class="kss-nav__name">assert-current-selector($expected, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that Stylus <code>selector()</code> matches the expected current selector string. Use this inside the selector context being tested.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$expected - <b>{string}</b> <b><i>Expected current selector returned by Stylus `selector()`</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-defined" data-singlesectiontrigger="kssref-mixins-assert-defined">
+                        <span class="kss-nav__ref">2.3</span><span class="kss-nav__name">assert-defined($name, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that <code>lookup($name)</code> resolves to a non-null Stylus value. Variables and functions are supported; values intentionally set to <code>null</code> are indistinguishable from missing symbols.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$name - <b>{string|ident}</b> <b><i>Variable or function name to look up</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-equal" data-singlesectiontrigger="kssref-mixins-assert-equal">
+                        <span class="kss-nav__ref">2.4</span><span class="kss-nav__name">assert-equal($assert, $expected, $description, $inspect)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that two Stylus values are equal.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
+<li>$expected - <b>{any}</b> <b><i>Expected mismatch</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments. Omitted descriptions output the assertion type only.</i></b></li>
+<li>$inspect = false - <b>{boolean}</b> <b><i>Optionally compare inspected values (useful for comparing CSS output rather than Stylus values)</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Division works as expected in Stylus&#x27;</span>) {
+  assert-equal(
+    <span class="hljs-number">8</span> / <span class="hljs-number">2</span>,
+    <span class="hljs-number">4</span>,
+    <span class="hljs-string">&#x27;You can optionally describe the assertion...&#x27;</span>
+  );
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-false" data-singlesectiontrigger="kssref-mixins-assert-false">
+                        <span class="kss-nav__ref">2.5</span><span class="kss-nav__name">assert-false($assert, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that a value is falsy. Empty lists and empty strings are treated as false for this assertion.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments. Omitted descriptions output the assertion type only.</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Empty strings are falsey&#x27;</span>) {
+  assert-false(
+    <span class="hljs-string">&#x27;&#x27;</span>
+  );
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-json" data-singlesectiontrigger="kssref-mixins-assert-json">
+                        <span class="kss-nav__ref">2.6</span><span class="kss-nav__name">assert-json($path, $expected, $description, $options)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that a JSON fixture loaded through Stylus <code>json()</code> matches the expected hash object. Options default to <code>{ hash: true, leave-strings: true }</code>, and <code>hash</code> is always forced to <code>true</code>.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$path - <b>{string}</b> <b><i>JSON file path resolved by Stylus</i></b></li>
+<li>$expected - <b>{object}</b> <b><i>Expected hash object</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+<li>$options = null - <b>{object|null}</b> <b><i>Optional Stylus `json()` options.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-not-null" data-singlesectiontrigger="kssref-mixins-assert-not-null">
+                        <span class="kss-nav__ref">2.7</span><span class="kss-nav__name">assert-not-null($value, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that a value is not <code>null</code>. This is useful for local values that Stylus <code>lookup()</code> cannot reliably inspect across helper scopes.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$value - <b>{any}</b> <b><i>Stylus value to check directly</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-selector" data-singlesectiontrigger="kssref-mixins-assert-selector">
+                        <span class="kss-nav__ref">2.8</span><span class="kss-nav__name">assert-selector($selector, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that a selector exists in the compiled selector map. This is not current-context relative; use <code>selector() + ' a'</code> when context should be included.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$selector - <b>{string}</b> <b><i>Selector to search for</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-selectors" data-singlesectiontrigger="kssref-mixins-assert-selectors">
+                        <span class="kss-nav__ref">2.9</span><span class="kss-nav__name">assert-selectors($expected, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that Stylus <code>selectors()</code> matches the expected selector stack. Pass the same list shape Stylus returns, such as <code>'.card' '&amp;:hover'</code>.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$expected - <b>{list|string}</b> <b><i>Expected selector stack returned by Stylus `selectors()`</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-true" data-singlesectiontrigger="kssref-mixins-assert-true">
+                        <span class="kss-nav__ref">2.10</span><span class="kss-nav__name">assert-true($assert, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that a value is truthy. Empty lists and empty strings are treated as false for this assertion.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments. Omitted descriptions output the assertion type only.</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Non-empty strings are truthy&#x27;</span>) {
+  assert-true(
+    <span class="hljs-string">&#x27;Hello World&#x27;</span>,
+    <span class="hljs-string">&#x27;You can optionally describe the assertion...&#x27;</span>
+  );
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-type" data-singlesectiontrigger="kssref-mixins-assert-type">
+                        <span class="kss-nav__ref">2.11</span><span class="kss-nav__name">assert-type($value, $expected-type, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that <code>type($value)</code> matches an exact Stylus type string, such as <code>'unit'</code>, <code>'string'</code>, <code>'rgba'</code>, <code>'object'</code>, or <code>'function'</code>.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$value - <b>{any}</b> <b><i>Stylus value to inspect</i></b></li>
+<li>$expected-type - <b>{string}</b> <b><i>Expected result from Stylus `type()`</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-unequal" data-singlesectiontrigger="kssref-mixins-assert-unequal">
+                        <span class="kss-nav__ref">2.12</span><span class="kss-nav__name">assert-unequal($assert, $expected, $description, $inspect)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that two Stylus values are not equal.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$assert - <b>{any}</b> <b><i>Asserted value to test</i></b></li>
+<li>$expected - <b>{any}</b> <b><i>Expected mismatch</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments. Omitted descriptions output the assertion type only.</i></b></li>
+<li>$inspect = false - <b>{boolean}</b> <b><i>Optionally compare inspected values (useful for comparing CSS output rather than Stylus values)</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Strings and numbers hare not the same&#x27;</span>) {
+  assert-unequal(
+    <span class="hljs-number">1em</span>,
+    <span class="hljs-string">&#x27;1em&#x27;</span>
+  );
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-unit" data-singlesectiontrigger="kssref-mixins-assert-unit">
+                        <span class="kss-nav__ref">2.13</span><span class="kss-nav__name">assert-unit($value, $expected-unit, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Assert that a unit value uses the expected unit. Unitless numbers should be checked with an empty string (<code>''</code>), and percentages with <code>'%'</code>.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$value - <b>{any}</b> <b><i>Stylus value to inspect</i></b></li>
+<li>$expected-unit - <b>{string|ident}</b> <b><i>Expected unit returned by Stylus `unit()`</i></b></li>
+<li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+</ul>
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-comment" data-singlesectiontrigger="kssref-mixins-comment">
+                        <span class="kss-nav__ref">2.14</span><span class="kss-nav__name">comment($string)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Output a message to CSS comments</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-contains" data-singlesectiontrigger="kssref-mixins-contains">
+                        <span class="kss-nav__ref">2.15</span><span class="kss-nav__name">contains($selector)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Define CSS that must be present within the sibling <code>output()</code> block. The JavaScript runner uses structural PostCSS containment: expected rules, declarations, comments, and at-rules must exist, declaration order inside a matching rule does not matter, and selectors are compared as normalized strings rather than selector algebra.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$selector = true - <b>{boolean}</b> <b><i>Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly.</i></b></li>
+<li>{block} - <b><i>Include any content that are part of this test</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Stylus math compiles before output&#x27;</span>) {
+  +assert() {
+    +output() {
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
+    }
+    +contains() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">16em</span>;
+    }
+  }
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-contains-string" data-singlesectiontrigger="kssref-mixins-contains-string">
+                        <span class="kss-nav__ref">2.16</span><span class="kss-nav__name">contains-string($string-to-find)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Define a case-sensitive substring that must be present in the sibling <code>output()</code> block.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$string-to-find - <b>{string}</b> <b><i>The substring to search for within the compiled CSS output.</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Contains output strings&#x27;</span>) {
+  +assert() {
+    +output() {
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">10px</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;
+    }
+    contains-string(<span class="hljs-string">&#x27;height&#x27;</span>);
+    contains-string(<span class="hljs-string">&#x27;20px&#x27;</span>);
+  }
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-expect" data-singlesectiontrigger="kssref-mixins-expect">
+                        <span class="kss-nav__ref">2.17</span><span class="kss-nav__name">expect($selector)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Define the exact CSS expected from the sibling <code>output()</code> block. The JavaScript runner compares normalized serialized CSS, so selector and declaration order remain significant.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$selector = true - <b>{boolean}</b> <b><i>Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly.</i></b></li>
+<li>{block} - <b><i>Define the expected results of a sibling `output()` mixin</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Stylus math compiles before output&#x27;</span>) {
+  +assert() {
+    +output() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
+    }
+    +expect() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">16em</span>;
+    }
+  }
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-is-equal" data-singlesectiontrigger="kssref-mixins-is-equal">
+                        <span class="kss-nav__ref">2.18</span><span class="kss-nav__name">is-equal($assert, $expected, $description, $inspect)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Alias for <code>assert-equal()</code>, matching Sass True. The optional <code>$inspect</code> argument is Stylus-specific.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-is-falsy" data-singlesectiontrigger="kssref-mixins-is-falsy">
+                        <span class="kss-nav__ref">2.19</span><span class="kss-nav__name">is-falsy($assert, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Alias for <code>assert-false()</code>, matching Sass True.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-is-truthy" data-singlesectiontrigger="kssref-mixins-is-truthy">
+                        <span class="kss-nav__ref">2.20</span><span class="kss-nav__name">is-truthy($assert, $description)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Alias for <code>assert-true()</code>, matching Sass True.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-it" data-singlesectiontrigger="kssref-mixins-it">
+                        <span class="kss-nav__ref">2.21</span><span class="kss-nav__name">it($name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{void}]</strong> Alias for <code>test()</code>, provided for JavaScript-style test syntax.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$name - <b>{string}</b> <b><i>Describe what is being tested</i></b></li>
+<li>{block} - <b><i>Include any assertions that are part of this test</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+it(<span class="hljs-string">&#x27;Returns lists zipped together&#x27;</span>) {
+    assert-equal(
+      zip(<span class="hljs-selector-tag">a</span> <span class="hljs-selector-tag">b</span> c, <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>),
+      (<span class="hljs-selector-tag">a</span> <span class="hljs-number">1</span>, <span class="hljs-selector-tag">b</span> <span class="hljs-number">2</span>, c <span class="hljs-number">3</span>)
+    );
+    +assert-equal(
+      zip(<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">3px</span>, solid dashed solid, red green blue),
+      (<span class="hljs-number">1px</span> solid red, <span class="hljs-number">1px</span> dashed green, <span class="hljs-number">3px</span> solid blue)
+    );
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-not-equal" data-singlesectiontrigger="kssref-mixins-not-equal">
+                        <span class="kss-nav__ref">2.22</span><span class="kss-nav__name">not-equal($assert, $expected, $description, $inspect)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Alias for <code>assert-unequal()</code>, matching Sass True. The optional <code>$inspect</code> argument is Stylus-specific.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-output" data-singlesectiontrigger="kssref-mixins-output">
+                        <span class="kss-nav__ref">2.23</span><span class="kss-nav__name">output($selector)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Define the CSS produced by the code under test. Use inside <code>assert()</code> with sibling <code>expect()</code>, <code>contains()</code>, or <code>contains-string()</code> checks.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$selector = true - <b>{boolean}</b> <b><i>Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly.</i></b></li>
+<li>{block} - <b><i>Define the test content to be checked</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Stylus math compiles before output&#x27;</span>) {
+  +assert() {
+    +output() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
+    }
+    +expect() {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">16em</span>;
+    }
+  }
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-report" data-singlesectiontrigger="kssref-mixins-report">
+                        <span class="kss-nav__ref">2.24</span><span class="kss-nav__name">report($terminal, $fail-on-error, $results, $stats)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{output}]</strong> Emit the result summary as CSS comments and optionally to the terminal.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-test" data-singlesectiontrigger="kssref-mixins-test">
+                        <span class="kss-nav__ref">2.25</span><span class="kss-nav__name">test($name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public:{void}]</strong> Define a single test case inside <code>test-module()</code> or <code>describe()</code>.</p>
+<p><b>Parameters:</b></p>
+<ul>
+<li>$name - <b>{string}</b> <b><i>Describe what is being tested</i></b></li>
+<li>{block} - <b><i>Include any assertions that are part of this test</i></b></li>
+</ul>
+<p>~</p>
+<p><strong>Usage:</strong></p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;Returns lists zipped together&#x27;</span>) {
+    assert-equal(
+      zip(<span class="hljs-selector-tag">a</span> <span class="hljs-selector-tag">b</span> c, <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>),
+      (<span class="hljs-selector-tag">a</span> <span class="hljs-number">1</span>, <span class="hljs-selector-tag">b</span> <span class="hljs-number">2</span>, c <span class="hljs-number">3</span>)
+    );
+    +assert-equal(
+      zip(<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">3px</span>, solid dashed solid, red green blue),
+      (<span class="hljs-number">1px</span> solid red, <span class="hljs-number">1px</span> dashed green, <span class="hljs-number">3px</span> solid blue)
+    );
+}
+</code></pre>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-__true-assert-results" data-singlesectiontrigger="kssref-mixins-__true-assert-results">
+                        <span class="kss-nav__ref">2.26</span><span class="kss-nav__name">_true-assert-results($assert, $expected, $unequal, $terminal)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Get an official result, record it in the database and output, provide details as necessary, and end the assertion.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-error-mixin" data-singlesectiontrigger="kssref-mixins-_true-error-mixin">
+                        <span class="kss-nav__ref">2.27</span><span class="kss-nav__name">_true-error-mixin($message, $source, $override)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{void}]</strong> Outputs an error with a message detailing the source and error</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-fail-details" data-singlesectiontrigger="kssref-mixins-_true-fail-details">
+                        <span class="kss-nav__ref">2.28</span><span class="kss-nav__name">_true-fail-details($assert, $expected, $terminal)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Failure message, with appropriate details to help you debug various common problems.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-message" data-singlesectiontrigger="kssref-mixins-_true-message">
+                        <span class="kss-nav__ref">2.29</span><span class="kss-nav__name">_true-message($message, $output, $comment-padding)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Output a message to CSS comments, or commandline terminal (via debug/warn/error)</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-module-start" data-singlesectiontrigger="kssref-mixins-_true-module-start">
+                        <span class="kss-nav__ref">2.30</span><span class="kss-nav__name">_true-module-start($name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Module start helper. Emits a private <code>TRUE_MODULE_START</code> marker for JavaScript runner nesting before the legacy <code># Module</code> display comment.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-module-stop" data-singlesectiontrigger="kssref-mixins-_true-module-stop">
+                        <span class="kss-nav__ref">2.31</span><span class="kss-nav__name">_true-module-stop($name)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Module stop helper. Emits a private <code>TRUE_MODULE_END</code> marker and the legacy <code>END_MODULE</code> display boundary.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-pass-details" data-singlesectiontrigger="kssref-mixins-_true-pass-details">
+                        <span class="kss-nav__ref">2.32</span><span class="kss-nav__name">_true-pass-details($terminal)</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private:{output}]</strong> Output a success message for passing tests.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-describe" data-singlesectiontrigger="kssref-mixins-describe">
+                        <span class="kss-nav__ref">2.33</span><span class="kss-nav__name">  // Test 2   +it(&#x27;Returns three zipped lists&#x27;) {     assert-equal(       zip(1px 1px 3px, solid dashed solid, red green blue),       (1px solid red, 1px dashed green, 3px solid blue)     );   } } &#x60;&#x60;&#x60;</span>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-mixins.html#kssref-mixins-test-module" data-singlesectiontrigger="kssref-mixins-test-module">
+                        <span class="kss-nav__ref">2.34</span><span class="kss-nav__name">  // Test 2   +test(&#x27;Returns three zipped lists&#x27;) {     assert-equal(       zip(1px 1px 3px, solid dashed solid, red green blue),       (1px solid red, 1px dashed green, 3px solid blue)     );   } } &#x60;&#x60;&#x60;</span>
+                    </a>
+                  </li>
+              </ul>
+        </li>
+        <li class="kss-search__item kss-nav__menu-item">
+          <a class="kss-search__link kss-nav__menu-link  has-children" href="section-variables.html">
+              <span class="kss-nav__ref">3</span><span class="kss-nav__name">Variables</span>
+          </a>
+              <ul>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-_true-error-output-override" data-singlesectiontrigger="kssref-variables-_true-error-output-override">
+                        <span class="kss-nav__ref">3.1</span><span class="kss-nav__name">$_true-error-output-override &#x3D; { value }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private]</strong> Deprecated compatibility alias for <code>$catch-errors</code>.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-catch-errors" data-singlesectiontrigger="kssref-variables-catch-errors">
+                        <span class="kss-nav__ref">3.2</span><span class="kss-nav__name">$catch-errors &#x3D; { value }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public]</strong> Controls whether <code>true-error()</code> throws immediately or returns/output catchable error messages.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-true-terminal-output" data-singlesectiontrigger="kssref-variables-true-terminal-output">
+                        <span class="kss-nav__ref">3.3</span><span class="kss-nav__name">$true-terminal-output &#x3D; { value }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[public]</strong> Controls direct terminal output from Stylus. The default is <code>false</code>; JavaScript runners such as Bun and Vitest still report through their own output.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-_true-context" data-singlesectiontrigger="kssref-variables-_true-context">
+                        <span class="kss-nav__ref">3.4</span><span class="kss-nav__name">$_true-context &#x3D; { buffer }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private]</strong> Stores the best-effort module/test/assertion context stack. JavaScript runner nesting is reconstructed from parser-visible marker comments instead of relying on this live Stylus state.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-_true-results" data-singlesectiontrigger="kssref-variables-_true-results">
+                        <span class="kss-nav__ref">3.5</span><span class="kss-nav__name">$_true-results &#x3D; { value }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private]</strong> Global test-results map</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-_true-stats" data-singlesectiontrigger="kssref-variables-_true-stats">
+                        <span class="kss-nav__ref">3.6</span><span class="kss-nav__name">$_true-stats &#x3D; { value }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private]</strong> Value key stores the desired value</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-_true-test-result" data-singlesectiontrigger="kssref-variables-_true-test-result">
+                        <span class="kss-nav__ref">3.7</span><span class="kss-nav__name">$_true-test-result &#x3D; { value }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private]</strong> Local flags for tracking assertion results in a test.</p>
+
+                            </div>
+                    </a>
+                  </li>
+                  <li class="kss-search__item kss-nav__menu-item ">
+                    <a class="kss-search__link kss-nav__menu-link" href="section-variables.html#kssref-variables-map" data-singlesectiontrigger="kssref-variables-map">
+                        <span class="kss-nav__ref">3.8</span><span class="kss-nav__name">$map &#x3D; { asserts }</span>
+                            <div class="kss-search__desc">
+                                <p><strong>[private]</strong> Variable to store asserts.</p>
+
+                            </div>
+                    </a>
+                  </li>
+              </ul>
+        </li>
+      </ul>
+    </div>
+    <nav class="kss-nav" aria-label="Style Guide">
+      <ul class="kss-nav__menu">
+        <li class="kss-nav__menu-item">
+          <a class="kss-nav__menu-link" href="./">
+            <span class="kss-nav__ref">0</span><span class="kss-nav__name">Overview</span>
+          </a>
+        </li>
+        <li class="kss-nav__menu-item">
+          <a class="kss-nav__menu-link " href="section-functions.html">
+            <span class="kss-nav__ref">1</span><span class="kss-nav__name">Functions</span>
+          </a>
+        </li>
+        <li class="kss-nav__menu-item">
+          <a class="kss-nav__menu-link " href="section-mixins.html">
+            <span class="kss-nav__ref">2</span><span class="kss-nav__name">Mixins</span>
+          </a>
+        </li>
+        <li class="kss-nav__menu-item">
+          <a class="kss-nav__menu-link " href="section-variables.html">
+            <span class="kss-nav__ref">3</span><span class="kss-nav__name">Variables</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <main class="kss-main" aria-label="Content">
+    <article>
+
+      <div id="kssref-functions-_true-stats-message" class="kss-section kss-section--depth-2 is-fullscreen">
+        <div class="kss-style kss-style--header kss-style--maincolor ">
+          <a class="kss-title__permalink" href="#kssref-functions-_true-stats-message">
+            <h2 class="kss-title kss-title--level-2 kss-style kss-title--onmaincolor">
+                _true-stats-message($linebreak, $stats)
+            </h2>
+          </a>
+
+            <div class="kss-description">
+              <p><strong>[private:{string}]</strong> Stats message</p>
+
+            </div>
 
 
-          <div class="kss-description">
-            <p><strong>[private:{string}]</strong> Stats message</p>
-
-          </div>
-
-
-          <div class="kss-parameters__title">Parameters:</div>
-          <ul class="kss-parameters">
-            <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$linebreak</code></div>
-              <div class="kss-parameters__description">
-                <strong>{boolean}</strong> <em><strong>Return message either as a single line or in multiple lines</strong></em>
-                  <div class="kss-parameters__default-value">
-                    Defaults to: <code>false</code>
-                  </div>
-              </div>
-            </li>
-            <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$stats</code></div>
-              <div class="kss-parameters__description">
-                <strong>{hash}</strong> <em><strong>Map that contains the stats counts for modules, tests, and assertions found</strong></em>
-                  <div class="kss-parameters__default-value">
-                    Defaults to: <code>$_true-stats.value</code>
-                  </div>
-              </div>
-            </li>
-          </ul>
-      </div>
-
-
-        <div class="kss-source kss-style">
-          Source: <code>styl/true/_stats.styl</code>, line 29
+            <div class="kss-parameters__title">Parameters:</div>
+            <ul class="kss-parameters">
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$linebreak</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{boolean}</strong> <em><strong>Return message either as a single line or in multiple lines</strong></em>
+                    <div class="kss-parameters__default-value">
+                      Defaults to: <code>false</code>
+                    </div>
+                </div>
+              </li>
+              <li class="kss-parameters__item">
+                <div class="kss-parameters__name"><code>$stats</code></div>
+                <div class="kss-parameters__description">
+                  <strong>{hash}</strong> <em><strong>Map that contains the stats counts for modules, tests, and assertions found</strong></em>
+                    <div class="kss-parameters__default-value">
+                      Defaults to: <code>$_true-stats.value</code>
+                    </div>
+                </div>
+              </li>
+            </ul>
         </div>
 
-    </div>
-</article>
-</main>
+
+      </div>
+  </article>
+  </main>
+</div>
+
 
 <!-- SCRIPTS -->
 <script src="kss-assets/kss.js"></script>
-<script src="kss-assets/scrollspy.js"></script>
 <script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-singlesection.js"></script>
 <script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/search.js"></script>
 <script src="kss-assets/kss-markup.js"></script>
+<script src="kss-assets/prismjs.js" data-manual></script>
 <script>
-  var spy = new ScrollSpy('#kss-node', {
-    nav: '.kss-nav__menu-child > li > a',
-    className: 'is-in-viewport'
-  });
+  var kssSingleSection = new KssSingleSection();
   var kssFullScreen = new KssFullScreen({
     idPrefix: 'kss-fullscreen-',
     bodyClass: 'kss-fullscreen-mode',
@@ -127,7 +1033,5 @@
 </script>
 
 
-
-<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
 </body>
 </html>

@@ -61,6 +61,29 @@ const testSource = (moduleName, testName, assertion) =>
     "}",
   ].join("\n");
 
+const captureStdout = (callback) => {
+  const write = process.stdout.write;
+  let output = "";
+
+  process.stdout.write = function (chunk, encoding, done) {
+    output += String(chunk);
+
+    if (typeof done === "function") {
+      done();
+    }
+
+    return true;
+  };
+
+  try {
+    callback();
+  } finally {
+    process.stdout.write = write;
+  }
+
+  return output;
+};
+
 describe("stylus-true", () => {
   const stylTestFiles = glob.sync(
     path.resolve(process.cwd(), "test/styl/test.styl")
@@ -180,6 +203,47 @@ describe("runStyl compatibility", () => {
       },
     ]);
     assert(Array.isArray(result.deps));
+  });
+
+  it("prints passing assertion details when terminal output is enabled", () => {
+    const source = [
+      '@require "styl/_true";',
+      "$true-terminal-output.value = true;",
+      "+test-module('Terminal Output') {",
+      "  +test('prints passing assertions') {",
+      "    assert-true(true);",
+      "  }",
+      "}",
+      "report(true);",
+    ].join("\n");
+
+    const output = captureStdout(() => {
+      stylTrue.renderStyl({ data: source });
+    });
+
+    assert.match(output, /DEBUG/);
+    assert(output.includes("✔ [assert-true]"), output);
+    assert(output.includes("1 Test, 1 Passed, 0 Failed"), output);
+  });
+
+  it("routes debug, warn, and error message channels through styled stdout", () => {
+    const source = [
+      '@require "styl/_true";',
+      "_true-message('debug line', 'debug');",
+      "_true-message('warn line', 'warn');",
+      "_true-message('error line', 'error');",
+    ].join("\n");
+
+    const output = captureStdout(() => {
+      stylTrue.renderStyl({ data: source });
+    });
+
+    assert.match(output, /DEBUG/);
+    assert.match(output, /WARN/);
+    assert.match(output, /ERROR/);
+    assert(output.includes("debug line"), output);
+    assert(output.includes("warn line"), output);
+    assert(output.includes("error line"), output);
   });
 
   it("uses deps from injected Stylus engines when available", () => {

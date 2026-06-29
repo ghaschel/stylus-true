@@ -25,12 +25,12 @@ comment($string) {
 
 // _true-message($message, $output, $comment-padding)
 // 
-// **[private:{output}]** Output a message to CSS comments, or commandline terminal (via debug/warn)
+// **[private:{output}]** Output a message to CSS comments, or commandline terminal (via debug/warn/error)
 // 
 // Weight: 0
 // 
 // $message - **{string}** ***Message to output***
-// $output = 'comments' - **{string}** ***Type of output, either `comments`, `terminal`, `debug` or `warn`***
+// $output = 'comments' - **{string}** ***Type of output, either `comments`, `terminal`, `debug`, `warn` or `error`***
 // 
 // Styleguide Mixins._true-message
 _true-message($message, $output = 'comments', $comment-padding = 0) {
@@ -52,14 +52,23 @@ _true-message($message, $output = 'comments', $comment-padding = 0) {
     }
 
     $debug = index($output, 'debug');
+    if ($debug != null && $debug >= 0) {
+      stdout($line, 'debug');
+    }
+
     $terminal = index($output, 'terminal');
-    if (($debug != null && $debug >= 0) || ($terminal != null && $terminal >= 0)) {
+    if ($terminal != null && $terminal >= 0) {
       stdout($line);
     }
 
     $warn = index($output, 'warn');
     if ($warn != null && $warn >= 0) {
       stdout($line, 'warn');
+    }
+
+    $error = index($output, 'error');
+    if ($error != null && $error >= 0) {
+      stdout($line, 'error');
     }
   }
 }

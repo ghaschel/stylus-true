@@ -44,7 +44,7 @@ Value assertions are evaluated by Stylus during compilation. CSS output assertio
 `$true-terminal-output.value` is a boolean and defaults to `false`.
 
 - `false` turns off direct terminal output from Stylus. Bun and Vitest still report through their normal runner output.
-- `true` sends failure details and reports to the terminal through Stylus debug/warn output. This is useful when compiling manually without a JavaScript runner.
+- `true` sends per-assertion details and reports to the terminal through Stylus debug/warn output. This is useful when compiling manually without a JavaScript runner.
 
 You can also pass a terminal flag directly to `report()`:
 

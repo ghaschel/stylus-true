@@ -3,5 +3,5 @@
   "source": "styl/",
   "homepage": "styl/homepage.md",
   "destination": "docs/",
-  "css": ["kss-assets/custom.css"]
+  "builder": "node_modules/kss-scheibo/kss_styleguide/scheibo-template/"
 }

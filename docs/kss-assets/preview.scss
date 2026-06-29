@@ -1,0 +1,61 @@
+.preview-pages{
+  display: flex;
+
+  figure{
+    display: block;
+    margin: 1rem;
+    cursor: pointer;
+
+    img{
+      width: 100%;
+      display: block;
+    }
+  }
+
+  figcaption{
+    display: block;
+    background-color: #fff;
+    font-weight: 300;
+    text-align: center;
+    padding: 0.3rem 0;
+  }
+}
+
+.preview-large{
+  position: fixed;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  overflow-x: height;
+  overflow-y: auto;
+  background-color: rgba(#000, 0.7);
+
+  .preview-inner{
+    width: 100%;
+    max-width: 1300px;
+    margin:2rem auto;
+    position: relative;
+
+
+    a{
+      display: block;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      background-color: #FFF;
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 2rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    img{
+      display: block;
+      width: 100%;
+    }
+  }
+}

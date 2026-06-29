@@ -1,16 +1,20 @@
 use('../../lib/str-length.js');
 
-// _true-pass-details()
-// 
-// **[private:{output}]** Ouptut a success message for passing tests
-// 
+// _true-pass-details($terminal)
+//
+// **[private:{output}]** Output a success message for passing tests.
+//
 // Weight: 0
-// 
+//
+// $terminal = $true-terminal-output.value - **{boolean}** ***Whether to also use the terminal as an output stream***
+//
 // Styleguide Mixins._true-pass-details
-_true-pass-details() {
+_true-pass-details($terminal = $true-terminal-output.value) {
+  $list = 'comments', 'debug';
+  $location = $terminal ? $list : 'comments';
   $assertion = _true-context('assert');
   $message = '✔ %s' % unquote($assertion);
-  _true-message($message, 'comments', 2);
+  _true-message($message, $location, 2);
 }
 
 // _true-fail-details($assert, $expected, $terminal)
@@ -187,11 +191,8 @@ _true-edgefail-notes($lists...) {
     if ($number or $color) {
       $type = $unit ? numbers : colors;
       $message = '%s may need to be rounded before comparison' % $type;
-      $note = $pre + $message + ' ' + $inspect;
-    }
-
-    // Catch-All (I think this may not be currently possible)
-    if (!$note) {
+      $note = $pre + $message + ' ' + $inspect;}
+    if ($one-type != $two-type) {
       $note = $pre + $inspect;
     }
   }

@@ -651,7 +651,7 @@ _true-assert-results($assert, $expected, $unequal = false, $terminal = $true-ter
   $result = _true-get-result($assert, $expected, $unequal);
 
   if ($result == 'pass') {
-    _true-pass-details();
+    _true-pass-details($terminal);
   } else {
     _true-fail-details($assert, $expected, $terminal);
   }
