@@ -7,3 +7,4 @@ coverage
 rename.sh
 *.lcov
 references
+.todo
