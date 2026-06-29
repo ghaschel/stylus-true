@@ -1,7 +1,36 @@
-var expect = require("chai").expect;
+var assert = require("assert/strict");
 var path = require("path");
 
 var main = require("../lib/main.js");
+
+var expect = function (actual) {
+  return {
+    to: {
+      contain: function (expected) {
+        assert.ok(
+          String(actual).indexOf(expected) !== -1,
+          'expected "' + actual + '" to contain "' + expected + '"'
+        );
+      },
+      deep: {
+        equal: function (expected) {
+          assert.deepEqual(actual, expected);
+        },
+      },
+      equal: function (expected) {
+        assert.equal(actual, expected);
+      },
+      throw: function (expected) {
+        assert.equal(typeof actual, "function");
+        assert.throws(actual, function (error) {
+          var message = error && error.message ? error.message : String(error);
+
+          return message.indexOf(expected) !== -1;
+        });
+      },
+    },
+  };
+};
 
 describe("#fail", function () {
   it("formats failure message", function () {

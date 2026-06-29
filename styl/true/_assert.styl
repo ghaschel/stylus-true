@@ -305,6 +305,46 @@ assert-selector($selector, $description = null) {
   _true-assert-results(selector-exists(_true-string-value($selector)), true);
 }
 
+// assert-current-selector($expected, $description)
+//
+// **[public:{output}]** Assert that Stylus `selector()` matches the expected current selector string. Use this inside the selector context being tested.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$expected - <b>{string}</b> <b><i>Expected current selector returned by Stylus `selector()`</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-current-selector
+assert-current-selector($expected, $description = null) {
+  $tmp = _true-assert-label('assert-current-selector', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results(selector(), _true-string-value($expected));
+}
+
+// assert-selectors($expected, $description)
+//
+// **[public:{output}]** Assert that Stylus `selectors()` matches the expected selector stack. Pass the same list shape Stylus returns, such as `'.card' '&:hover'`.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$expected - <b>{list|string}</b> <b><i>Expected selector stack returned by Stylus `selectors()`</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-selectors
+assert-selectors($expected, $description = null) {
+  $tmp = _true-assert-label('assert-selectors', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results(selectors(), $expected);
+}
+
 // assert-defined($name, $description)
 //
 // **[public:{output}]** Assert that `lookup($name)` resolves to a non-null Stylus value. Variables and functions are supported; values intentionally set to `null` are indistinguishable from missing symbols.
@@ -323,6 +363,26 @@ assert-defined($name, $description = null) {
 
   _true-context-mixin('assert', $tmp);
   _true-assert-results(lookup(_true-string-value($name)) != null, true);
+}
+
+// assert-not-null($value, $description)
+//
+// **[public:{output}]** Assert that a value is not `null`. This is useful for local values that Stylus `lookup()` cannot reliably inspect across helper scopes.
+//
+// Weight: -10
+//
+// <b>Parameters:</b>
+// <ul>
+// <li>$value - <b>{any}</b> <b><i>Stylus value to check directly</i></b></li>
+// <li>$description = null - <b>{string}</b> <b><i>Optional description emitted in assertion comments.</i></b></li>
+// </ul>
+//
+// Styleguide Mixins.assert-not-null
+assert-not-null($value, $description = null) {
+  $tmp = _true-assert-label('assert-not-null', $description);
+
+  _true-context-mixin('assert', $tmp);
+  _true-assert-results($value != null, true);
 }
 
 // assert-json($path, $expected, $description, $options)

@@ -1,311 +1,182 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>stylus-true</title>
+<head>
+  <meta charset="utf-8"/>
+  <title>stylus-true</title>
 
-    <meta name="description" content="" />
-    <meta name="generator" content="kss-node" />
-    <meta name="viewport" content="width=device-width" />
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
 
-    <link rel="stylesheet" href="kss-assets/kss.css" />
-    <link rel="stylesheet" href="kss-assets/custom.css" />
-  </head>
-  <body id="kss-node">
-    <div class="kss-sidebar kss-style">
-      <header class="kss-header">
-        <h1 class="kss-doc-title">stylus-true</h1>
-      </header>
-      <nav class="kss-nav" aria-label="Style Guide">
-        <ul class="kss-nav__menu">
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="./">
-              <span class="kss-nav__ref">0</span
-              ><span class="kss-nav__name">Overview</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-functions.html">
-              <span class="kss-nav__ref">1</span
-              ><span class="kss-nav__name">Functions</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-mixins.html">
-              <span class="kss-nav__ref">2</span
-              ><span class="kss-nav__name">Mixins</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-variables.html">
-              <span class="kss-nav__ref">3</span
-              ><span class="kss-nav__name">Variables</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <main class="kss-main" aria-label="Content">
-      <article>
-        <div
-          id="kssref-0"
-          class="kss-section kss-section--depth-0 kss-overview kss-style"
-        >
-          <h1>stylus-true support overview</h1>
-          <p>
-            stylus-true is a unit-testing framework for Stylus code. Tests are
-            written in Stylus and can be compiled directly or bridged into
-            JavaScript runners through <code>runStyl()</code>.
-          </p>
-          <h2>Public API</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Area</th>
-                <th>API</th>
-                <th>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Structure</td>
-                <td>
-                  <code>test-module($name)</code>, <code>describe($name)</code>
-                </td>
-                <td>Group related tests.</td>
-              </tr>
-              <tr>
-                <td>Tests</td>
-                <td><code>test($name)</code>, <code>it($name)</code></td>
-                <td>Define a single test case.</td>
-              </tr>
-              <tr>
-                <td>Value assertions</td>
-                <td>
-                  <code>assert-true($value)</code>,
-                  <code>assert-false($value)</code>,
-                  <code>assert-equal($actual, $expected)</code>,
-                  <code>assert-unequal($actual, $expected)</code>
-                </td>
-                <td>Compare Stylus values during compilation.</td>
-              </tr>
-              <tr>
-                <td>Value aliases</td>
-                <td>
-                  <code>is-truthy($value)</code>, <code>is-falsy($value)</code>,
-                  <code>is-equal($actual, $expected)</code>,
-                  <code>not-equal($actual, $expected)</code>
-                </td>
-                <td>sass-true-compatible aliases for value assertions.</td>
-              </tr>
-              <tr>
-                <td>Stylus assertions</td>
-                <td>
-                  <code>assert-type($value, $type)</code>,
-                  <code>assert-unit($value, $unit)</code>,
-                  <code>assert-selector($selector)</code>,
-                  <code>assert-defined($name)</code>,
-                  <code>assert-json($path, $expected)</code>
-                </td>
-                <td>
-                  Test Stylus-specific types, units, selectors, symbols, and
-                  JSON fixtures.
-                </td>
-              </tr>
-              <tr>
-                <td>CSS output assertions</td>
-                <td>
-                  <code>assert($description)</code>, <code>output()</code>,
-                  <code>expect()</code>, <code>contains()</code>,
-                  <code>contains-string($string)</code>
-                </td>
-                <td>
-                  Emit CSS assertion blocks for JavaScript runner comparison.
-                </td>
-              </tr>
-              <tr>
-                <td>Errors</td>
-                <td><code>true-error($message, $source, $catch)</code></td>
-                <td>Throw or catch testable error messages.</td>
-              </tr>
-              <tr>
-                <td>Reporting</td>
-                <td><code>report($terminal, $fail-on-error)</code></td>
-                <td>
-                  Emit a summary to CSS comments and optionally the terminal.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p>
-            <code>$catch-errors.value</code> defaults to <code>false</code>. Set
-            it to <code>true</code> to make <code>true-error()</code> return
-            strings from functions or emit CSS comments from mixin calls; set it
-            to <code>'warn'</code> to catch and warn.
-          </p>
-          <h2>Stylus-specific feature layer</h2>
-          <p>
-            <code>assert-type()</code>, <code>assert-unit()</code>,
-            <code>assert-selector()</code>, <code>assert-defined()</code>, and
-            <code>assert-json()</code> test Stylus semantics directly. Pass type
-            names as strings, for example
-            <code>assert-type(10px, 'unit')</code>; use
-            <code>assert-unit(10, '')</code> for unitless numbers and
-            <code>assert-unit(50%, '%')</code> for percentages.
-          </p>
-          <p>
-            <code>assert-selector()</code> checks
-            <code>selector-exists()</code> and is not current-context relative.
-            Use Stylus introspection such as <code>selector()</code> or
-            <code>selectors()</code> directly in assertions when the current
-            selector stack matters. Use <code>assert-defined()</code> for
-            <code>lookup()</code> and <code>define()</code> behavior, with the
-            Stylus limitation that <code>lookup()</code> cannot distinguish a
-            missing symbol from a symbol set to <code>null</code>.
-          </p>
-          <p>
-            <code>assert-json()</code> loads fixtures through Stylus
-            <code>json()</code>, defaults to
-            <code>{ hash: true, leave-strings: true }</code>, copies caller
-            options, and always forces <code>hash: true</code>.
-          </p>
-          <p>
-            <code>renderStyl()</code> compiles and parses without invoking
-            runner callbacks, and <code>runStyl()</code> still invokes
-            <code>describe</code>/<code>it</code>. Both return
-            <code>{ css, modules, deps }</code>, both support
-            <code>trueOptions.onDeps(deps, result)</code>, and both support
-            native renderer plugins through <code>use</code> plus CLI-style
-            plugin factories through <code>pluginPaths</code>.
-          </p>
-          <h2>Compatibility</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Environment</th>
-                <th>Status</th>
-                <th>Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Node.js</td>
-                <td>Supported on Node <code>&gt;=16</code></td>
-                <td>
-                  Stylus <code>0.64.0</code> and the current test stack no
-                  longer target Node 14.
-                </td>
-              </tr>
-              <tr>
-                <td>Stylus <code>0.64.0</code></td>
-                <td>Supported</td>
-                <td>
-                  Direct compilation and package-internal plugin paths are
-                  covered by tests.
-                </td>
-              </tr>
-              <tr>
-                <td>Standalone Stylus compiler</td>
-                <td>Supported with limits</td>
-                <td>
-                  Value assertions and reports compile to comments. CSS output
-                  assertions need manual review unless a JS runner parses them.
-                </td>
-              </tr>
-              <tr>
-                <td>Stylus CLI</td>
-                <td>Supported</td>
-                <td>
-                  Use the same <code>@require</code> entrypoint; enable terminal
-                  output with <code>$true-terminal-output.value = true</code> or
-                  <code>report(true)</code>.
-                </td>
-              </tr>
-              <tr>
-                <td>Mocha</td>
-                <td>Supported and tested</td>
-                <td>The repository runs <code>npm run test:mocha</code>.</td>
-              </tr>
-              <tr>
-                <td>Jest</td>
-                <td>Supported and tested</td>
-                <td>
-                  The repository runs <code>npm run test:jest</code> with Jest
-                  29.
-                </td>
-              </tr>
-              <tr>
-                <td>Vitest-style runners</td>
-                <td>Compatible in principle</td>
-                <td>
-                  Any runner exposing <code>describe</code> and
-                  <code>it</code> can use <code>runStyl</code>, but this repo
-                  does not yet include a Vitest test script.
-                </td>
-              </tr>
-              <tr>
-                <td>Stylus plugins</td>
-                <td>Supported</td>
-                <td>
-                  Direct Stylus <code>use()</code> calls,
-                  <code>runStyl({ use })</code>, and CLI-style
-                  <code>runStyl({ pluginPaths })</code> are supported.
-                </td>
-              </tr>
-              <tr>
-                <td>Dependency reporting</td>
-                <td>Supported</td>
-                <td>
-                  <code>renderStyl()</code> and <code>runStyl()</code> return
-                  Stylus <code>.deps()</code> data and support
-                  <code>trueOptions.onDeps</code>.
-                </td>
-              </tr>
-              <tr>
-                <td>CLI runner</td>
-                <td>Deferred</td>
-                <td>
-                  The reusable renderer/parser/dependency layer exists, but
-                  <code>stylus-true</code> does not yet ship a standalone
-                  file-discovery CLI.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h2>Known limits</h2>
-          <p>
-            Stylus evaluates nested block contents before wrapper mixins.
-            <code>runStyl()</code> supports nested
-            <code>test-module()</code>/<code>describe()</code> and
-            <code>test()</code>/<code>it()</code> structures by parsing private
-            <code>TRUE_MODULE_*</code> and <code>TRUE_TEST_*</code> marker
-            comments, then reconstructing the hierarchy in JavaScript. Private
-            live context reads such as
-            <code>_true-context('module')</code> inside nested wrapper bodies
-            are not a public guarantee.
-          </p>
-          <p>
-            CSS output assertions should still use an
-            <code>assert()</code> wrapper. The JavaScript parser reports stray
-            <code>output()</code>, <code>expect()</code>,
-            <code>contains()</code>, <code>contains-string()</code>, or
-            <code>END_ASSERT</code> markers outside an assertion, but the
-            standalone Stylus compiler cannot always reject a missing wrapper
-            before CSS is emitted.
-          </p>
-          <p>
-            The JavaScript runner parses CSS output assertions with PostCSS.
-            <code>expect()</code> compares normalized serialized CSS exactly,
-            while <code>contains()</code> performs structural subset matching
-            for rules, declarations, comments, and at-rules. Selectors are
-            compared as normalized strings rather than selector algebra, so
-            <code>.a, .b</code> and <code>.b, .a</code> are not equivalent.
-          </p>
-          <p>Use this structure for CSS output assertions:</p>
-          <pre
-            class="hljs"
-          ><code class="language-stylus">+test(<span class="hljs-string">'output contract'</span>) {
-  +assert(<span class="hljs-string">'expected CSS'</span>) {
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/custom.css"/>
+
+</head>
+<body id="kss-node" >
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">stylus-true</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-functions.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Functions</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-mixins.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Mixins</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-variables.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Variables</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+      <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
+        <h1>stylus-true support overview</h1>
+<p>stylus-true is a unit-testing framework for Stylus code. Tests are written in Stylus and can be compiled directly or bridged into JavaScript runners through <code>runStyl()</code>.</p>
+<h2>Public API</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>API</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structure</td>
+<td><code>test-module($name)</code>, <code>describe($name)</code></td>
+<td>Group related tests.</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td><code>test($name)</code>, <code>it($name)</code></td>
+<td>Define a single test case.</td>
+</tr>
+<tr>
+<td>Value assertions</td>
+<td><code>assert-true($value)</code>, <code>assert-false($value)</code>, <code>assert-equal($actual, $expected)</code>, <code>assert-unequal($actual, $expected)</code></td>
+<td>Compare Stylus values during compilation.</td>
+</tr>
+<tr>
+<td>Value aliases</td>
+<td><code>is-truthy($value)</code>, <code>is-falsy($value)</code>, <code>is-equal($actual, $expected)</code>, <code>not-equal($actual, $expected)</code></td>
+<td>sass-true-compatible aliases for value assertions.</td>
+</tr>
+<tr>
+<td>Stylus assertions</td>
+<td><code>assert-type($value, $type)</code>, <code>assert-unit($value, $unit)</code>, <code>assert-selector($selector)</code>, <code>assert-current-selector($expected)</code>, <code>assert-selectors($expected)</code>, <code>assert-defined($name)</code>, <code>assert-not-null($value)</code>, <code>assert-json($path, $expected)</code></td>
+<td>Test Stylus-specific types, units, selectors, symbols, local values, and JSON fixtures.</td>
+</tr>
+<tr>
+<td>CSS output assertions</td>
+<td><code>assert($description)</code>, <code>output()</code>, <code>expect()</code>, <code>contains()</code>, <code>contains-string($string)</code></td>
+<td>Emit CSS assertion blocks for JavaScript runner comparison.</td>
+</tr>
+<tr>
+<td>Errors</td>
+<td><code>true-error($message, $source, $catch)</code></td>
+<td>Throw or catch testable error messages.</td>
+</tr>
+<tr>
+<td>Reporting</td>
+<td><code>report($terminal, $fail-on-error)</code></td>
+<td>Emit a summary to CSS comments and optionally the terminal.</td>
+</tr>
+</tbody>
+</table>
+<p><code>$catch-errors.value</code> defaults to <code>false</code>. Set it to <code>true</code> to make <code>true-error()</code> return strings from functions or emit CSS comments from mixin calls; set it to <code>'warn'</code> to catch and warn.</p>
+<h2>Stylus-specific feature layer</h2>
+<p><code>assert-type()</code>, <code>assert-unit()</code>, <code>assert-selector()</code>, <code>assert-current-selector()</code>, <code>assert-selectors()</code>, <code>assert-defined()</code>, <code>assert-not-null()</code>, and <code>assert-json()</code> test Stylus semantics directly. Pass type names as strings, for example <code>assert-type(10px, 'unit')</code>; use <code>assert-unit(10, '')</code> for unitless numbers and <code>assert-unit(50%, '%')</code> for percentages.</p>
+<p><code>assert-selector()</code> checks the compiled selector map with <code>selector-exists()</code>. Use <code>assert-current-selector()</code> for <code>selector()</code> and <code>assert-selectors()</code> for <code>selectors()</code> when the current selector stack matters. Use <code>assert-defined()</code> for <code>lookup()</code> and <code>define()</code> behavior, with the Stylus limitation that <code>lookup()</code> cannot distinguish a missing symbol from a symbol set to <code>null</code>. Use <code>assert-not-null($value)</code> for local values that should be checked directly instead of resolved by name.</p>
+<p><code>assert-json()</code> loads fixtures through Stylus <code>json()</code>, defaults to <code>{ hash: true, leave-strings: true }</code>, copies caller options, and always forces <code>hash: true</code>.</p>
+<p><code>renderStyl()</code> compiles and parses without invoking runner callbacks, and <code>runStyl()</code> still invokes <code>describe</code>/<code>it</code>. Both return <code>{ css, modules, deps }</code>, both support <code>trueOptions.onDeps(deps, result)</code>, and both support native renderer plugins through <code>use</code> plus CLI-style plugin factories through <code>pluginPaths</code>.</p>
+<h2>Compatibility</h2>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.js</td>
+<td>Supported on Node <code>&gt;=22.22.2</code></td>
+<td>The current test stack targets Node 22.22.2 and newer compatible Node releases.</td>
+</tr>
+<tr>
+<td>Stylus <code>0.64.0</code></td>
+<td>Supported</td>
+<td>Direct compilation and package-internal plugin paths are covered by tests.</td>
+</tr>
+<tr>
+<td>Standalone Stylus compiler</td>
+<td>Supported with limits</td>
+<td>Value assertions and reports compile to comments. CSS output assertions need manual review unless a JS runner parses them.</td>
+</tr>
+<tr>
+<td>Stylus CLI</td>
+<td>Supported</td>
+<td>Use the same <code>@require</code> entrypoint; enable terminal output with <code>$true-terminal-output.value = true</code> or <code>report(true)</code>.</td>
+</tr>
+<tr>
+<td>Mocha</td>
+<td>Supported and tested</td>
+<td>The repository runs <code>npm run test:mocha</code>.</td>
+</tr>
+<tr>
+<td>Vitest</td>
+<td>Supported and tested</td>
+<td>The repository runs <code>npm run test:vitest</code> with Vitest 4.</td>
+</tr>
+<tr>
+<td>Other <code>describe</code>/<code>it</code> runners</td>
+<td>Compatible in principle</td>
+<td>Any runner exposing <code>describe</code> and <code>it</code> can use <code>runStyl</code>, but Mocha and Vitest are the tested integrations.</td>
+</tr>
+<tr>
+<td>Stylus plugins</td>
+<td>Supported</td>
+<td>Direct Stylus <code>use()</code> calls, <code>runStyl({ use })</code>, and CLI-style <code>runStyl({ pluginPaths })</code> are supported.</td>
+</tr>
+<tr>
+<td>Dependency reporting</td>
+<td>Supported</td>
+<td><code>renderStyl()</code> and <code>runStyl()</code> return Stylus <code>.deps()</code> data and support <code>trueOptions.onDeps</code>.</td>
+</tr>
+<tr>
+<td>CLI runner</td>
+<td>Deferred</td>
+<td>The reusable renderer/parser/dependency layer exists, but <code>stylus-true</code> does not yet ship a standalone file-discovery CLI.</td>
+</tr>
+</tbody>
+</table>
+<h2>Stylus limitations</h2>
+<p>Stylus evaluates nested block contents before wrapper mixins. <code>runStyl()</code> supports nested <code>test-module()</code>/<code>describe()</code> and <code>test()</code>/<code>it()</code> structures by parsing private <code>TRUE_MODULE_*</code> and <code>TRUE_TEST_*</code> marker comments, then reconstructing the hierarchy in JavaScript. Private live context reads such as <code>_true-context('module')</code> inside nested wrapper bodies are not a public guarantee.</p>
+<p>CSS output assertions should still use an <code>assert()</code> wrapper. <code>runStyl()</code> and <code>renderStyl()</code> report stray <code>output()</code>, <code>expect()</code>, <code>contains()</code>, <code>contains-string()</code>, or <code>END_ASSERT</code> markers outside an assertion. The standalone Stylus compiler can emit marker comments before it has enough wrapper context to reject every malformed assertion, so parser-backed JS runner validation is the strict mode.</p>
+<p>Stylus introspection helpers work inside Stylus's own scope rules. <code>assert-selector()</code> checks the global selector map, <code>assert-current-selector()</code> and <code>assert-selectors()</code> cover current selector context, and <code>assert-not-null()</code> covers local values that <code>lookup()</code> cannot reliably inspect by name.</p>
+<p>The JavaScript runner parses CSS output assertions with PostCSS. <code>expect()</code> compares normalized serialized CSS exactly, while <code>contains()</code> performs structural subset matching for rules, declarations, comments, and at-rules. Selectors are compared as normalized strings rather than selector algebra, so <code>.a, .b</code> and <code>.b, .a</code> are not equivalent.</p>
+<p>Use this structure for CSS output assertions:</p>
+<pre class="hljs"><code class="language-stylus">+test(<span class="hljs-string">&#x27;output contract&#x27;</span>) {
+  +assert(<span class="hljs-string">&#x27;expected CSS&#x27;</span>) {
     +output() {
       <span class="hljs-attribute">width</span>: <span class="hljs-number">14em</span> + <span class="hljs-number">2</span>;
     }
@@ -316,35 +187,38 @@
   }
 }
 </code></pre>
-        </div>
-      </article>
-    </main>
 
-    <!-- SCRIPTS -->
-    <script src="kss-assets/kss.js"></script>
-    <script src="kss-assets/scrollspy.js"></script>
-    <script src="kss-assets/kss-fullscreen.js"></script>
-    <script src="kss-assets/kss-guides.js"></script>
-    <script src="kss-assets/kss-markup.js"></script>
-    <script>
-      var spy = new ScrollSpy("#kss-node", {
-        nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport",
-      });
-      var kssFullScreen = new KssFullScreen({
-        idPrefix: "kss-fullscreen-",
-        bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen",
-      });
-      var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode",
-      });
-      var kssMarkup = new KssMarkup({
-        bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup",
-      });
-    </script>
+      </div>
+</article>
+</main>
 
-    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
-  </body>
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
 </html>

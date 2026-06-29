@@ -1,0 +1,5 @@
+# Pre-commit hook
+bunx -- lint-staged
+npm run build
+npm run lint:lib
+git add lib

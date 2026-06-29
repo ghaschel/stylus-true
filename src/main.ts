@@ -1,7 +1,4 @@
-import { diffStringsUnified } from "jest-diff";
-import find = require("lodash.find");
-import forEach = require("lodash.foreach");
-import last = require("lodash.last");
+import { diffStringsUnified } from "@vitest/utils/diff";
 import fs = require("fs");
 import path = require("path");
 import postcss = require("postcss");
@@ -118,6 +115,10 @@ interface NormalizedDeclaration {
 
 var PACKAGE_PATH = path.join(__dirname, "..");
 var PACKAGE_STYL_PATH = path.join(PACKAGE_PATH, "styl");
+
+var lastItem = function <T>(items: T[]): T | undefined {
+  return items[items.length - 1];
+};
 
 var noColor = function (string: string): string {
   return string;
@@ -313,7 +314,7 @@ var renderWithStylus = function (
 ): RenderedStylus {
   var renderer: StylusRenderer;
   var css: string;
-  var deps: string[] = [];
+  var deps: string[];
 
   if (typeof styl === "function") {
     renderer = styl(contents, stylOpts);
@@ -371,7 +372,7 @@ var runStyl = function (
   var trueOpts = Object.assign({}, trueOptions);
   var result = renderStyl(stylOptions, trueOpts);
 
-  forEach(result.modules, function (module: ModuleResult) {
+  result.modules.forEach(function (module: ModuleResult) {
     describeModule(module, trueOpts.describe, trueOpts.it);
   });
 
@@ -446,12 +447,12 @@ var describeModule = function (
 ): void {
   var assert = require("assert");
   describe(module.module, function () {
-    forEach(module.modules, function (submodule: ModuleResult) {
+    (module.modules || []).forEach(function (submodule: ModuleResult) {
       describeModule(submodule, describe, it);
     });
-    forEach(module.tests, function (test: TestResult) {
+    (module.tests || []).forEach(function (test: TestResult) {
       it(test.test, function () {
-        forEach(test.assertions, function (assertion: AssertionResult) {
+        test.assertions.forEach(function (assertion: AssertionResult) {
           if (!assertion.passed) {
             assert.fail(formatFailureMessage(assertion));
           }
@@ -547,7 +548,7 @@ var parse = function (rawCss: string, contextLines?: number): ModuleResult[] {
     };
     var handler: Parser = parseModule;
 
-    forEach(ast.nodes || [], function (rule) {
+    (ast.nodes || []).forEach(function (rule) {
       handler = handler(rule, ctx);
     });
 
@@ -1175,7 +1176,7 @@ var renderNodes = function (
     node: CssNode;
   }[] = [];
 
-  forEach(nodes || [], function (node) {
+  (nodes || []).forEach(function (node) {
     var css = renderNode(node, level);
     if (css) {
       rendered.push({
@@ -1368,7 +1369,7 @@ var validateStructuredEof = function (ctx: ParseContext): void {
 
 var currentModule = function (ctx: ParseContext): ModuleResult | undefined {
   if (ctx.useModuleBoundaries) {
-    return last(ctx.moduleStack);
+    return lastItem(ctx.moduleStack);
   }
 
   return ctx.currentModule;
@@ -1477,7 +1478,7 @@ var finishCurrentModule = function (
 
   if (ctx.currentModule) {
     var path = ctx.currentModule.module.split(MODULE_NESTING_TOKEN);
-    ctx.currentModule.module = last(path) || "";
+    ctx.currentModule.module = lastItem(path) || "";
     insertModule(path, ctx.currentModule, ctx);
     delete ctx.currentModule;
   }
@@ -1567,8 +1568,8 @@ var insertModule = function (
   }
 
   if (path.length > 1) {
-    var newCtx = find(ctx.modules, {
-      module: path[0],
+    var newCtx = ctx.modules.find(function (module) {
+      return module.module === path[0];
     });
     if (!newCtx) {
       newCtx = {

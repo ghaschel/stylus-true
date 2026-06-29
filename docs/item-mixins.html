@@ -1,432 +1,311 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>stylus-true</title>
+<head>
+  <meta charset="utf-8"/>
+  <title>stylus-true</title>
 
-    <meta name="description" content="" />
-    <meta name="generator" content="kss-node" />
-    <meta name="viewport" content="width=device-width" />
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
 
-    <link rel="stylesheet" href="kss-assets/kss.css" />
-    <link rel="stylesheet" href="kss-assets/custom.css" />
-  </head>
-  <body id="kss-node" class="kss-fullscreen-mode">
-    <div class="kss-sidebar kss-style">
-      <header class="kss-header">
-        <h1 class="kss-doc-title">stylus-true</h1>
-      </header>
-      <nav class="kss-nav" aria-label="Style Guide">
-        <ul class="kss-nav__menu">
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="./">
-              <span class="kss-nav__ref">0</span
-              ><span class="kss-nav__name">Overview</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-functions.html">
-              <span class="kss-nav__ref">1</span
-              ><span class="kss-nav__name">Functions</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-mixins.html">
-              <span class="kss-nav__ref">2</span
-              ><span class="kss-nav__name">Mixins</span>
-            </a>
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/custom.css"/>
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">stylus-true</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-functions.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Functions</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-mixins.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Mixins</span>
+        </a>
             <ul class="kss-nav__menu-child">
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert"
-                >
-                  <span class="kss-nav__ref">2.1</span
-                  ><span class="kss-nav__name"
-                    >assert($description &#x3D; null)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert">
+                  <span class="kss-nav__ref ">2.1</span
+                  ><span class="kss-nav__name">assert($description &#x3D; null)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-defined"
-                >
-                  <span class="kss-nav__ref">2.2</span
-                  ><span class="kss-nav__name"
-                    >assert-defined($name, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-current-selector">
+                  <span class="kss-nav__ref ">2.2</span
+                  ><span class="kss-nav__name">assert-current-selector($expected, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-equal"
-                >
-                  <span class="kss-nav__ref">2.3</span
-                  ><span class="kss-nav__name"
-                    >assert-equal($assert, $expected, $description,
-                    $inspect)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-defined">
+                  <span class="kss-nav__ref ">2.3</span
+                  ><span class="kss-nav__name">assert-defined($name, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-false"
-                >
-                  <span class="kss-nav__ref">2.4</span
-                  ><span class="kss-nav__name"
-                    >assert-false($assert, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-equal">
+                  <span class="kss-nav__ref ">2.4</span
+                  ><span class="kss-nav__name">assert-equal($assert, $expected, $description, $inspect)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-json"
-                >
-                  <span class="kss-nav__ref">2.5</span
-                  ><span class="kss-nav__name"
-                    >assert-json($path, $expected, $description, $options)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-false">
+                  <span class="kss-nav__ref ">2.5</span
+                  ><span class="kss-nav__name">assert-false($assert, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-selector"
-                >
-                  <span class="kss-nav__ref">2.6</span
-                  ><span class="kss-nav__name"
-                    >assert-selector($selector, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-json">
+                  <span class="kss-nav__ref ">2.6</span
+                  ><span class="kss-nav__name">assert-json($path, $expected, $description, $options)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-true"
-                >
-                  <span class="kss-nav__ref">2.7</span
-                  ><span class="kss-nav__name"
-                    >assert-true($assert, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-not-null">
+                  <span class="kss-nav__ref ">2.7</span
+                  ><span class="kss-nav__name">assert-not-null($value, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-type"
-                >
-                  <span class="kss-nav__ref">2.8</span
-                  ><span class="kss-nav__name"
-                    >assert-type($value, $expected-type, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-selector">
+                  <span class="kss-nav__ref ">2.8</span
+                  ><span class="kss-nav__name">assert-selector($selector, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-unequal"
-                >
-                  <span class="kss-nav__ref">2.9</span
-                  ><span class="kss-nav__name"
-                    >assert-unequal($assert, $expected, $description,
-                    $inspect)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-selectors">
+                  <span class="kss-nav__ref ">2.9</span
+                  ><span class="kss-nav__name">assert-selectors($expected, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-assert-unit"
-                >
-                  <span class="kss-nav__ref">2.10</span
-                  ><span class="kss-nav__name"
-                    >assert-unit($value, $expected-unit, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-true">
+                  <span class="kss-nav__ref ">2.10</span
+                  ><span class="kss-nav__name">assert-true($assert, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-comment"
-                >
-                  <span class="kss-nav__ref">2.11</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-type">
+                  <span class="kss-nav__ref ">2.11</span
+                  ><span class="kss-nav__name">assert-type($value, $expected-type, $description)</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-unequal">
+                  <span class="kss-nav__ref ">2.12</span
+                  ><span class="kss-nav__name">assert-unequal($assert, $expected, $description, $inspect)</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-assert-unit">
+                  <span class="kss-nav__ref ">2.13</span
+                  ><span class="kss-nav__name">assert-unit($value, $expected-unit, $description)</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-comment">
+                  <span class="kss-nav__ref ">2.14</span
                   ><span class="kss-nav__name">comment($string)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-contains"
-                >
-                  <span class="kss-nav__ref">2.12</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-contains">
+                  <span class="kss-nav__ref ">2.15</span
                   ><span class="kss-nav__name">contains($selector)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-contains-string"
-                >
-                  <span class="kss-nav__ref">2.13</span
-                  ><span class="kss-nav__name"
-                    >contains-string($string-to-find)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-contains-string">
+                  <span class="kss-nav__ref ">2.16</span
+                  ><span class="kss-nav__name">contains-string($string-to-find)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-expect"
-                >
-                  <span class="kss-nav__ref">2.14</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-expect">
+                  <span class="kss-nav__ref ">2.17</span
                   ><span class="kss-nav__name">expect($selector)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-is-equal"
-                >
-                  <span class="kss-nav__ref">2.15</span
-                  ><span class="kss-nav__name"
-                    >is-equal($assert, $expected, $description, $inspect)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-is-equal">
+                  <span class="kss-nav__ref ">2.18</span
+                  ><span class="kss-nav__name">is-equal($assert, $expected, $description, $inspect)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-is-falsy"
-                >
-                  <span class="kss-nav__ref">2.16</span
-                  ><span class="kss-nav__name"
-                    >is-falsy($assert, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-is-falsy">
+                  <span class="kss-nav__ref ">2.19</span
+                  ><span class="kss-nav__name">is-falsy($assert, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-is-truthy"
-                >
-                  <span class="kss-nav__ref">2.17</span
-                  ><span class="kss-nav__name"
-                    >is-truthy($assert, $description)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-is-truthy">
+                  <span class="kss-nav__ref ">2.20</span
+                  ><span class="kss-nav__name">is-truthy($assert, $description)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-it"
-                >
-                  <span class="kss-nav__ref">2.18</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-it">
+                  <span class="kss-nav__ref ">2.21</span
                   ><span class="kss-nav__name">it($name)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-not-equal"
-                >
-                  <span class="kss-nav__ref">2.19</span
-                  ><span class="kss-nav__name"
-                    >not-equal($assert, $expected, $description, $inspect)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-not-equal">
+                  <span class="kss-nav__ref ">2.22</span
+                  ><span class="kss-nav__name">not-equal($assert, $expected, $description, $inspect)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-output"
-                >
-                  <span class="kss-nav__ref">2.20</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-output">
+                  <span class="kss-nav__ref ">2.23</span
                   ><span class="kss-nav__name">output($selector)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-report"
-                >
-                  <span class="kss-nav__ref">2.21</span
-                  ><span class="kss-nav__name"
-                    >report($terminal, $fail-on-error, $results, $stats)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-report">
+                  <span class="kss-nav__ref ">2.24</span
+                  ><span class="kss-nav__name">report($terminal, $fail-on-error, $results, $stats)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-test"
-                >
-                  <span class="kss-nav__ref">2.22</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-test">
+                  <span class="kss-nav__ref ">2.25</span
                   ><span class="kss-nav__name">test($name)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-__true-assert-results"
-                >
-                  <span class="kss-nav__ref">2.23</span
-                  ><span class="kss-nav__name"
-                    >_true-assert-results($assert, $expected, $unequal,
-                    $terminal)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-__true-assert-results">
+                  <span class="kss-nav__ref ">2.26</span
+                  ><span class="kss-nav__name">_true-assert-results($assert, $expected, $unequal, $terminal)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-_true-error-mixin"
-                >
-                  <span class="kss-nav__ref">2.24</span
-                  ><span class="kss-nav__name"
-                    >_true-error-mixin($message, $source, $override)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-error-mixin">
+                  <span class="kss-nav__ref ">2.27</span
+                  ><span class="kss-nav__name">_true-error-mixin($message, $source, $override)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-_true-fail-details"
-                >
-                  <span class="kss-nav__ref">2.25</span
-                  ><span class="kss-nav__name"
-                    >_true-fail-details($assert, $expected, $terminal)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-fail-details">
+                  <span class="kss-nav__ref ">2.28</span
+                  ><span class="kss-nav__name">_true-fail-details($assert, $expected, $terminal)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-_true-message"
-                >
-                  <span class="kss-nav__ref">2.26</span
-                  ><span class="kss-nav__name"
-                    >_true-message($message, $output, $comment-padding)</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-message">
+                  <span class="kss-nav__ref ">2.29</span
+                  ><span class="kss-nav__name">_true-message($message, $output, $comment-padding)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-_true-module-start"
-                >
-                  <span class="kss-nav__ref">2.27</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-module-start">
+                  <span class="kss-nav__ref ">2.30</span
                   ><span class="kss-nav__name">_true-module-start($name)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-_true-module-stop"
-                >
-                  <span class="kss-nav__ref">2.28</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-module-stop">
+                  <span class="kss-nav__ref ">2.31</span
                   ><span class="kss-nav__name">_true-module-stop($name)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-_true-pass-details"
-                >
-                  <span class="kss-nav__ref">2.29</span
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-_true-pass-details">
+                  <span class="kss-nav__ref ">2.32</span
                   ><span class="kss-nav__name">_true-pass-details()</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-describe"
-                >
-                  <span class="kss-nav__ref">2.30</span
-                  ><span class="kss-nav__name">
-                    // Test 2 +it(&#x27;Returns three zipped lists&#x27;) {
-                    assert-equal( zip(1px 1px 3px, solid dashed solid, red green
-                    blue), (1px solid red, 1px dashed green, 3px solid blue) );
-                    } } &#x60;&#x60;&#x60;</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-describe">
+                  <span class="kss-nav__ref ">2.33</span
+                  ><span class="kss-nav__name">  // Test 2   +it(&#x27;Returns three zipped lists&#x27;) {     assert-equal(       zip(1px 1px 3px, solid dashed solid, red green blue),       (1px solid red, 1px dashed green, 3px solid blue)     );   } } &#x60;&#x60;&#x60;</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a
-                  class="kss-nav__menu-link"
-                  href="section-mixins.html#kssref-mixins-test-module"
-                >
-                  <span class="kss-nav__ref">2.31</span
-                  ><span class="kss-nav__name">
-                    // Test 2 +test(&#x27;Returns three zipped lists&#x27;) {
-                    assert-equal( zip(1px 1px 3px, solid dashed solid, red green
-                    blue), (1px solid red, 1px dashed green, 3px solid blue) );
-                    } } &#x60;&#x60;&#x60;</span
-                  >
+                <a class="kss-nav__menu-link" href="section-mixins.html#kssref-mixins-test-module">
+                  <span class="kss-nav__ref ">2.34</span
+                  ><span class="kss-nav__name">  // Test 2   +test(&#x27;Returns three zipped lists&#x27;) {     assert-equal(       zip(1px 1px 3px, solid dashed solid, red green blue),       (1px solid red, 1px dashed green, 3px solid blue)     );   } } &#x60;&#x60;&#x60;</span>
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-variables.html">
-              <span class="kss-nav__ref">3</span
-              ><span class="kss-nav__name">Variables</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-variables.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Variables</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-mixins" class="kss-section kss-section--depth-1 is-fullscreen">
+
+      <div class="kss-style">
+        <h1 class="kss-title kss-title--level-1">
+          <a class="kss-title__permalink" href="#kssref-mixins">
+            <span class="kss-title__ref">
+              2
+              <span class="kss-title__permalink-hash">
+                  #Mixins
+              </span>
+            </span>
+            Mixins
+          </a>
+        </h1>
+
+
+
+
+      </div>
+
+
+
     </div>
-    <main class="kss-main" aria-label="Content">
-      <article>
-        <div
-          id="kssref-mixins"
-          class="kss-section kss-section--depth-1 is-fullscreen"
-        >
-          <div class="kss-style">
-            <h1 class="kss-title kss-title--level-1">
-              <a class="kss-title__permalink" href="#kssref-mixins">
-                <span class="kss-title__ref">
-                  2
-                  <span class="kss-title__permalink-hash">
-                    #Mixins
-                  </span>
-                </span>
-                Mixins
-              </a>
-            </h1>
-          </div>
-        </div>
-      </article>
-    </main>
+</article>
+</main>
 
-    <!-- SCRIPTS -->
-    <script src="kss-assets/kss.js"></script>
-    <script src="kss-assets/scrollspy.js"></script>
-    <script src="kss-assets/kss-fullscreen.js"></script>
-    <script src="kss-assets/kss-guides.js"></script>
-    <script src="kss-assets/kss-markup.js"></script>
-    <script>
-      var spy = new ScrollSpy("#kss-node", {
-        nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport",
-      });
-      var kssFullScreen = new KssFullScreen({
-        idPrefix: "kss-fullscreen-",
-        bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen",
-      });
-      var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode",
-      });
-      var kssMarkup = new KssMarkup({
-        bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup",
-      });
-    </script>
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
 
-    <!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
-  </body>
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
 </html>

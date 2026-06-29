@@ -5,10 +5,8 @@
 [![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![GitHub issues](https://img.shields.io/github/issues/ghaschel/stylus-true.svg)](https://github.com/ghaschel/vscode-angular-html/issues)
 [![Build status](https://travis-ci.org/ghaschel/stylus-true.svg?branch=master)](https://travis-ci.org/ghaschel/stylus-true.svg?branch=master)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ghaschel/stylus-true.svg)](https://greenkeeper.io/)
-[![codecov](https://codecov.io/gh/ghaschel/stylus-true/branch/master/graph/badge.svg)](https://codecov.io/gh/ghaschel/stylus-true)
 
 stylus-true is a unit-testing framework for [Stylus](https://stylus-lang.com/) code, inspired by [True](https://github.com/oddbird/true). Tests are written in Stylus and can be compiled directly by Stylus or bridged into JavaScript runners for automated reporting.
 
@@ -28,16 +26,16 @@ Import the framework in a Stylus test file:
 
 The public Stylus API currently supported by this package is:
 
-| Area                  | API                                                                                                                                                | Purpose                                                                   |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Structure             | `test-module($name)` / `describe($name)`                                                                                                           | Group related tests.                                                      |
-| Tests                 | `test($name)` / `it($name)`                                                                                                                        | Define a single behavior or case.                                         |
-| Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)`                            | Compare Stylus values during compilation.                                 |
-| Value aliases         | `is-truthy($value)`, `is-falsy($value)`, `is-equal($actual, $expected)`, `not-equal($actual, $expected)`                                           | sass-true-compatible aliases for value assertions.                        |
-| Stylus assertions     | `assert-type($value, $type)`, `assert-unit($value, $unit)`, `assert-selector($selector)`, `assert-defined($name)`, `assert-json($path, $expected)` | Test Stylus-specific types, units, selectors, symbols, and JSON fixtures. |
-| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`, `contains-string($string)`                                                           | Emit CSS assertion blocks for JavaScript runner comparison.               |
-| Errors                | `true-error($message, $source, $catch)`                                                                                                            | Throw or catch testable error messages.                                   |
-| Reporting             | `report($terminal, $fail-on-error)`                                                                                                                | Emit a summary to CSS comments and optionally the terminal.               |
+| Area                  | API                                                                                                                                                                                                                                                | Purpose                                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Structure             | `test-module($name)` / `describe($name)`                                                                                                                                                                                                           | Group related tests.                                                                    |
+| Tests                 | `test($name)` / `it($name)`                                                                                                                                                                                                                        | Define a single behavior or case.                                                       |
+| Value assertions      | `assert-true($value)`, `assert-false($value)`, `assert-equal($actual, $expected)`, `assert-unequal($actual, $expected)`                                                                                                                            | Compare Stylus values during compilation.                                               |
+| Value aliases         | `is-truthy($value)`, `is-falsy($value)`, `is-equal($actual, $expected)`, `not-equal($actual, $expected)`                                                                                                                                           | sass-true-compatible aliases for value assertions.                                      |
+| Stylus assertions     | `assert-type($value, $type)`, `assert-unit($value, $unit)`, `assert-selector($selector)`, `assert-current-selector($expected)`, `assert-selectors($expected)`, `assert-defined($name)`, `assert-not-null($value)`, `assert-json($path, $expected)` | Test Stylus-specific types, units, selectors, symbols, local values, and JSON fixtures. |
+| CSS output assertions | `assert($description)`, `output()`, `expect()`, `contains()`, `contains-string($string)`                                                                                                                                                           | Emit CSS assertion blocks for JavaScript runner comparison.                             |
+| Errors                | `true-error($message, $source, $catch)`                                                                                                                                                                                                            | Throw or catch testable error messages.                                                 |
+| Reporting             | `report($terminal, $fail-on-error)`                                                                                                                                                                                                                | Emit a summary to CSS comments and optionally the terminal.                             |
 
 Value assertions are evaluated by Stylus during compilation. CSS output assertions are emitted into compiled CSS and compared by the JavaScript runner integration.
 
@@ -45,7 +43,7 @@ Value assertions are evaluated by Stylus during compilation. CSS output assertio
 
 `$true-terminal-output.value` is a boolean and defaults to `false`.
 
-- `false` turns off direct terminal output from Stylus. Mocha and Jest still report through their normal runner output.
+- `false` turns off direct terminal output from Stylus. Mocha and Vitest still report through their normal runner output.
 - `true` sends failure details and reports to the terminal through Stylus debug/warn output. This is useful when compiling manually without a JavaScript runner.
 
 You can also pass a terminal flag directly to `report()`:
@@ -102,7 +100,7 @@ These assertions cover Stylus features that Sass True does not expose:
 
 `assert-unit($value, $expected-unit)` compares `unit($value)` for unit values without throwing on non-unit values. Use `''` for unitless numbers and `'%'` for percentages.
 
-`assert-selector($selector)` checks `selector-exists($selector)`. It is not current-context relative, so use Stylus introspection when context matters:
+`assert-selector($selector)` checks `selector-exists($selector)`. It searches Stylus's compiled selector map, so pass the full selector you expect to exist.
 
 ```stylus
 .card
@@ -114,17 +112,32 @@ These assertions cover Stylus features that Sass True does not expose:
 }
 ```
 
-`assert-defined($name)` checks that `lookup($name)` returns a non-null value. It covers variables, functions, and values created with `define()`. Stylus `lookup()` cannot distinguish a missing symbol from a symbol intentionally set to `null`, and symbols local to the caller's block may not be visible inside the assertion helper; prefer top-level fixtures or `define($name, $value, true)` for tests that need explicit lookup visibility.
-
-`assert-json($path, $expected, $description = null, $options = null)` loads a JSON file through Stylus `json()` and compares the resulting hash object to `$expected`. Options default to `{ hash: true, leave-strings: true }`; caller options are copied without mutation and `hash` is always forced to `true`.
-
-For selector stack and mixin-introspection behavior, use Stylus built-ins directly inside value assertions:
+Use `assert-current-selector($expected)` and `assert-selectors($expected)` when the current selector context or selector stack is what you are testing:
 
 ```stylus
 .card
   &:hover
-    assert-equal(selector(), '.card:hover');
+    assert-current-selector('.card:hover');
+    assert-selectors('.card' '&:hover');
+```
 
+`assert-defined($name)` checks that `lookup($name)` returns a non-null value. It covers variables, functions, and values created with `define()`. Stylus `lookup()` cannot distinguish a missing symbol from a symbol intentionally set to `null`, and symbols local to the caller's block may not be visible inside the assertion helper; prefer top-level fixtures or `define($name, $value, true)` for tests that need explicit lookup visibility.
+
+Use `assert-not-null($value)` for local values that should be checked directly instead of resolved by name:
+
+```stylus
++test('local value') {
+  $local-value = 12px;
+
+  assert-not-null($local-value);
+}
+```
+
+`assert-json($path, $expected, $description = null, $options = null)` loads a JSON file through Stylus `json()` and compares the resulting hash object to `$expected`. Options default to `{ hash: true, leave-strings: true }`; caller options are copied without mutation and `hash` is always forced to `true`.
+
+For mixin-introspection behavior, use Stylus built-ins directly inside value assertions:
+
+```stylus
 helper()
   assert-true(mixin);
 ```
@@ -234,24 +247,26 @@ The second argument accepts `describe`, `it`, `contextLines`, injected `styl`, a
 
 ## Compatibility
 
-| Environment                | Status                   | Notes                                                                                                                      |
-| -------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| Node.js                    | Supported on Node `>=16` | Stylus `0.64.0` and the current test stack no longer target Node 14.                                                       |
-| Stylus `0.64.0`            | Supported                | Direct compilation and package-internal plugin paths are covered by tests.                                                 |
-| Standalone Stylus compiler | Supported with limits    | Value assertions and reports compile to comments. CSS output assertions need manual review unless a JS runner parses them. |
-| Stylus CLI                 | Supported                | Use the same `@require` entrypoint; enable terminal output with `$true-terminal-output.value = true` or `report(true)`.    |
-| Mocha                      | Supported and tested     | The repository runs `npm run test:mocha`.                                                                                  |
-| Jest                       | Supported and tested     | The repository runs `npm run test:jest` with Jest 29.                                                                      |
-| Vitest-style runners       | Compatible in principle  | Any runner exposing `describe` and `it` can use `runStyl`, but this repo does not yet include a Vitest test script.        |
-| Stylus plugins             | Supported                | Direct Stylus `use()` calls, `runStyl({ use })`, and CLI-style `runStyl({ pluginPaths })` are supported.                   |
-| Dependency reporting       | Supported                | `renderStyl()` and `runStyl()` return Stylus `.deps()` data and support `trueOptions.onDeps`.                              |
-| CLI runner                 | Deferred                 | The reusable renderer/parser/dependency layer exists, but `stylus-true` does not yet ship a standalone file-discovery CLI. |
+| Environment                   | Status                        | Notes                                                                                                                      |
+| ----------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Node.js                       | Supported on Node `>=22.22.2` | The current test stack targets Node 22.22.2 and newer compatible Node releases.                                            |
+| Stylus `0.64.0`               | Supported                     | Direct compilation and package-internal plugin paths are covered by tests.                                                 |
+| Standalone Stylus compiler    | Supported with limits         | Value assertions and reports compile to comments. CSS output assertions need manual review unless a JS runner parses them. |
+| Stylus CLI                    | Supported                     | Use the same `@require` entrypoint; enable terminal output with `$true-terminal-output.value = true` or `report(true)`.    |
+| Mocha                         | Supported and tested          | The repository runs `npm run test:mocha`.                                                                                  |
+| Vitest                        | Supported and tested          | The repository runs `npm run test:vitest` with Vitest 4.                                                                   |
+| Other `describe`/`it` runners | Compatible in principle       | Any runner exposing `describe` and `it` can use `runStyl`, but Mocha and Vitest are the tested integrations.               |
+| Stylus plugins                | Supported                     | Direct Stylus `use()` calls, `runStyl({ use })`, and CLI-style `runStyl({ pluginPaths })` are supported.                   |
+| Dependency reporting          | Supported                     | `renderStyl()` and `runStyl()` return Stylus `.deps()` data and support `trueOptions.onDeps`.                              |
+| CLI runner                    | Deferred                      | The reusable renderer/parser/dependency layer exists, but `stylus-true` does not yet ship a standalone file-discovery CLI. |
 
-## Known Limits
+## Stylus Limitations
 
 Stylus evaluates nested block contents before wrapper mixins. `runStyl()` supports nested `test-module()`/`describe()` and `test()`/`it()` structures by parsing private `TRUE_MODULE_*` and `TRUE_TEST_*` marker comments from compiled CSS, then reconstructing the hierarchy in JavaScript. Private live context reads such as `_true-context('module')` inside nested wrapper bodies are not a public guarantee.
 
-CSS output assertions should still use an `assert()` wrapper. The JavaScript parser reports stray `output()`, `expect()`, `contains()`, `contains-string()`, or `END_ASSERT` markers outside an assertion, but the standalone Stylus compiler cannot always reject a missing wrapper before CSS is emitted.
+CSS output assertions should still use an `assert()` wrapper. `runStyl()` and `renderStyl()` parse compiled CSS and report stray `output()`, `expect()`, `contains()`, `contains-string()`, or `END_ASSERT` markers outside an assertion. The standalone Stylus compiler can emit those marker comments before it has enough wrapper context to reject every malformed assertion, so parser-backed JS runner validation is the strict mode.
+
+Stylus introspection helpers work inside Stylus's own scope rules. `assert-selector()` checks the global selector map with `selector-exists()`. Use `assert-current-selector()` or `assert-selectors()` for current selector context, and use `assert-not-null($value)` for local values that `lookup($name)` cannot reliably inspect by name.
 
 Use this safe structure for CSS output assertions:
 
@@ -269,7 +284,7 @@ Use this safe structure for CSS output assertions:
 }
 ```
 
-See [KNOWN-ISSUES.MD](KNOWN-ISSUES.MD) for details.
+See [STYLUS-LIMITATIONS.MD](STYLUS-LIMITATIONS.MD) for details.
 
 ## Acknowledgements
 

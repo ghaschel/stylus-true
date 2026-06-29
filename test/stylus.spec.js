@@ -633,6 +633,35 @@ describe("stylus interface", () => {
     );
   });
 
+  it("supports current selector, selector stack, and not-null assertions", () => {
+    const source = [
+      '@require "styl/_true";',
+      "+test-module('Stylus helper assertions')",
+      "  +test('Selector context and local values')",
+      "    $local-value = 12px",
+      "    assert-not-null($local-value, 'local value exists')",
+      "    .selector-fixture",
+      "      &:hover",
+      "        assert-current-selector('.selector-fixture:hover', 'current selector')",
+      "        assert-selectors('.selector-fixture' '&:hover', 'selector stack')",
+    ].join("\n");
+    const result = stylTrue.renderStyl({ data: source });
+    const assertions = result.modules[0].tests[0].assertions;
+
+    assert.deepStrictEqual(
+      assertions.map((assertion) => assertion.description),
+      [
+        "[assert-not-null] local value exists",
+        "[assert-current-selector] current selector",
+        "[assert-selectors] selector stack",
+      ]
+    );
+    assert.deepStrictEqual(
+      assertions.map((assertion) => assertion.passed),
+      [true, true, true]
+    );
+  });
+
   it("emits failure comments for Stylus-specific assertions", () => {
     const source = [
       '@require "styl/_true";',
@@ -642,7 +671,10 @@ describe("stylus interface", () => {
       "    assert-unit('value', px, 'non-unit value');",
       "    assert-selector('.missing-selector', 'missing selector');",
       "    assert-defined('missing-symbol', 'missing symbol');",
+      "    assert-not-null(null, 'null value');",
       "    assert-json('test/styl/fixtures/assert-json.json', { name: 'wrong' }, 'json mismatch');",
+      "    assert-current-selector('.missing-selector', 'current selector mismatch');",
+      "    assert-selectors('.missing-selector', 'selector stack mismatch');",
       "  }",
       "}",
     ].join("\n");
@@ -656,12 +688,15 @@ describe("stylus interface", () => {
         "assert-unit",
         "assert-selector",
         "assert-defined",
+        "assert-not-null",
         "assert-json",
+        "assert-current-selector",
+        "assert-selectors",
       ]
     );
     assert.deepStrictEqual(
       assertions.map((assertion) => assertion.passed),
-      [false, false, false, false, false]
+      [false, false, false, false, false, false, false, false]
     );
   });
 

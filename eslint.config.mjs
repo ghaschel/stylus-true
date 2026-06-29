@@ -30,13 +30,11 @@ const testGlobals = {
   beforeEach: "readonly",
   describe: "readonly",
   it: "readonly",
-  jest: "readonly",
 };
 
 export default [
   {
     ignores: [
-      ".nyc_output/**",
       "coverage/**",
       "docs/**",
       "node_modules/**",
@@ -69,6 +67,7 @@ export default [
           varsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/no-require-imports": "off",
       "@typescript-eslint/no-var-requires": "off",
       "no-var": "off",
       "prefer-rest-params": "off",

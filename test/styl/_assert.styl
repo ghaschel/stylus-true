@@ -175,6 +175,27 @@ defined-variable = 12px;
   }
 }
 
+// Assert Current Selector
++test-module('Assert Current Selector')
+  +test('Compares the current selector')
+    .selector-fixture
+      &:hover
+        assert-current-selector('.selector-fixture:hover');
+
+// Assert Selectors
++test-module('Assert Selectors')
+  +test('Compares the selector stack')
+    .selector-fixture
+      &:hover
+        assert-selectors('.selector-fixture' '&:hover');
+
+// Assert Not Null
++test-module('Assert Not Null')
+  +test('Checks local values directly')
+    $local-value = 12px;
+
+    assert-not-null($local-value);
+
 // Assert JSON
 +test-module('Assert JSON') {
   +test('Compares JSON hash fixtures') {
