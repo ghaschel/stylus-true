@@ -1,4 +1,4 @@
-import chalk = require("chalk");
+import chalk from "chalk";
 import type { StylusPlugin } from "./types/stylus-interop";
 
 const stdout = function (): StylusPlugin {
@@ -13,19 +13,19 @@ const stdout = function (): StylusPlugin {
 
       if (type === "debug") {
         process.stdout.write(
-          `${chalk.hex("#333333").bold.bgKeyword("orange")(" DEBUG ")} ${str}\n`
+          `${chalk.hex("#333333").bold.bgBlue(" DEBUG ")} ${str}\n`
         );
       }
 
       if (type === "warn") {
         process.stdout.write(
-          `${chalk.hex("#000000").bold.bgKeyword("yellow")(" WARN ")} ${str}\n`
+          `${chalk.hex("#000000").bold.bgYellow(" WARN ")} ${str}\n`
         );
       }
 
       if (type === "error") {
         process.stdout.write(
-          `${chalk.hex("#000000").bold.bgKeyword("red")(" ERROR ")} ${str}\n`
+          `${chalk.hex("#000000").bold.bgRed(" ERROR ")} ${str}\n`
         );
       }
     });

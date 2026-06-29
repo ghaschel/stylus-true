@@ -1,0 +1,11 @@
+# Bun configuration
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Auto-install peer dependencies
+peer = true
+
+[test]
+# Keep Bun's default test collector scoped to this package's tests.
+# `pathIgnorePatterns` is a Jest option, not a Bun test option.
+root = "./test"

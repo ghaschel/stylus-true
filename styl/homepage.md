@@ -35,9 +35,9 @@ stylus-true is a unit-testing framework for Stylus code. Tests are written in St
 | Stylus `0.64.0`               | Supported                     | Direct compilation and package-internal plugin paths are covered by tests.                                                 |
 | Standalone Stylus compiler    | Supported with limits         | Value assertions and reports compile to comments. CSS output assertions need manual review unless a JS runner parses them. |
 | Stylus CLI                    | Supported                     | Use the same `@require` entrypoint; enable terminal output with `$true-terminal-output.value = true` or `report(true)`.    |
-| Mocha                         | Supported and tested          | The repository runs `npm run test:mocha`.                                                                                  |
+| Bun test                      | Supported and tested          | The repository runs `npm run test:bun` with Bun's test runner.                                                             |
 | Vitest                        | Supported and tested          | The repository runs `npm run test:vitest` with Vitest 4.                                                                   |
-| Other `describe`/`it` runners | Compatible in principle       | Any runner exposing `describe` and `it` can use `runStyl`, but Mocha and Vitest are the tested integrations.               |
+| Other `describe`/`it` runners | Compatible in principle       | Any runner exposing `describe` and `it` can use `runStyl`, but Bun and Vitest are the tested integrations.                 |
 | Stylus plugins                | Supported                     | Direct Stylus `use()` calls, `runStyl({ use })`, and CLI-style `runStyl({ pluginPaths })` are supported.                   |
 | Dependency reporting          | Supported                     | `renderStyl()` and `runStyl()` return Stylus `.deps()` data and support `trueOptions.onDeps`.                              |
 | CLI runner                    | Deferred                      | The reusable renderer/parser/dependency layer exists, but `stylus-true` does not yet ship a standalone file-discovery CLI. |
