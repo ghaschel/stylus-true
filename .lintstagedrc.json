@@ -1,0 +1,7 @@
+{
+  "*.{js,jsx,ts,tsx}": ["eslint --fix"],
+  "*.styl": ["stylelint --fix"],
+  "styl/**/*.styl": ["stylelint --fix"],
+  "test/styl/**/*.styl": ["stylelint --fix"],
+  "*.{json,md,yml,yaml}": ["prettier --write"]
+}

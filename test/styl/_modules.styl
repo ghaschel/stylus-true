@@ -1,16 +1,34 @@
 // Module Tests
 // ============
 
-// TODO: Uncomment when figured out the issue with the stylus compiler ordering
++test-module('test-module [mixin]') {
+  +test('Outputs module boundaries') {
+    +assert('module start and stop comments') {
+      +output() {
+        _true-module-start('Helper Module');
+        _true-module-stop('Helper Module');
+      }
 
-// +test-module('test-module [mixin]') {
-//   +test('Changes the current module context') {
-//     assert-equal(_true-context('module'), 'test-module [mixin]');
-//   }
-// }
+      contains-string('# Module: Helper Module');
+      contains-string('TRUE_MODULE_START: Helper Module');
+      contains-string('TRUE_MODULE_END: Helper Module');
+      contains-string('END_MODULE');
+    }
+  }
+}
 
-// +describe('Describe/it syntax') {
-//   +it('Changes the current module context') {
-//     assert-equal(_true-context('module'), 'Describe/it syntax');
-//   }
-// }
++describe('Describe/it syntax') {
+  +it('Outputs describe module boundaries') {
+    +assert('describe start and stop comments') {
+      +output() {
+        _true-module-start('Describe Helper');
+        _true-module-stop('Describe Helper');
+      }
+
+      contains-string('# Module: Describe Helper');
+      contains-string('TRUE_MODULE_START: Describe Helper');
+      contains-string('TRUE_MODULE_END: Describe Helper');
+      contains-string('END_MODULE');
+    }
+  }
+}

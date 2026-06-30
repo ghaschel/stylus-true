@@ -1,20 +1,19 @@
 // Pass Details
 
-// TODO: Uncomment when figured out the issue with the stylus compiler ordering
++test-module('pass-details [mixin]') {
+  +test('Properly output a passing assertion result') {
+    +assert('passing test') {
+      +output() {
+        _true-context-mixin('assert', '[output] passing test');
+        _true-pass-details();
+      }
 
-// +test-module('pass-details [mixin]') {
-//   +test('Properly output a passing assertion result') {
-//     +assert('passing test') {
-//       +output() {
-//         _true-pass-details(); 
-//       }
-
-//       +expect() {
-//         /*   ✔ [output] passing test */
-//       }
-//     }
-//   }
-// }
+      +expect() {
+        /*!   ✔ [output] passing test */
+      }
+    }
+  }
+}
 
 
 // Variable Details
@@ -103,7 +102,7 @@
       }
 
       +expect() {
-        /*!   ✖ FAILED:  */
+        /*!   ✖ FAILED: [assert-equal] */
         /*!     - Output: '[unit] 0.333333333333333' */
         /*!     - Expected: '[unit] 0.333333333' */
       }

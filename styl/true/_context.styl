@@ -1,5 +1,5 @@
 // unwrap-list($list)
-// 
+//
 // **[private:{list}]** Transforms a wrapped list into a unwrapped one
 // 
 // Weight: 0
@@ -11,7 +11,7 @@ use('../../lib/unwrap-list.js');
 
 // $_true-context = { buffer }
 // 
-// **[private]** Stores the current module/test/assertion context stack
+// **[private]** Stores the best-effort module/test/assertion context stack. JavaScript runner nesting is reconstructed from parser-visible marker comments instead of relying on this live Stylus state.
 // 
 // Weight: 0
 // 
@@ -38,25 +38,55 @@ _true-context-mixin($scope, $name) {
   $_true-context.buffer = unwrap-list($_true-context.buffer);
 }
 
-// _true-context-pop($type)
+// _true-context-pop($scope)
 // 
-// **[private:{void}]** Remove the deepest context layer from `$_true-context.buffer`
+// **[private:{void}]** Remove the deepest context layer from `$_true-context.buffer`, optionally matching a specific scope.
 // 
 // Weight: 0
 // 
-// Styleguide Functions._true-output-pop
-_true-context-pop($type = null) {
+// $scope = null - **{string|null}** ***Scope to remove, or `null` to remove the last context entry.***
+//
+// Styleguide Functions._true-context-pop
+_true-context-pop($scope = null) {
   $new = ();
+  $remove = null;
+  $length = 0;
 
-  if ($type == null) {
-    for $i in 0 .. (length($_true-context.buffer) - 1) {
-      push($new, $_true-context.buffer[$i]);
+  for $entry in ($_true-context.buffer) {
+    if ($entry != null) {
+      if ($scope != null) {
+        $entries = split('|', $entry);
+        $entry-scope = $entries[0];
+
+        if (length($entries) > 1 && $entry-scope == $scope) {
+          $remove = $length;
+        }
+      }
+
+      $length = $length + 1;
     }
-
-    $_true-context.buffer = $new;
-  } else {
-    $_true-context.buffer = ();
   }
+
+  if ($length == 0) {
+    return;
+  }
+
+  if ($scope == null) {
+    $remove = $length - 1;
+  }
+
+  $index = 0;
+  for $entry in ($_true-context.buffer) {
+    if ($entry != null) {
+      if ($index != $remove) {
+        push($new, $entry);
+      }
+
+      $index = $index + 1;
+    }
+  }
+
+  $_true-context.buffer = $new;
 }
 
 $_true-output-context = {
@@ -65,16 +95,16 @@ $_true-output-context = {
 
 // _true-output-context($new, $context)
 // 
-// **[private:{void}]** Add `assert`, `output`, `expect`, or `contains` context to an output test, or check to make sure they all exist before resetting the context.
+// **[private:{void}]** Add output assertion context, or check/reset the context at the end of an output assertion.
 // 
 // Weight: 0
 // 
-// $new - **{'assert'|'output'|'expect'|'contains'|null}** ***Add a new `assert`, `output`, `expect`, or `contains` layer to the context of an output-test, or use `null` to check that all context is properly formed and then reset it at the end of a test***
+// $new - **{'assert'|'output'|'expect'|'contains'|'contains-string'|null}** ***Add a new output assertion layer, or use `null` to check/reset the current output-test context.***
 // $context = $_true-output-context.value - **{list}** ***The current output context***
 // 
 // Styleguide Functions._true-output-context
 _true-output-context($new, $context = $_true-output-context.value) {
-  $valid = 'assert' 'expect' 'output' 'contains';
+  $valid = 'assert' 'expect' 'output' 'contains' 'contains-string';
 
   $_true-output-context.value = _true-validate-output-context($new, $context);
 }
@@ -85,22 +115,26 @@ _true-output-context($new, $context = $_true-output-context.value) {
 // 
 // Weight: 0
 // 
-// $new - **{'assert'|'output'|'expect'|'contains'|null}** ***Add a new `assert`, `output`, `expect`, or `contains` layer to the context of an output-test, or use `null` to check that all context is properly formed and then reset it at the end of a test***
+// $new - **{'assert'|'output'|'expect'|'contains'|'contains-string'|null}** ***Add a new output assertion layer, or use `null` to check/reset the current output-test context.***
 // $context = $_true-output-context.value - **{list}** ***The current output context***
 // 
 // Styleguide Functions._true-validate-output-context
 _true-validate-output-context($new, $context = $_true-output-context.value) {
-  $valid = 'assert' 'expect' 'output' 'contains';
+  $valid = 'assert' 'expect' 'output' 'contains' 'contains-string';
+  $repeatable = 'contains' 'contains-string';
+  $modes = 'expect' 'contains' 'contains-string';
 
   $validIndex = index($valid, $new);
   $contextIndex = index($context, $new);
   $assertIndex = index($context, 'assert')
+  $repeatableIndex = index($repeatable, $new);
+  $is-repeatable = $repeatableIndex != null && $repeatableIndex >= 0;
 
   if ($new && $validIndex == null || $validIndex < 0 ) {
     $error = $new + ' is not a valid context for output tests: ' + $valid;
 
     return _true-error($error, 'output-context');
-  } else if ($contextIndex != null && $contextIndex >= 0 ) {
+  } else if ($contextIndex != null && $contextIndex >= 0 && !$is-repeatable) {
     if ($new == 'assert') {
       $error = 'The `assert()` mixin can not contain another `assert()`';
 
@@ -111,36 +145,57 @@ _true-validate-output-context($new, $context = $_true-output-context.value) {
 
     return _true-error($error, 'output-context');
   } else if ($new) {
-    $is-sub = index('expect' 'output' 'contains', $new);
+    $modeIndex = index($modes, $new);
+    $is-mode = $modeIndex != null && $modeIndex >= 0;
+
+    if ($is-mode) {
+      for $mode in $modes {
+        $existingModeIndex = index($context, $mode);
+        $has-existing-mode = $existingModeIndex != null && $existingModeIndex >= 0;
+
+        if ($mode != $new && $has-existing-mode) {
+          $error = 'Cannot mix output assertion modes in one `assert()`: found `%s()` after `%s()`. Split them into separate `assert()` blocks.' % (unquote($new) unquote($mode));
+
+          return _true-error($error, 'output-context');
+        }
+      }
+    }
+
+    $is-sub = index('expect' 'output' 'contains' 'contains-string', $new);
     $is-sub = $is-sub != null && $is-sub >= 0;
-
-    // if ($is-sub && !($assertIndex != null && $assertIndex >= 0)) {
-    //   $error = 'The `assert()` wrapper is required';
-
-    //   return _true-error($error, 'output-context');
-    // }
 
     push($context, $new);
     return $context
   }
 
-  $length = length($context);
-  $has-expect = index($context, 'expect') || index($context, 'contains');
-  $has-both = index($context, 'output') && $has-expect;
+  $assertIndex = index($context, 'assert');
+  $outputIndex = index($context, 'output');
+  $expectIndex = index($context, 'expect');
+  $containsIndex = index($context, 'contains');
+  $containsStringIndex = index($context, 'contains-string');
+  $has-assert = $assertIndex != null && $assertIndex >= 0;
+  $has-output = $outputIndex != null && $outputIndex >= 0;
+  $has-expect = ($expectIndex != null && $expectIndex >= 0) || ($containsIndex != null && $containsIndex >= 0) || ($containsStringIndex != null && $containsStringIndex >= 0);
 
-  // if ($length != 3 || !$has-both) {
-  //   $required = 'one `output()`, and one `expect()` or `contains()`';
-  //   $error = 'Each `assert()` must contain %s' % $required;
+  if (!$has-assert) {
+    $error = 'The `assert()` wrapper is required';
 
-  //   return _true-error($error, 'output-context');
-  // }
+    return _true-error($error, 'output-context');
+  }
+
+  if (!$has-output || !$has-expect) {
+    $required = 'one `output()`, and one `expect()`, `contains()`, or `contains-string()`';
+    $error = 'Each `assert()` must contain ' + unquote($required);
+
+    return _true-error($error, 'output-context');
+  }
 
   return ();
 }
 
 // _true-context($scope)
 // 
-// **[private:{string}]** Get information on current context for a given scope
+// **[private:{string}]** Get information on current context for a given scope. This is a best-effort private helper and should not be used as a public nested-wrapper API.
 // 
 // Weight: 0
 // 
@@ -151,14 +206,18 @@ _true-context($scope) {
   $value = null;
 
   for $entry in ($_true-context.buffer) {
-    $entries = split('|', $entry);
+    if ($entry != null) {
+      $entries = split('|', $entry);
 
-    $entry-scope = $entries[0];
-    $entry-value = $entries[1];
-  }
+      if (length($entries) > 1) {
+        $entry-scope = $entries[0];
+        $entry-value = $entries[1];
 
-  if ($entry-scope == $scope) {
-    $value = $entry-value;
+        if ($entry-scope == $scope) {
+          $value = $entry-value;
+        }
+      }
+    }
   }
 
   return $value;
@@ -166,7 +225,7 @@ _true-context($scope) {
 
 // _true-context-all($scope)
 // 
-// **[private:{list}]** Get list of context names for a given scope
+// **[private:{list}]** Get list of context names for a given scope. This is a best-effort private helper and should not be used as a public nested-wrapper API.
 // 
 // Weight: 0
 // 
@@ -177,13 +236,17 @@ _true-context-all($scope) {
   $list = ();
 
   for $entry in ($_true-context.buffer) {
-    $entries = split('|', $entry);
-    
-    $entry-scope = $entries[0];
-    $entry-value = $entries[1];
+    if ($entry != null) {
+      $entries = split('|', $entry);
 
-    if ($entry-scope == $scope) {
-      push($list, $entry-value);
+      if (length($entries) > 1) {
+        $entry-scope = $entries[0];
+        $entry-value = $entries[1];
+
+        if ($entry-scope == $scope) {
+          push($list, $entry-value);
+        }
+      }
     }
   }
 

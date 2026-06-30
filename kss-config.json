@@ -1,6 +1,7 @@
 {
   "title": "stylus-true",
   "source": "styl/",
+  "homepage": "styl/homepage.md",
   "destination": "docs/",
-  "css": ["kss-assets/custom.css"]
+  "builder": "node_modules/kss-tailwindcss"
 }

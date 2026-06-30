@@ -1,0 +1,8 @@
+{
+  "name": "stylus-true",
+  "size": 12,
+  "nested": {
+    "unit": "10px",
+    "flag": true
+  }
+}

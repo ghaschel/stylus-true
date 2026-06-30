@@ -22,7 +22,7 @@ use('../../lib/arrange-test-list.js');
 
 // test-module($name)
 // 
-// **[public:{void}]** Test Modules are optional, and can be used to group tests and other modules for organizational purposes.
+// **[public:{void}]** Group related tests under a module heading. Nested modules are supported by the JavaScript runner parser; live private context inspection inside nested blocks remains limited by Stylus evaluation order.
 // 
 // Weight: -10
 // 
@@ -61,12 +61,12 @@ test-module($name) {
 
   {block};
 
-  _true-module-stop();
+  _true-module-stop($name);
 }
 
 // describe($name)
 // 
-// **[public:{void}]** Describe the unit to be tested. This works just like a test module, allowing you to group one or more related tests.
+// **[public:{void}]** Alias for `test-module()`, provided for JavaScript-style test syntax.
 // 
 // Weight: -10
 // 
@@ -108,7 +108,7 @@ describe($name) {
 
 // _true-module-start($name)
 // 
-// **[private:{output}]** Module start helper
+// **[private:{output}]** Module start helper. Emits a private `TRUE_MODULE_START` marker for JavaScript runner nesting before the legacy `# Module` display comment.
 // 
 // Weight: 0
 // 
@@ -118,36 +118,32 @@ describe($name) {
 _true-module-start($name) {
   _true-context-mixin(module, $name);
   $_true-context.buffer = arrange-test-list($_true-context.buffer);
-  $module-list = _true-context-all('module');
+  $module = unquote($name);
 
-  $modules = $module-list[0];
-  $length = length($module-list);
-
-  // if ($length > 1) {
-  //   for $i in ((2)..($length)) {
-  //     $modules = $modules + ' :: ' + $module-list[$i];
-  //   }
-  // }
-
-  _true-message('# Module: %s' % unquote($modules), 'comments');
+  _true-message(' TRUE_MODULE_START: %s ' % $module, 'comments');
+  _true-message('# Module: %s' % $module, 'comments');
   $underline = '----------';
 
-  for $i in ((0)..(str-length(unquote($modules)) - 1)) {
+  for $i in ((0)..(str-length($module) - 1)) {
     $underline = '%s-' % unquote($underline);
   }
 
   _true-message($underline, 'comments');
 }
 
-// _true-module-stop()
+// _true-module-stop($name)
 // 
-// **[private:{output}]** Module stop helper
+// **[private:{output}]** Module stop helper. Emits a private `TRUE_MODULE_END` marker and the legacy `END_MODULE` display boundary.
 // 
 // Weight: 0
 // 
+// $name - **{string}** ***Module name***
+//
 // Styleguide Mixins._true-module-stop
-_true-module-stop() {
+_true-module-stop($name) {
   _true-update-stats-count('modules');
-  // _true-context-pop('modules')
+  _true-context-pop('module');
+  _true-message(' TRUE_MODULE_END: %s ' % unquote($name), 'comments');
+  _true-message(' END_MODULE ', 'comments');
   _true-message('', 'comments');
 }

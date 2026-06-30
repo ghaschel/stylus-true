@@ -1,11 +1,11 @@
 // report($terminal, $fail-on-error, $results, $stats)
 // 
-// **[public:{output}]** Report results summary to CSS and (optionally) the command line
+// **[public:{output}]** Emit the result summary as CSS comments and optionally to the terminal.
 // 
 // Weight: -10
 // 
-// $terminal = $true-terminal-output.value - **{boolean}** ***Optionally output results to the terminal***
-// $fail-on-error = false - **{boolean}** ***Optionally error out the compiler if tests have failed***
+// $terminal = $true-terminal-output.value - **{boolean}** ***Optionally output results directly from Stylus to the terminal.***
+// $fail-on-error = false - **{boolean}** ***Optionally stop compilation when value assertions have failed.***
 // $results = $_true-results.value - **{hash}** ***A hash of run, pass, fail, and output-to-css results***
 // $stats = $_true-stats - **{hash}** ***A map of module, test, and assertion statistics***
 //

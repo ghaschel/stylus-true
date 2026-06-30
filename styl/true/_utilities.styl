@@ -1,37 +1,37 @@
 use('../../lib/str-length.js');
 
 // map-keys($hash)
-// 
+//
 // **[private:{list}]** Returns a list with only the keys of the selected hash
-// 
+//
 // Weight: 0
-// 
+//
 // $hash - **{hash}** ***Hash to extract the keys from***
-// 
+//
 // Styleguide Functions.map-keys
 use('../../lib/map-keys.js');
 
 // $_true-error-output-override = { value }
-// 
-// **[public]** Value key stores the desired value
-// 
+//
+// **[private]** Deprecated compatibility alias for `$catch-errors`.
+//
 // Weight: -10
-// 
-// $value = true - **{boolean}** ***The actual output override value***
-// 
+//
+// $value = null - **{boolean|'warn'|null}** ***When set, overrides `$catch-errors` for legacy tests and helpers.***
+//
 // Styleguide Variables.$_true-error-output-override
 $_true-error-output-override = {
-  value: true
+  value: null
 };
 
 // is-list($list)
-// 
+//
 // **[private:{boolean}]** Returns whether an argument is a list or not
-// 
+//
 // Weight: 0
-// 
+//
 // $list - **{list}** ***The list to analyze***
-// 
+//
 // Styleguide Functions.is-list
 is-list() {
   // arguments is injected by stylus
@@ -42,59 +42,123 @@ is-list() {
   }
 }
 
-// _true-error($message, $source, $override)
-// 
-// **[private:{void|string}]** Throw or returns an error with a message detailing the source and error
-// 
+// _true-error-prefix($source)
+//
+// **[private:{string}]** Format the standard True error prefix.
+//
 // Weight: 0
-// 
+//
+// $source - **{string|null}** ***Optional source of the error***
+//
+// Styleguide Functions._true-error-prefix
+_true-error-prefix($source = null) {
+  if ($source) {
+    return 'ERROR [' + $source + ']:';
+  }
+
+  return 'ERROR:';
+}
+
+// _true-catch-errors($catch)
+//
+// **[private:{boolean|'warn'}]** Normalize catchable error settings from object or scalar configuration.
+//
+// Weight: 0
+//
+// $catch = null - **{boolean|'warn'|object|null}** ***Explicit catch setting, or `null` to use `$catch-errors`.***
+//
+// Styleguide Functions._true-catch-errors
+_true-catch-errors($catch = null) {
+  if ($catch == null) {
+    $catch = $catch-errors;
+  }
+
+  if (type($catch) == 'object') {
+    $catch = $catch.value;
+  }
+
+  if ($catch) {
+    $catch-key = unquote('' + $catch);
+    if ($catch-key == unquote('warn') || $catch-key == unquote('warn(msg)')) {
+      return 'warn';
+    }
+  }
+
+  return $catch;
+}
+
+// true-error($message, $source, $catch)
+//
+// **[public:{string|output}]** Catchable Stylus error helper, adapted from Sass True's namespaced `throw.error()`.
+//
+// Weight: -10
+//
+// $message - **{string}** ***The error to report***
+// $source = null - **{string|null}** ***Optional source of the error***
+// $catch = null - **{boolean|'warn'|object|null}** ***Optionally catch errors, using `$catch-errors` when omitted.***
+//
+// Styleguide Functions.true-error
+true-error($message, $source = null, $catch = null) {
+  $catch = _true-catch-errors($catch);
+  $prefix = _true-error-prefix($source);
+  $error = $prefix + ' ' + $message;
+
+  if ($catch) {
+    if ($catch == 'warn') {
+      warn('' + $message);
+    }
+
+    if (mixin) {
+      _true-message($prefix, 'comments');
+      _true-message($message, 'comments', 2);
+    } else {
+      return $error;
+    }
+  } else {
+    error('' + $message);
+  }
+}
+
+// _true-error($message, $source, $override)
+//
+// **[private:{void|string}]** Throw or returns an error with a message detailing the source and error
+//
+// Weight: 0
+//
 // $message - **{string}** ***The error to report***
 // $source - **{string}** ***The source of the error***
 // $override = $_true-error-output-override.value - **{boolean}** ***Optionally override error-output for testing failure-cases***
-// 
+//
 // Styleguide Functions._true-error
 _true-error($message, $source, $override = $_true-error-output-override.value) {
-  $error = 'ERROR [' + $source + '] ' + $message;
-
-  if ($override) {
-    return $error;
-  }
-
-  $error = '' + $error + '';
-  error($error);
+  return true-error($message, $source, $override);
 }
 
 // _true-error-mixin($message, $source, $override)
-// 
+//
 // **[private:{void}]** Outputs an error with a message detailing the source and error
-// 
+//
 // Weight: 0
-// 
+//
 // $message - **{string}** ***The error to report***
 // $source - **{string}** ***The source of the error***
 // $override = $_true-error-output-override.value - **{boolean}** ***Optionally override error-output for testing failure-cases***
-// 
+//
 // Styleguide Mixins._true-error-mixin
 _true-error-mixin($message, $source, $override = $_true-error-output-override.value) {
-  $error = 'ERROR [' + $source + '] ' + $message;
-
-  if ($override) {
-    _true-message($error, 'comments');
-  } else {
-    error($error);
-  }
+  true-error($message, $source, $override);
 }
 
 
 // _true-map-increment($base, $add)
-// 
+//
 // **[private:{string}]** Add hash values together
-// 
+//
 // Weight: 0
-// 
+//
 // $base - **{string}** ***Initial map to add values to***
 // $add - **{string}** ***Map of values to be added***
-// 
+//
 // Styleguide Functions._true-map-increment
 _true-map-increment($base, $add) {
   for $key in (map-keys($add)) {
@@ -111,13 +175,13 @@ _true-map-increment($base, $add) {
 }
 
 // _true-join-multiple($lists...)
-// 
+//
 // **[private:{list}]** Any number of lists to be joined, with an optional final argument describing the desired list-separator ('space' or 'comma')
-// 
+//
 // Weight: 0
-// 
+//
 // $lists - **{list[]}** ***Lists***
-// 
+//
 // Styleguide Functions._true-join-multiple
 _true-join-multiple($lists...) {
   $return = ();

@@ -1,110 +1,620 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
+<!doctype html>
+<html class="scrollbar scroll-smooth" lang="en">
   <head>
     <meta charset="utf-8" />
     <title>stylus-true</title>
-
-    <meta name="description" content="" />
+    <meta name="description" content="stylus-true API style guide" />
     <meta name="generator" content="kss-node" />
-    <meta name="viewport" content="width=device-width" />
-
-    <link rel="stylesheet" href="kss-assets/kss.css" />
-    <link rel="stylesheet" href="kss-assets/custom.css" />
-  </head>
-  <body id="kss-node" class="kss-fullscreen-mode">
-    <div class="kss-sidebar kss-style">
-      <header class="kss-header">
-        <h1 class="kss-doc-title">stylus-true</h1>
-      </header>
-      <nav class="kss-nav" aria-label="Style Guide">
-        <ul class="kss-nav__menu">
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="./">
-              <span class="kss-nav__ref">0</span
-              ><span class="kss-nav__name">Overview</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-functions.html">
-              <span class="kss-nav__ref">1</span
-              ><span class="kss-nav__name">Functions</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-mixins.html">
-              <span class="kss-nav__ref">2</span
-              ><span class="kss-nav__name">Mixins</span>
-            </a>
-          </li>
-          <li class="kss-nav__menu-item">
-            <a class="kss-nav__menu-link" href="section-variables.html">
-              <span class="kss-nav__ref">3</span
-              ><span class="kss-nav__name">Variables</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <main class="kss-main" aria-label="Content">
-      <article>
-        <div
-          id="kssref-mixins-_true-pass-details"
-          class="kss-section kss-section--depth-2 is-fullscreen"
-        >
-          <div class="kss-style">
-            <h2 class="kss-title kss-title--level-2">
-              <a
-                class="kss-title__permalink"
-                href="#kssref-mixins-_true-pass-details"
-              >
-                <span class="kss-title__ref">
-                  2.19
-                  <span class="kss-title__permalink-hash">
-                    #Mixins._true-pass-details
-                  </span>
-                </span>
-                _true-pass-details()
-              </a>
-            </h2>
-
-            <div class="kss-description">
-              <p>
-                <strong>[private:{output}]</strong> Ouptut a success message for
-                passing tests
-              </p>
-            </div>
-          </div>
-
-          <div class="kss-source kss-style">
-            Source: <code>true/_output.styl</code>, line 3
-          </div>
-        </div>
-      </article>
-    </main>
-
-    <!-- SCRIPTS -->
-    <script src="kss-assets/kss.js"></script>
-    <script src="kss-assets/scrollspy.js"></script>
-    <script src="kss-assets/kss-fullscreen.js"></script>
-    <script src="kss-assets/kss-guides.js"></script>
-    <script src="kss-assets/kss-markup.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      var spy = new ScrollSpy("#kss-node", {
-        nav: ".kss-nav__menu-child > li > a",
-        className: "is-in-viewport"
-      });
-      var kssFullScreen = new KssFullScreen({
-        idPrefix: "kss-fullscreen-",
-        bodyClass: "kss-fullscreen-mode",
-        elementClass: "is-fullscreen"
-      });
-      var kssGuides = new KssGuides({
-        bodyClass: "kss-guides-mode"
-      });
-      var kssMarkup = new KssMarkup({
-        bodyClass: "kss-markup-mode",
-        detailsClass: "kss-markup"
-      });
+      (function () {
+        var stored = localStorage.getItem("kss-theme") || "system";
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle(
+          "dark",
+          stored === "dark" || (stored === "system" && prefersDark)
+        );
+        document.documentElement.dataset.kssTheme = stored;
+      })();
     </script>
+    <link rel="icon" href="kss-assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="kss-assets/kss-theme.css" />
+    
+  </head>
+  <body id="kss-node" class="bg-neutral-50 text-neutral-950 antialiased dark:bg-neutral-950 dark:text-neutral-50">
+    <script id="kss-search-index" type="application/json">[{"title":"Functions","reference":"Functions","referenceNumber":"1","description":"","url":"section-functions.html#kssref-functions","itemUrl":"item-functions.html","deprecated":false,"experimental":false,"private":false},{"title":"_true-test-start($name)","reference":"Functions._true-test-start","referenceNumber":"1.1","description":"[private:{void}] Test start helper. Emits a private TRUE_TEST_START marker for JavaScript runner nesting before the legacy Test: display comment.","url":"section-functions.html#kssref-functions-_true-test-start","itemUrl":"item-functions-_true-test-start.html","deprecated":false,"experimental":false,"private":true},{"title":"true-error($message, $source, $catch)","reference":"Functions.true-error","referenceNumber":"1.2","description":"[public:{string|output}] Catchable Stylus error helper, adapted from Sass True's namespaced throw.error() .","url":"section-functions.html#kssref-functions-true-error","itemUrl":"item-functions-true-error.html","deprecated":false,"experimental":false,"private":false},{"title":"_true-assert-label($name, $description)","reference":"Functions._true-assert-label","referenceNumber":"1.3","description":"[private:{string}] Build the output label for assertion comments.","url":"section-functions.html#kssref-functions-_true-assert-label","itemUrl":"item-functions-_true-assert-label.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-catch-errors($catch)","reference":"Functions._true-catch-errors","referenceNumber":"1.4","description":"[private:{boolean|'warn'}] Normalize catchable error settings from object or scalar configuration.","url":"section-functions.html#kssref-functions-_true-catch-errors","itemUrl":"item-functions-_true-catch-errors.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-context($scope)","reference":"Functions._true-context","referenceNumber":"1.5","description":"[private:{string}] Get information on current context for a given scope. This is a best-effort private helper and should not be used as a public nested-wrapper API.","url":"section-functions.html#kssref-functions-_true-context","itemUrl":"item-functions-_true-context.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-context-all($scope)","reference":"Functions._true-context-all","referenceNumber":"1.6","description":"[private:{list}] Get list of context names for a given scope. This is a best-effort private helper and should not be used as a public nested-wrapper API.","url":"section-functions.html#kssref-functions-_true-context-all","itemUrl":"item-functions-_true-context-all.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-context-mixin($scope, $name)","reference":"Functions._true-context-mixin","referenceNumber":"1.7","description":"[private:{void}] Update the current context for a given scope","url":"section-functions.html#kssref-functions-_true-context-mixin","itemUrl":"item-functions-_true-context-mixin.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-context-pop($scope)","reference":"Functions._true-context-pop","referenceNumber":"1.8","description":"[private:{void}] Remove the deepest context layer from $_true-context.buffer , optionally matching a specific scope.","url":"section-functions.html#kssref-functions-_true-context-pop","itemUrl":"item-functions-_true-context-pop.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-edgefail-notes($one, $two)","reference":"Functions._true-edgefail-notes","referenceNumber":"1.9","description":"[private:{null|string}] There are some common test failures that can be confusing, where results look identical in the output, but represent different values internally. This function looks for those edge-case failures and adds a clarifying note in the results.","url":"section-functions.html#kssref-functions-_true-edgefail-notes","itemUrl":"item-functions-_true-edgefail-notes.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-error($message, $source, $override)","reference":"Functions._true-error","referenceNumber":"1.10","description":"[private:{void|string}] Throw or returns an error with a message detailing the source and error","url":"section-functions.html#kssref-functions-_true-error","itemUrl":"item-functions-_true-error.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-error-prefix($source)","reference":"Functions._true-error-prefix","referenceNumber":"1.11","description":"[private:{string}] Format the standard True error prefix.","url":"section-functions.html#kssref-functions-_true-error-prefix","itemUrl":"item-functions-_true-error-prefix.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-get-result($assert, $expected, $unequal)","reference":"Functions._true-get-result","referenceNumber":"1.12","description":"[private:{'pass' | 'fail'}] Compare two values, and return a pass or fail result.","url":"section-functions.html#kssref-functions-_true-get-result","itemUrl":"item-functions-_true-get-result.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-is-truthy($assert)","reference":"Functions._true-is-truthy","referenceNumber":"1.13","description":"[private:{boolean}] Check that a value is truthy (empty lists and strings return false)","url":"section-functions.html#kssref-functions-_true-is-truthy","itemUrl":"item-functions-_true-is-truthy.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-join-multiple($lists...)","reference":"Functions._true-join-multiple","referenceNumber":"1.14","description":"[private:{list}] Any number of lists to be joined, with an optional final argument describing the desired list-separator ('space' or 'comma')","url":"section-functions.html#kssref-functions-_true-join-multiple","itemUrl":"item-functions-_true-join-multiple.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-json-options($options)","reference":"Functions._true-json-options","referenceNumber":"1.15","description":"[private:{object}] Build options for Stylus json() assertions without mutating caller options.","url":"section-functions.html#kssref-functions-_true-json-options","itemUrl":"item-functions-_true-json-options.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-map-increment($base, $add)","reference":"Functions._true-map-increment","referenceNumber":"1.16","description":"[private:{string}] Add hash values together","url":"section-functions.html#kssref-functions-_true-map-increment","itemUrl":"item-functions-_true-map-increment.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-output-context($new, $context)","reference":"Functions._true-output-context","referenceNumber":"1.17","description":"[private:{void}] Add output assertion context, or check/reset the context at the end of an output assertion.","url":"section-functions.html#kssref-functions-_true-output-context","itemUrl":"item-functions-_true-output-context.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-report-message($linebreak, $results, $stats)","reference":"Functions._true-report-message","referenceNumber":"1.18","description":"[private:{string}] Report results summary to CSS and (optionally) the command line","url":"section-functions.html#kssref-functions-_true-report-message","itemUrl":"item-functions-_true-report-message.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-results-message($linebreak, $results)","reference":"Functions._true-results-message","referenceNumber":"1.19","description":"[private:{string}] Report message","url":"section-functions.html#kssref-functions-_true-results-message","itemUrl":"item-functions-_true-results-message.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-stats-message($linebreak, $stats)","reference":"Functions._true-stats-message","referenceNumber":"1.20","description":"[private:{string}] Stats message","url":"section-functions.html#kssref-functions-_true-stats-message","itemUrl":"item-functions-_true-stats-message.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-string-value($value)","reference":"Functions._true-string-value","referenceNumber":"1.21","description":"[private:{string}] Coerce identifiers or strings into a Stylus string value.","url":"section-functions.html#kssref-functions-_true-string-value","itemUrl":"item-functions-_true-string-value.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-test-stop($name)","reference":"Functions._true-test-stop","referenceNumber":"1.22","description":"[private:{void}] Test stop helper. Emits a private TRUE_TEST_END marker for JavaScript runner nesting before the legacy blank test boundary comment.","url":"section-functions.html#kssref-functions-_true-test-stop","itemUrl":"item-functions-_true-test-stop.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-update($result)","reference":"Functions._true-update","referenceNumber":"1.23","description":"[private:{void}] Update global results data","url":"section-functions.html#kssref-functions-_true-update","itemUrl":"item-functions-_true-update.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-update-stats-count($type)","reference":"Functions._true-update-stats-count","referenceNumber":"1.24","description":"[private:{void}] Add to a stats count type count by 1","url":"section-functions.html#kssref-functions-_true-update-stats-count","itemUrl":"item-functions-_true-update-stats-count.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-update-test($result)","reference":"Functions._true-update-test","referenceNumber":"1.25","description":"[private:{void}] Update test result flag with new data","url":"section-functions.html#kssref-functions-_true-update-test","itemUrl":"item-functions-_true-update-test.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-validate-output-context($new, $context)","reference":"Functions._true-validate-output-context","referenceNumber":"1.26","description":"[private:{string}] Validate the new context, and return an updated context value","url":"section-functions.html#kssref-functions-_true-validate-output-context","itemUrl":"item-functions-_true-validate-output-context.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-variable-details($var)","reference":"Functions._true-variable-details","referenceNumber":"1.27","description":"[private:{string}] Provide the details (type, list-separator, quotation) for a given variable - used to provide context in failure reporting.","url":"section-functions.html#kssref-functions-_true-variable-details","itemUrl":"item-functions-_true-variable-details.html","deprecated":false,"experimental":false,"private":true},{"title":"arrange-test-list($test-list)","reference":"Functions.arrange-test-list","referenceNumber":"1.28","description":"[private:{void}] Fix the test list order to work with currently used order","url":"section-functions.html#kssref-functions-arrange-test-list","itemUrl":"item-functions-arrange-test-list.html","deprecated":false,"experimental":false,"private":true},{"title":"is-list($list)","reference":"Functions.is-list","referenceNumber":"1.29","description":"[private:{boolean}] Returns whether an argument is a list or not","url":"section-functions.html#kssref-functions-is-list","itemUrl":"item-functions-is-list.html","deprecated":false,"experimental":false,"private":true},{"title":"map-keys($hash)","reference":"Functions.map-keys","referenceNumber":"1.30","description":"[private:{list}] Returns a list with only the keys of the selected hash","url":"section-functions.html#kssref-functions-map-keys","itemUrl":"item-functions-map-keys.html","deprecated":false,"experimental":false,"private":true},{"title":"stdout($string, $type)","reference":"Functions.stdout","referenceNumber":"1.31","description":"[private:{output}] Output to terminal","url":"section-functions.html#kssref-functions-stdout","itemUrl":"item-functions-stdout.html","deprecated":false,"experimental":false,"private":true},{"title":"str-length($list)","reference":"Functions.str-length","referenceNumber":"1.32","description":"[private:{number|'NOT_A_STRING'}] Return the desired string length","url":"section-functions.html#kssref-functions-str-length","itemUrl":"item-functions-str-length.html","deprecated":false,"experimental":false,"private":true},{"title":"unwrap-list($list)","reference":"Functions.unwrap-list","referenceNumber":"1.33","description":"[private:{list}] Transforms a wrapped list into a unwrapped one","url":"section-functions.html#kssref-functions-unwrap-list","itemUrl":"item-functions-unwrap-list.html","deprecated":false,"experimental":false,"private":true},{"title":"Mixins","reference":"Mixins","referenceNumber":"2","description":"","url":"section-mixins.html#kssref-mixins","itemUrl":"item-mixins.html","deprecated":false,"experimental":false,"private":false},{"title":"assert($description = null)","reference":"Mixins.assert","referenceNumber":"2.1","description":"[public:{output}] Define a CSS-output assertion. Use it as a wrapper around one output() block and one expect() , contains() , or contains-string() check. JavaScript runner output assertions are parsed with PostCSS. Parameters: $description = null - {string} Optional output assertion description. When omitted, the JavaScript parser uses the current test name for runner output. {block} - Use `output()` and `expect()` mixins to define blocks for comparison ~ Usage: +test( &#x27;Stylus math compiles before output&#x27; ) { +assert( &#x27;You can also describe the assertion...&#x27; ) { +output() { width : 14em + 2 ; } +expect() { width : 16em ; } } }","url":"section-mixins.html#kssref-mixins-assert","itemUrl":"item-mixins-assert.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-current-selector($expected, $description)","reference":"Mixins.assert-current-selector","referenceNumber":"2.2","description":"[public:{output}] Assert that Stylus selector() matches the expected current selector string. Use this inside the selector context being tested. Parameters: $expected - {string} Expected current selector returned by Stylus `selector()` $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-current-selector","itemUrl":"item-mixins-assert-current-selector.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-defined($name, $description)","reference":"Mixins.assert-defined","referenceNumber":"2.3","description":"[public:{output}] Assert that lookup($name) resolves to a non-null Stylus value. Variables and functions are supported; values intentionally set to null are indistinguishable from missing symbols. Parameters: $name - {string|ident} Variable or function name to look up $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-defined","itemUrl":"item-mixins-assert-defined.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-equal($assert, $expected, $description, $inspect)","reference":"Mixins.assert-equal","referenceNumber":"2.4","description":"[public:{output}] Assert that two Stylus values are equal. Parameters: $assert - {any} Asserted value to test $expected - {any} Expected mismatch $description = null - {string} Optional description emitted in assertion comments. Omitted descriptions output the assertion type only. $inspect = false - {boolean} Optionally compare inspected values (useful for comparing CSS output rather than Stylus values) ~ Usage: +test( &#x27;Division works as expected in Stylus&#x27; ) { assert-equal( 8 / 2 , 4 , &#x27;You can optionally describe the assertion...&#x27; ); }","url":"section-mixins.html#kssref-mixins-assert-equal","itemUrl":"item-mixins-assert-equal.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-false($assert, $description)","reference":"Mixins.assert-false","referenceNumber":"2.5","description":"[public:{output}] Assert that a value is falsy. Empty lists and empty strings are treated as false for this assertion. Parameters: $assert - {any} Asserted value to test $description = null - {string} Optional description emitted in assertion comments. Omitted descriptions output the assertion type only. ~ Usage: +test( &#x27;Empty strings are falsey&#x27; ) { assert-false( &#x27;&#x27; ); }","url":"section-mixins.html#kssref-mixins-assert-false","itemUrl":"item-mixins-assert-false.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-json($path, $expected, $description, $options)","reference":"Mixins.assert-json","referenceNumber":"2.6","description":"[public:{output}] Assert that a JSON fixture loaded through Stylus json() matches the expected hash object. Options default to { hash: true, leave-strings: true } , and hash is always forced to true . Parameters: $path - {string} JSON file path resolved by Stylus $expected - {object} Expected hash object $description = null - {string} Optional description emitted in assertion comments. $options = null - {object|null} Optional Stylus `json()` options.","url":"section-mixins.html#kssref-mixins-assert-json","itemUrl":"item-mixins-assert-json.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-not-null($value, $description)","reference":"Mixins.assert-not-null","referenceNumber":"2.7","description":"[public:{output}] Assert that a value is not null . This is useful for local values that Stylus lookup() cannot reliably inspect across helper scopes. Parameters: $value - {any} Stylus value to check directly $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-not-null","itemUrl":"item-mixins-assert-not-null.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-selector($selector, $description)","reference":"Mixins.assert-selector","referenceNumber":"2.8","description":"[public:{output}] Assert that a selector exists in the compiled selector map. This is not current-context relative; use selector() + ' a' when context should be included. Parameters: $selector - {string} Selector to search for $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-selector","itemUrl":"item-mixins-assert-selector.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-selectors($expected, $description)","reference":"Mixins.assert-selectors","referenceNumber":"2.9","description":"[public:{output}] Assert that Stylus selectors() matches the expected selector stack. Pass the same list shape Stylus returns, such as '.card' '&amp;:hover' . Parameters: $expected - {list|string} Expected selector stack returned by Stylus `selectors()` $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-selectors","itemUrl":"item-mixins-assert-selectors.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-true($assert, $description)","reference":"Mixins.assert-true","referenceNumber":"2.10","description":"[public:{output}] Assert that a value is truthy. Empty lists and empty strings are treated as false for this assertion. Parameters: $assert - {any} Asserted value to test $description = null - {string} Optional description emitted in assertion comments. Omitted descriptions output the assertion type only. ~ Usage: +test( &#x27;Non-empty strings are truthy&#x27; ) { assert-true( &#x27;Hello World&#x27; , &#x27;You can optionally describe the assertion...&#x27; ); }","url":"section-mixins.html#kssref-mixins-assert-true","itemUrl":"item-mixins-assert-true.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-type($value, $expected-type, $description)","reference":"Mixins.assert-type","referenceNumber":"2.11","description":"[public:{output}] Assert that type($value) matches an exact Stylus type string, such as 'unit' , 'string' , 'rgba' , 'object' , or 'function' . Parameters: $value - {any} Stylus value to inspect $expected-type - {string} Expected result from Stylus `type()` $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-type","itemUrl":"item-mixins-assert-type.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-unequal($assert, $expected, $description, $inspect)","reference":"Mixins.assert-unequal","referenceNumber":"2.12","description":"[public:{output}] Assert that two Stylus values are not equal. Parameters: $assert - {any} Asserted value to test $expected - {any} Expected mismatch $description = null - {string} Optional description emitted in assertion comments. Omitted descriptions output the assertion type only. $inspect = false - {boolean} Optionally compare inspected values (useful for comparing CSS output rather than Stylus values) ~ Usage: +test( &#x27;Strings and numbers hare not the same&#x27; ) { assert-unequal( 1em , &#x27;1em&#x27; ); }","url":"section-mixins.html#kssref-mixins-assert-unequal","itemUrl":"item-mixins-assert-unequal.html","deprecated":false,"experimental":false,"private":false},{"title":"assert-unit($value, $expected-unit, $description)","reference":"Mixins.assert-unit","referenceNumber":"2.13","description":"[public:{output}] Assert that a unit value uses the expected unit. Unitless numbers should be checked with an empty string ( '' ), and percentages with '%' . Parameters: $value - {any} Stylus value to inspect $expected-unit - {string|ident} Expected unit returned by Stylus `unit()` $description = null - {string} Optional description emitted in assertion comments.","url":"section-mixins.html#kssref-mixins-assert-unit","itemUrl":"item-mixins-assert-unit.html","deprecated":false,"experimental":false,"private":false},{"title":"comment($string)","reference":"Mixins.comment","referenceNumber":"2.14","description":"[private:{output}] Output a message to CSS comments","url":"section-mixins.html#kssref-mixins-comment","itemUrl":"item-mixins-comment.html","deprecated":false,"experimental":false,"private":true},{"title":"contains($selector)","reference":"Mixins.contains","referenceNumber":"2.15","description":"[public:{output}] Define CSS that must be present within the sibling output() block. The JavaScript runner uses structural PostCSS containment: expected rules, declarations, comments, and at-rules must exist, declaration order inside a matching rule does not matter, and selectors are compared as normalized strings rather than selector algebra. Parameters: $selector = true - {boolean} Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly. {block} - Include any content that are part of this test ~ Usage: +test( &#x27;Stylus math compiles before output&#x27; ) { +assert() { +output() { height : 100% ; width : 14em + 2 ; } +contains() { width : 16em ; } } }","url":"section-mixins.html#kssref-mixins-contains","itemUrl":"item-mixins-contains.html","deprecated":false,"experimental":false,"private":false},{"title":"contains-string($string-to-find)","reference":"Mixins.contains-string","referenceNumber":"2.16","description":"[public:{output}] Define a case-sensitive substring that must be present in the sibling output() block. Parameters: $string-to-find - {string} The substring to search for within the compiled CSS output. ~ Usage: +test( &#x27;Contains output strings&#x27; ) { +assert() { +output() { height : 10px ; width : 20px ; } contains-string( &#x27;height&#x27; ); contains-string( &#x27;20px&#x27; ); } }","url":"section-mixins.html#kssref-mixins-contains-string","itemUrl":"item-mixins-contains-string.html","deprecated":false,"experimental":false,"private":false},{"title":"expect($selector)","reference":"Mixins.expect","referenceNumber":"2.17","description":"[public:{output}] Define the exact CSS expected from the sibling output() block. The JavaScript runner compares normalized serialized CSS, so selector and declaration order remain significant. Parameters: $selector = true - {boolean} Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly. {block} - Define the expected results of a sibling `output()` mixin ~ Usage: +test( &#x27;Stylus math compiles before output&#x27; ) { +assert() { +output() { width : 14em + 2 ; } +expect() { width : 16em ; } } }","url":"section-mixins.html#kssref-mixins-expect","itemUrl":"item-mixins-expect.html","deprecated":false,"experimental":false,"private":false},{"title":"is-equal($assert, $expected, $description, $inspect)","reference":"Mixins.is-equal","referenceNumber":"2.18","description":"[public:{output}] Alias for assert-equal() , matching Sass True. The optional $inspect argument is Stylus-specific.","url":"section-mixins.html#kssref-mixins-is-equal","itemUrl":"item-mixins-is-equal.html","deprecated":false,"experimental":false,"private":false},{"title":"is-falsy($assert, $description)","reference":"Mixins.is-falsy","referenceNumber":"2.19","description":"[public:{output}] Alias for assert-false() , matching Sass True.","url":"section-mixins.html#kssref-mixins-is-falsy","itemUrl":"item-mixins-is-falsy.html","deprecated":false,"experimental":false,"private":false},{"title":"is-truthy($assert, $description)","reference":"Mixins.is-truthy","referenceNumber":"2.20","description":"[public:{output}] Alias for assert-true() , matching Sass True.","url":"section-mixins.html#kssref-mixins-is-truthy","itemUrl":"item-mixins-is-truthy.html","deprecated":false,"experimental":false,"private":false},{"title":"it($name)","reference":"Mixins.it","referenceNumber":"2.21","description":"[public:{void}] Alias for test() , provided for JavaScript-style test syntax. Parameters: $name - {string} Describe what is being tested {block} - Include any assertions that are part of this test ~ Usage: +it( &#x27;Returns lists zipped together&#x27; ) { assert-equal( zip( a b c, 1 2 3 ), ( a 1 , b 2 , c 3 ) ); +assert-equal( zip( 1px 1px 3px , solid dashed solid, red green blue), ( 1px solid red, 1px dashed green, 3px solid blue) ); }","url":"section-mixins.html#kssref-mixins-it","itemUrl":"item-mixins-it.html","deprecated":false,"experimental":false,"private":false},{"title":"not-equal($assert, $expected, $description, $inspect)","reference":"Mixins.not-equal","referenceNumber":"2.22","description":"[public:{output}] Alias for assert-unequal() , matching Sass True. The optional $inspect argument is Stylus-specific.","url":"section-mixins.html#kssref-mixins-not-equal","itemUrl":"item-mixins-not-equal.html","deprecated":false,"experimental":false,"private":false},{"title":"output($selector)","reference":"Mixins.output","referenceNumber":"2.23","description":"[public:{output}] Define the CSS produced by the code under test. Use inside assert() with sibling expect() , contains() , or contains-string() checks. Parameters: $selector = true - {boolean} Optionally wrap the contents in a `.test-output` selector block, so you can test property-value output directly. {block} - Define the test content to be checked ~ Usage: +test( &#x27;Stylus math compiles before output&#x27; ) { +assert() { +output() { width : 14em + 2 ; } +expect() { width : 16em ; } } }","url":"section-mixins.html#kssref-mixins-output","itemUrl":"item-mixins-output.html","deprecated":false,"experimental":false,"private":false},{"title":"report($terminal, $fail-on-error, $results, $stats)","reference":"Mixins.report","referenceNumber":"2.24","description":"[public:{output}] Emit the result summary as CSS comments and optionally to the terminal.","url":"section-mixins.html#kssref-mixins-report","itemUrl":"item-mixins-report.html","deprecated":false,"experimental":false,"private":false},{"title":"test($name)","reference":"Mixins.test","referenceNumber":"2.25","description":"[public:{void}] Define a single test case inside test-module() or describe() . Parameters: $name - {string} Describe what is being tested {block} - Include any assertions that are part of this test ~ Usage: +test( &#x27;Returns lists zipped together&#x27; ) { assert-equal( zip( a b c, 1 2 3 ), ( a 1 , b 2 , c 3 ) ); +assert-equal( zip( 1px 1px 3px , solid dashed solid, red green blue), ( 1px solid red, 1px dashed green, 3px solid blue) ); }","url":"section-mixins.html#kssref-mixins-test","itemUrl":"item-mixins-test.html","deprecated":false,"experimental":false,"private":false},{"title":"_true-assert-results($assert, $expected, $unequal, $terminal)","reference":"Mixins.__true-assert-results","referenceNumber":"2.26","description":"[private:{output}] Get an official result, record it in the database and output, provide details as necessary, and end the assertion.","url":"section-mixins.html#kssref-mixins-__true-assert-results","itemUrl":"item-mixins-__true-assert-results.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-error-mixin($message, $source, $override)","reference":"Mixins._true-error-mixin","referenceNumber":"2.27","description":"[private:{void}] Outputs an error with a message detailing the source and error","url":"section-mixins.html#kssref-mixins-_true-error-mixin","itemUrl":"item-mixins-_true-error-mixin.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-fail-details($assert, $expected, $terminal)","reference":"Mixins._true-fail-details","referenceNumber":"2.28","description":"[private:{output}] Failure message, with appropriate details to help you debug various common problems.","url":"section-mixins.html#kssref-mixins-_true-fail-details","itemUrl":"item-mixins-_true-fail-details.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-message($message, $output, $comment-padding)","reference":"Mixins._true-message","referenceNumber":"2.29","description":"[private:{output}] Output a message to CSS comments, or commandline terminal (via debug/warn/error)","url":"section-mixins.html#kssref-mixins-_true-message","itemUrl":"item-mixins-_true-message.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-module-start($name)","reference":"Mixins._true-module-start","referenceNumber":"2.30","description":"[private:{output}] Module start helper. Emits a private TRUE_MODULE_START marker for JavaScript runner nesting before the legacy # Module display comment.","url":"section-mixins.html#kssref-mixins-_true-module-start","itemUrl":"item-mixins-_true-module-start.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-module-stop($name)","reference":"Mixins._true-module-stop","referenceNumber":"2.31","description":"[private:{output}] Module stop helper. Emits a private TRUE_MODULE_END marker and the legacy END_MODULE display boundary.","url":"section-mixins.html#kssref-mixins-_true-module-stop","itemUrl":"item-mixins-_true-module-stop.html","deprecated":false,"experimental":false,"private":true},{"title":"_true-pass-details($terminal)","reference":"Mixins._true-pass-details","referenceNumber":"2.32","description":"[private:{output}] Output a success message for passing tests.","url":"section-mixins.html#kssref-mixins-_true-pass-details","itemUrl":"item-mixins-_true-pass-details.html","deprecated":false,"experimental":false,"private":true},{"title":"// Test 2 +it('Returns three zipped lists') { assert-equal( zip(1px 1px 3px, solid dashed solid, red green blue), (1px solid red, 1px dashed green, 3px solid blue) ); } } ```","reference":"Mixins.describe","referenceNumber":"2.33","description":"","url":"section-mixins.html#kssref-mixins-describe","itemUrl":"item-mixins-describe.html","deprecated":false,"experimental":false,"private":false},{"title":"// Test 2 +test('Returns three zipped lists') { assert-equal( zip(1px 1px 3px, solid dashed solid, red green blue), (1px solid red, 1px dashed green, 3px solid blue) ); } } ```","reference":"Mixins.test-module","referenceNumber":"2.34","description":"","url":"section-mixins.html#kssref-mixins-test-module","itemUrl":"item-mixins-test-module.html","deprecated":false,"experimental":false,"private":false},{"title":"Variables","reference":"Variables","referenceNumber":"3","description":"","url":"section-variables.html#kssref-variables","itemUrl":"item-variables.html","deprecated":false,"experimental":false,"private":false},{"title":"$_true-error-output-override = { value }","reference":"Variables.$_true-error-output-override","referenceNumber":"3.1","description":"[private] Deprecated compatibility alias for $catch-errors .","url":"section-variables.html#kssref-variables-_true-error-output-override","itemUrl":"item-variables-_true-error-output-override.html","deprecated":false,"experimental":false,"private":true},{"title":"$catch-errors = { value }","reference":"Variables.$catch-errors","referenceNumber":"3.2","description":"[public] Controls whether true-error() throws immediately or returns/output catchable error messages.","url":"section-variables.html#kssref-variables-catch-errors","itemUrl":"item-variables-catch-errors.html","deprecated":false,"experimental":false,"private":false},{"title":"$true-terminal-output = { value }","reference":"Variables.$true-terminal-output","referenceNumber":"3.3","description":"[public] Controls direct terminal output from Stylus. The default is false ; JavaScript runners such as Bun and Vitest still report through their own output.","url":"section-variables.html#kssref-variables-true-terminal-output","itemUrl":"item-variables-true-terminal-output.html","deprecated":false,"experimental":false,"private":false},{"title":"$_true-context = { buffer }","reference":"Variables.$_true-context","referenceNumber":"3.4","description":"[private] Stores the best-effort module/test/assertion context stack. JavaScript runner nesting is reconstructed from parser-visible marker comments instead of relying on this live Stylus state.","url":"section-variables.html#kssref-variables-_true-context","itemUrl":"item-variables-_true-context.html","deprecated":false,"experimental":false,"private":true},{"title":"$_true-results = { value }","reference":"Variables.$_true-results","referenceNumber":"3.5","description":"[private] Global test-results map","url":"section-variables.html#kssref-variables-_true-results","itemUrl":"item-variables-_true-results.html","deprecated":false,"experimental":false,"private":true},{"title":"$_true-stats = { value }","reference":"Variables.$_true-stats","referenceNumber":"3.6","description":"[private] Value key stores the desired value","url":"section-variables.html#kssref-variables-_true-stats","itemUrl":"item-variables-_true-stats.html","deprecated":false,"experimental":false,"private":true},{"title":"$_true-test-result = { value }","reference":"Variables.$_true-test-result","referenceNumber":"3.7","description":"[private] Local flags for tracking assertion results in a test.","url":"section-variables.html#kssref-variables-_true-test-result","itemUrl":"item-variables-_true-test-result.html","deprecated":false,"experimental":false,"private":true},{"title":"$map = { asserts }","reference":"Variables.$map","referenceNumber":"3.8","description":"[private] Variable to store asserts.","url":"section-variables.html#kssref-variables-map","itemUrl":"item-variables-map.html","deprecated":false,"experimental":false,"private":true}]</script>
+
+    <div class="min-h-screen lg:grid lg:grid-cols-[20rem_minmax(0,1fr)]">
+      <div class="fixed inset-0 z-30 hidden bg-neutral-950/45 backdrop-blur-sm lg:hidden" data-kss-drawer-overlay></div>
+
+      <aside id="kss-sidebar" class="fixed inset-y-0 left-0 z-40 flex w-80 -translate-x-full flex-col border-r border-neutral-200 bg-white/95 shadow-2xl shadow-neutral-950/10 backdrop-blur transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:shadow-none dark:border-neutral-800 dark:bg-neutral-950/95" data-kss-drawer>
+        <div class="flex items-center justify-between border-b border-neutral-200 px-5 py-4 dark:border-neutral-800">
+          <a class="group min-w-0" href="./">
+            <span class="block text-xs font-semibold uppercase tracking-[0.16em] text-teal-700 dark:text-teal-300">Style guide</span>
+            <span class="mt-1 block truncate text-lg font-semibold text-neutral-950 dark:text-white">stylus-true</span>
+          </a>
+          <button class="inline-flex size-9 items-center justify-center rounded-md border border-neutral-200 text-neutral-700 transition hover:border-neutral-300 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-teal-500 lg:hidden dark:border-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-900" type="button" data-kss-drawer-close aria-label="Close navigation">
+            <!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="size-4"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 6 6 18" />
+  <path d="m6 6 12 12" />
+</svg>
+
+          </button>
+        </div>
+
+        <div class="border-b border-neutral-200 p-4 dark:border-neutral-800">
+          <label class="sr-only" for="kss-search">Search documentation</label>
+          <div class="relative">
+            <!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+            <input id="kss-search" class="h-10 w-full rounded-md border border-neutral-200 bg-neutral-50 pl-9 pr-3 text-sm text-neutral-950 outline-none transition placeholder:text-neutral-400 focus:border-teal-500 focus:bg-white focus:ring-2 focus:ring-teal-500/20 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-50 dark:focus:bg-neutral-950" type="search" placeholder="Search APIs" autocomplete="off" data-kss-search />
+          </div>
+          <div class="scrollbar mt-2 hidden max-h-80 overflow-auto rounded-md border border-neutral-200 bg-white text-sm shadow-lg dark:border-neutral-800 dark:bg-neutral-900" data-kss-search-results></div>
+        </div>
+
+        <nav class="scrollbar min-h-0 flex-1 overflow-auto px-3 py-4" aria-label="Style guide navigation">
+          <a class="kss-nav-link " href="./" data-kss-nav-item data-kss-nav-text="Overview stylus-true">
+            <span class="kss-nav-ref">0</span>
+            <span class="truncate">Overview</span>
+          </a>
+
+            <div class="mt-1" data-kss-nav-item data-kss-nav-text="Functions 1">
+              <a class="kss-nav-link " href="section-functions.html">
+                <span class="kss-nav-ref">1</span>
+                <span class="truncate">Functions</span>
+              </a>
+
+                <div class="ml-4 mt-1 space-y-0.5 border-l border-neutral-200 pl-2 dark:border-neutral-800">
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-test-start" data-kss-nav-item data-kss-nav-text="_true-test-start($name) 1.1">
+                      <span class="kss-nav-ref">1.1</span>
+                      <span class="truncate">_true-test-start($name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-true-error" data-kss-nav-item data-kss-nav-text="true-error($message, $source, $catch) 1.2">
+                      <span class="kss-nav-ref">1.2</span>
+                      <span class="truncate">true-error($message, $source, $catch)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-assert-label" data-kss-nav-item data-kss-nav-text="_true-assert-label($name, $description) 1.3">
+                      <span class="kss-nav-ref">1.3</span>
+                      <span class="truncate">_true-assert-label($name, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-catch-errors" data-kss-nav-item data-kss-nav-text="_true-catch-errors($catch) 1.4">
+                      <span class="kss-nav-ref">1.4</span>
+                      <span class="truncate">_true-catch-errors($catch)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-context" data-kss-nav-item data-kss-nav-text="_true-context($scope) 1.5">
+                      <span class="kss-nav-ref">1.5</span>
+                      <span class="truncate">_true-context($scope)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-context-all" data-kss-nav-item data-kss-nav-text="_true-context-all($scope) 1.6">
+                      <span class="kss-nav-ref">1.6</span>
+                      <span class="truncate">_true-context-all($scope)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-context-mixin" data-kss-nav-item data-kss-nav-text="_true-context-mixin($scope, $name) 1.7">
+                      <span class="kss-nav-ref">1.7</span>
+                      <span class="truncate">_true-context-mixin($scope, $name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-context-pop" data-kss-nav-item data-kss-nav-text="_true-context-pop($scope) 1.8">
+                      <span class="kss-nav-ref">1.8</span>
+                      <span class="truncate">_true-context-pop($scope)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-edgefail-notes" data-kss-nav-item data-kss-nav-text="_true-edgefail-notes($one, $two) 1.9">
+                      <span class="kss-nav-ref">1.9</span>
+                      <span class="truncate">_true-edgefail-notes($one, $two)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-error" data-kss-nav-item data-kss-nav-text="_true-error($message, $source, $override) 1.10">
+                      <span class="kss-nav-ref">1.10</span>
+                      <span class="truncate">_true-error($message, $source, $override)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-error-prefix" data-kss-nav-item data-kss-nav-text="_true-error-prefix($source) 1.11">
+                      <span class="kss-nav-ref">1.11</span>
+                      <span class="truncate">_true-error-prefix($source)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-get-result" data-kss-nav-item data-kss-nav-text="_true-get-result($assert, $expected, $unequal) 1.12">
+                      <span class="kss-nav-ref">1.12</span>
+                      <span class="truncate">_true-get-result($assert, $expected, $unequal)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-is-truthy" data-kss-nav-item data-kss-nav-text="_true-is-truthy($assert) 1.13">
+                      <span class="kss-nav-ref">1.13</span>
+                      <span class="truncate">_true-is-truthy($assert)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-join-multiple" data-kss-nav-item data-kss-nav-text="_true-join-multiple($lists...) 1.14">
+                      <span class="kss-nav-ref">1.14</span>
+                      <span class="truncate">_true-join-multiple($lists...)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-json-options" data-kss-nav-item data-kss-nav-text="_true-json-options($options) 1.15">
+                      <span class="kss-nav-ref">1.15</span>
+                      <span class="truncate">_true-json-options($options)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-map-increment" data-kss-nav-item data-kss-nav-text="_true-map-increment($base, $add) 1.16">
+                      <span class="kss-nav-ref">1.16</span>
+                      <span class="truncate">_true-map-increment($base, $add)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-output-context" data-kss-nav-item data-kss-nav-text="_true-output-context($new, $context) 1.17">
+                      <span class="kss-nav-ref">1.17</span>
+                      <span class="truncate">_true-output-context($new, $context)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-report-message" data-kss-nav-item data-kss-nav-text="_true-report-message($linebreak, $results, $stats) 1.18">
+                      <span class="kss-nav-ref">1.18</span>
+                      <span class="truncate">_true-report-message($linebreak, $results, $stats)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-results-message" data-kss-nav-item data-kss-nav-text="_true-results-message($linebreak, $results) 1.19">
+                      <span class="kss-nav-ref">1.19</span>
+                      <span class="truncate">_true-results-message($linebreak, $results)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-stats-message" data-kss-nav-item data-kss-nav-text="_true-stats-message($linebreak, $stats) 1.20">
+                      <span class="kss-nav-ref">1.20</span>
+                      <span class="truncate">_true-stats-message($linebreak, $stats)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-string-value" data-kss-nav-item data-kss-nav-text="_true-string-value($value) 1.21">
+                      <span class="kss-nav-ref">1.21</span>
+                      <span class="truncate">_true-string-value($value)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-test-stop" data-kss-nav-item data-kss-nav-text="_true-test-stop($name) 1.22">
+                      <span class="kss-nav-ref">1.22</span>
+                      <span class="truncate">_true-test-stop($name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-update" data-kss-nav-item data-kss-nav-text="_true-update($result) 1.23">
+                      <span class="kss-nav-ref">1.23</span>
+                      <span class="truncate">_true-update($result)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-update-stats-count" data-kss-nav-item data-kss-nav-text="_true-update-stats-count($type) 1.24">
+                      <span class="kss-nav-ref">1.24</span>
+                      <span class="truncate">_true-update-stats-count($type)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-update-test" data-kss-nav-item data-kss-nav-text="_true-update-test($result) 1.25">
+                      <span class="kss-nav-ref">1.25</span>
+                      <span class="truncate">_true-update-test($result)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-validate-output-context" data-kss-nav-item data-kss-nav-text="_true-validate-output-context($new, $context) 1.26">
+                      <span class="kss-nav-ref">1.26</span>
+                      <span class="truncate">_true-validate-output-context($new, $context)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-_true-variable-details" data-kss-nav-item data-kss-nav-text="_true-variable-details($var) 1.27">
+                      <span class="kss-nav-ref">1.27</span>
+                      <span class="truncate">_true-variable-details($var)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-arrange-test-list" data-kss-nav-item data-kss-nav-text="arrange-test-list($test-list) 1.28">
+                      <span class="kss-nav-ref">1.28</span>
+                      <span class="truncate">arrange-test-list($test-list)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-is-list" data-kss-nav-item data-kss-nav-text="is-list($list) 1.29">
+                      <span class="kss-nav-ref">1.29</span>
+                      <span class="truncate">is-list($list)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-map-keys" data-kss-nav-item data-kss-nav-text="map-keys($hash) 1.30">
+                      <span class="kss-nav-ref">1.30</span>
+                      <span class="truncate">map-keys($hash)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-stdout" data-kss-nav-item data-kss-nav-text="stdout($string, $type) 1.31">
+                      <span class="kss-nav-ref">1.31</span>
+                      <span class="truncate">stdout($string, $type)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-str-length" data-kss-nav-item data-kss-nav-text="str-length($list) 1.32">
+                      <span class="kss-nav-ref">1.32</span>
+                      <span class="truncate">str-length($list)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-functions.html#kssref-functions-unwrap-list" data-kss-nav-item data-kss-nav-text="unwrap-list($list) 1.33">
+                      <span class="kss-nav-ref">1.33</span>
+                      <span class="truncate">unwrap-list($list)</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-1" data-kss-nav-item data-kss-nav-text="Mixins 2">
+              <a class="kss-nav-link " href="section-mixins.html">
+                <span class="kss-nav-ref">2</span>
+                <span class="truncate">Mixins</span>
+              </a>
+
+                <div class="ml-4 mt-1 space-y-0.5 border-l border-neutral-200 pl-2 dark:border-neutral-800">
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert" data-kss-nav-item data-kss-nav-text="assert($description &#x3D; null) 2.1">
+                      <span class="kss-nav-ref">2.1</span>
+                      <span class="truncate">assert($description &#x3D; null)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-current-selector" data-kss-nav-item data-kss-nav-text="assert-current-selector($expected, $description) 2.2">
+                      <span class="kss-nav-ref">2.2</span>
+                      <span class="truncate">assert-current-selector($expected, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-defined" data-kss-nav-item data-kss-nav-text="assert-defined($name, $description) 2.3">
+                      <span class="kss-nav-ref">2.3</span>
+                      <span class="truncate">assert-defined($name, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-equal" data-kss-nav-item data-kss-nav-text="assert-equal($assert, $expected, $description, $inspect) 2.4">
+                      <span class="kss-nav-ref">2.4</span>
+                      <span class="truncate">assert-equal($assert, $expected, $description, $inspect)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-false" data-kss-nav-item data-kss-nav-text="assert-false($assert, $description) 2.5">
+                      <span class="kss-nav-ref">2.5</span>
+                      <span class="truncate">assert-false($assert, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-json" data-kss-nav-item data-kss-nav-text="assert-json($path, $expected, $description, $options) 2.6">
+                      <span class="kss-nav-ref">2.6</span>
+                      <span class="truncate">assert-json($path, $expected, $description, $options)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-not-null" data-kss-nav-item data-kss-nav-text="assert-not-null($value, $description) 2.7">
+                      <span class="kss-nav-ref">2.7</span>
+                      <span class="truncate">assert-not-null($value, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-selector" data-kss-nav-item data-kss-nav-text="assert-selector($selector, $description) 2.8">
+                      <span class="kss-nav-ref">2.8</span>
+                      <span class="truncate">assert-selector($selector, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-selectors" data-kss-nav-item data-kss-nav-text="assert-selectors($expected, $description) 2.9">
+                      <span class="kss-nav-ref">2.9</span>
+                      <span class="truncate">assert-selectors($expected, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-true" data-kss-nav-item data-kss-nav-text="assert-true($assert, $description) 2.10">
+                      <span class="kss-nav-ref">2.10</span>
+                      <span class="truncate">assert-true($assert, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-type" data-kss-nav-item data-kss-nav-text="assert-type($value, $expected-type, $description) 2.11">
+                      <span class="kss-nav-ref">2.11</span>
+                      <span class="truncate">assert-type($value, $expected-type, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-unequal" data-kss-nav-item data-kss-nav-text="assert-unequal($assert, $expected, $description, $inspect) 2.12">
+                      <span class="kss-nav-ref">2.12</span>
+                      <span class="truncate">assert-unequal($assert, $expected, $description, $inspect)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-assert-unit" data-kss-nav-item data-kss-nav-text="assert-unit($value, $expected-unit, $description) 2.13">
+                      <span class="kss-nav-ref">2.13</span>
+                      <span class="truncate">assert-unit($value, $expected-unit, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-comment" data-kss-nav-item data-kss-nav-text="comment($string) 2.14">
+                      <span class="kss-nav-ref">2.14</span>
+                      <span class="truncate">comment($string)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-contains" data-kss-nav-item data-kss-nav-text="contains($selector) 2.15">
+                      <span class="kss-nav-ref">2.15</span>
+                      <span class="truncate">contains($selector)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-contains-string" data-kss-nav-item data-kss-nav-text="contains-string($string-to-find) 2.16">
+                      <span class="kss-nav-ref">2.16</span>
+                      <span class="truncate">contains-string($string-to-find)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-expect" data-kss-nav-item data-kss-nav-text="expect($selector) 2.17">
+                      <span class="kss-nav-ref">2.17</span>
+                      <span class="truncate">expect($selector)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-is-equal" data-kss-nav-item data-kss-nav-text="is-equal($assert, $expected, $description, $inspect) 2.18">
+                      <span class="kss-nav-ref">2.18</span>
+                      <span class="truncate">is-equal($assert, $expected, $description, $inspect)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-is-falsy" data-kss-nav-item data-kss-nav-text="is-falsy($assert, $description) 2.19">
+                      <span class="kss-nav-ref">2.19</span>
+                      <span class="truncate">is-falsy($assert, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-is-truthy" data-kss-nav-item data-kss-nav-text="is-truthy($assert, $description) 2.20">
+                      <span class="kss-nav-ref">2.20</span>
+                      <span class="truncate">is-truthy($assert, $description)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-it" data-kss-nav-item data-kss-nav-text="it($name) 2.21">
+                      <span class="kss-nav-ref">2.21</span>
+                      <span class="truncate">it($name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-not-equal" data-kss-nav-item data-kss-nav-text="not-equal($assert, $expected, $description, $inspect) 2.22">
+                      <span class="kss-nav-ref">2.22</span>
+                      <span class="truncate">not-equal($assert, $expected, $description, $inspect)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-output" data-kss-nav-item data-kss-nav-text="output($selector) 2.23">
+                      <span class="kss-nav-ref">2.23</span>
+                      <span class="truncate">output($selector)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-report" data-kss-nav-item data-kss-nav-text="report($terminal, $fail-on-error, $results, $stats) 2.24">
+                      <span class="kss-nav-ref">2.24</span>
+                      <span class="truncate">report($terminal, $fail-on-error, $results, $stats)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-test" data-kss-nav-item data-kss-nav-text="test($name) 2.25">
+                      <span class="kss-nav-ref">2.25</span>
+                      <span class="truncate">test($name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-__true-assert-results" data-kss-nav-item data-kss-nav-text="_true-assert-results($assert, $expected, $unequal, $terminal) 2.26">
+                      <span class="kss-nav-ref">2.26</span>
+                      <span class="truncate">_true-assert-results($assert, $expected, $unequal, $terminal)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-_true-error-mixin" data-kss-nav-item data-kss-nav-text="_true-error-mixin($message, $source, $override) 2.27">
+                      <span class="kss-nav-ref">2.27</span>
+                      <span class="truncate">_true-error-mixin($message, $source, $override)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-_true-fail-details" data-kss-nav-item data-kss-nav-text="_true-fail-details($assert, $expected, $terminal) 2.28">
+                      <span class="kss-nav-ref">2.28</span>
+                      <span class="truncate">_true-fail-details($assert, $expected, $terminal)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-_true-message" data-kss-nav-item data-kss-nav-text="_true-message($message, $output, $comment-padding) 2.29">
+                      <span class="kss-nav-ref">2.29</span>
+                      <span class="truncate">_true-message($message, $output, $comment-padding)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-_true-module-start" data-kss-nav-item data-kss-nav-text="_true-module-start($name) 2.30">
+                      <span class="kss-nav-ref">2.30</span>
+                      <span class="truncate">_true-module-start($name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-_true-module-stop" data-kss-nav-item data-kss-nav-text="_true-module-stop($name) 2.31">
+                      <span class="kss-nav-ref">2.31</span>
+                      <span class="truncate">_true-module-stop($name)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-_true-pass-details" data-kss-nav-item data-kss-nav-text="_true-pass-details($terminal) 2.32">
+                      <span class="kss-nav-ref">2.32</span>
+                      <span class="truncate">_true-pass-details($terminal)</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-describe" data-kss-nav-item data-kss-nav-text="// Test 2 +it(&#x27;Returns three zipped lists&#x27;) { assert-equal( zip(1px 1px 3px, solid dashed solid, red green blue), (1px solid red, 1px dashed green, 3px solid blue) ); } } &#x60;&#x60;&#x60; 2.33">
+                      <span class="kss-nav-ref">2.33</span>
+                      <span class="truncate">  // Test 2   +it(&#x27;Returns three zipped lists&#x27;) {     assert-equal(       zip(1px 1px 3px, solid dashed solid, red green blue),       (1px solid red, 1px dashed green, 3px solid blue)     );   } } &#x60;&#x60;&#x60;</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-mixins.html#kssref-mixins-test-module" data-kss-nav-item data-kss-nav-text="// Test 2 +test(&#x27;Returns three zipped lists&#x27;) { assert-equal( zip(1px 1px 3px, solid dashed solid, red green blue), (1px solid red, 1px dashed green, 3px solid blue) ); } } &#x60;&#x60;&#x60; 2.34">
+                      <span class="kss-nav-ref">2.34</span>
+                      <span class="truncate">  // Test 2   +test(&#x27;Returns three zipped lists&#x27;) {     assert-equal(       zip(1px 1px 3px, solid dashed solid, red green blue),       (1px solid red, 1px dashed green, 3px solid blue)     );   } } &#x60;&#x60;&#x60;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-1" data-kss-nav-item data-kss-nav-text="Variables 3">
+              <a class="kss-nav-link " href="section-variables.html">
+                <span class="kss-nav-ref">3</span>
+                <span class="truncate">Variables</span>
+              </a>
+
+                <div class="ml-4 mt-1 space-y-0.5 border-l border-neutral-200 pl-2 dark:border-neutral-800">
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-_true-error-output-override" data-kss-nav-item data-kss-nav-text="$_true-error-output-override &#x3D; { value } 3.1">
+                      <span class="kss-nav-ref">3.1</span>
+                      <span class="truncate">$_true-error-output-override &#x3D; { value }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-catch-errors" data-kss-nav-item data-kss-nav-text="$catch-errors &#x3D; { value } 3.2">
+                      <span class="kss-nav-ref">3.2</span>
+                      <span class="truncate">$catch-errors &#x3D; { value }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-true-terminal-output" data-kss-nav-item data-kss-nav-text="$true-terminal-output &#x3D; { value } 3.3">
+                      <span class="kss-nav-ref">3.3</span>
+                      <span class="truncate">$true-terminal-output &#x3D; { value }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-_true-context" data-kss-nav-item data-kss-nav-text="$_true-context &#x3D; { buffer } 3.4">
+                      <span class="kss-nav-ref">3.4</span>
+                      <span class="truncate">$_true-context &#x3D; { buffer }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-_true-results" data-kss-nav-item data-kss-nav-text="$_true-results &#x3D; { value } 3.5">
+                      <span class="kss-nav-ref">3.5</span>
+                      <span class="truncate">$_true-results &#x3D; { value }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-_true-stats" data-kss-nav-item data-kss-nav-text="$_true-stats &#x3D; { value } 3.6">
+                      <span class="kss-nav-ref">3.6</span>
+                      <span class="truncate">$_true-stats &#x3D; { value }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-_true-test-result" data-kss-nav-item data-kss-nav-text="$_true-test-result &#x3D; { value } 3.7">
+                      <span class="kss-nav-ref">3.7</span>
+                      <span class="truncate">$_true-test-result &#x3D; { value }</span>
+                    </a>
+                    <a class="kss-nav-link kss-nav-link-child" href="section-variables.html#kssref-variables-map" data-kss-nav-item data-kss-nav-text="$map &#x3D; { asserts } 3.8">
+                      <span class="kss-nav-ref">3.8</span>
+                      <span class="truncate">$map &#x3D; { asserts }</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+      </aside>
+
+      <main class="min-w-0">
+        <header class="sticky top-0 z-20 border-b border-neutral-200 bg-neutral-50/90 px-4 py-3 backdrop-blur lg:px-8 dark:border-neutral-800 dark:bg-neutral-950/88">
+          <div class="mx-auto flex max-w-[118rem] items-center gap-3">
+            <button class="inline-flex size-10 items-center justify-center rounded-md border border-neutral-200 bg-white text-neutral-700 transition hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-teal-500 lg:hidden dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-800" type="button" data-kss-drawer-toggle aria-controls="kss-sidebar" aria-expanded="false" aria-label="Open navigation">
+              <!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="size-4"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
+            </button>
+
+            <div class="min-w-0 flex-1">
+              <div class="truncate text-xs font-medium uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">
+                Specimen
+              </div>
+              <div class="truncate text-sm font-semibold text-neutral-950 dark:text-neutral-50">stylus-true</div>
+            </div>
+
+            <button class="inline-flex h-10 items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 text-sm font-medium text-neutral-700 transition hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-800" type="button" data-kss-theme-toggle aria-label="Toggle color theme">
+              <span class="kss-theme-sun"><!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="size-4"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+</span>
+              <span class="kss-theme-moon hidden"><!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="size-4"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+</span>
+              <span class="hidden sm:inline" data-kss-theme-label>Theme</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="mx-auto grid max-w-[118rem] gap-8 px-4 py-8 lg:grid-cols-[minmax(0,1fr)_17rem] lg:px-8 xl:gap-10">
+          <article class="min-w-0">
+                <section id="kssref-mixins-_true-pass-details" class="kss-section scroll-mt-24 rounded-lg border border-neutral-200 bg-white p-5 shadow-sm dark:border-neutral-800 dark:bg-neutral-900 sm:p-6 " data-kss-section data-kss-section-text="_true-pass-details($terminal) [private:{output}] Output a success message for passing tests. 2.32">
+                  <div class="flex flex-wrap items-start justify-between gap-4">
+                    <div class="min-w-0">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <a class="inline-flex items-center gap-1 rounded-md bg-neutral-100 px-2 py-1 text-xs font-semibold text-neutral-700 hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700" href="#kssref-mixins-_true-pass-details">
+                          <span>2.32</span>
+                          <!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="size-3"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+                        </a>
+                          <span class="kss-badge kss-badge-muted">Private</span>
+                      </div>
+                      <h2 class="mt-3 break-words text-2xl font-semibold tracking-normal text-neutral-950 dark:text-white">_true-pass-details($terminal)</h2>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                    </div>
+                  </div>
+
+                    <div class="kss-prose mt-4">
+                      <p><strong>[private:{output}]</strong> Output a success message for passing tests.</p>
+
+                    </div>
+
+                    <div class="mt-5 overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
+                      <div class="border-b border-neutral-200 bg-neutral-50 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400">Parameters</div>
+                      <div class="scrollbar overflow-x-auto">
+                        <table class="min-w-full divide-y divide-neutral-200 text-sm dark:divide-neutral-800">
+                          <thead class="bg-neutral-50 dark:bg-neutral-950">
+                            <tr>
+                              <th class="px-4 py-3 text-left font-semibold text-neutral-700 dark:text-neutral-200">Name</th>
+                              <th class="px-4 py-3 text-left font-semibold text-neutral-700 dark:text-neutral-200">Description</th>
+                              <th class="px-4 py-3 text-left font-semibold text-neutral-700 dark:text-neutral-200">Default</th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                              <tr>
+                                <td class="whitespace-nowrap px-4 py-3 align-top"><code class="kss-inline-code">$terminal</code></td>
+                                <td class="px-4 py-3 align-top text-neutral-600 dark:text-neutral-300"><strong>{boolean}</strong> <em><strong>Whether to also use the terminal as an output stream</strong></em></td>
+                                <td class="whitespace-nowrap px-4 py-3 align-top text-neutral-500 dark:text-neutral-400"><code class="kss-inline-code">$true-terminal-output.value</code></td>
+                              </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+
+
+
+                    <footer class="mt-5 flex flex-wrap items-center gap-2 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
+                      <!-- @license lucide-static v1.22.0 - ISC -->
+<svg aria-hidden="true" focusable="false" class="size-4"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="m5 16-3 3 3 3" />
+  <path d="m9 22 3-3-3-3" />
+</svg>
+
+                      <span>Source</span>
+                      <code class="kss-inline-code">styl/true/_output.styl:3</code>
+                    </footer>
+                </section>
+          </article>
+
+          <aside class="hidden lg:block">
+            <div class="sticky top-24 space-y-5">
+                <nav class="rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900" aria-label="Current page sections">
+                  <h2 class="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">On this page</h2>
+                  <div class="mt-3 space-y-1" data-kss-page-toc>
+                      <a class="kss-toc-link" href="#kssref-mixins-_true-pass-details" data-kss-toc-link="kssref-mixins-_true-pass-details">
+                        <span class="font-mono text-[0.72rem] text-neutral-400">2.32</span>
+                        <span class="truncate">_true-pass-details($terminal)</span>
+                      </a>
+                  </div>
+                </nav>
+
+              <div class="rounded-lg border border-neutral-200 bg-white p-4 text-sm shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+                <h2 class="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">Build</h2>
+                <dl class="mt-3 space-y-2">
+                  <div class="flex justify-between gap-3">
+                    <dt class="text-neutral-500 dark:text-neutral-400">Generator</dt>
+                    <dd class="font-medium text-neutral-900 dark:text-neutral-100">kss-node</dd>
+                  </div>
+                  <div class="flex justify-between gap-3">
+                    <dt class="text-neutral-500 dark:text-neutral-400">Theme</dt>
+                    <dd class="font-medium text-neutral-900 dark:text-neutral-100">Tailwind</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <script src="kss-assets/kss-theme.js"></script>
+    
   </body>
 </html>
