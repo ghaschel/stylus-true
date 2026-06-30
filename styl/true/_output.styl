@@ -193,7 +193,7 @@ _true-edgefail-notes($lists...) {
       $message = '%s may need to be rounded before comparison' % $type;
       $note = $pre + $message + ' ' + $inspect;}
     if ($one-type != $two-type) {
-      $note = $pre + $inspect;
+      $note = $pre + $message + ' ' + $inspect;
     }
   }
 
